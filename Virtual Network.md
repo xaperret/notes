@@ -25,10 +25,9 @@
 ### LAYER 2 DEVICES
 
 ### SWITCH
-- Qu'est-ce qu'un switch ?
-- Quel est l'utilité d'un switch ?
-- 
 
+- Qu'est-ce qu'un switch ?
+- Quel est l'utilité d'un switch ? 
 - Switch
 	- A switch utilizes an application-specific integrated circuit (ASIC), c'est la raison pour laquelle un switch appartient à la couche 2.
 
@@ -37,8 +36,6 @@
 ### MULTILAYER SWITCH
 
 ### ROUTER
-
-
 
 ## DOMAINE DE COLLISION
 
@@ -139,14 +136,15 @@
 
 ## AUTRES APPAREILS RÉSEAUX
 
-### ### PONT
+### PONT
 
 - Qu'est-ce qu'un pont ?
 
 ### ROUTER
 
 - Qu’est-ce qu’un router ?
-- 
+
+
 ### PARE-FEU
 
 ### PROXY
@@ -154,6 +152,27 @@
 ### VPN
 
 ### OVERLAY/TUNNEL
+
+- Qu'est-ce qu'un overlay ?
+	- Un réseau overlay est une couche de réseau virtuel construite au-dessus d'un autre réseau, généralement pour fournir des fonctionnalités ou des services supplémentaires.
+- Quel est l'utilité des réseaux overlay ?
+	- Les réseaux overlay sont souvent utilisés pour créer des réseaux privés virtuels (VPN), des réseaux de diffusion de contenu (CDN), ou pour virtualiser les réseaux dans des environnements de cloud computing.
+- Comment fonctionne les réseaux overlay ?
+	- Les réseaux overlay utilisent généralement des protocoles de tunneling pour encapsuler les paquets de données et les acheminer à travers le réseau sous-jacent.
+- Qu'est-ce qu'un tunnel ?
+
+### DES PROTOCOLES QUI PEUVENT ÊTRE UTILE À COMPRENDRE
+
+Ces protocoles de routage sont utilisés pour maintenir et échanger des informations de routage entre les routeurs d'un réseau IP, ce qui permet de déterminer les meilleurs chemins vers les destinations et de s'adapter aux changements de topologie de réseau.
+
+- Qu'est-ce que l'OSPF ?
+	- OSPF est un protocole de routage dynamique utilisé pour échanger des informations de routage entre les routeurs d'un réseau IP. Il s'agit d'un protocole de routage à état de lien qui permet aux routeurs de calculer les chemins les plus courts vers toutes les destinations du réseau en utilisant l'algorithme de Dijkstra. OSPF est un protocole de routage interne (IGP), ce qui signifie qu'il est conçu pour être utilisé à l'intérieur d'un seul système autonome.
+- Qu'est-ce que l'EIGRP ?
+	- EIGRP est un protocole de routage dynamique développé par Cisco. Il s'agit également d'un protocole de routage interne qui utilise un algorithme de routage à vecteur de distance pour déterminer les meilleurs chemins vers les destinations du réseau. EIGRP est capable de converger rapidement et de s'adapter aux changements de topologie de réseau, tout en minimisant la consommation de ressources réseau.
+- Qu'est-ce que le RIP ?
+	- RIP est un protocole de routage dynamique simple et ancien qui utilise un algorithme de vecteur de distance pour échanger des informations de routage entre les routeurs d'un réseau IP. RIP a été l'un des premiers protocoles de routage IP, mais il est maintenant considéré comme obsolète en raison de ses limitations, telles que sa lente convergence et sa limitation à 15 sauts (hops) entre les routeurs.
+- Qu'est-ce que le BGP ?
+	- BGP est un protocole de routage externe (EGP) utilisé pour échanger des informations de routage entre les systèmes autonomes (AS) sur Internet. BGP est conçu pour être très évolutif et gérer des milliers de routes, et il est donc utilisé par les fournisseurs de services Internet (ISP) et les grands réseaux d'entreprise pour maintenir la connectivité entre les systèmes autonomes. BGP utilise un algorithme de routage à vecteur de chemin et prend en compte de nombreux attributs pour sélectionner les meilleurs chemins vers les destinations du réseau.
 
 ## ADRESSAGE IP
 
@@ -574,9 +593,120 @@
 	- L'endpoint est défini dans la configuration de chaque pair et est essentiel pour établir la connexion.
 - Qu'est-ce que le roaming ?
 	- Le roaming est une fonctionnalité de WireGuard qui permet aux pairs de maintenir une connexion sécurisée, même lorsqu'ils changent d'adresse IP ou de réseau. Cela est particulièrement utile pour les clients mobiles, qui peuvent passer d'un réseau Wi-Fi à un réseau mobile ou changer d'adresse IP en raison de l'attribution dynamique des adresses par DHCP.
+- Comment fonctionne le roaming dans WireGuard ?
+	1. Échange de clés publiques et configuration des endpoints
+		- Chaque pair WireGuard possède une clé publique et une clé privée. Lors de la configuration de la connexion, les pairs échangent leurs clés publiques et définissent les endpoints (adresse IP publique et port) de l'autre pair. Les informations d'endpoint sont stockées dans la configuration de chaque pair.
+	2.  Routage des paquets chiffrés via les endpoints
+		- Lorsqu'un client envoie des paquets chiffrés à un serveur, il utilise l'endpoint du serveur pour acheminer les paquets. De même, le serveur utilise l'endpoint du client pour renvoyer des paquets chiffrés.
+	3.  Changement d'adresse IP et impact sur l'endpoint
+		- Si un client change d'adresse IP ou de réseau, par exemple en passant d'un réseau Wi-Fi à un réseau mobile, son endpoint (adresse IP publique et port) change également. Cependant, étant donné que le serveur n'est pas informé de ce changement, il continuera d'envoyer des paquets à l'ancien endpoint du client.
+	4.  Mise à jour automatique de l'endpoint du client par le serveur
+		- Lorsque le client envoie un paquet chiffré valide au serveur à partir de sa nouvelle adresse IP, le serveur reconnaît la clé publique du client et met à jour l'endpoint du client dans sa configuration avec la nouvelle adresse IP et le nouveau port. Le serveur n'a pas besoin de renégocier la clé ou de réauthentifier le client, car la clé publique du client est toujours valide.
+	5.  Maintien de la connexion VPN sans interruption
+		- Le serveur commence à envoyer des paquets chiffrés à la nouvelle adresse IP du client, ce qui permet de maintenir la connexion sans interruption.
+- Comment WireGuard gère-t-il le roaming lorsqu'un pair se déplace entre différents réseaux ou change d'adresse IP externe?
+	- WireGuard se base sur l'adresse IP externe source du paquet chiffré pour identifier le pair distant, ce qui permet aux pairs de se déplacer librement entre différentes adresses IP externes sans avoir à renégocier ou rétablir la connexion VPN.
+- Qu'est-ce qui identifie de manière unique un pair dans WireGuard?
+	- Une clé publique identifie de manière unique un pair dans WireGuard.
+- Qu'est-ce qui permet le roaming dans WireGuard?
+	- Le roaming est possible car WireGuard utilise l'adresse IP externe source du paquet chiffré pour identifier le pair distant, plutôt que de compter sur une configuration d'adresse IP statique.
+- Comment le roaming dans WireGuard est-il similaire à Mosh?
+	- Mosh est un autre protocole qui permet la mobilité des connexions, en particulier pour les sessions SSH sur les réseaux instables ou en cas de changement d'adresse IP. WireGuard et Mosh permettent tous deux la mobilité des connexions sans interruption.
+- Quel est l'avantage du roaming dans WireGuard pour les utilisateurs du réseau VPN?
+	- Le roaming dans WireGuard permet une expérience de mobilité transparente pour les utilisateurs du réseau VPN, car ils peuvent se déplacer entre différents réseaux ou changer d'adresse IP externe sans perdre leur connexion VPN.
+- Les éléments internes et externes impliqués dans le roaming WireGuard sont les suivants :
+	- Internes
+		- Clés publiques et privées
+		- Les configurations d'endpoint stockées par chaque pair
+		- Le processus de mise à jour automatique de l'endpoint lorsqu'un paquet chiffré valide est reçu d'une nouvelle adresse IP
+	- Externes
+		- Les réseaux et les adresses IP que les clients utilisent pour se connecter, qui peuvent changer en raison de facteurs tels que le passage entre les réseaux Wi-Fi et mobiles ou l'attribution dynamique des adresses IP par DHCP.
 - Qu'est-ce qu'une IP adresse externe ?
 	- Un *endpoint*
 	- En effet, chaque membre de la table de routage peut éventuellement pré-spécifié une adresse connue externe et un port UDP.
+
+#### EXEMPLE DU ROAMING
+
+Alice utilise son smartphone pour se connecter à un serveur VPN WireGuard. Son smartphone a une clé privée `smartphone_private_key` et une clé publique `smartphone_public_key`. Le serveur VPN a une clé privée `server_private_key` et une clé publique `server_public_key`.
+
+Au départ, le smartphone d'Alice utilise une connexion Wi-Fi de son domicile et a une adresse IP publique `192.0.2.10` fournie par son réseau Wi-Fi.
+
+1.  Alice et le serveur VPN échangent leurs clés publiques et configurent leurs endpoints respectifs (adresse IP publique et port). Le serveur VPN a une adresse IP publique fixe `203.0.113.5` et écoute sur le port `51820`.
+
+Configuration WireGuard sur le smartphone d'Alice:
+
+```ini
+[Interface]
+PrivateKey = smartphone_private_key
+Address = 10.200.200.2/24
+
+[Peer]
+PublicKey = server_public_key
+AllowedIPs = 0.0.0.0/0
+Endpoint = 203.0.113.5:51820
+```
+
+Configuration WireGuard sur le serveur VPN:
+
+```ini
+[Interface] 
+PrivateKey = server_private_key 
+Address = 10.200.200.1/24  
+
+[Peer]
+PublicKey = smartphone_public_key 
+AllowedIPs = 10.200.200.2/32
+Endpoint = 192.0.2.10:12345
+```
+
+2.  Alice envoie des paquets chiffrés au serveur VPN en utilisant l'endpoint du serveur `203.0.113.5:51820`. 
+   Le serveur VPN répond en envoyant des paquets chiffrés à l'endpoint d'Alice `192.0.2.10:12345`.
+3.  Alice quitte son domicile et se déplace vers un café, où elle se connecte à un nouveau réseau Wi-Fi. 
+   Son smartphone obtient une nouvelle adresse IP publique `198.51.100.20` du réseau Wi-Fi du café.
+4.  Le smartphone d'Alice continue d'envoyer des paquets chiffrés au serveur VPN. 
+   Cependant, maintenant, ces paquets proviennent de la nouvelle adresse IP publique `198.51.100.20`.
+5.  Le serveur VPN reçoit un paquet chiffré valide provenant de la nouvelle adresse IP d'Alice (`198.51.100.20`) et reconnaît la clé publique d'Alice. 
+   Le serveur met alors à jour l'endpoint d'Alice dans sa configuration avec la nouvelle adresse IP `198.51.100.20` et le nouveau port (par exemple, `23456`).
+
+Configuration WireGuard mise à jour sur le serveur VPN:
+
+```ini
+[Interface]
+PrivateKey = server_private_key
+Address = 10.200.200.1/24
+
+[Peer]
+PublicKey = smartphone_public_key 
+AllowedIPs = 10.200.200.2/32 
+Endpoint = 198.51.100.20:23456
+```
+
+6.  Le serveur VPN commence à envoyer des paquets chiffrés à la nouvelle adresse IP d'Alice `198.51.100.20`, maintenant la connexion VPN sans interruption.
+
+Dans ce scénario, le roaming de WireGuard permet à Alice de passer d'un réseau Wi-Fi à un autre sans interrompre
+
+![[Pasted image 20230408212433.png]]
+
+```mermaidjs
+sequenceDiagram
+    participant Alice as Alice (smartphone)
+    participant HomeWiFi as Home Wi-Fi
+    participant VPN as VPN Server
+    participant CafeWiFi as Café Wi-Fi
+
+    Alice->>HomeWiFi: Connect to Home Wi-Fi
+    HomeWiFi->>Alice: Assign IP 192.0.2.10
+    Alice->>VPN: Exchange public keys and configure endpoints
+    Alice->>VPN: Send encrypted packets (source IP: 192.0.2.10)
+    VPN->>Alice: Send encrypted packets (source IP: 203.0.113.5)
+    Alice->>CafeWiFi: Connect to Café Wi-Fi
+    CafeWiFi->>Alice: Assign IP 198.51.100.20
+    Alice->>VPN: Send encrypted packets (source IP: 198.51.100.20)
+    VPN->>Alice: Update Alice's endpoint to 198.51.100.20
+    VPN->>Alice: Send encrypted packets (source IP: 203.0.113.5)
+```
+
+### SEND/RECEIVE FLOW
 
 ### LA COMPÉTITION
 
@@ -587,7 +717,7 @@
 - Quel est l'avantage de WireGuard par rapport à IPsec ?
 	- WireGuard n'utilise pas deux couches différentes pour l'échange de clé et le transport de données comme le fait IPsec. Ainsi cela diminue la **complexité** de l'implémentation.
 	- En effet, après une simple configuration d'une interface virtuel en lui assignant une clé privée et les clés publiques des pairs, le tunnel fonctionne !
-- Quel est le problème de Wireguard par rapport à IPsec ?
+- Quel est le problème de WireGuard par rapport à IPsec ?
 	- Académiquement c'est pas une bonne manière d'abstraire les choses (mauvaise utilisation des couches). 
 	- Cependant, ces problèmes sont rectifiés à l'aide de techniques ingénierique (lol) et cryptographique.
 - Quel est le désavantage d'OpenVPN par rapport à WireGuard ?
@@ -596,6 +726,10 @@
 	- Il n'est pas stateless du point de vue de l'administrateur.
 	- Il utilise un protocole complexe et lourd : TLS.
 
+### LAYER 3 VPNS
+
+- Qu'est-ce qu'un layer 3 VPN ?
+	- 
 ### RÉFÉRENCES
 
 - https://www.youtube.com/watch?v=kxj8GMvnASE

@@ -356,3 +356,17 @@ date modified: Tuesday, February 7th 2023, 9:37:29 am
 >%%TAGS%%
 >
 ^cuyrjip897n
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-08T18:58:13.643Z","updated":"2023-04-08T18:58:13.643Z","document":{"title":"WireGuard: Next Generation Kernel Network Tunnel","link":[{"href":"urn:x-pdf:64e8e4753111ae743298375fc0f7a8dd"},{"href":"vault:/Books/wireguard.pdf"}],"documentFingerprint":"64e8e4753111ae743298375fc0f7a8dd"},"uri":"vault:/Books/wireguard.pdf","target":[{"source":"vault:/Books/wireguard.pdf","selector":[{"type":"TextPositionSelector","start":14660,"end":14951},{"type":"TextQuoteSelector","exact":"Since a public key uniquely identifies a peer, the outer external source IP of an encrypted WireGuard packetis used to identify the remote endpoint of a peer, enabling peers to roam freely between different external IPs,between mobile networks for example, similar to what is allowed by Mosh","prefix":"ss for determining the endpoint.","suffix":" [25]. For example, the prior cr"}]}]}
+>```
+>%%
+>*%%PREFIX%%ss for determining the endpoint.%%HIGHLIGHT%% ==Since a public key uniquely identifies a peer, the outer external source IP of an encrypted WireGuard packetis used to identify the remote endpoint of a peer, enabling peers to roam freely between different external IPs,between mobile networks for example, similar to what is allowed by Mosh== %%POSTFIX%%[25]. For example, the prior cr*
+>%%LINK%%[[#^xv4dlaq83j|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^xv4dlaq83j
