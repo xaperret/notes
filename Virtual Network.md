@@ -50,6 +50,7 @@
 
 ## SWITCH ET LES DOMAINES DE BROADCAST ET DE COLLISION
 
+
 - Qu’est-ce qu’un switch ?
 - Qu’est-ce qu’il permet de faire (en lien avec les domaines de collision) ?
 	- Un switch segmente les domaines de collision de manière transparente et automatique
@@ -177,6 +178,10 @@ Ces protocoles de routage sont utilisés pour maintenir et échanger des informa
 ## ADRESSAGE IP
 
 ## ROUTAGE
+
+### NAT
+
+### MASQUERADE
 
 ## CONFIGURATION DES PÉRIPHÉRIQUES VIRTUELS
 
@@ -624,6 +629,42 @@ Ces protocoles de routage sont utilisés pour maintenir et échanger des informa
 - Qu'est-ce qu'une IP adresse externe ?
 	- Un *endpoint*
 	- En effet, chaque membre de la table de routage peut éventuellement pré-spécifié une adresse connue externe et un port UDP.
+- Comment WireGuard gère-t-il les adresses IP externes les plus récentes et les ports UDP pour les pairs lors du roaming ?
+	- WireGuard met à jour les informations d'endpoint pour refléter les changements d'adresse IP externe et de port UDP lorsqu'un pair se déplace entre différents réseaux.
+- Pourquoi le roaming de WireGuard réduit-il la nécessité pour les dispositifs NAT de maintenir des sessions ouvertes ?
+	- WireGuard gère le roaming en mettant à jour les endpoints en fonction de l'adresse IP source externe. Cela permet aux communications entre les pairs de ne pas être interrompues lorsqu'ils changent d'adresse IP, réduisant ainsi la nécessité pour les dispositifs NAT de maintenir des sessions ouvertes.
+- Quel est le rôle des dispositifs de traduction d'adresse réseau (NAT) dans un contexte de roaming ?
+	- Dans un contexte de roaming, le NAT doit généralement garder les sessions ouvertes pour que les communications entre les pairs ne soient pas interrompues lorsqu'ils changent d'adresse IP. Cependant, avec WireGuard, cette exigence est réduite grâce à sa gestion du roaming.
+- Comment WireGuard gère-t-il les fichiers de configuration pour les interfaces côté serveur et client ?
+	- Chaque interface WireGuard a son propre fichier de configuration. WireGuard ne distingue pas les rôles "client" et "serveur", chaque nœud est considéré comme un "pair".
+- Quelle est la différence entre le champ "Endpoint" et le champ "AllowedIPs" pour la section [Peer] dans un fichier de configuration WireGuard ?
+	- Le champ "Endpoint" indique l'adresse IP réelle et le port du pair distant, tandis que le champ "AllowedIPs" spécifie les adresses IP que l'hôte local doit acheminer vers le pair distant via le tunnel WireGuard.
+- Comment fonctionne le routage de paquets entrants et sortants dans le tunnel WireGuard avec l'adresse IP virtuelle spécifiée dans la section [Interface] du fichier de configuration ?
+	- L'adresse IP virtuelle spécifiée dans la section [Interface] affecte le routage des paquets entrants et sortants du tunnel WireGuard. Cette adresse IP ne doit pas être une adresse IP réelle routable en dehors du VPN.
+- Quel est l'impact de la spécification d'un masque de réseau pour le paramètre "Address" dans un fichier de configuration WireGuard ?
+	- La spécification d'un masque de réseau pour le paramètre "Address" affecte les décisions de routage prises par l'hôte local concernant le trafic à envoyer dans le tunnel. Cela peut être redondant ou contradictoire avec le paramètre "AllowedIPs". Il est généralement préférable d'omettre le masque de réseau dans le paramètre "Address" et d'utiliser uniquement les paramètres "AllowedIPs" pour chaque pair pour contrôler le routage.
+- Quelle est l'utilité du champ "Endpoint" dans le fichier de configuration WireGuard ?
+	- Le champ "Endpoint" est nécessaire pour indiquer à l'hôte local comment se connecter au pair distant afin d'établir un tunnel WireGuard. Il n'est nécessaire de définir un "Endpoint" que d'un côté du tunnel WireGuard, mais il peut être défini des deux côtés si les deux pairs ont une adresse IP statique.
+- Comment fonctionne le paramètre "PersistentKeepalive" dans un fichier de configuration WireGuard ?
+	- Le paramètre "PersistentKeepalive" indique à un pair de se connecter activement à l'autre pair toutes les N secondes, où N est la valeur spécifiée. Cela permet d'établir et de maintenir un tunnel WireGuard, même si l'un des pairs possède une adresse IP publique dynamique.
+
+> [!summary]
+> -   Endpoint : adresse IP publique et port d'un pair pour l'envoi de paquets chiffrés
+> -   Endpoint nécessaire pour les clients et serveurs pour établir la connexion
+> -   Endpoint défini dans la configuration de chaque pair
+> -   Roaming : maintien d'une connexion sécurisée lors de changement d'adresse IP ou de réseau
+> -   Roaming dans WireGuard : échange de clés, routage via endpoints, mise à jour automatique d'endpoint
+> -   WireGuard identifie les pairs par clé publique et adresse IP source externe pour gérer le roaming
+> -   Roaming similaire à Mosh : mobilité des connexions sans interruption
+> -   Avantage du roaming : expérience transparente pour les utilisateurs de VPN
+> -   Éléments internes et externes du roaming : clés, configurations d'endpoint, mise à jour automatique, réseaux et adresses IP
+> -   WireGuard met à jour les endpoints lors du roaming, réduisant la nécessité de sessions NAT ouvertes
+> -   WireGuard utilise des fichiers de configuration pour chaque interface sans distinction entre client et serveur
+> -   Différence entre Endpoint et AllowedIPs : adresse IP réelle et port vs adresses IP à acheminer via le tunnel
+> -   Routage de paquets entrants et sortants avec l'adresse IP virtuelle spécifiée dans [Interface]
+> -   Impact du masque de réseau pour "Address" : affecte les décisions de routage, préférable d'utiliser AllowedIPs
+> -   Utilité du champ "Endpoint" : indiquer comment se connecter au pair distant
+> -   Paramètre "PersistentKeepalive" : connexion active toutes les N secondes pour établir et maintenir un tunnel
 
 #### EXEMPLE DU ROAMING
 
