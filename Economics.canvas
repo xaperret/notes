@@ -1,0 +1,20 @@
+{
+	"nodes":[
+		{"id":"1b6fd930d4456d1b","x":320,"y":1000,"width":420,"height":320,"type":"file","file":"Economy.md"},
+		{"id":"da671d2679956aab","x":260,"y":-40,"width":400,"height":400,"type":"file","file":"Basics Economics Book Notes.md"},
+		{"id":"8a23b55eb61cf129","x":281,"y":1520,"width":399,"height":303,"type":"file","file":"What is an Economy ?.md"},
+		{"id":"27e403eec98448a2","x":-280,"y":1020,"width":400,"height":400,"type":"file","file":"Economics.md"},
+		{"id":"38a4c928b4cfa791","x":-280,"y":1480,"width":400,"height":400,"type":"file","file":"Principles of Economics.md"},
+		{"id":"fe403c19e020cb95","x":-520,"y":2000,"width":400,"height":400,"type":"file","file":"Individual Choice.md"},
+		{"id":"a144fd2ca735002d","x":-40,"y":2000,"width":400,"height":400,"type":"file","file":"Interaction of Individual Choices.md"},
+		{"id":"56f7fa0bc7ab45c4","x":380,"y":2000,"width":400,"height":400,"type":"file","file":"Economy-wide Interactions.md"}
+	],
+	"edges":[
+		{"id":"0321e87456b3e260","fromNode":"38a4c928b4cfa791","fromSide":"bottom","toNode":"fe403c19e020cb95","toSide":"top"},
+		{"id":"6c91b5f0abaf5b4a","fromNode":"38a4c928b4cfa791","fromSide":"bottom","toNode":"a144fd2ca735002d","toSide":"top"},
+		{"id":"d1955968d14f66d8","fromNode":"38a4c928b4cfa791","fromSide":"bottom","toNode":"56f7fa0bc7ab45c4","toSide":"top"},
+		{"id":"88826f168cff8e64","fromNode":"27e403eec98448a2","fromSide":"bottom","toNode":"38a4c928b4cfa791","toSide":"top"},
+		{"id":"39f9fd36c49d9c27","fromNode":"27e403eec98448a2","fromSide":"right","toNode":"1b6fd930d4456d1b","toSide":"left"},
+		{"id":"bfb9165ff50bde71","fromNode":"1b6fd930d4456d1b","fromSide":"bottom","toNode":"8a23b55eb61cf129","toSide":"top"}
+	]
+}

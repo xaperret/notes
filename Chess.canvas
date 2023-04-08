@@ -1,0 +1,7 @@
+{
+	"nodes":[
+		{"id":"aa35a4658822ffd6","x":-300,"y":20,"width":400,"height":400,"type":"file","file":"Stuff to do in a turn.md"},
+		{"type":"file","file":"Chess Opening.md","id":"94b903b15a2762ba","x":-300,"y":-600,"width":400,"height":440}
+	],
+	"edges":[]
+}

@@ -1,0 +1,11 @@
+{
+	"nodes":[
+		{"id":"8a9ca49bb8d29eac","x":-650,"y":-348,"width":400,"height":400,"type":"file","file":"Functional Programming.md"},
+		{"id":"7ec095ad6e86a609","x":-250,"y":252,"width":400,"height":400,"type":"file","file":"Static Type.md"},
+		{"id":"eb3e1408c701ccef","x":-1050,"y":252,"width":400,"height":400,"type":"file","file":"Strong Typing.md"}
+	],
+	"edges":[
+		{"id":"d20da9e3292e9a72","fromNode":"8a9ca49bb8d29eac","fromSide":"bottom","toNode":"eb3e1408c701ccef","toSide":"top"},
+		{"id":"d7406895bf9be1b7","fromNode":"8a9ca49bb8d29eac","fromSide":"bottom","toNode":"7ec095ad6e86a609","toSide":"top"}
+	]
+}

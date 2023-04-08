@@ -1,0 +1,8 @@
+{
+	"nodes":[
+		{"id":"8378eb0738ce7510","x":180,"y":1380,"width":400,"height":400,"type":"file","file":"Virtual Network.md"},
+		{"type":"file","file":"Ansible Book Notes.md","id":"48e88a1a4c1e80bb","x":-680,"y":-180,"width":680,"height":700},
+		{"type":"file","file":"Ansible.md","id":"363f42ddc26fe535","x":100,"y":-100,"width":400,"height":400}
+	],
+	"edges":[]
+}

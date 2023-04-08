@@ -1,0 +1,65 @@
+---
+---
+
+# QEMU
+
+- What is QEMU ?
+	- QEMU (Quick EMUlator - http://qemu.org) is an open source machine emulator and hosted VMM
+- What can QEMU do?
+	- Can run any i386 (or other) OS as a user application
+	- Run every architecture you can dream
+	- Do emulation fast as fuck
+- What is the advantage of emulating devices ?
+	- Good compatibility
+- What are the disadvantage of emulating devices ?
+	- Low performance
+- What are the advantage of paravirtualized devices ?
+	- Good performance
+- What are the disadvantage of paravirtualized devices ?
+	- Require dedicated paravirtualized drivers in the guest OS
+- What are the advantages of passthrough devices ?
+	- Near native performance
+- What are the disadvantages of passthrough devices (via VFIO) ?
+	- Limited number of PCI devices supported
+	- Tricky live migration
+	- Requires VT-d hardware extension
+- What is virtio ?
+	- Paravirtualization
+	- ![[Pasted image 20230329143614.png]]
+- What is `qcow` ? 
+	- It's a virtualized disk
+	- QEMU
+- What are the two types of snapshots ?
+	- disk snapshots
+	- VM snapshots
+- What are disk snapshots (QEMU) ?
+	- Snapshot that only save content of the disk
+- What are VM snapshots (QEMU) ?
+	-  save content of disk + RAM + device state
+- What are the two strategies used by snapshots ?
+	- Internal
+	- External
+- What strategy is used by disk snapshots ?
+	- Internal or external
+- What strategy is used by VM snapshots ?
+	- Internal
+- What is an internal snapshots ?
+	- All snapshots are stored inside the same qcow2 file
+- What is an external snapshots ?
+	- Each snapshot is stored in a different qcow2 file in a chain of qcow2 files
+- Disk images in a chain can be merged together
+- There are two types of merges
+	- commit
+	- stream
+- What is an overlay ?
+	- The overlay is a snapshot that can be written to, it might the snapshot being written or one of the child of the backing file of a disk image
+- What is a backing file ?
+	- It's a read-only clone of a disk image
+- What is a commit ?
+	- merge of data from overlay file into backing file (child to parent)
+- What is a stream ?
+	- copy of data from backing file into overlay file (parent to child) 
+- When can corruption happen ?
+	- When you modify a snapshot of the parent of a snapshot
+
+## References

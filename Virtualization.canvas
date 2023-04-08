@@ -1,0 +1,22 @@
+{
+	"nodes":[
+		{"type":"file","file":"Platform Virtualization.md","id":"87ec54801677089a","x":-580,"y":2920,"width":400,"height":400},
+		{"type":"file","file":"Introduction to Virtualization.md","id":"301c3b5bda6f5883","x":381,"y":1800,"width":400,"height":400},
+		{"type":"file","file":"Gluck/lab1.md","id":"05f582526c689755","x":-80,"y":1260,"width":400,"height":400},
+		{"type":"file","file":"VDI.md","id":"350a7ef621253519","x":-549,"y":1680,"width":400,"height":400},
+		{"type":"file","file":"System emulation.md","id":"cb7daceb87232ee0","x":688,"y":-142,"width":400,"height":400},
+		{"type":"file","file":"Types of Virtualization.md","id":"9175d7074e0400ed","x":-349,"y":-142,"width":400,"height":400},
+		{"type":"file","file":"Hypervisor or Virtual Machine.md","id":"453cc3f8bb677072","x":-940,"y":-142,"width":400,"height":400},
+		{"type":"file","file":"Storage Virtualization.md","id":"4dd2fcb449d568c9","x":-349,"y":482,"width":400,"height":400},
+		{"type":"file","file":"Platform (hardware) virtualization.md","id":"1f13f7af844ad323","x":-847,"y":482,"width":400,"height":400},
+		{"type":"file","file":"Language-based virtualization.md","id":"ccf57b088b619265","x":181,"y":482,"width":400,"height":400},
+		{"type":"file","file":"System simulation.md","id":"b2e7682a924e080e","x":688,"y":482,"width":400,"height":400},
+		{"type":"file","file":"QEMU.md","id":"240928ed4ff41453","x":-580,"y":2300,"width":400,"height":400},
+		{"id":"e31da696976bc13f","x":-1580,"y":3360,"width":420,"height":400,"type":"file","file":"Docker.md"}
+	],
+	"edges":[
+		{"id":"c383bfb61e9ef249","fromNode":"9175d7074e0400ed","fromSide":"bottom","toNode":"4dd2fcb449d568c9","toSide":"top"},
+		{"id":"0dc567950ba31a78","fromNode":"9175d7074e0400ed","fromSide":"bottom","toNode":"1f13f7af844ad323","toSide":"top"},
+		{"id":"cb45ac2e5ade7149","fromNode":"9175d7074e0400ed","fromSide":"bottom","toNode":"ccf57b088b619265","toSide":"top"}
+	]
+}

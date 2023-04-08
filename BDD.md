@@ -1,0 +1,512 @@
+- Base de donnée
+    - Chapitre 1 : Introduction aux bases de données
+        - Base de données↔est une collection d'informations persistantes organisée de manière à pouvoir être facilement manipulée
+        - Système de gestion de base de données↔est un système qui permet de gérer une base données
+            - Exemple
+                - MySQL
+                - PostgreSQL
+                - SQLite
+                - MongoDB
+        - Pour une activité donnée l'information est organisée en terme ↓ 
+            - D'entités→collections
+            - De liens entre les entités↔relation
+            - De structure des liens et entités↔caractéristique ou attribut
+        - Les éléments d'une activité donnée doivent respecter les contraintes du domaine d'activité
+        - Qu'est-ce que l'utilité d'une base de donnée?↓ ↓ 
+            - Persistance et pérennité
+            - Partage et centralisation
+            - Sécurité↔grâce à la gestion des droits
+            - Efficacité↔grâce à l'optimisation des requêtes, du stockage, de l'indexation
+            - Source de confiance↔à travers la cohérence des données, permet d'éviter les redondances, dans le respect des règles de métiers
+        - Quels sont les quatres opérations de manipulation de données ↓ 
+            - Create↔Ajouter
+            - Read↔rechercher
+            - Update↔Modifier
+            - Delete↔Supprimer
+        - Quel est l'outil permettant la manipulation des données ?→Ces opérations sont effectuées à l'aide d'un langage déclaratif ou d'une API
+            - Exemple
+                - Le langage SQL est un langage de requête structuré et déclaratif permettant de manipuler des bases de données relationnelles
+        - Langage déclaratif↔permet de décrire l'objectif sans préciser comment l'obtenir
+        - Contraintes d'intégrité↔décrivent des règles métiers à respecter. Elles décrivent des situations (ou comportements) admissibles ou non admissibles pour le domaine d'application (contraintes définies dans un cahier des charges par ex.).
+            - Exemple
+                - chaque entité possède un identifiant
+                - une personne a un nom
+                - un professeur enseigne au minimum un cours
+                - un livre est classé dans une catégorie
+                - l'email d'une personne est facultatif
+                - un siège sur un vol ne peut pas être attribué à plusieurs clients
+                - le salaire d'un professeur ne peut jamais diminuer
+        - Normalisation↔une base de données normalisée est modélisée de manière à éviter des redondances, des incohérences et des anomalies.
+            - Illustration
+                - ![](https://remnote-user-data.s3.amazonaws.com/xZQd6v8XuEYWRTXGDjnpCVFHBNW13uhVrjQ9x9VNXusQeUVn0OGlGh0mon2qbTTuWmnRendRFvOAnoNKxhu9M_NBsdVJH1g2FooTl5BTso9LvN9UpvRKwS9SB4F2Klvm.png)
+                - ![](https://remnote-user-data.s3.amazonaws.com/brzis3cR6AyLPoBEi1p-b3lR-wpXiW6dTFjlDwPqog2jM2LWF-qZXdop0nv9g8dSZeYqL1tRqrywAQxQ-NnzfVoHpss93avHOur1oinF42_2cC6p4kZx-J_RDpdfVtjd.png)
+        - Pour modéliser une base de données on ↓ 
+            - centrée sur les données (data-centric)
+            - identifie les données à persister, les entités et les relations entre elles
+            - s'intéresse à la structure
+        - Pour modéliser une logique métier on ↓ 
+            - centrée sur le domaine, la logique métier (domain-centric)
+            - identifie les concepts et les fonctionnalités
+            - s'intéresse au comportement
+            - la persistance est un détail d'implémentation dont on se préoccupe le plus tard possible
+        - Une base de donnée et une application doivent évoluer {{indépendamment}}, cela signifie ↓ 
+            - séparer leur modélisation respective
+            - l'un ne doit pas être dépendant de l'autre
+            - évitez de générer un modèle à partir de l'autre (danger des ORM)
+        - Une autre raison pour séparer modélisation d'une BD et d'une application est {{qu'une BD peut servir plusieurs applications, plusieurs vues}}
+    - Chapitre 2 : Le modèle entité-association
+        - Modèle entité-association↔C'est une modèle conceptuel et non logique qui est indépendant du choix de la BD et qui ne requiert aucune notion technique.
+            - but→décrit les concepts importants comme la structure des données et les liens existants entre ces dernières
+            - utilité→permet de structurer l'information en évitant au maximum toute redondance grâce à la séparation des concepts et l'utilisation d'attributs [Atomique ou monovalué](BDD/Base de donnée/Chapitre 2 _ Le modèle entité-association/Le modèle entité-association est constituée des concepts/Attribut/Un attribut peut être de type/Atomique ou monovalué.md)  
+            - La conception du modèle EA survient lors {{de la phase d'analyse de la persistance.}}
+            - Une autre manière de voir le modèle EA c'est de le voir comme {{une représentation graphique des concepts de base.}}
+            - Il doit être {{compréhensible par les différants intervenants}}.
+        - 
+        - Le modèle entité-association est constituée des concepts ↓ 
+            - Type **d'entité**↔concept d'intérêt de la réalité pour lequel on souhaite conserver de l'information
+                - Exemple
+                    - Voiture
+                    - Personne
+                    - Conférence
+            - Type **d'association**↔est une association entre plusieurs type d'entités
+                - Exemple
+                    - Un visiteur **s'inscrit** à une conférence
+                    - Une conférence **engage** des intervenants
+            - **Attribut**→est une caractéristique d'un type d'entité ou d'un type d'association
+                - Un attribut peut être de type ↓ 
+                    - Atomique ou monovalué→si aucune subdivision de la donnée initiale n'apporte une information supplémentaire ou complémentaire.
+                        - Exemple
+                            - année de naissance
+                            - prénom
+                            - nombre d'entrées
+                            - prix
+                    - Composé, mais représenté de manière atomique↔Il joue alors le rôle d'un groupe d'attributs (par exemple une adresse peut être un attribut composé des attributs numéro, type de voie, nom de la voie)
+                        - Exemple
+                            - no_avs : code pays + id + chiffre de contrôle
+                            - adresse : rue + code postal + localité
+                    - Dérivé↔qui se déduit/calcule à partir d'autres attributs ou à partir d'associations
+                - Exemple
+                    - Nom
+                    - Date de naissance
+                    - Salaire
+                    - Cachet de l'intervenant
+                - Un attribut ne doit pas être {{multivalué, comme la liste de conférenciers attribués à une conférence par exemple.}}
+        - Identifiant↔sous-ensemble d'attributs permettant d'identifier une entité de manière unique
+            - Il peut exister plusieurs {{candidats}} pouvant devenir un identifiant.
+            - Une clé peut être composée de {{plusieurs attributs}}.
+            - Chaque entité doit avoir {{un identifiant }}(sauf exception e.g. {{entité faible}})
+            - Une clé {{artificielle}} peut être créée si il y a {{aucune clé candidate}}
+        - Illustration
+            - ![](https://remnote-user-data.s3.amazonaws.com/Y2HTSehXcVEkXHsGdw5EXd8ezYeK8REjPWV6FuD37QfouSjgxiN9f89FIZbtg2EUpHaJCn5QgNRztV7XjJTIK8W7y8uKzl1xdftBs6ZGpCLCA6awSr0ecbLEZA-jLpCU.png)
+            - ![](https://remnote-user-data.s3.amazonaws.com/vxQO6Nv_i4lOxYXKBQdO4ZfTxPoZYat1yUDY7grmmVkVSyc5uHj_wbFz6amK31dZzYW1xlqtk67Kn0MeDhxsQk2eRlxgm_FF-Syexsr3gkBU0iMyjSFg2sJdXfBZnsv5.png)
+        - Cardinalité↔est une propriété d'une association. Elle définit une contrainte sur le nombre d'occurence qu'une entité peut avoir avec une autre : le nombre d'associations minimum et maximum auxquelles toute entité participe.
+            - Le nombre {{minimum}} indique le {{caractère optionnel ou obligatoire (0 ou 1)}}
+            - Le nombre {{maximum}} indique la {{possibilité (1 ou plusieurs)}}
+            - Le couple (min, max) du côté d'un type d'associations B décrit {{le nombre minimum et maximum d'entités B pour chaque entité A}}
+            - Plusieurs possibilités de cardinalité
+                - Plusieurs - plusieurs
+                    - Possibilité
+                        - Cardinalité max (possibilité)→plusieurs - plusieurs
+                        - Cardinalité min (optionnel/obigatoire)→une entité peut exister sans association existante
+                    - Illustration
+                        - ![](https://remnote-user-data.s3.amazonaws.com/boCrqu9pnyiT-wlXavwhCwZRzJStV_jBF8enlKXW_Pi41Trw890eqNQDUsakm1G5UonBwlI-uy1cLYBnu9RBkm-t8pIENiUeiG5UbUBTWkgfeBaElhBSQcnDaYsqIQhc.png)
+                - Un - plusieurs
+                    - Possibilité
+                        - Cardinalité max (possibilité)↔un - plusieurs
+                        - Cardinalité min (optionnel/obligatoire)↔thème n'est pas obligatoirement attribué à une conférence
+                    - Illustration
+                        - ![](https://remnote-user-data.s3.amazonaws.com/-4FkvcmZ-vnDpfbTwweF2-DH_FIC72VfmGL3x5EnLInDJNdefSP8T8bMiZo23U9_SY8aiRRheZFydCXIgv5TcGoE5mkYzghMM5S-1VNvZAFv2usfkrPzYBdF8euYy3Tt.png)
+                - Un - un
+                    - Possibilité
+                        - Cardinalité max (possibilité)↔un - un
+                        - Cardinalité min (optionnel/obligatoire)↔un visiteur n'a pas forcément de compte de fidélité
+                    - Illustration
+                        - ![](https://remnote-user-data.s3.amazonaws.com/pr1bgY4u7PVHdZgHTCA7fsqaOiuzs1n3wnrzIsN531Zv1f4U6dhejEAELCUKzRDqM3yN-D165ShJv3vApcPsJl3sAeJE5O8x7EAG26BVUeNHJitcCA5Ra1FgBHmja8fF.png)
+            - Illustration
+                - ![](https://remnote-user-data.s3.amazonaws.com/FtOxOaem1Z4KnaPJTv4Ng6_kic47aYqhXpPqJeKEHYPgFNe3lSnXHxX9nMLmty2XADZdk1MwfxocimEnFglXDKZSpvGn_pKS5yC7HpBmz4LSho6GxhUt1RjBi0kGz5PN.png)
+        - Diagramme sagittal↔est employé pour représenter graphiquement les relations d'ensembles
+            - Un type d'entité est {{un ensemble}}
+            - Une entité est {{un sommet}}
+            - Un type d'association est {{une relation entre deux ensembles}}
+            - Une association est un {{arc entre deux sommets}}
+            - Avantages ↓ 
+                - Représentation d'une base de données à l'aide d'un graphe
+                - S'aider à déterminer les cardinalités
+                - Déterminer si notre schéma conceptuel nous permet de répondre à certaines questions
+            - Illustration
+                - ![](https://remnote-user-data.s3.amazonaws.com/NiyQaUgQbNY16gWanHCvilj2tDcShVilc5zwF0ZHahuHllluaggfDZQ3Qsfa-R5t7THo6-SynlmvDfgJOGR1NJ5aNJ8vndXXU8fOw9_wdT70JAnWYoxU4rlzoC1bDWJF.png)
+                - ![](https://remnote-user-data.s3.amazonaws.com/b8F7_68p8rNiqrTTwl-UcnyE8BsrIgHQR2oapfpEP_67rVOJ_JV6SZFYn5Fro8RAthHucmjW1EcOI7GV0VJqCIoqdK-czRtPIdrKa3mYvkh-Xi7JO-8eHN9PalPBOax6.png)
+                - ![](https://remnote-user-data.s3.amazonaws.com/nkXLzoSwbXE2HWR--WfIDcnC9mhgQOTLNC7hAKAQZIACciVUREaEDmoVpl6YAuGWA-z30SieaMs18Tvasg71yBj_xbk9z1G05NtAoXLRko4sl_JqIDrcVUgCeAnN3C6s.png)
+                - ![](https://remnote-user-data.s3.amazonaws.com/czTELqokNHrFrR_1F3MxV79WgYjUY8cXW0Fr1S8p6n7uLxCjPvTUJMLwDftyL6URizcpHu-dxDHzsCbcNl4RKAZU67lmTXz6re8vqUoQSgc0URG_5vWf-y-EHYaTz_Q7.png)
+        - Contraintes non modélisables
+            - Les [Contraintes d'intégrité](BDD/Algèbre relationnelle/Chapitre 1 _ Formalisation des bases de données relationnelles/Contraintes d'intégrité.md)  décrivent des règles métiers à respecter. Elles décrivent des situations (ou comportements) admissibles ou non admissibles pour le domaine d'application
+                - Contraintes modélisables
+                    - une personne doit avoir un nom de famille
+                    - une personne est identifiée par un identifiant unique
+                    - une conférence doit avoir un thème
+                - Contraintes non modélisables
+                    - le prix d'une conférence doit être supérieur à 0
+                    - les conférences n'on lieu que dans des capitales européennes
+                    - les intervenants pour les conférences "blockchain" logent dans des hôtels quatre ou cinq étoiles
+        - Entité faible↔C'est un type d'entité qui n'est identifiable qu'à l'aide d'une autre entité.
+            - Illustration
+                - ![](https://remnote-user-data.s3.amazonaws.com/taQRwTeCkRJPsz_F0FAaClLf2KXpNmChG14GLC5YRpApnXK2YR38IuEFROsrbfta5muvwf4WapSyRdvO1JeJ4rJektMDWlDy2rJaecPVuGvRzxtB6cFUCsHfz-E4sMB2.png)
+                - ![](https://remnote-user-data.s3.amazonaws.com/JQk5xVFt2ukx2ODii_YkPKImIsBZ4iPqVdeZ2xzobVxlpbcbMv4k02d1As75g_6dyS1KiWI1uM7QQODYWTfLCfChCvmiAFpJ6CJ2Zk0DboYAGwM5fffFHlTxfOmypdid.png)
+        - Associations récursives↔![](https://remnote-user-data.s3.amazonaws.com/f6OMIb_WEFhT4MLrSmBc-vlGIH4IwBOd_5aG6mLxiW1pTPZDWgnejsxCybTG7qSh54Lw1zzrZbfSdqz7yevEEszdTqJt28eGv9GfjT9ef3tzy-deHA9NOyZkzyQ3gvZG.png) 
+        - 
+    - Chapitre 3 : Introduction aux bases de données relationnelles
+        - Base de données relationnelle↔permet de regrouper des données structurées dans un ensemble de tables et de contraintes d'intégrité,organisées en lignes et colonnes.
+            - Elle permet de renforcer {{les contraintes d'intégrité.}}
+        - Relation→Le terme ne décrit pas les associations entre les tables, il correspond à une table avec ses enregistrements. En fait ce terme provient du formalisme mathématique.
+        - Association↔décrit les liens entre tables
+        - La structure d'une base de donnée relationnelle est particulière. En effet les données sont représentées {{sous forme de ligne et de colonnes (tables)}}
+        - Les valeurs des attributs sont{{ }}[Atomique ou monovalué](BDD/Base de donnée/Chapitre 2 _ Le modèle entité-association/Le modèle entité-association est constituée des concepts/Attribut/Un attribut peut être de type/Atomique ou monovalué.md){{, ainsi la valeur d'un attribut ne peut pas être une liste}}
+        - Tous les enregistrements d'une table contiennent {{les mêmes attributs, la même structure}}.
+            - Un attribut peut être {{facultatif}}
+        - Une table↔est un ensemble de données organisées sous forme de lignes et de colonnes
+        - Une ligne↔correspond à un enregistrement, à une entité ou à un tuple
+        - Une colonne↔correspond à une propriété d'une entité. Elle possède un type.
+        - Enregistrement↔possède un identifiant appelé clé primaire, unique.
+        - Une clé étrangère↔est une colonne utilisé pour référencer une clé (candidate) d'une entité d'une autre table. 
+        - Illustration
+            - ![](https://remnote-user-data.s3.amazonaws.com/-T1Yjcl4mahRjQYcflg4zo2nviEmv7XFPt6HSjtaWYey-rpyjuXN6PXE3EiYoRS-v-W-SyO5usrT_HxAiu1rPhTSQ9_dC6it41zGO5QT_S_fGnErJys6UZRdrVDtVuj4.png)
+        - Une base données normalisée↔est modélisée de manière à éviter des redondances, des incohérences et des anomalies
+        - La normalisation↔repose sur un ensemble de règles à respecter: les formes normales
+        - La normalisation permet d'éviter les problèmes ci-dessous grâce à {{la séparation des entités}} et l'utilisation {{d'attributs communs (clé étrangère)}} ↓ 
+            - les redondances
+            - anomalies de mise-à-jour
+            - anomalies d'insertions
+        - Contraintes d'intégrité↔décrivent des règles métiers à respecter. Elles décrivent des situations (ou comportements) admissibles ou non admissibles pour le domaine d'application. 
+            - Elles permettent de {{renforcer la cohérence des données.}}, grâce à ↓ 
+                - modélisation logique
+                - [Déclencheur ou trigger](BDD/Base de donnée/Chapitre 3 _ Introduction aux bases de données relationnelles/Déclencheur ou trigger.md)
+                - [Transaction](BDD/Base de donnée/Chapitre 3 _ Introduction aux bases de données relationnelles/Transaction.md)
+            - Contraintes d'intégrité statique↔décrivent des états valides
+                - modélisables
+                    - une personne doit avoir un nom de famille
+                - non modélisables
+                    - le prix d'une conférence doit être supérieur à 0
+            - Contraintes d'intégrité dynamiques↔décrivent des changements d'états valides 
+                - non modélisables
+                    - pour un intervenant, il est possible de changer l'attribution d'un hôtel vers un autre de même classe ou de classe supérieur
+            - Les contraintes non modélisables↔doivent être décrites en annexe du modèle
+            - Types de contraintes d'intégrité
+                - Existence
+                - Unicité→la valeur d'un attribut ou d'un ensemble d'attributs doit être unique comme
+                    - clé primaire
+                    - entité doit avoir un identifiant unique
+                - Domaine↔ensemble des valeurs possibles/restreindre, clause CHECK/WITH CHECK OPTION ou colonne générée
+                    - Exemple
+                        - le numéro d'un employé est un nombre à six chiffres, le degré d'alcool est compris entre 0 et 100
+                - [Dépendance fonctionnelle](BDD/Algèbre relationnelle/Chapitre 1 _ Formalisation des bases de données relationnelles/Dépendance fonctionnelle.md)
+                - [Dépendance d'inclusion](BDD/Algèbre relationnelle/Chapitre 1 _ Formalisation des bases de données relationnelles/Dépendance d'inclusion.md) ou référentielle→est une contrainte d'existence qui garanti que les valeurs d'un groupe d'attributs d'une table doivent exister dans une autre table 
+                    - une clé étrangère doit contenir une valeur existante comme clé primaire d'une autre table
+        - Transaction↔est une suite d'opérations réalisées de manière indivisible
+            - Les propriétés d'une transaction sont {{ACID}} ↓ 
+                - Atomicité ⇒[Atomique ou monovalué](BDD/Base de donnée/Chapitre 2 _ Le modèle entité-association/Le modèle entité-association est constituée des concepts/Attribut/Un attribut peut être de type/Atomique ou monovalué.md)→C'est une suite d'opérations indivisibles, l'opération est donc faite dans son intégralité ou elle est annulée, ainsi on dit que la transaction est indivisible #[[Atomique ou monovalué]] 
+                - Cohérence↔C'est le fait que la base de données est toujours dans un état cohérent, ainsi une transaction fait passer d'un état valide à un autre état valide
+                - Isolation↔Chaque transaction est indépendante, ainsi une transaction n'a pas accès aux données d'une autre transaction en cours, car une transaction verrouille les ressources
+                - Durabilité↔Une fois qu'une transaction est terminée, elle est persistée même en cas de crash du système. On va donc stocker sur le disque (non volatile) le résultat d'une transaction.
+        - Déclencheur ou trigger↔est une vérification qui est activée lors d'un événement particulier (crud). Il permet de vérifier des contraintes non modélisables.
+            - Exemple
+
+![](https://remnote-user-data.s3.amazonaws.com/B3WDH47ezatWZpvqGQAxZIgy0zztYoxlH-ZFT7dlc_I-KwBW4145ekdvxEqqeIC0LzgvzdRyY3MPMAVe_hzg_RtpOE4m4S6O6ty9X7lnG9c33wDT2zo_YiVA1S222jiT.png)
+        - Modèle conceptuel↔Le **modèle EA** est une représentation graphique qui permet de visualiser la conception d'une BD
+        - Modèle relationnel↔Le modèle relationnel est une **représentation logique** de la manière dont est **organisée** **l'information** dans un [Système de gestion de base de données](BDD/Base de donnée/Chapitre 1 _ Introduction aux bases de données/Système de gestion de base de données.md)  
+            - Il peut être obtenu ↓ 
+                1. à partir du modèle EA en appliquant des règles de transformations
+                2. par décomposition: en appliquant les règles de normalisation
+                - par synthèse, en se basasnt sur les DF/DI
+        - Application de règles de transformation
+            - Un type d'entité devient{{ une table ou schéma de relation}}
+            - Un identifiant devient{{ une clé}}
+            - Illustration
+                - ![](https://remnote-user-data.s3.amazonaws.com/LN3cTPhdFHF1QQtenDDFqMkRMsU3W5mtH7CKNtTMK0SvUwvz7sWV-mIYVNlWTB7Pwxz8I36abaJix0qP9Fg10E4dxDYfJC4NiHKpZocET8mHk7K7nqjX_To1mnS_RzX-.png)
+            - Chaque type d'association possède ses propres règles de transformation
+                - un-à-plusieurs
+                    - Variante 1
+                        - Chaque type d’entité est transformé en une table
+                        - Un nouveau champ est créé dans la table du côté “plusieurs”
+                        - Ce champ est une clé étrangère
+                        - Elle référence la clé primaire de l’autre table
+                        - Si le type d’association a des attributs, ils deviennent des attributs de la table du côté “plusieurs”
+                        - Illustration
+                            - ![](https://remnote-user-data.s3.amazonaws.com/l4bB5tVJ9Y-V6hCyCWmTQPPO7-n4e3Vm9cJKG3NfpPUXrJaEL_8PxPVnEH2tvJopFUZXemrvqx3Bq6HdDfDfYzSKebO7W4XZj38MHRNfmm5WAitjnnI2lY4jOzvg3lJh.png)
+                - un-à-un
+                    - Variante 1 (standard)
+                        - Chaque type d’entité est transformé en une table
+                        - Un nouveau champ (clé étrangère) est créé dans une des tables
+                            - du côté de la table “optionelle” si existante
+                            - arbitrairement sinon
+                        - La valeur de cette clé étrangère doit être unique
+                        - Meilleure séparation des préoccupations mais jointure nécessaire
+                        - Illustration
+                            - ![](https://remnote-user-data.s3.amazonaws.com/RLr8U4Z_LHv99pkRuYjOeFZDktfBJotouMUWJ3IY3ZJSTrT1SHyA4MyJdSiGHtjNL3HvZxb68SiLTfVfNwG6CyMxK94i1XHKCLQYfdwQXTrsmNT6pZoARUNyQ_Ae6YBW.png)
+                            - ![](https://remnote-user-data.s3.amazonaws.com/Tqo4UUDUoGli0Te3q5Mqd6G8IPNNdBHs7mtOj6YGVlS2Eoz0YKUaTj5nOCURt-vm9zbVDrSKAfxP4VxXzqqbBCLtPgDh4Gqzsdb-cl0hwFvmE6o5LWow17_XS66Mc4iS.png)
+                    - Variante 2
+                        - Les deux entités sont fusionnées et forment une seule table
+                        - Sélection d’une seule clé primaire
+                        - +/-←Simple et efficace, mais implique des champs optionels (null)
+                        - Illustration
+                            - ![](https://remnote-user-data.s3.amazonaws.com/adQAYWCsobl6lxIIq50ieu8l0Z8tM8rThyKV9s8T4IwXKpcbdkpL01eOmH4F2LC4-RxWkTgip8m97wo8qmQWeTq89RabdXH0tBAKbVWpB80Ew9t6-5XssAshh10ylE09.png)
+                - plusieurs-à-plusieurs
+                    - Chaque type d’entité est transformé en une table
+                    - Le type d’association devient une table (appelé parfois table de correspondance)
+                    - Les attributs de l’association se retrouvent dans cette table
+                    - Cette table enregistre les clés étrangères des deux tables associées
+                    - Le choix de la clé primaire pour cette table définit une contrainte (correspond à une DF)
+                        - Cas Permissif↔Une clé artificielle est créée
+                            - Avec contraintes d'unicité→possible de restreindre d'avantage en appliquant des contraintes d'unicité sur un ensemble d'attributs (en plus d'une clé primaire) avec le mot clé unique
+                            - Illustration
+                                - ![](https://remnote-user-data.s3.amazonaws.com/HFXDkCkoC6vYl1ts3nkBr4y3QCpP78FlSb4Fj3VBNOmdQQoTrV9bVavgthsRr4XxVA-ifMBatc_zIlLbXPrJIFxc3XJ6J6lDo-egfnqoo3Rs8lvia7jbPA1fDUo_g_fH.png)
+                        - Cas Restrictif↔Les clés étrangères deviennent la clé primaire
+                        - Autres↔ajout d’un attribut dans la clé par exemple
+                            - Illustration
+                                - ![](https://remnote-user-data.s3.amazonaws.com/iHXM_aj3lOPiOSpS2ckztp4vAK96PfZlbg6rPR4ppgFlLH0Mh0yJzEg-2sgoHiPOe-hkPoS0MF7GftcibJle3kYLxDAyb_xiM89O5ZRj_BHx7XqWa6dq88xu61KqU5HU.png)
+                - Illustration
+                    - ![](https://remnote-user-data.s3.amazonaws.com/82PTIYkQj8VnIEBKnohg-gnQiBXre_g3nRGGiZIAqP8SetCJg_SAi1FF7ZNU-qVbjRHoRR-oc1CIt0kvehvW1lc_3jvTSdlwwLZIa9jfn_CbESUIdF1DhTouNwnHmUI2.png)
+        - 
+    - Chapitre 5 : Le langage SQL DML
+        - Série d'exercices
+            - Conférence
+                - Les visiteurs qui ont moins de 50 points sur leur compte fidélité
+
+    - Chapitre 7 : Modélisation avancée
+        - Introduction
+            - Objectifs
+                - Concepts de modélisation avancés
+                - Généralisation/Spécialisation
+                - Association ternaires (et n-aires)
+                - Dépendance d'inclusion
+            - L'importance de la clé et de sa signification
+                - ` Vente(` _`article`_ `, fournisseur, prix, ...)`→Un article est vendu par un fournisseur à un prix donné;
+{article} → {fournisseur, prix, ...}
+                - ` Vente(` _`article, fournisseur,`_ ` prix, ...)`→Un article est vendu par plusieurs fournisseurs. Son prix dépend du fournisseur;
+{article, fournisseur} → {prix, ...}
+                - ` Vente(` _`article`_ `, ` _`fournisseur`_ `, prix, ...)`→Un article peut être vendu à des prix différents par un même fournisseur;
+{article, fournisseur, prix} → {...} 
+        - Certains types d'associations sont difficilement modélisables sans la relation ternaire
+        - Généralisation et spécialisation (héritage)
+            - Entité générale vs Entité spécifique, il y a plusieurs types d'associations ↓ 
+                1. Associations de type "est un"
+![](https://remnote-user-data.s3.amazonaws.com/EEwUZ_mCUcad9giR2DZS9UF9f_m6h3S-2uF_T0FTPb1szn4R_jUIqoIJmvMBQdbhoVGfptVnHaJJpjOLMQsMiMSacLf4KRDWuvLLxo5Xiz5Wmitfs3GbxswF5HUzGR1C.png) ↓ 
+                    - Ne renseigne pas si un patient peut être également médecin
+                    - Ne renseigne pas si un individu peut être enregistré sans être ni médecin ni patient
+            - Pour améliorer les [Associations de type "est un"](BDD/Base de donnée/Chapitre 7 _ Modélisation avancée/Généralisation et spécialisation (héritage)/Associations de type _est un_.md)
+            - Associations de type "est un"
+            - Contraintes de chevauchement ↓ 
+                1. disjoint - partiel ![](https://remnote-user-data.s3.amazonaws.com/ZmxwWerg3xbQYCQ6e49G9vxy2UTiRdlIYYhW10ofv-qJZrA2APzxAlCmICftcJ2Y7ATVXPWTMUjEV4EkwwKdjpYZHIbeh4bNQju_5XUwMxAQr4TVHK0nGE1bf08YcF-O.png)
+                2. overlap - partiel ![](https://remnote-user-data.s3.amazonaws.com/g-t3VUKBdt2DPfb07_NlcUkfFw8ArsEzCWajeHHS0o3F0BKcdmplA9kvqF6ptk2SU7qqasgllgnD0MoFR1ihFjeingFZf-aQIughAZhgSQAurCUIHJq3Oi0QDdoElvBs.png)
+                3. disjoint - total ![](https://remnote-user-data.s3.amazonaws.com/nXMlEIitdkacUUZM317xkze_qNvvBMyalwdmyV_dCVjj2FU_2aZiX__o_i0lxL_AZ8TFTjV4YgwhqrNuNnxW0_oiJJ4Mz9D820ZfRb4UUG7L91GQXBSAzTtAcaRCSdR6.png)
+                4. overlap - total ![](https://remnote-user-data.s3.amazonaws.com/E4j_TmerBAcs4co_GSLW2OI-K6kSjbaV543FDS-RNF6lFl-gMuoRLEatPPgcEuEzNyPT8VuIHOhfyHoupn5AaZxMhYIFYr9pN0rBgyUtlr-oSY2MQXqV6mTjO96sCkK9.png)
+            - Contraintes de chevauchement
+                - ![](https://remnote-user-data.s3.amazonaws.com/hFY3Y0gIKm6iEA19HOkgaY-tXHNonUxHIwIf0FqLFfozskWQZtvPBmxBSNZuph9-TkR5UpEYAvEXDbC6Sn4msMHnbQY5yD8trrPfl1RRPmOGDf-zqIfHoR-DSFUkEAOC.png)
+                    - un individu est {{obligatoirement un patient et/ou un médecin}}
+                - ![](https://remnote-user-data.s3.amazonaws.com/_qgcOKWQOPSsOh2vu-UlVzqyJARkjqJvevB2pLGCW_BHoj2U5TAgYqCC64mK3VlKQIxmvUdwzjSrNSl_vJ_u4JCbvpZhiNKTO9su8vpFSlc4UUsH2mLBMfENIRgv0udg.png)
+                    - un employé {{peut pas être soit chef, soit consultant}}
+                    - possibilité {{d'enregistrer des employés}}
+            - Enum ⇒ soit l'un soit l'autre, l'un des deux a une valeur, l'autre est NULL
+        - Associations récursives
+        - Associations ternaires ( ≥3)
+            - difficile à déterminer les cardinalités
+                - se fait de l'autre côté
+- Algèbre relationnelle
+    - Chapitre 1 : Formalisation des bases de données relationnelles
+        - Qu'est-ce qu'une base de donnée ?→est une **collection** **d'informations** **persistantes** **organisée** de manière à pouvoir être **facilement** **manipulée**.
+            - Elle est définie par ↓ 
+                - entités
+                - nature des liens entre ses entités
+                - contraintes
+        - Quels sont les avantage d'une base de donnée ? ↓ 
+            1. Persistance et pérennité
+            2. Partage et centralisation
+            3. Sécurité (gestion des droits)
+            4. Efficacité (optimisation des requêtes, du stockage, de l'indexation, ...)
+            5. Source de confiance ↓ 
+                1. cohérence des données, éviter les redondances
+                2. respect des règles métiers
+        - Manipulation des données
+            - Les quatres opérations de manipulation des données {{(Acronyme CRUD)}} sont ↓ 
+                - Rechercher
+                - Ajouter
+                - Supprimer
+                - Modifier
+            - Langage de requête→Les opérations CRUD sont effectuées à l'aide d'un langage de requête qui peut soit être un **langage déclaratif** soit une **API** 
+                - type
+                    - Langage déclaratif→un langage déclaratif permet de décrire l'objectif sans préciser comment l'obtenir
+                        - ^^Par exemple:^^ Le langage SQL est un langage de requêtes structuré et déclaratif permettant de manipuler des bases de données relationnelles.
+                    - API et bibliothèque déclaratives→Application Programming Interface, which is a software intermediary that allows two applications to talk to each other
+                        - ^^Par exemple:^^![](https://remnote-user-data.s3.amazonaws.com/Rzpjf-RPQajHSSvm8vffML_F370vXizJo8fNYqDwqmZ77USkb2GLKeZ6J1E3WYljoZNbVWT2zdh2y2y_ErsQRGfvLiZRvXAcaKMxv63rlbdZp23VhRXvoOQ5hL-TmGkz.png)![](https://remnote-user-data.s3.amazonaws.com/7jf0Zm5UZAZfagyDY8FAaF6BLXB4lrRPj1pXMlndjEdFQ_FbMDxJ93fQX_y4x488JQkwoNvU9FB6nQL1gLmde5onJdaJ2H3QESe23hmoQS8z2I12RwbfGISf7RN8TOXC.png)
+        - Contraintes d'intégrité↔décrivent des règles métiers à respecter. Elles décrivent des situations (ou comportements) admissibles ou non admissibles pour le domaine d'application.
+            - Exemple
+                - On définit les contraintes dans un cahier des charges, ^^une personne a un nom^^
+        - Normalisation→une base de données normalisée est modélisée de manière à éviter des redondances, des incohérences et des anomalies. On dit qu'elle n'est pas ambiguë.
+            - ![](https://remnote-user-data.s3.amazonaws.com/VMVe-12ZR16NcfpeA6ZPK5fAEDYbZWANB8LxIUcMc07i7XshFzF4XbsjO6_u-x4x76w_3UpafxYVarBmbI2CpnPvQU3dcAKYejwzmxTds3fuf7jAmb071slaSPSPhZmS.png)
+            - ![](https://remnote-user-data.s3.amazonaws.com/FLfDl68ElSZY68Hw8KUKtT2VyXe5OGn6izsWxlBFNoTbKdhvSaJgkvGhBwnT1KoQiIIYpJI6D76l8-xGYYnEmtv1L8U-G_CzjGXCDTu8KIUSUl-SxdfgzxOUY7TSy-Gr.png)
+        - Base de données relationnelle ?→C'est une structure qui permet de regrouper des données structurées dans un ensemble de **tables** organisées en **lignes** et **colonnes**.
+            - Qu'est-ce que l'utilité d'une base données relationnelle ?→renforcée les contraintes d'intégrité [Contraintes d'intégrité](BDD/Algèbre relationnelle/Chapitre 1 _ Formalisation des bases de données relationnelles/Contraintes d'intégrité.md)  
+        - Ensemble↔est une collection d'éléments. Chaque élément est unique.
+        - Qu'est-ce que le produit cartésien ?→C'est une multiplication qui permet d'obtenir toutes les possibilités entre deux ensembles.
+            - définition formel→Le produit cartésien de deux ensembles X et Y, noté $X \times Y$ , est l'ensemble des couples (x, y) tel que $x \epsilon X, y \epsilon Y$ , notée aussi :
+$$\{(x,y) | x \epsilon X, y \epsilon Y\}$$ 
+            - Images
+                - ![](https://remnote-user-data.s3.amazonaws.com/s3jsbgeUwVg7zX4dMNZaaNmSsgHj3jYyzTDAx69nWusMjFYqyU-GXYZIik4PcyWWWZRqciz2eYiEV2GP1V3LXyTQQawj7AKfhu5iRhbn3f3wI7Q5zcjMoumB9iBdV3A0.png)
+                - ![](https://remnote-user-data.s3.amazonaws.com/B9Z5pYxJv5OX15Qzu_3Z0RQCj_VkhdZIdOFLDwqyRhqtsxIuo3lUYTxN-lydrfA4Pg7aemd0bQ3SMhKk2ih9rVrVQ2qnJT8Wq07WsbugsuR8buydnkS06XS-QOTLRtmO.png)
+            - Analogie
+                - Vous organisez une séance de dégustation de pommes auprès de personnes qui devront noter le goût de différentes variétés. Miam !
+                - Si je vous dis qu'il y a 3 variétés à faire goûter à 4 personnes, et que je vous demande combien de pommes vous devez prévoir, quelle opération effectuerez-vous ?
+                - ```javascript
+3 * 4 = 12
+``` Il vous faudra au total 12 pommes.
+                - Nous avons ici utilisé l'opération ```javascript
+*
+``` : la multiplication (aussi appelée "produit").
+                - En algèbre relationnelle, le produit (cartésien) a la même signification ! En calculant ```javascript
+3 * 4
+```, vous avez imaginé chaque goûteur essayer chaque variété.
+        - Qu'est-ce que le schéma d'une relation ?→Le schéma d'une relation c'est simplement une table
+            - définition formelle→Le schéma d'une relation R dénoté $R(A_1, A_2, ..., A_n)$ est composé d'un nom R et d'attributs $A_1, A_2, ..., A_n$ .
+            - Exemple
+                - Visiteur(id_visiteur, prenom, nom, email)
+                - Conference(id_conf, intitule, date_debut, date_fin, prix)
+                - Hotel(id_hotel, nom_hotel, adresse)
+        - Relation ?→C'est un sous-ensemble issu d'une opération, ce sous-ensemble est lui-même un ensemble de tuples.
+            - définition formelle→Une relation d'un schéma R, noté r(R), est un sous-ensemble du produit cartésien défini par R: $r(R) \subseteq A_1 \times A_2 \times ... \times A_n$ . Une relation est un ensemble de tuples (n-uplets) $(a_1, a_2, ..., a_n), a_i \subseteq A_i$ 
+            - Tuple↔représente un enregistrement (une ligne) d'une table.
+                - Exemple
+                    - ![](https://remnote-user-data.s3.amazonaws.com/qpY_sM1Sc4cD7xhwFwYeaRR9NuR_j1o8yKO1lWuhBx6b_h5rmSbe42M9JPgTv67kfCxn4y3MTBZLi3-OOWkC3g67Kcv_KjmFO-qVtjk8u5pWCB08m5aI3BwM0oVutYBI.png)
+            - Une relation est aussi un ensemble, or un ensemble est une collection d'éléments uniques. Il n'existe donc pas deux tuples de mêmes valeurs dans une relation
+                - Exemple
+                    - ![](https://remnote-user-data.s3.amazonaws.com/YyNd7EpgQ8Nq440DilCZZTHGi-CrcisCNLW8W2d11AvBQkQ3LJopkzAK0ASOafYdRhd-mMmPx82c1XnTP3a1O1I-OAo3Fxs0YOFpjQrmGJcoSbeBhCGzborgqII8IG2S.png)
+        - Qu'est-ce qu'une clé primaire?→La clé primaire d'un schéma est un** sous-ensemble d'attributs **du **schéma de la relation** permettant **d'identifier** de manière **unique** un **tuple**.
+            - Contrainte d'unicité↔Deux tuples distincts d'une relation ne peuvent avoir la même clé.
+            - Une clé est obligatoirement renseignée
+            - Il peut exister plusieurs clés candidates
+            - Une clé artificielle peut être créée si
+                - aucune clé n'est candidate
+                - si les clés candidates sont mal adaptées pour l'indexation
+        - Clé candidate↔est un tuple dont chaque enregistrement est distinct l'un de l'autre, ainsi elle peut devenir une clé primaire.
+            - définition formelle→un ensemble des données permettant d'indexer chaque ligne d'une table donnée de manière différenciée
+            - Une même base de données peut posséder {{plusieurs clés candidates distinctes.}}
+            - La [clé primaire](https://fr.wikipedia.org/wiki/Cl%C3%A9_primaire)  appartient {{nécessairement à l'ensemble des clés candidates.}}
+            - Une table sans lignes en doublon possède {{nécessairement une ou plusieurs clés candidates.}}
+            - Une table avec des lignes en doublon {{ne possède aucune clé candidate.}}
+            - Lorsqu'une table ne possède aucune clé candidate, ou que les clés candidates sont peu adaptées (par exemple très longues), le gestionnaire de la base peut être amené à ajouter des données d'indexation arbitraires à la table, créant ainsi une [clé artificielle](https://fr.wikipedia.org/wiki/Cl%C3%A9_artificielle) .
+            - Une clé choisie parmi les clés candidates pour indexer une base est appelée une [clé naturelle](https://fr.wikipedia.org/wiki/Cl%C3%A9_naturelle) .
+        - Clé artificielle↔désigne un ensemble de données adjointes aux données d'une [table](https://fr.wikipedia.org/wiki/Table_(base_de_donn%C3%A9es) ) pour les indexer.
+            - Les clés artificielles sont les seules clés possibles quand ↓ 
+                - il n'existe pas de [clé candidate](https://fr.wikipedia.org/wiki/Cl%C3%A9_candidate)  dans la table initiale (il existe des lignes doublons) ;
+            - Autres raisons d'adjoindre une clé artificielle à une table ↓ 
+                - il existe un risque significatif que des doublons de lignes existantes soient introduits ultérieurement dans la table ;
+                - les clés candidates sont peu utilisables (par exemple elles sont trop longues, ce qui nuit aux performances d'interrogation) ;
+                - il existe une instabilité trop importante sur les données faisant partie des clés candidates entraînant des modifications trop fréquentes (correction d'erreurs de saisie, changement de référentiel…).
+        - Clé étrangère↔est un attribut (ou ensemble d'attributs) référençant une clé primaire d'une autre table
+            - Contrainte d'intégrité référentielle ou dépendance d'inclusion↔La valeur doit exister dans l'autre relation
+            - Qu'est-ce que l'utilité d'une clé étrangère ?→Elle permet d'éviter les **redondances** et **anomalies**, elle indique une **cardinalité de un.** 
+            - Illustration
+                - ![](https://remnote-user-data.s3.amazonaws.com/Nm521Dwf0ZC_IlA-ygNlTEseioupbrt6mQ5VSQpsdYgFIYo1d9KIzYzhzTceYhnN-jp-4RYquE9Yc43Sx09AkTZlXqjZzoX_gIYsb0Vx2sWRdZ4Q9sf5mov_WxLHyzyK.png)
+            - Formalisation
+                - ![](https://remnote-user-data.s3.amazonaws.com/mg--aP8zjpxeIJoM5lwS4_30vOUxAwRKPglh-G_lYxJiE32RwQs7TjgJlUmReFXiEVL4TeQepiG6O-juvk3EQNVCtKYlX5y8mnUKEuPDELluYfWX3U14kr1vHA7hf98w.png)
+            - Diagramme sagitale
+                - Dans l'univers relationnel, les arcs n'existent pas. La clé étrangère permet de représenter {{une association}}. Elle apparaît du côté {{de l'origine de l'arc}}.
+                - ![](https://remnote-user-data.s3.amazonaws.com/gS8rIBRRuFy6Rsh4lAKz_vvUWF8deXWv1ow5rsQeujkTuS9VAVyY98RQrvj41seW2bA2jGAKQcfpvJI8zt0wcRI2lj211vtlrmme8sSwz95avm8U6a-m2twT-K1tZgQP.png)
+                - Association plusieurs à plusieurs↔![](https://remnote-user-data.s3.amazonaws.com/0vST_wBgPX_eObh3kr4LNL7RvQmk6-8DbBXM1-KINcH8sqeyiiEmVuX_LK4TmLWU7GBUKNVyvEf5KqRPc88w4uiigVvbF7pO6pLm_AD632MeJOV9ULbilVssKbDeAAQo.png) 
+        - Fonction d'un ensemble A vers un ensemble B↔est une **relation** (un **sous-ensemble** $A \times B$ ) où chaque élément (**unicité**) de A appartient à un et un seul couple de la relation.
+        - Dépendance fonctionnelle↔est une contrainte qui décrit les liens qui peut exister entre des attributs.
+            - Dépendance fonctionnelle (définition formelle)→Une DF, dénotée X → Y, entre deux ensembles d'attributs X et Y d'une relation R, spécifie une contrainte entre ces deux ensembles.
+            - X → Y peut être interprété de différentes manières ↓ 
+                1. connaissant X je peux déduire Y
+                2. connaissant X il ne peut y avoir qu'un Y
+                3. X détermine Y
+            - X est appelé le {{déterminant}}
+            - Y est appelé le {{déterminé}}
+            - Exemple
+                - {id_theme} → {intitule}↔connaissant l'id_theme, je peux déduire l'intitule
+                - {id_conference} → {nom, id_theme}↔connaissant l'id_conference, il ne peut y avoir qu'un autre (nom, id_theme) associé
+                - {no_isbn} → {titre, description}
+                - {no_exemplaire} → {no_isbn}
+                - {no_exemplaire, no_emprunteur, date_emprunt} → {date_retour, date_echeance}
+            - Quel est l'utilité d'une dépendance fonctionnelle ?→En plus de permettre de modéliser des contraintes supplémentaires, elles permettent de déterminer les identifiants
+            - Quels sont les attributs déterminants d'une dépendance fonctionnelle ?→Les attributs déterminants sont généralement des clés primaires ou des couples uniques.
+            - Illustration
+                - ![](https://remnote-user-data.s3.amazonaws.com/VPbfzJYrRM_h2wNtAAoNGNCrYyVtIvQo1Eh2Gyw_uouN_cHhjcsfbSuNLQPQRqg5n2jsj7fgu_Xnu5ZH1KPPlhORR27LKz5rF6NDSvk1Ga5OFA9_SK8ZLzpwjit7sqJz.png)
+                - ![](https://remnote-user-data.s3.amazonaws.com/7qPNQiQewNkiybIj8bXpxvf8Q2HWefrs5nGka0K9XYz-UcwJ6SUB7XI0VTD4xP84pf5Y7R9FST5cQfHON-QxRbJBfuiYDMkTqwZxZvXphtYli9WN4J4rpI5zHU5jnF58.png)
+        - Schéma de base de données relationnelle↔est composé de l'ensemble des schémas de relations et l'ensemble des dépendances fonctionnelles.
+            - Illustration
+                - ![](https://remnote-user-data.s3.amazonaws.com/7CISbQ3-5sbnwzSpPWWMecEH7ljNJE21LBmgO4QTbk1D7FHyENJyEWbEfieyNBOqFVSFqy6o9cmDjtpix51vXnbAq8KrTrkzetw0r0LLpDzjGKjVIupZofEfXxnwROOQ.png)
+        - Dépendance d'inclusion↔Lorsque l'on utilise une clé étrangère dans un schéma de relation, alors cette clé étrangère doit forcément référencer une clé primaire qui doit exister dans l'autre relation. On note ce concept $\subseteq$ 
+            - Illustration
+                - ![](https://remnote-user-data.s3.amazonaws.com/EfFO8702FL3-VHMn2pAScMGX1_S1Ytasc2GHg5EG4t5KteaMNQlD2Z5mLZxIIDqnKb3gMpSd5iy30lA0EAYXtuZODim6B0t3Ec1qCqhxdLSIODKKSQV5EFJ70Z8gflcR.png)
+            - Une DI indique que les valeurs d'un ou de plusieurs attributs d'un enregistrement {{doivent exister dans une autre relation}}
+            - La clé étrangère est {{une DI}}
+            - Une DI n'est pas {{nécessairement une clé étrangère}}
+            - Quel est l'utilité d'une DI ?→Elle permet de renforcer, à la manière des DF, les contraintes d'intégrité.
+                - ![](https://remnote-user-data.s3.amazonaws.com/Py3TEPqazy4jVvvwHAE-hCzgobZjuD5zTj_1GGW8Bbcvk2MDApG1Z6wJr-TAkKmNNCI_GIkiR4urrS4jHYFqCilTgNUauCsX8sbTaMSKB7wikYGjCpkB2-8AKqwe7Rpy.png)
+            - Quel est l'avantage d'une DI ?→Elle se modélise facilement.
+            - Quel est la différence avec la DF?:: ↓ 
+                1. les DI peuvent être définies entre attributs de relations différentes et possèdent un caractère global à la base, pas local à une relation
+                2. les DI sont définies non pas entre deux ensembles d'attributs, mais entre deux séquences d'attributs de même taille
+    - Chapitre 2 : L'algèbre relationnelle
+        - Algèbre relationnelle↔langage fournissant un ensemble formel d'opérateurs permettant d'extraire des informations des relations.
+        - Les opérateurs sont unaires ou binaires, ils prennent une ou deux relations et retournent une nouvelle relation
+        - Le résultat ne comportent pas de doublons
+        - Opérateurs unaires
+            - Sélection
+            - Produit
+        - Opérateurs binaires
+            - Produit cartésien
+            - Jointures
+            - Différence
+            - Division
+            - Union
+            - Intersection
+        - Sélection↔est une opération unaire permettant d'appliquer un filtre sur une relation (clause SQL: WHERE)$$\sigma_{condition}(\textrm{Relation})$$ 
+            - Exemple
+                - ![](https://remnote-user-data.s3.amazonaws.com/5oM3siBoF9k8Knc5rxjN65W_SDmYYWfLveZfB7iQnLQRW1-AWHnH0DBC9_jcIi-kLK8Gxd1wnqYSDkh6ixPIlqQsky2ePdvmRNs7VatZLxmshHGkpbAncMBoyojIAJz5.png)
+        - Projection↔d'une relation permet de conserver un sous-ensemble de ses attributs. Les doublons sont supprimés du résultat (clause SQL: SELECT DISTINCT)
+$$\pi\{\textrm{attribut}_1,\textrm{attribut}_2, ...\}(\textrm{Relation})$$ 
+            - Exemple
+                - ![](https://remnote-user-data.s3.amazonaws.com/YpDLrw-gskkxGdknZUCRH5j_Dws8rJYlum9zDpJkvjO7LBHEp3O-H3S_b4CJLxM0AUIsIVXYkOdAYztdECo32KyA5ILpIZMA81PKGhdNYtJgNBZIoEwAcBE1NKhmFI1_.png)
+        - Projection et Composition
+            - ![](https://remnote-user-data.s3.amazonaws.com/8s0z_BMdu51ad93h0-cP5m3ku0T5JuFOklHTvEnb4rQPIRLMXyDDTJtF70giZpl4gPv0uJRZGa9CjCOy49UQgEXdBrm8k11-YTKM2cjZmjqDZeBNhLKiF9wrZzaNEa-E.png)
+            - ![](https://remnote-user-data.s3.amazonaws.com/34vxe4nliUMbj7zz0RX49LpDDHBqyZMgPkx4Ulcy0hQX-66y6ThXmtSiNG8x6LVox-pfry87qpdz4Ehoz03j7VjSNZLGETqw6yBbaUl0iJUgeFE7QPp-_l_bHQPjzFVJ.png)
+        - Le produit cartésien↔produit une nouvelle relation composée de toutes les combinaisons possibles des tuples des deux relations
+            - Exemple
+                - ![](https://remnote-user-data.s3.amazonaws.com/bK5tCIMSFhMxb8E0yuU1k2SbS1-NAZYVw1EsBBy4PrQZdjPnDcs43tLDx4K4i4QbcQF1gKTPmgrb9-PaN-MWFkr-XmBlK8GxHKSDU_3ckttuzjwTKG1PiclcNrvRew0i.png)
+                - Le produit cartésien n'a pas d'intérêt en tant que tel. Par contre, il fournit une opération intermédiaire pour joindre les enregistrements de deux relations.
+                    - Lister les livres (nom du livre et nom du thème) avec leur thème associé$$\pi\{titre, intitule\}(\sigma Theme.id\_theme = Livre.id\_theme(Livre \times Theme))$$
+        - La jointure↔permet de produire une relation dont les lignes sont composées en joignant les lignes des deux relations en entrée qui possèdent une correspondance commune (même valeurs d'attributs).
+$$R1 \bowtie_{condition} R2$$ 
+            - Exemple
+                - Lister les livres (nom du livre et nom du thème) avec leur thème associé
+                    - $\pi\{titre, intitule\}(Theme \bowtie_{Theme.id\_theme = Livre.id\_theme} Livre)$
+                - ![](https://remnote-user-data.s3.amazonaws.com/k7xntaJi22Z3tjVf3aBcYqBNczocX9KvXuvhaefouBzJQW3EhX6jRUBu3cRQqJgUOzpaT4zlfPORP--wAnLElk_E9xzyC7QxthnKDkwzr64V2qlTnj9Ndze8fS67Mx_t.png)
+                - ![](https://remnote-user-data.s3.amazonaws.com/NbfqyAPaDfxXGTi_wtTQ_TJVLbLb6uMFy9Acg58zrqVzCnK_PMyRz3fSmNXUByJcIvfkrt5xTXNiVzBsg9fpuy1Ko1kRn3N5oOw4FPxOoodqbl-OqfQkHn16_6LGGw5w.png)
+            - Jointure externe
+                - Jointure droite
+                - Jointure gauche
+                - Jointure pleine
+                - Exemple
+                    - ![](https://remnote-user-data.s3.amazonaws.com/qs_IyILAEDntcVfwYQxJ0oGdOw_A2h9JGgvdveShlCpRoB05_jqys6FdT9I0fVW4qDzAj-5KVAfz3u9qqTeD_u72sXf9APESIddtGqbBxW0SHobLrfdaTx2VOYIKZv3b.png)
+                    - ![](https://remnote-user-data.s3.amazonaws.com/FaAn5SMbs7JFGRgQ0Bc7UcSQlI47cLoM4Z1CO6Z-FKe-V2qG8jR0fEaCZK-uaKLKyAy-YpGHYT2bppyK0a6PkSrPo3_SuFeF8mvQ6Gm8tM-n14zDbo7dr4w5WKm32Hy5.png)
+        - Exemple de composition d'une requête
+            - Lister tous les emprunts (nom, prénom, titre du livre et intitulé) des personnes habitant Lausanne qui ont emprunté des livres sur le thème "Informatique"
+                - ![](https://remnote-user-data.s3.amazonaws.com/iF5qfDP0xUXnjPG5HgT-XQV8ZL8xMWEJNGVSh5wE5xLIp5vm8C0RWnGsXXimldF_CrY_B9FpMGvNkwHsHo8z2K-_3jCMo5GH0nyhabhgi7N1seo7ZDuHB7UnJUOPTV47.png)
+                - ![](https://remnote-user-data.s3.amazonaws.com/y5FSo_86F4QIwm3kNav5K2etDfONfTbdWfgFBow6I-A3pBbnusIlKvaioe8fX_VwYfNc2lbcIKQGDeco8wspns20ULxqTCJuC-E6mCMKvPa6rEPA78l1Okbd2dOn0cLU.png)`
+        - Les opérations ensemblistes↔sont des opérations binaires qui s'effectuent sur des relations possédant les mêmes attributs
+            - L'union↔notée $\cup$ 
+                - Exemple: Le nom des clients et des employés
+                - Requête: $\pi\{nom\}(Client)\cup\pi\{nom\}(Employe)$
+            - L'intersection↔notée $\cap$ 
+                - Exemple: Le nom des clients qui sont également employés
+                - Requête: $\pi\{nom\}(Client)\cap\pi\{nom\}(Employe)$
+            - La différence↔notée $-$ , qui exprime généralement une négation
+                - Exemple: Les personnes (nom, prénom) qui n'ont jamais emprunté de livre
+                - Requête: $\pi\{nom, prenom\}(Personne) - (Emprunt \bowtie Personne)$
+        - La division↔le résultat de cette opération entre deux relations ($R_1 , R_2)$ est composée des tuples de $R_1$ qui sont associés à tous les éléments de $R_2$ . Le schéma de la relation $R_2$ doit obligatoirement être composee d'un sous-ensemble d'attributs du schéma de la relation $R_1$ .
+            - Exemple: Les personnes (nom, prénom) qui ont emprunté tous les livres
+            - Requête: $$R_1 \leftarrow (\textrm{Personne} \bowtie \textrm{Personne.id\_personne = Emprunt.id\_personne Emprunt}) \\
+\pi\{nom, prénom, id\_livre\}(R) \setminus \pi\{id\_livre\}(Livre)$$
+            - Illustration
+                - ![](https://remnote-user-data.s3.amazonaws.com/4MSV5z1I_EO1nLDrsTcdkxm-aKU510ANjzfjomMgcdE0ZV9PRGDKfbddBVNt3IWySX8ubpEDh5ucg_cW_W1IkJTCiP0VRDv_GiEMgzDLsBm8d7ELlxOzVIPhuz-FPiJ8.png)
+- 

@@ -1,0 +1,1905 @@
+{
+  "config": {
+    "id": "36a3b0b5-bad0-4a04-b79b-441c7cef77db",
+    "label": "BetterBibTeX JSON",
+    "preferences": {
+      "ascii": "",
+      "asciiBibLaTeX": false,
+      "asciiBibTeX": true,
+      "autoAbbrev": false,
+      "autoAbbrevStyle": "",
+      "autoExport": "immediate",
+      "autoExportDelay": 5,
+      "autoExportIdleWait": 10,
+      "autoExportPathReplaceDiacritics": false,
+      "autoExportPathReplaceDirSep": "-",
+      "autoExportPathReplaceSpace": " ",
+      "automaticTags": true,
+      "autoPinDelay": 0,
+      "auxImport": false,
+      "baseAttachmentPath": "",
+      "biblatexExtendedDateFormat": true,
+      "biblatexExtendedNameFormat": true,
+      "biblatexExtractEprint": true,
+      "bibtexParticleNoOp": false,
+      "bibtexURL": "off",
+      "cache": true,
+      "cacheFlushInterval": 5,
+      "charmap": "",
+      "citeCommand": "cite",
+      "citekeyFold": true,
+      "citekeyFormat": "auth.lower + shorttitle(3,3) + year",
+      "citekeySearch": true,
+      "citekeyUnsafeChars": "\\\"#%'(),={}~",
+      "csquotes": "",
+      "DOIandURL": "both",
+      "exportBibTeXStrings": "off",
+      "exportBraceProtection": true,
+      "exportTitleCase": true,
+      "extraMergeCitekeys": false,
+      "extraMergeCSL": false,
+      "extraMergeTeX": false,
+      "git": "config",
+      "import": true,
+      "importBibTeXStrings": true,
+      "importCaseProtection": "as-needed",
+      "importCitationKey": true,
+      "importExtra": true,
+      "importJabRefAbbreviations": true,
+      "importJabRefStrings": true,
+      "importNoteToExtra": "",
+      "importSentenceCase": "on+guess",
+      "importUnknownTexCommand": "ignore",
+      "itemObserverDelay": 5,
+      "jabrefFormat": 0,
+      "jieba": false,
+      "keyConflictPolicy": "keep",
+      "keyScope": "library",
+      "kuroshiro": false,
+      "language": "langid",
+      "mapMath": "",
+      "mapText": "",
+      "mapUnicode": "conservative",
+      "parseParticles": true,
+      "patchDates": "dateadded=dateAdded, date-added=dateAdded, datemodified=dateModified, date-modified=dateModified",
+      "postscript": "",
+      "postscriptOverride": "",
+      "preferencesOverride": "",
+      "qualityReport": false,
+      "quickCopyEta": "",
+      "quickCopyMode": "latex",
+      "quickCopyOrgMode": "zotero",
+      "quickCopyPandocBrackets": false,
+      "quickCopySelectLink": "zotero",
+      "rawImports": false,
+      "rawLaTag": "#LaTeX",
+      "relativeFilePaths": false,
+      "retainCache": false,
+      "separatorList": "and",
+      "separatorNames": "and",
+      "skipFields": "",
+      "skipWords": "a,ab,aboard,about,above,across,after,against,al,along,amid,among,an,and,anti,around,as,at,before,behind,below,beneath,beside,besides,between,beyond,but,by,d,da,das,de,del,dell,dello,dei,degli,della,dell,delle,dem,den,der,des,despite,die,do,down,du,during,ein,eine,einem,einen,einer,eines,el,en,et,except,for,from,gli,i,il,in,inside,into,is,l,la,las,le,les,like,lo,los,near,nor,of,off,on,onto,or,over,past,per,plus,round,save,since,so,some,sur,than,the,through,to,toward,towards,un,una,unas,under,underneath,une,unlike,uno,unos,until,up,upon,versus,via,von,while,with,within,without,yet,zu,zum",
+      "startupProgress": "popup",
+      "strings": "",
+      "stringsOverride": "",
+      "verbatimFields": "url,doi,file,pdf,ids,eprint,/^verb[a-z]$/,groups,/^citeulike-linkout-[0-9]+$/, /^bdsk-url-[0-9]+$/",
+      "warnBulkModify": 10,
+      "warnTitleCased": false,
+      "texmap": {}
+    },
+    "options": {
+      "exportNotes": true,
+      "exportFileData": false,
+      "keepUpdated": false,
+      "worker": true
+    }
+  },
+  "version": {
+    "zotero": "6.0.23",
+    "bbt": "6.7.61"
+  },
+  "collections": {
+    "PRUTT6E4": {
+      "key": "PRUTT6E4",
+      "parent": "",
+      "name": "Books",
+      "collections": [],
+      "items": [
+        100
+      ]
+    }
+  },
+  "items": [
+    {
+      "key": "IM5PKJ5A",
+      "version": 96,
+      "itemType": "encyclopediaArticle",
+      "title": "Abstract syntax tree",
+      "abstractNote": "In computer science, an abstract syntax tree (AST), or just syntax tree, is a tree representation of the abstract syntactic structure of text (often source code) written in a formal language. Each node of the tree denotes a construct occurring in the text.\nThe syntax is \"abstract\" in the sense that it does not represent every detail appearing in the real syntax, but rather just the structural or content-related details. For instance, grouping parentheses are implicit in the tree structure, so these do not have to be represented as separate nodes. Likewise, a syntactic construct like an if-condition-then statement may be denoted by means of a single node with three branches.\nThis distinguishes abstract syntax trees from concrete syntax trees, traditionally designated parse trees. Parse trees are typically built by a parser during the source code translation and compiling process. Once built, additional information is added to the AST by means of subsequent processing, e.g., contextual analysis.\nAbstract syntax trees are also used in program analysis and program transformation systems.",
+      "date": "2023-01-27T19:22:44Z",
+      "language": "en",
+      "libraryCatalog": "Wikipedia",
+      "url": "https://en.wikipedia.org/w/index.php?title=Abstract_syntax_tree&oldid=1135931906",
+      "accessDate": "2023-03-17T19:44:55Z",
+      "rights": "Creative Commons Attribution-ShareAlike License",
+      "extra": "Page Version ID: 1135931906",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-17T19:44:55Z",
+      "dateModified": "2023-03-17T19:44:55Z",
+      "uri": "http://zotero.org/groups/4899626/items/IM5PKJ5A",
+      "itemID": 161,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Snapshot",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-03-17T19:45:00Z",
+          "dateModified": "2023-03-17T19:45:00Z",
+          "uri": "http://zotero.org/groups/4899626/items/LB3PKCWD",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\LB3PKCWD\\Abstract_syntax_tree.html",
+          "select": "zotero://select/groups/4899626/items/LB3PKCWD"
+        }
+      ],
+      "notes": [],
+      "citationKey": "AbstractSyntaxTree2023",
+      "itemKey": "IM5PKJ5A",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/IM5PKJ5A",
+      "publicationTitle": "Wikipedia"
+    },
+    {
+      "key": "PLSIF3TB",
+      "version": 95,
+      "itemType": "book",
+      "title": "Compilers: Principles, Techniques, & Tools",
+      "abstractNote": "Compilers: Principles, Techniques and Tools, known to professors, students, and developers worldwide as the \"Dragon Book,\" is available in a new edition. Every chapter has been completely revised to reflect developments in software engineering, programming languages, and computer architecture that have occurred since 1986, when the last edition published. The authors, recognizing that few readers will ever go on to construct a compiler, retain their focus on the broader set of problems faced in software design and software development.  New chapters include:   Chapter 10 Instruction-Level Parallelism Chapter 11 Optimizing for Parallelism and Locality Chapter 12 Interprocedural Analysis",
+      "date": "2007",
+      "language": "en",
+      "shortTitle": "Compilers",
+      "libraryCatalog": "Google Books",
+      "extra": "Google-Books-ID: dIU_AQAAIAAJ",
+      "publisher": "Pearson/Addison Wesley",
+      "ISBN": "978-0-321-48681-3",
+      "numPages": "1042",
+      "creators": [
+        {
+          "firstName": "Alfred V.",
+          "lastName": "Aho",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Monica S.",
+          "lastName": "Lam",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Ravi",
+          "lastName": "Sethi",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Jeffrey D.",
+          "lastName": "Ullman",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-17T19:43:01Z",
+      "dateModified": "2023-03-17T19:43:01Z",
+      "uri": "http://zotero.org/groups/4899626/items/PLSIF3TB",
+      "itemID": 159,
+      "attachments": [
+        {
+          "key": "5SF5MGJR",
+          "version": 95,
+          "itemType": "attachment",
+          "title": "Google Books Link",
+          "url": "https://books.google.ch/books?id=dIU_AQAAIAAJ",
+          "accessDate": "2023-03-17T19:43:01Z",
+          "parentItem": "PLSIF3TB",
+          "linkMode": "linked_url",
+          "contentType": "text/html",
+          "charset": "",
+          "tags": [],
+          "relations": {},
+          "dateAdded": "2023-03-17T19:43:01Z",
+          "dateModified": "2023-03-17T19:43:01Z",
+          "uri": "http://zotero.org/groups/4899626/items/5SF5MGJR"
+        }
+      ],
+      "notes": [],
+      "citationKey": "ahoCompilersPrinciplesTechniques2007",
+      "itemKey": "PLSIF3TB",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/PLSIF3TB"
+    },
+    {
+      "key": "YQE9X875",
+      "version": 15,
+      "itemType": "attachment",
+      "title": "20140908 CBH application to extend and vary - port terminal services agreement (clean).pdf",
+      "url": "https://www.accc.gov.au/system/files/20140908%20CBH%20application%20to%20extend%20and%20vary%20-%20port%20terminal%20services%20agreement%20%28clean%29.pdf",
+      "accessDate": "2022-12-29T14:33:55Z",
+      "linkMode": "imported_url",
+      "contentType": "application/pdf",
+      "charset": "",
+      "filename": "20140908 CBH application to extend and vary - port terminal services agreement (clean).pdf",
+      "tags": [],
+      "collections": [],
+      "relations": {},
+      "dateAdded": "2022-12-29T14:33:55Z",
+      "dateModified": "2022-12-29T14:33:55Z",
+      "uri": "http://zotero.org/groups/4899626/items/YQE9X875",
+      "itemID": 112,
+      "localPath": "C:\\Users\\xaper\\Zotero\\storage\\YQE9X875\\20140908 CBH application to extend and vary - port terminal services agreement (clean).pdf",
+      "defaultPath": "files/112/20140908 CBH application to extend and vary - port terminal services agreement (clean).pdf",
+      "itemKey": "YQE9X875",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/YQE9X875"
+    },
+    {
+      "key": "XLLNH8CK",
+      "version": 24,
+      "itemType": "attachment",
+      "title": "backnaur.pdf",
+      "url": "https://mirror.init7.net/ctan/macros/latex/contrib/backnaur/backnaur.pdf",
+      "accessDate": "2023-02-06T14:19:00Z",
+      "linkMode": "imported_url",
+      "contentType": "application/pdf",
+      "charset": "",
+      "filename": "backnaur.pdf",
+      "tags": [],
+      "collections": [],
+      "relations": {},
+      "dateAdded": "2023-02-06T14:19:00Z",
+      "dateModified": "2023-02-06T14:19:00Z",
+      "uri": "http://zotero.org/groups/4899626/items/XLLNH8CK",
+      "itemID": 116,
+      "localPath": "C:\\Users\\xaper\\Zotero\\storage\\XLLNH8CK\\backnaur.pdf",
+      "defaultPath": "files/116/backnaur.pdf",
+      "itemKey": "XLLNH8CK",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/XLLNH8CK"
+    },
+    {
+      "key": "C29IV4TW",
+      "version": 27,
+      "itemType": "attachment",
+      "title": "syntax.pdf",
+      "url": "https://mirror.foobar.to/CTAN/macros/latex/contrib/mdwtools/syntax.pdf",
+      "accessDate": "2023-02-06T16:38:07Z",
+      "linkMode": "imported_url",
+      "contentType": "application/pdf",
+      "charset": "",
+      "filename": "syntax.pdf",
+      "tags": [],
+      "collections": [],
+      "relations": {},
+      "dateAdded": "2023-02-06T16:38:07Z",
+      "dateModified": "2023-02-06T16:38:07Z",
+      "uri": "http://zotero.org/groups/4899626/items/C29IV4TW",
+      "itemID": 117,
+      "localPath": "C:\\Users\\xaper\\Zotero\\storage\\C29IV4TW\\syntax.pdf",
+      "defaultPath": "files/117/syntax.pdf",
+      "itemKey": "C29IV4TW",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/C29IV4TW"
+    },
+    {
+      "key": "UP2AHDDF",
+      "version": 69,
+      "itemType": "book",
+      "title": "Compiler design: theory, tools, and examples",
+      "abstractNote": "This is an introductory level text for compiler design courses, that emphasizes problem solving skills. The concepts are clearly presented with sampler problems and diagrams to illustrate the concepts. The text also covers lex and yacc two compiler generating tools in UNIX.",
+      "date": "1994",
+      "language": "eng",
+      "shortTitle": "Compiler design",
+      "libraryCatalog": "Open WorldCat",
+      "extra": "OCLC: 30548415",
+      "place": "Dubuque, Iowa",
+      "publisher": "W.C. Brown Publishers, c",
+      "ISBN": "978-0-697-17086-6",
+      "numPages": "302",
+      "creators": [
+        {
+          "firstName": "Seth",
+          "lastName": "Bergmann",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [
+        {
+          "tag": "Programming",
+          "type": 1
+        },
+        {
+          "tag": "Compilateurs (Logiciels)",
+          "type": 1
+        },
+        {
+          "tag": "Compilers (Computer programs)",
+          "type": 1
+        },
+        {
+          "tag": "Computer software Development",
+          "type": 1
+        },
+        {
+          "tag": "\u00dcbersetzerbau",
+          "type": 1
+        }
+      ],
+      "relations": [],
+      "dateAdded": "2023-03-14T13:34:42Z",
+      "dateModified": "2023-03-14T13:34:42Z",
+      "uri": "http://zotero.org/groups/4899626/items/UP2AHDDF",
+      "itemID": 134,
+      "attachments": [],
+      "notes": [],
+      "citationKey": "bergmannCompilerDesignTheory1994",
+      "itemKey": "UP2AHDDF",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/UP2AHDDF"
+    },
+    {
+      "key": "GRC68KHT",
+      "version": 6,
+      "itemType": "book",
+      "title": "Natural Language Processing with Python: Analyzing Text with the Natural Language Toolkit",
+      "abstractNote": "This book offers a highly accessible introduction to natural language processing, the field that supports a variety of language technologies, from predictive text and email filtering to automatic summarization and translation. With it, you'll learn how to write Python programs that work with large collections of unstructured text. You'll access richly annotated datasets using a comprehensive range of linguistic data structures, and you'll understand the main algorithms for analyzing the content and structure of written communication.Packed with examples and exercises, Natural Language Processing with Python will help you:Extract information from unstructured text, either to guess the topic or identify \"named entities\"Analyze linguistic structure in text, including parsing and semantic analysisAccess popular linguistic databases, including WordNet and treebanksIntegrate techniques drawn from fields as diverse as linguistics and artificial intelligenceThis book will help you gain practical skills in natural language processing using the Python programming language and the Natural Language Toolkit (NLTK) open source library. If you're interested in developing web applications, analyzing multilingual news sources, or documenting endangered languages -- or if you're simply curious to have a programmer's perspective on how human language works -- you'll find Natural Language Processing with Python both fascinating and immensely useful.",
+      "date": "2009-06-12",
+      "language": "en",
+      "shortTitle": "Natural Language Processing with Python",
+      "libraryCatalog": "Google Books",
+      "extra": "Google-Books-ID: KGIbfiiP1i4C",
+      "publisher": "\"O'Reilly Media, Inc.\"",
+      "ISBN": "978-0-596-55571-9",
+      "numPages": "506",
+      "creators": [
+        {
+          "firstName": "Steven",
+          "lastName": "Bird",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Ewan",
+          "lastName": "Klein",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Edward",
+          "lastName": "Loper",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [
+        {
+          "tag": "Computers / Languages / General",
+          "type": 1
+        },
+        {
+          "tag": "Computers / General",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Languages / JavaScript",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Languages / Python",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Software Development & Engineering / General",
+          "type": 1
+        }
+      ],
+      "relations": [],
+      "dateAdded": "2022-12-29T14:09:54Z",
+      "dateModified": "2022-12-29T14:09:54Z",
+      "uri": "http://zotero.org/groups/4899626/items/GRC68KHT",
+      "itemID": 105,
+      "attachments": [
+        {
+          "key": "MJ3ZBVM3",
+          "version": 6,
+          "itemType": "attachment",
+          "title": "Google Books Link",
+          "url": "https://books.google.ch/books?id=KGIbfiiP1i4C",
+          "accessDate": "2022-11-06T14:36:46Z",
+          "parentItem": "GRC68KHT",
+          "linkMode": "linked_url",
+          "contentType": "text/html",
+          "charset": "",
+          "tags": [],
+          "relations": {},
+          "dateAdded": "2022-12-29T14:09:54Z",
+          "dateModified": "2022-12-29T14:09:54Z",
+          "uri": "http://zotero.org/groups/4899626/items/MJ3ZBVM3"
+        }
+      ],
+      "notes": [],
+      "citationKey": "birdNaturalLanguageProcessing2009",
+      "itemKey": "GRC68KHT",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/GRC68KHT"
+    },
+    {
+      "key": "ANWD4RUJ",
+      "version": 18,
+      "itemType": "journalArticle",
+      "title": "ANTLRWorks: an ANTLR grammar development environment",
+      "abstractNote": "Programmers tend to avoid using language tools, resorting to ad hoc methods, because tools can be hard to use, their parsing strategies can be difficult to understand and debug, and their generated parsers can be opaque black-boxes. In particular, there are two very common difficulties encountered by grammar developers: understanding why a grammar fragment results in a parser non-determinism and determining why a generated parser incorrectly interprets an input sentence. This paper describes ANTLRWorks, a complete development environment for ANTLR grammars that attempts to resolve these difficulties and, in general, make grammar development more accessible to the average programmer. The main components are a grammar editor with refactoring and navigation features, a grammar interpreter, and a domain-specific grammar debugger. ANTLRWorks' primary contributions are a parser non-determinism visualizer based on syntax diagrams and a time-traveling debugger that pays special attention to parser decision-making by visualizing lookahead usage and speculative parsing during backtracking. Copyright \u00a9 2008 John Wiley & Sons, Ltd.",
+      "date": "2008",
+      "language": "en",
+      "shortTitle": "ANTLRWorks",
+      "libraryCatalog": "Wiley Online Library",
+      "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/spe.872",
+      "accessDate": "2023-01-16T12:26:28Z",
+      "extra": "_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1002/spe.872",
+      "volume": "38",
+      "pages": "1305-1332",
+      "publicationTitle": "Software: Practice and Experience",
+      "DOI": "10.1002/spe.872",
+      "issue": "12",
+      "ISSN": "1097-024X",
+      "creators": [
+        {
+          "firstName": "Jean",
+          "lastName": "Bovet",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Terence",
+          "lastName": "Parr",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [
+        {
+          "tag": "debugger",
+          "type": 1
+        },
+        {
+          "tag": "grammar development",
+          "type": 1
+        },
+        {
+          "tag": "GUI",
+          "type": 1
+        },
+        {
+          "tag": "parser",
+          "type": 1
+        },
+        {
+          "tag": "rapid prototyping",
+          "type": 1
+        }
+      ],
+      "relations": [],
+      "dateAdded": "2023-01-16T12:26:28Z",
+      "dateModified": "2023-01-16T12:26:28Z",
+      "uri": "http://zotero.org/groups/4899626/items/ANWD4RUJ",
+      "itemID": 113,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Full Text PDF",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-01-16T12:26:30Z",
+          "dateModified": "2023-01-16T12:26:30Z",
+          "uri": "http://zotero.org/groups/4899626/items/3BUPDW7C",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\3BUPDW7C\\Bovet and Parr - 2008 - ANTLRWorks an ANTLR grammar development environme.pdf",
+          "select": "zotero://select/groups/4899626/items/3BUPDW7C"
+        }
+      ],
+      "notes": [],
+      "citationKey": "bovetANTLRWorksANTLRGrammar2008",
+      "itemKey": "ANWD4RUJ",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/ANWD4RUJ"
+    },
+    {
+      "key": "YSWWJG8E",
+      "version": 29,
+      "itemType": "webpage",
+      "title": "Building a lexer and parser with Scala's Parser Combinators \u00b7 e.near Tech Blog",
+      "url": "https://enear.github.io/2016/03/31/parser-combinators/",
+      "accessDate": "2023-02-14T11:14:43Z",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-02-14T11:14:43Z",
+      "dateModified": "2023-02-14T11:14:43Z",
+      "uri": "http://zotero.org/groups/4899626/items/YSWWJG8E",
+      "itemID": 118,
+      "attachments": [],
+      "notes": [],
+      "citationKey": "BuildingLexerParser",
+      "itemKey": "YSWWJG8E",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/YSWWJG8E"
+    },
+    {
+      "key": "JNUIXTSJ",
+      "version": 88,
+      "itemType": "computerProgram",
+      "title": "Cask 0.9.0: a Scala HTTP micro-framework",
+      "abstractNote": "Cask: a Scala HTTP micro-framework",
+      "date": "2023-03-16T15:56:51Z",
+      "shortTitle": "Cask 0.9.0",
+      "libraryCatalog": "GitHub",
+      "url": "https://github.com/com-lihaoyi/cask",
+      "accessDate": "2023-03-17T17:54:40Z",
+      "extra": "original-date: 2018-07-20T00:48:20Z",
+      "programmingLanguage": "Scala",
+      "creators": [],
+      "tags": [
+        {
+          "tag": "http",
+          "type": 1
+        },
+        {
+          "tag": "scala",
+          "type": 1
+        },
+        {
+          "tag": "server",
+          "type": 1
+        },
+        {
+          "tag": "web",
+          "type": 1
+        }
+      ],
+      "relations": [],
+      "dateAdded": "2023-03-17T17:54:40Z",
+      "dateModified": "2023-03-17T17:54:40Z",
+      "uri": "http://zotero.org/groups/4899626/items/JNUIXTSJ",
+      "itemID": 154,
+      "attachments": [],
+      "notes": [],
+      "citationKey": "CaskScalaHTTP2023",
+      "itemKey": "JNUIXTSJ",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/JNUIXTSJ",
+      "publisher": "com-lihaoyi"
+    },
+    {
+      "key": "I7H76GN2",
+      "version": 22,
+      "itemType": "book",
+      "title": "Formal Languages and Compilation",
+      "date": "2019",
+      "language": "en",
+      "libraryCatalog": "DOI.org (Crossref)",
+      "url": "http://link.springer.com/10.1007/978-3-030-04879-2",
+      "accessDate": "2022-11-12T14:39:53Z",
+      "extra": "DOI: 10.1007/978-3-030-04879-2",
+      "place": "Cham",
+      "publisher": "Springer International Publishing",
+      "ISBN": "978-3-030-04878-5 978-3-030-04879-2",
+      "series": "Texts in Computer Science",
+      "creators": [
+        {
+          "firstName": "Stefano",
+          "lastName": "Crespi Reghizzi",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Luca",
+          "lastName": "Breveglieri",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Angelo",
+          "lastName": "Morzenti",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [
+        {
+          "tag": "Automata",
+          "type": 1
+        },
+        {
+          "tag": "Compiler",
+          "type": 1
+        },
+        {
+          "tag": "Formal languages",
+          "type": 1
+        },
+        {
+          "tag": "Language theory",
+          "type": 1
+        },
+        {
+          "tag": "Programming",
+          "type": 1
+        },
+        {
+          "tag": "Translation",
+          "type": 1
+        }
+      ],
+      "relations": [],
+      "dateAdded": "2022-12-29T14:09:28Z",
+      "dateModified": "2022-12-29T14:09:28Z",
+      "uri": "http://zotero.org/groups/4899626/items/I7H76GN2",
+      "itemID": 100,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Submitted Version",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2022-12-29T14:09:28Z",
+          "dateModified": "2022-12-29T14:09:28Z",
+          "uri": "http://zotero.org/groups/4899626/items/GF459IAY",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\GF459IAY\\Crespi Reghizzi et al. - 2019 - Formal Languages and Compilation.pdf",
+          "select": "zotero://select/groups/4899626/items/GF459IAY"
+        }
+      ],
+      "notes": [],
+      "citationKey": "crespireghizziFormalLanguagesCompilation2019",
+      "itemKey": "I7H76GN2",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/I7H76GN2"
+    },
+    {
+      "key": "YF7NGQ3I",
+      "version": 80,
+      "itemType": "webpage",
+      "title": "Easy Parsing with Parser Combinators",
+      "url": "http://www.lihaoyi.com/post/EasyParsingwithParserCombinators.html",
+      "accessDate": "2023-03-14T22:27:48Z",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-14T22:27:48Z",
+      "dateModified": "2023-03-14T22:27:48Z",
+      "uri": "http://zotero.org/groups/4899626/items/YF7NGQ3I",
+      "itemID": 148,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Easy Parsing with Parser Combinators",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-03-14T22:27:50Z",
+          "dateModified": "2023-03-14T22:27:50Z",
+          "uri": "http://zotero.org/groups/4899626/items/WFKEFDTY",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\WFKEFDTY\\EasyParsingwithParserCombinators.html",
+          "select": "zotero://select/groups/4899626/items/WFKEFDTY"
+        }
+      ],
+      "notes": [],
+      "citationKey": "EasyParsingParser",
+      "itemKey": "YF7NGQ3I",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/YF7NGQ3I"
+    },
+    {
+      "key": "BUBRKEQ8",
+      "version": 94,
+      "itemType": "book",
+      "title": "Mastering Regular Expressions",
+      "abstractNote": "Regular expressions are an extremely powerful tool for manipulating text and data. They are now standard features in a wide range of languages and popular tools, including Perl, Python, Ruby, Java, VB.NET and C# (and any language using the .NET Framework), PHP, and MySQL.  If you don't use regular expressions yet, you will discover in this book a whole new world of mastery over your data. If you already use them, you'll appreciate this book's unprecedented detail and breadth of coverage. If you think you know all you need to know about regular expressions, this book is a stunning eye-opener.  As this book shows, a command of regular expressions is an invaluable skill. Regular expressions allow you to code complex and subtle text processing that you never imagined could be automated. Regular expressions can save you time and aggravation. They can be used to craft elegant solutions to a wide range of problems. Once you've mastered regular expressions, they'll become an invaluable part of your toolkit. You will wonder how you ever got by without them.  Yet despite their wide availability, flexibility, and unparalleled power, regular expressions are frequently underutilized. Yet what is power in the hands of an expert can be fraught with peril for the unwary. Mastering Regular Expressions will help you navigate the minefield to becoming an expert and help you optimize your use of regular expressions.   Mastering Regular Expressions, Third Edition, now includes a full chapter devoted to PHP and its powerful and expressive suite of regular expression functions, in addition to enhanced PHP coverage in the central \"core\" chapters. Furthermore, this edition has been updated throughout to reflect advances in other languages, including expanded in-depth coverage of Sun's java.util.regex package, which has emerged as the standard Java regex implementation.Topics include: A comparison of features among different versions of many languages and tools How the regular expression engine works Optimization (major savings available here!) Matching just what you want, but not what you don't want Sections and chapters on individual languages  Written in the lucid, entertaining tone that makes a complex, dry topic become crystal-clear to programmers, and sprinkled with solutions to complex real-world problems, Mastering Regular Expressions, Third Edition offers a wealth information that you can put to immediate use. Reviews of this new edition and the second edition: \"There isn't a better (or more useful) book available on regular expressions.\"  --Zak Greant, Managing Director, eZ Systems  \"A real tour-de-force of a book which not only covers the mechanics of regexes in extraordinary detail but also talks about efficiency and the use of regexes in Perl, Java, and .NET...If you use regular expressions as part of your professional work (even if you already have a good book on whatever language you're programming in) I would strongly recommend this book to you.\"  --Dr. Chris Brown, Linux Format   \"The author does an outstanding job leading the reader from regex novice to master. The book is extremely easy to read and chock full of useful and relevant examples...Regular expressions are valuable tools that every developer should have in their toolbox. Mastering Regular Expressions is the definitive guide to the subject, and an outstanding resource that belongs on every programmer's bookshelf. Ten out of Ten Horseshoes.\"  --Jason Menard, Java Ranch",
+      "date": "2006-08-08",
+      "language": "en",
+      "libraryCatalog": "Google Books",
+      "publisher": "\"O'Reilly Media, Inc.\"",
+      "ISBN": "978-0-596-52812-6",
+      "numPages": "542",
+      "creators": [
+        {
+          "firstName": "Jeffrey",
+          "lastName": "Friedl",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [
+        {
+          "tag": "Computers / General",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Languages / C",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Languages / C#",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Languages / General",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Languages / Java",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Languages / JavaScript",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Languages / SQL",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Languages / XML",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Programming / General",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Programming / Object Oriented",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Programming Languages / COBOL",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Programming Languages / FORTRAN",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Programming Languages / LISP",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Programming Languages / Pascal",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Programming Languages / RPG",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Software Development & Engineering / General",
+          "type": 1
+        }
+      ],
+      "relations": [],
+      "dateAdded": "2023-03-17T18:13:31Z",
+      "dateModified": "2023-03-17T18:13:31Z",
+      "uri": "http://zotero.org/groups/4899626/items/BUBRKEQ8",
+      "itemID": 157,
+      "attachments": [
+        {
+          "key": "IULVWYH9",
+          "version": 94,
+          "itemType": "attachment",
+          "title": "Google Books Link",
+          "url": "https://www.google.ch/books?id=GX3w_18-JegC",
+          "accessDate": "2023-03-17T18:13:31Z",
+          "parentItem": "BUBRKEQ8",
+          "linkMode": "linked_url",
+          "contentType": "text/html",
+          "charset": "",
+          "tags": [],
+          "relations": {},
+          "dateAdded": "2023-03-17T18:13:31Z",
+          "dateModified": "2023-03-17T18:13:31Z",
+          "uri": "http://zotero.org/groups/4899626/items/IULVWYH9"
+        }
+      ],
+      "notes": [],
+      "citationKey": "friedlMasteringRegularExpressions2006",
+      "itemKey": "BUBRKEQ8",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/BUBRKEQ8"
+    },
+    {
+      "key": "724P48SS",
+      "version": 5,
+      "itemType": "blogPost",
+      "title": "Lexing with Ragel and Parsing with Yacc using Go",
+      "abstractNote": "Occasionally I need to parse some input for processing and analysis. A Go Advent post from 2014 described handwritten lexers and parsers\u2026",
+      "date": "2017-01-09T03:08:30.755Z",
+      "language": "en",
+      "url": "https://mhamrah.medium.com/lexing-with-ragel-and-parsing-with-yacc-using-go-81e50475f88f",
+      "accessDate": "2022-11-11T14:34:13Z",
+      "creators": [
+        {
+          "firstName": "Michael",
+          "lastName": "Hamrah",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2022-12-29T14:09:46Z",
+      "dateModified": "2022-12-29T14:09:46Z",
+      "uri": "http://zotero.org/groups/4899626/items/724P48SS",
+      "itemID": 103,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Snapshot",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2022-12-29T14:09:46Z",
+          "dateModified": "2022-12-29T14:09:46Z",
+          "uri": "http://zotero.org/groups/4899626/items/CI7KJB7Y",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\CI7KJB7Y\\lexing-with-ragel-and-parsing-with-yacc-using-go-81e50475f88f.html",
+          "select": "zotero://select/groups/4899626/items/CI7KJB7Y"
+        }
+      ],
+      "notes": [],
+      "citationKey": "hamrahLexingRagelParsing2017",
+      "itemKey": "724P48SS",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/724P48SS",
+      "publicationTitle": "Medium"
+    },
+    {
+      "key": "6CLDA6B6",
+      "version": 42,
+      "itemType": "webpage",
+      "title": "Who we are : Ifchor",
+      "date": "03.12.2023",
+      "url": "https://ifchor.com/who-we-are/",
+      "accessDate": "2023-03-12T14:31:58Z",
+      "creators": [
+        {
+          "firstName": "",
+          "lastName": "Ifchor",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-12T14:31:58Z",
+      "dateModified": "2023-03-12T14:33:32Z",
+      "uri": "http://zotero.org/groups/4899626/items/6CLDA6B6",
+      "itemID": 125,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Who we are : Ifchor",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-03-12T14:32:04Z",
+          "dateModified": "2023-03-12T14:32:04Z",
+          "uri": "http://zotero.org/groups/4899626/items/MGLQKE9I",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\MGLQKE9I\\who-we-are.html",
+          "select": "zotero://select/groups/4899626/items/MGLQKE9I"
+        }
+      ],
+      "notes": [],
+      "citationKey": "ifchorWhoWeAre2023",
+      "itemKey": "6CLDA6B6",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/6CLDA6B6"
+    },
+    {
+      "key": "UX8Y2GBF",
+      "version": 53,
+      "itemType": "encyclopediaArticle",
+      "title": "Intermodal container",
+      "abstractNote": "An intermodal container, often called a shipping container, is a large standardized container designed and built for intermodal freight transport, meaning these containers can be used across different modes of transport \u2013 from ship to rail to truck \u2013 without unloading and reloading their cargo. Intermodal containers are primarily used to store and transport materials and products efficiently and securely in the global containerized intermodal freight transport system, but smaller numbers are in regional use as well. These containers are known under a number of names. Based on size alone, up to 95% of intermodal containers comply with ISO standards, and can officially be called ISO containers. Many other names are simply: container, cargo or freight container, shipping, sea or ocean container, container van or sea van, sea can or C can, or MILVAN, SEAVAN, or RO/RO. The also used term CONEX (Box) is technically incorrect carry-over usage of the name of an important predecessor of the international ISO containers, namely the much smaller prior steel CONEX boxes used by the U.S. Army.\nIntermodal containers exist in many types and a number of standardized sizes, but ninety percent of the global container fleet are so-called \"dry freight\" or \"general purpose\" containers \u2013 durable closed rectangular boxes, made of rust-retardant Corten steel; almost all 8 feet (2.44 m) wide, and of either 20 or 40 feet (6.10 or 12.19 m) standard length, as defined by International Organization for Standardization (ISO) standard 668:2020. The worldwide standard heights are 8 feet 6 inches (2.59 m) and 9 feet 6 inches (2.90 m) \u2013 the latter are known as High Cube or Hi-Cube (HC or HQ) containers.First invented in the early 20th century, modern 40-foot intermodal containers proliferated during the 1960s and 1970s under the containerization innovations of the American shipping company SeaLand.  Just like cardboard boxes and pallets, these containers are a means to bundle cargo and goods into larger, unitized loads, that can be easily handled, moved, and stacked, and that will pack tightly in a ship or yard. Intermodal containers share a number of key construction features to withstand the stresses of intermodal shipping, to facilitate their handling and to allow stacking, as well as being identifiable through their individual, unique ISO 6346 reporting mark.\nIn 2012, there were about 20.5 million intermodal containers in the world of varying types to suit different cargoes. Containers have largely supplanted the traditional break bulk cargo \u2013 in 2010 containers accounted for 60% of the world's seaborne trade. The predominant alternative methods of transport carry bulk cargo whether gaseous, liquid, or solid; e.g., by bulk carrier or tank ship, tank car, or truck. For air freight, the lighter weight IATA-defined unit load devices are used.",
+      "date": "2023-02-19T00:17:13Z",
+      "language": "en",
+      "libraryCatalog": "Wikipedia",
+      "url": "https://en.wikipedia.org/w/index.php?title=Intermodal_container&oldid=1140207736",
+      "accessDate": "2023-03-13T15:45:08Z",
+      "rights": "Creative Commons Attribution-ShareAlike License",
+      "extra": "Page Version ID: 1140207736",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-13T15:45:08Z",
+      "dateModified": "2023-03-13T15:45:08Z",
+      "uri": "http://zotero.org/groups/4899626/items/UX8Y2GBF",
+      "itemID": 133,
+      "attachments": [],
+      "notes": [],
+      "citationKey": "IntermodalContainer2023",
+      "itemKey": "UX8Y2GBF",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/UX8Y2GBF",
+      "publicationTitle": "Wikipedia"
+    },
+    {
+      "key": "LQHIIT5P",
+      "version": 33,
+      "itemType": "book",
+      "title": "Speech and Language Processing: An Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition",
+      "abstractNote": "For undergraduate or advanced undergraduate courses in Classical Natural Language Processing, Statistical Natural Language Processing, Speech Recognition, Computational Linguistics, and Human Language Processing.   An explosion of Web-based language techniques, merging of distinct fields, availability of phone-based dialogue systems, and much more make this an exciting time in speech and language processing. The first of its kind to thoroughly cover language technology - at all levels and with all modern technologies - this text takes an empirical approach to the subject, based on applying statistical and other machine-learning algorithms to large corporations. The authors cover areas that traditionally are taught in different courses, to describe a unified vision of speech and language processing. Emphasis is on practical applications and scientific evaluation. An accompanying Website contains teaching materials for instructors, with pointers to language processing resources on the Web. The Second Edition offers a significant amount of new and extended material.   Supplements:   Click on the \"Resources\" tab to View Downloadable Files:   Solutions   Power Point Lecture Slides - Chapters 1-5, 8-10, 12-13 and 24 Now Available!   For additional resourcse visit the author website: http://www.cs.colorado.edu/~martin/slp.html",
+      "date": "2009",
+      "language": "en",
+      "shortTitle": "Speech and Language Processing",
+      "libraryCatalog": "Google Books",
+      "extra": "Google-Books-ID: fZmj5UNK8AQC",
+      "publisher": "Prentice Hall",
+      "ISBN": "978-0-13-187321-6",
+      "numPages": "1027",
+      "creators": [
+        {
+          "firstName": "Dan",
+          "lastName": "Jurafsky",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "James H.",
+          "lastName": "Martin",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-12T10:18:29Z",
+      "dateModified": "2023-03-12T10:18:29Z",
+      "uri": "http://zotero.org/groups/4899626/items/LQHIIT5P",
+      "itemID": 121,
+      "attachments": [
+        {
+          "key": "92JE9BDT",
+          "version": 33,
+          "itemType": "attachment",
+          "title": "Google Books Link",
+          "url": "https://books.google.ch/books?id=fZmj5UNK8AQC",
+          "accessDate": "2023-03-12T10:18:29Z",
+          "parentItem": "LQHIIT5P",
+          "linkMode": "linked_url",
+          "contentType": "text/html",
+          "charset": "",
+          "tags": [],
+          "relations": {},
+          "dateAdded": "2023-03-12T10:18:29Z",
+          "dateModified": "2023-03-12T10:18:29Z",
+          "uri": "http://zotero.org/groups/4899626/items/92JE9BDT"
+        }
+      ],
+      "notes": [],
+      "citationKey": "jurafskySpeechLanguageProcessing2009",
+      "itemKey": "LQHIIT5P",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/LQHIIT5P"
+    },
+    {
+      "key": "KJR7F8Y3",
+      "version": 7,
+      "itemType": "webpage",
+      "title": "Ragel: state machine compiler",
+      "abstractNote": "Really fast way to build really fast parser.",
+      "date": "2021-01-25T00:00:00+00:00",
+      "language": "en-us",
+      "shortTitle": "Ragel",
+      "url": "https://ekhabarov.com/post/ragel-state-machine-compiler/",
+      "accessDate": "2022-11-11T14:33:58Z",
+      "extra": "Section: post",
+      "creators": [
+        {
+          "firstName": "Evgeny",
+          "lastName": "Khabarov",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2022-12-29T14:10:03Z",
+      "dateModified": "2022-12-29T14:10:03Z",
+      "uri": "http://zotero.org/groups/4899626/items/KJR7F8Y3",
+      "itemID": 107,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Snapshot",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2022-12-29T14:10:03Z",
+          "dateModified": "2022-12-29T14:10:03Z",
+          "uri": "http://zotero.org/groups/4899626/items/63YYEVT7",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\63YYEVT7\\ragel-state-machine-compiler.html",
+          "select": "zotero://select/groups/4899626/items/63YYEVT7"
+        }
+      ],
+      "notes": [],
+      "citationKey": "khabarovRagelStateMachine2021",
+      "itemKey": "KJR7F8Y3",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/KJR7F8Y3",
+      "publicationTitle": "Writing here about Golang and Co."
+    },
+    {
+      "key": "6CYANQ4R",
+      "version": 17,
+      "itemType": "conferencePaper",
+      "title": "Deterministic Techniques for Efficient Non-Deterministic Parsers",
+      "abstractNote": "A general study of parallel non-deterministic parsing and translation \u00e0 la Earley is developped formally, based on non-deterministic pushdown acceptor-transducers. Several results (camplexity and efficiency) are established, same new and other previously proved only in special cases. As an application, we show that for every family of deterministic context-free pushdown parsers (e.g. precedence, LR(k), LL(k), ...) there is a family of general context-free parallel parsers that have the same efficiency in most practical cases (e.g. analysis of programming languages).",
+      "date": "1974",
+      "language": "en",
+      "libraryCatalog": "Springer Link",
+      "place": "Berlin, Heidelberg",
+      "publisher": "Springer",
+      "ISBN": "978-3-662-21545-6",
+      "pages": "255-269",
+      "series": "Lecture Notes in Computer Science",
+      "DOI": "10.1007/978-3-662-21545-6_18",
+      "creators": [
+        {
+          "firstName": "Bernard",
+          "lastName": "Lang",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Jacques",
+          "lastName": "Loeckx",
+          "creatorType": "editor"
+        }
+      ],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-01-16T12:23:12Z",
+      "dateModified": "2023-01-16T12:23:12Z",
+      "uri": "http://zotero.org/groups/4899626/items/6CYANQ4R",
+      "itemID": 114,
+      "attachments": [],
+      "notes": [],
+      "citationKey": "langDeterministicTechniquesEfficient1974",
+      "itemKey": "6CYANQ4R",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/6CYANQ4R",
+      "publicationTitle": "Automata, Languages and Programming"
+    },
+    {
+      "key": "TVS2LI33",
+      "version": 8,
+      "itemType": "webpage",
+      "title": "Laycan Definition",
+      "abstractNote": "Sample Contracts and Business Agreements",
+      "language": "en",
+      "url": "https://www.lawinsider.com/dictionary/laycan",
+      "accessDate": "2022-12-29T14:14:05Z",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2022-12-29T14:14:05Z",
+      "dateModified": "2022-12-29T14:14:05Z",
+      "uri": "http://zotero.org/groups/4899626/items/TVS2LI33",
+      "itemID": 109,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Snapshot",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2022-12-29T14:14:09Z",
+          "dateModified": "2022-12-29T14:14:09Z",
+          "uri": "http://zotero.org/groups/4899626/items/N3UPBC4B",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\N3UPBC4B\\laycan.html",
+          "select": "zotero://select/groups/4899626/items/N3UPBC4B"
+        }
+      ],
+      "notes": [],
+      "citationKey": "LaycanDefinition",
+      "itemKey": "TVS2LI33",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/TVS2LI33",
+      "publicationTitle": "Law Insider"
+    },
+    {
+      "key": "MZERYYPC",
+      "version": 48,
+      "itemType": "webpage",
+      "title": "Difference between a shipbroker and ship charterer",
+      "abstractNote": "This article discusses the Difference between a shipbroker and ship charterer and the role that both of them play in global trade..",
+      "date": "2019-02-26T23:23:56+00:00",
+      "language": "en-US",
+      "url": "https://www.shippingandfreightresource.com/shipbroker-and-ship-charterer/",
+      "accessDate": "2023-03-13T15:29:20Z",
+      "creators": [
+        {
+          "firstName": "Hariesh",
+          "lastName": "Manaadiar",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-13T15:29:20Z",
+      "dateModified": "2023-03-13T15:29:20Z",
+      "uri": "http://zotero.org/groups/4899626/items/MZERYYPC",
+      "itemID": 130,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Snapshot",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-03-13T15:29:27Z",
+          "dateModified": "2023-03-13T15:29:27Z",
+          "uri": "http://zotero.org/groups/4899626/items/2AKRCQJN",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\2AKRCQJN\\shipbroker-and-ship-charterer.html",
+          "select": "zotero://select/groups/4899626/items/2AKRCQJN"
+        }
+      ],
+      "notes": [],
+      "citationKey": "manaadiarDifferenceShipbrokerShip2019",
+      "itemKey": "MZERYYPC",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/MZERYYPC",
+      "publicationTitle": "Shipping and Freight Resource"
+    },
+    {
+      "key": "I2XJXNPL",
+      "version": 79,
+      "itemType": "conferencePaper",
+      "title": "Graph Parser Combinators",
+      "abstractNote": "A graph language can be described by a graph grammar in a manner similar to a string grammar known from the theory of formal languages. Unfortunately, graph parsing is known to be computationally expensive in general. There are quite simple graph languages that crush most general-purpose graph parsers.",
+      "date": "2008",
+      "language": "en",
+      "libraryCatalog": "Springer Link",
+      "place": "Berlin, Heidelberg",
+      "publisher": "Springer",
+      "ISBN": "978-3-540-85373-2",
+      "pages": "1-18",
+      "series": "Lecture Notes in Computer Science",
+      "DOI": "10.1007/978-3-540-85373-2_1",
+      "creators": [
+        {
+          "firstName": "Steffen",
+          "lastName": "Mazanek",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Mark",
+          "lastName": "Minas",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Olaf",
+          "lastName": "Chitil",
+          "creatorType": "editor"
+        },
+        {
+          "firstName": "Zolt\u00e1n",
+          "lastName": "Horv\u00e1th",
+          "creatorType": "editor"
+        },
+        {
+          "firstName": "Vikt\u00f3ria",
+          "lastName": "Zs\u00f3k",
+          "creatorType": "editor"
+        }
+      ],
+      "tags": [
+        {
+          "tag": "functional programming",
+          "type": 1
+        },
+        {
+          "tag": "graph parsing",
+          "type": 1
+        },
+        {
+          "tag": "parser combinators",
+          "type": 1
+        },
+        {
+          "tag": "visual languages",
+          "type": 1
+        }
+      ],
+      "relations": [],
+      "dateAdded": "2023-03-14T22:25:56Z",
+      "dateModified": "2023-03-14T22:25:56Z",
+      "uri": "http://zotero.org/groups/4899626/items/I2XJXNPL",
+      "itemID": 147,
+      "attachments": [],
+      "notes": [],
+      "citationKey": "mazanekGraphParserCombinators2008",
+      "itemKey": "I2XJXNPL",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/I2XJXNPL",
+      "publicationTitle": "Implementation and Application of Functional Languages"
+    },
+    {
+      "key": "CLW2QX92",
+      "version": 100,
+      "itemType": "journalArticle",
+      "title": "A Framework for Domain-Specific Natural Language Information Brokerage",
+      "abstractNote": "Service providers \u2014 from public institutions to primary care facilities \u2014 need to constantly attend to clients\u2019 inquiries to provide useful information and directive guidelines. Ensuring high quality service is challenging as it not only demands detailed domain-specific knowledge, but also the ability to quickly understand the clients\u2019 issues through their diverse \u2014 and often casual \u2014 descriptions. This paper aims to provide a framework for the development of an automated information broker agent who performs the task of a helper. The main task of the agent is to interact with the client and direct them to obtain further services that cater their personalized need. To do so, the agent should accomplish a sequence of tasks that include natural language inquiry, knowledge gathering, reasoning, and giving feedback; in this way, it simulates a human helper to engage in interaction with the client. The framework combines a question-answering reasoning mechanism while utilizing domain-specific knowledge base. When the users cannot describe clearly their needs, the system tries to narrow down the possibilities by an iterative question-answering process, until it eventually identifies the target. In realizing our framework, we make a proof-of-concept project, Mandy, a primary care chatbot system created to assist healthcare staffs by automating the patient intake process. We describe in detail the system functionalities and design of the system, and evaluate our proof-of-concept on benchmark case studies.",
+      "date": "2018-10-01",
+      "language": "en",
+      "libraryCatalog": "Springer Link",
+      "url": "https://doi.org/10.1007/s11518-018-5389-1",
+      "accessDate": "2023-04-02T09:44:55Z",
+      "volume": "27",
+      "pages": "559-585",
+      "publicationTitle": "Journal of Systems Science and Systems Engineering",
+      "DOI": "10.1007/s11518-018-5389-1",
+      "issue": "5",
+      "journalAbbreviation": "J. Syst. Sci. Syst. Eng.",
+      "ISSN": "1861-9576",
+      "creators": [
+        {
+          "firstName": "Lin",
+          "lastName": "Ni",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Jiamou",
+          "lastName": "Liu",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [
+        {
+          "tag": "AI and healthcare",
+          "type": 1
+        },
+        {
+          "tag": "automated information broker",
+          "type": 1
+        },
+        {
+          "tag": "chatbot",
+          "type": 1
+        },
+        {
+          "tag": "iterative inquiry",
+          "type": 1
+        },
+        {
+          "tag": "language processing",
+          "type": 1
+        },
+        {
+          "tag": "Question and answer system",
+          "type": 1
+        }
+      ],
+      "relations": [],
+      "dateAdded": "2023-04-02T09:44:55Z",
+      "dateModified": "2023-04-02T09:44:55Z",
+      "uri": "http://zotero.org/groups/4899626/items/CLW2QX92",
+      "itemID": 163,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Ni_Liu_2018_A Framework for Domain-Specific Natural Language Information Brokerage.pdf",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-04-02T09:44:56Z",
+          "dateModified": "2023-04-02T09:44:57Z",
+          "uri": "http://zotero.org/groups/4899626/items/SDCQSR3A",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\SDCQSR3A\\Ni_Liu_2018_A Framework for Domain-Specific Natural Language Information Brokerage.pdf",
+          "select": "zotero://select/groups/4899626/items/SDCQSR3A"
+        }
+      ],
+      "notes": [],
+      "citationKey": "niFrameworkDomainSpecificNatural2018",
+      "itemKey": "CLW2QX92",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/CLW2QX92"
+    },
+    {
+      "key": "M6FXGJC3",
+      "version": 71,
+      "itemType": "webpage",
+      "title": "NLTK :: Natural Language Toolkit",
+      "url": "https://www.nltk.org/",
+      "accessDate": "2023-03-14T19:55:02Z",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-14T19:55:02Z",
+      "dateModified": "2023-03-14T19:55:02Z",
+      "uri": "http://zotero.org/groups/4899626/items/M6FXGJC3",
+      "itemID": 143,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "NLTK :: Natural Language Toolkit",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-03-14T19:55:06Z",
+          "dateModified": "2023-03-14T19:55:06Z",
+          "uri": "http://zotero.org/groups/4899626/items/F7L8NHL5",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\F7L8NHL5\\www.nltk.org.html",
+          "select": "zotero://select/groups/4899626/items/F7L8NHL5"
+        }
+      ],
+      "notes": [],
+      "citationKey": "NLTKNaturalLanguage",
+      "itemKey": "M6FXGJC3",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/M6FXGJC3"
+    },
+    {
+      "key": "VPM3YQ8W",
+      "version": 2,
+      "itemType": "book",
+      "title": "Crafting Interpreters",
+      "abstractNote": "Despite using them every day, most software engineers know little about how programming languages are designed and implemented. For many, their only experience with that corner of computer science was a terrifying &quot;compilers&quot; class that they suffered through in undergrad and tried to blot from their memory as soon as they had scribbled their last NFA to DFA conversion on the final exam.That fearsome reputation belies a field that is rich with useful techniques and not so difficult as some of its practitioners might have you believe. A better understanding of how programming languages are built will make you a stronger software engineer and teach you concepts and data structures you&#39;ll use the rest of your coding days. You might even have fun.This book teaches you everything you need to know to implement a full-featured, efficient scripting language. You&#39;ll learn both high-level concepts around parsing and semantics and gritty details like bytecode representation and garbage collection. Your brain will light up with new ideas, and your hands will get dirty and calloused.Starting from main(), you will build a language that features rich syntax, dynamic typing, garbage collection, lexical scope, first-class functions, closures, classes, and inheritance. All packed into a few thousand lines of clean, fast code that you thoroughly understand because you wrote each one yourself.",
+      "date": "2021-07-27",
+      "language": "en",
+      "libraryCatalog": "Google Books",
+      "extra": "Google-Books-ID: q0c6EAAAQBAJ",
+      "publisher": "Genever Benning",
+      "ISBN": "978-0-9905829-4-6",
+      "numPages": "1021",
+      "creators": [
+        {
+          "firstName": "Robert",
+          "lastName": "Nystrom",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [
+        {
+          "tag": "Computers / Languages / General",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Programming / Compilers",
+          "type": 1
+        },
+        {
+          "tag": "Computers / Software Development & Engineering / Tools",
+          "type": 1
+        }
+      ],
+      "relations": [],
+      "dateAdded": "2022-12-29T14:09:11Z",
+      "dateModified": "2022-12-29T14:09:11Z",
+      "uri": "http://zotero.org/groups/4899626/items/VPM3YQ8W",
+      "itemID": 98,
+      "attachments": [
+        {
+          "key": "6C83HQ76",
+          "version": 2,
+          "itemType": "attachment",
+          "title": "Google Books Link",
+          "url": "https://books.google.ch/books?id=q0c6EAAAQBAJ",
+          "accessDate": "2022-11-11T10:11:23Z",
+          "parentItem": "VPM3YQ8W",
+          "linkMode": "linked_url",
+          "contentType": "text/html",
+          "charset": "",
+          "tags": [],
+          "relations": {},
+          "dateAdded": "2022-12-29T14:09:11Z",
+          "dateModified": "2022-12-29T14:09:11Z",
+          "uri": "http://zotero.org/groups/4899626/items/6C83HQ76"
+        }
+      ],
+      "notes": [],
+      "citationKey": "nystromCraftingInterpreters2021",
+      "itemKey": "VPM3YQ8W",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/VPM3YQ8W"
+    },
+    {
+      "key": "VQYVV5AH",
+      "version": 60,
+      "itemType": "webpage",
+      "title": "Oxford English Dictionary",
+      "abstractNote": "The OED is the definitive record of the English language, featuring 600,000 words, 3 million quotations, and over 1,000 years of English.",
+      "language": "en",
+      "shortTitle": "Oxford English Dictionary",
+      "url": "https://www.oed.com/",
+      "accessDate": "2023-03-14T12:34:50Z",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-14T12:34:50Z",
+      "dateModified": "2023-03-14T12:37:59Z",
+      "uri": "http://zotero.org/groups/4899626/items/VQYVV5AH",
+      "itemID": 137,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Snapshot",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-03-14T12:34:56Z",
+          "dateModified": "2023-03-14T12:34:56Z",
+          "uri": "http://zotero.org/groups/4899626/items/K4T85MNU",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\K4T85MNU\\www.oed.com.html",
+          "select": "zotero://select/groups/4899626/items/K4T85MNU"
+        }
+      ],
+      "notes": [],
+      "citationKey": "OxfordEnglishDictionary",
+      "itemKey": "VQYVV5AH",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/VQYVV5AH",
+      "publicationTitle": "Oxford English Dictionary"
+    },
+    {
+      "key": "ESTLWAFZ",
+      "version": 83,
+      "itemType": "encyclopediaArticle",
+      "title": "Parser combinator",
+      "abstractNote": "In computer programming, a parser combinator is a higher-order function that accepts several parsers as input and returns a new parser as its output. In this context, a parser is a function accepting strings as input and returning some structure as output, typically a parse tree or a set of indices representing locations in the string where parsing stopped successfully. Parser combinators enable a recursive descent parsing strategy that facilitates modular piecewise construction and testing. This parsing technique is called combinatory parsing.\nParsers using combinators have been used extensively in the prototyping of compilers and processors for domain-specific languages such as natural-language interfaces to databases, where complex and varied semantic actions are closely integrated with syntactic processing. In 1989, Richard Frost and John Launchbury demonstrated use of parser combinators to construct natural-language interpreters. Graham Hutton also used higher-order functions for basic parsing in 1992 and monadic parsing in 1996. S. D. Swierstra also exhibited the practical aspects of parser combinators in 2001. In 2008, Frost, Hafiz and Callaghan described a set of parser combinators in Haskell that solve the long-standing problem of accommodating left recursion, and work as a complete top-down parsing tool in polynomial time and space.",
+      "date": "2023-02-27T11:49:50Z",
+      "language": "en",
+      "libraryCatalog": "Wikipedia",
+      "url": "https://en.wikipedia.org/w/index.php?title=Parser_combinator&oldid=1141893658",
+      "accessDate": "2023-03-15T09:40:37Z",
+      "rights": "Creative Commons Attribution-ShareAlike License",
+      "extra": "Page Version ID: 1141893658",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-15T09:40:37Z",
+      "dateModified": "2023-03-15T09:40:37Z",
+      "uri": "http://zotero.org/groups/4899626/items/ESTLWAFZ",
+      "itemID": 150,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Snapshot",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-03-15T09:40:42Z",
+          "dateModified": "2023-03-15T09:40:42Z",
+          "uri": "http://zotero.org/groups/4899626/items/FM89NK7U",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\FM89NK7U\\Parser_combinator.html",
+          "select": "zotero://select/groups/4899626/items/FM89NK7U"
+        }
+      ],
+      "notes": [],
+      "citationKey": "ParserCombinator2023",
+      "itemKey": "ESTLWAFZ",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/ESTLWAFZ",
+      "publicationTitle": "Wikipedia"
+    },
+    {
+      "key": "CP5U36NL",
+      "version": 34,
+      "itemType": "book",
+      "title": "Shipbroking and Chartering Practice",
+      "abstractNote": "Now in its eighth edition, this classic text is a first point of reference for anyone looking to obtain an understanding of chartering and shipbroking practice. It provides hands-on, commercially-focused explanations of chartering business and invaluable advice on how the shipping market operates across a broad range of topics. The authors also deal expertly with the legal, financial, operational and managerial aspects of chartering, offering numerous case studies which clearly link theory to practice.  This new edition has been fully revised and updated to reflect the current trends in chartering practice, legal developments and standard forms of charterparties. New to this edition:      Enriched with practical examples covering\u3000crucial aspects of chartering and shipbroking business, such as voyage estimations, freight conversions and tanker calculations.    New material on day-to-day laytime principles, including \"Laytime Definitions for Charterparties 2013\", associated commentary and relevant examples.     Shipping Marketing as a modern tool of improving chartering and shipbroking business.     Expanded coverage of the economic background of chartering, including markets, vessels, cargoes, trades and fixtures.    Freight rates for all vessel types from 1980 to 2015.     Updated review of well-known standard charterparty documents (including NYPE 2015), together with clauses and wordings commonly applying to various charter types.     Analytical glossary containing typical terms and abbreviations used in chartering negotiations.     This book is an essential guide for practitioners in private practice and in-house for shipowners and cargo houses, as well as those studying shipbroking and chartering.",
+      "date": "2017-12-14",
+      "language": "en",
+      "libraryCatalog": "Google Books",
+      "extra": "Google-Books-ID: FkMHjwEACAAJ",
+      "publisher": "Informa Law from Routledge",
+      "ISBN": "978-1-138-82694-6",
+      "numPages": "738",
+      "creators": [
+        {
+          "firstName": "Evi",
+          "lastName": "Plomaritou",
+          "creatorType": "author"
+        },
+        {
+          "firstName": "Anthony",
+          "lastName": "Papadopoulos",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-12T10:46:30Z",
+      "dateModified": "2023-03-12T10:46:30Z",
+      "uri": "http://zotero.org/groups/4899626/items/CP5U36NL",
+      "itemID": 123,
+      "attachments": [
+        {
+          "key": "ID7SYDRV",
+          "version": 34,
+          "itemType": "attachment",
+          "title": "Google Books Link",
+          "url": "https://books.google.ch/books?id=FkMHjwEACAAJ",
+          "accessDate": "2023-03-12T10:46:30Z",
+          "parentItem": "CP5U36NL",
+          "linkMode": "linked_url",
+          "contentType": "text/html",
+          "charset": "",
+          "tags": [],
+          "relations": {},
+          "dateAdded": "2023-03-12T10:46:30Z",
+          "dateModified": "2023-03-12T10:46:30Z",
+          "uri": "http://zotero.org/groups/4899626/items/ID7SYDRV"
+        }
+      ],
+      "notes": [],
+      "citationKey": "plomaritouShipbrokingCharteringPractice2017",
+      "itemKey": "CP5U36NL",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/CP5U36NL"
+    },
+    {
+      "key": "5QV4R8CG",
+      "version": 76,
+      "itemType": "webpage",
+      "title": "Ragel State Machine Compiler",
+      "url": "http://www.colm.net/open-source/ragel/",
+      "accessDate": "2023-03-14T22:06:15Z",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-14T22:06:15Z",
+      "dateModified": "2023-03-14T22:06:15Z",
+      "uri": "http://zotero.org/groups/4899626/items/5QV4R8CG",
+      "itemID": 145,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Ragel State Machine Compiler",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-03-14T22:06:20Z",
+          "dateModified": "2023-03-14T22:06:20Z",
+          "uri": "http://zotero.org/groups/4899626/items/HMPAMZ2W",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\HMPAMZ2W\\ragel.html",
+          "select": "zotero://select/groups/4899626/items/HMPAMZ2W"
+        }
+      ],
+      "notes": [],
+      "citationKey": "RagelStateMachine",
+      "itemKey": "5QV4R8CG",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/5QV4R8CG"
+    },
+    {
+      "key": "CDA2X52Y",
+      "version": 87,
+      "itemType": "webpage",
+      "title": "Scala Parser Combinators 2.2.0 - scala.util.parsing.combinator",
+      "url": "https://javadoc.io/static/org.scala-lang.modules/scala-parser-combinators_2.13/2.2.0/scala/util/parsing/combinator/index.html",
+      "accessDate": "2023-03-17T13:52:32Z",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-17T13:52:32Z",
+      "dateModified": "2023-03-17T13:52:32Z",
+      "uri": "http://zotero.org/groups/4899626/items/CDA2X52Y",
+      "itemID": 153,
+      "attachments": [],
+      "notes": [],
+      "citationKey": "ScalaParserCombinators",
+      "itemKey": "CDA2X52Y",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/CDA2X52Y"
+    },
+    {
+      "key": "WN4NJYYB",
+      "version": 87,
+      "itemType": "computerProgram",
+      "title": "scala-parser-combinators",
+      "abstractNote": "simple combinator-based parsing for Scala. formerly part of the Scala standard library, now a separate community-maintained module",
+      "date": "2023-03-13T02:43:44Z",
+      "libraryCatalog": "GitHub",
+      "url": "https://github.com/scala/scala-parser-combinators/blob/2084983b79c7ed519d78d937625598cb5a0a41dd/docs/Getting_Started.md",
+      "accessDate": "2023-03-17T13:52:29Z",
+      "rights": "Apache-2.0",
+      "extra": "original-date: 2013-08-15T18:35:18Z",
+      "programmingLanguage": "Scala",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-17T13:52:29Z",
+      "dateModified": "2023-03-17T13:52:29Z",
+      "uri": "http://zotero.org/groups/4899626/items/WN4NJYYB",
+      "itemID": 152,
+      "attachments": [],
+      "notes": [],
+      "citationKey": "Scalaparsercombinators2023",
+      "itemKey": "WN4NJYYB",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/WN4NJYYB",
+      "publisher": "The Scala Programming Language"
+    },
+    {
+      "key": "FRS5RBDV",
+      "version": 43,
+      "itemType": "webpage",
+      "title": "Shipbroker IFCHOR opens up in Dubai",
+      "abstractNote": "Lausanne-based international shipbroking company IFCHOR has opened a new office in Dubai under the name IFCHOR Middle East, aiming to conduct primarily dry business across the GCC region.",
+      "date": "2018-01-11T01:16:26+00:00",
+      "language": "en",
+      "url": "https://www.seatrade-maritime.com/europe/shipbroker-ifchor-opens-dubai",
+      "accessDate": "2023-03-12T16:38:10Z",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-12T16:38:10Z",
+      "dateModified": "2023-03-12T16:38:10Z",
+      "uri": "http://zotero.org/groups/4899626/items/FRS5RBDV",
+      "itemID": 127,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Snapshot",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-03-12T16:38:18Z",
+          "dateModified": "2023-03-12T16:38:18Z",
+          "uri": "http://zotero.org/groups/4899626/items/GIAXBXJ3",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\GIAXBXJ3\\shipbroker-ifchor-opens-dubai.html",
+          "select": "zotero://select/groups/4899626/items/GIAXBXJ3"
+        }
+      ],
+      "notes": [],
+      "citationKey": "ShipbrokerIFCHOROpens2018",
+      "itemKey": "FRS5RBDV",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/FRS5RBDV",
+      "publicationTitle": "Seatrade Maritime"
+    },
+    {
+      "key": "9C82KE44",
+      "version": 52,
+      "itemType": "webpage",
+      "title": "Shipbroking as a stepping-stone to shipowning? Delusional",
+      "abstractNote": "Panos Patsadas, MD at Target Maritime Transport, reckons too many young men and women are becoming brokers for the wrong reasons. This is a topic I have long been wanting to talk about as it is something I come across every single day. I get CVs every day with young people aspiring to be shipbrokers. \u2026",
+      "date": "2016-03-08T02:58:56+00:00",
+      "language": "en-GB",
+      "shortTitle": "Shipbroking as a stepping-stone to shipowning?",
+      "url": "https://splash247.com/shipbroking-as-a-stepping-stone-to-shipowning-delusional/",
+      "accessDate": "2023-03-13T15:44:51Z",
+      "creators": [
+        {
+          "firstName": "",
+          "lastName": "Splash",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-13T15:44:51Z",
+      "dateModified": "2023-03-13T15:44:51Z",
+      "uri": "http://zotero.org/groups/4899626/items/9C82KE44",
+      "itemID": 132,
+      "attachments": [],
+      "notes": [],
+      "citationKey": "splashShipbrokingSteppingstoneShipowning2016",
+      "itemKey": "9C82KE44",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/9C82KE44",
+      "publicationTitle": "Splash247"
+    },
+    {
+      "key": "6R76SSKK",
+      "version": 54,
+      "itemType": "book",
+      "title": "Oxford Dictionary of English",
+      "abstractNote": "The foremost single volume authority on the English language, the Oxford Dictionary of English is at the forefront of language research, focusing on English as it is used today. It is informed by the most up-to-date evidence from the largest language research programme in the world, including the two-billion-word Oxford English Corpus. This new edition includes thousands of brand-new words and senses, as well as up-to-date encyclopedic information, and extensive appendices covering topics such as countries, heads of state, and chemical elements. New features include Word Trends which showcase language research based on the Oxford English Corpus and illuminate the extraordinary stories behind fast-changing words of everyday English. 12 months' access to Oxford's premium online dictionary and thesaurus service is included with this book, so you can get accurate definitions and synonyms wherever you are. Find out more about our living language using Oxford Dictionaries Pro - updated regularly with the latest changes to words and meanings, so you have the most accurate picture of English available. Use the thousands of audio pronunciations to hear how words are spoken. Improve your confidence in writing with helpful grammar and punctuation guides, full thesaurus information, style and usage help, and much more.",
+      "date": "2010-08-19",
+      "language": "en",
+      "libraryCatalog": "Google Books",
+      "extra": "Google-Books-ID: anecAQAAQBAJ",
+      "publisher": "OUP Oxford",
+      "ISBN": "978-0-19-957112-3",
+      "numPages": "2093",
+      "creators": [
+        {
+          "firstName": "Angus",
+          "lastName": "Stevenson",
+          "creatorType": "author"
+        }
+      ],
+      "tags": [
+        {
+          "tag": "Foreign Language Study / English as a Second Language",
+          "type": 1
+        },
+        {
+          "tag": "Language Arts & Disciplines / Journalism",
+          "type": 1
+        },
+        {
+          "tag": "Reference / Dictionaries",
+          "type": 1
+        }
+      ],
+      "relations": [],
+      "dateAdded": "2023-03-14T12:29:28Z",
+      "dateModified": "2023-03-14T12:29:28Z",
+      "uri": "http://zotero.org/groups/4899626/items/6R76SSKK",
+      "itemID": 138,
+      "attachments": [
+        {
+          "key": "7U2E2WSN",
+          "version": 54,
+          "itemType": "attachment",
+          "title": "Google Books Link",
+          "url": "https://books.google.ch/books?id=anecAQAAQBAJ",
+          "accessDate": "2023-03-14T12:29:28Z",
+          "parentItem": "6R76SSKK",
+          "linkMode": "linked_url",
+          "contentType": "text/html",
+          "charset": "",
+          "tags": [],
+          "relations": {},
+          "dateAdded": "2023-03-14T12:29:28Z",
+          "dateModified": "2023-03-14T12:29:28Z",
+          "uri": "http://zotero.org/groups/4899626/items/7U2E2WSN"
+        }
+      ],
+      "notes": [],
+      "citationKey": "stevensonOxfordDictionaryEnglish2010",
+      "itemKey": "6R76SSKK",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/6R76SSKK"
+    },
+    {
+      "key": "D4DUJM9T",
+      "version": 61,
+      "itemType": "encyclopediaArticle",
+      "title": "Telex",
+      "abstractNote": "The telex network is a station-to-station switched network of teleprinters similar to a telephone network, using telegraph-grade connecting circuits for two-way text-based messages. Telex was a major method of sending written messages electronically between businesses in the post\u2013World War II period. Its usage went into decline as the fax machine grew in popularity in the 1980s.\nThe term \"telex\" refers to the network, and sometimes the teleprinters (as \"telex machines\"), although point-to-point teleprinter systems had been in use long before telex exchanges were built in the 1930s. Teleprinters evolved from telegraph systems, and, like the telegraph, use binary signals, with mark and space logic represented by the presence or absence of a certain level of electric current. This differs from the analog telephone system, which used varying voltage to represent sound. For this reason, telex exchanges were entirely separate from the telephone system, with their own signalling standards, exchanges and system of telex numbers (the counterpart of telephone numbers).\nTelex provided the first common medium for international record communications using standard signalling techniques and operating criteria as specified by the International Telecommunication Union. Customers on any telex exchange could deliver messages to any other, around the world. To reduce connecting line usage, telex messages were encoded onto paper tape and then read into the line as quickly as possible. The system normally delivered information at 50 baud or approximately 66 words per minute, encoded using the International Telegraph Alphabet No. 2. In the last days of the traditional telex networks, end-user equipment was often replaced by modems and phone lines, reducing the telex network to what was effectively a directory service running on the phone network.",
+      "date": "2023-02-22T15:39:50Z",
+      "language": "en",
+      "libraryCatalog": "Wikipedia",
+      "url": "https://en.wikipedia.org/w/index.php?title=Telex&oldid=1140945522",
+      "accessDate": "2023-03-14T12:44:13Z",
+      "rights": "Creative Commons Attribution-ShareAlike License",
+      "extra": "Page Version ID: 1140945522",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-14T12:44:13Z",
+      "dateModified": "2023-03-14T12:44:13Z",
+      "uri": "http://zotero.org/groups/4899626/items/D4DUJM9T",
+      "itemID": 136,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Snapshot",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-03-14T12:44:19Z",
+          "dateModified": "2023-03-14T12:44:19Z",
+          "uri": "http://zotero.org/groups/4899626/items/JU8W5WG5",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\JU8W5WG5\\Telex.html",
+          "select": "zotero://select/groups/4899626/items/JU8W5WG5"
+        }
+      ],
+      "notes": [],
+      "citationKey": "Telex2023",
+      "itemKey": "D4DUJM9T",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/D4DUJM9T",
+      "publicationTitle": "Wikipedia"
+    },
+    {
+      "key": "JMKCDCW3",
+      "version": 47,
+      "itemType": "computerProgram",
+      "title": "adrian-thurston/ragel",
+      "abstractNote": "Ragel State Machine Compiler",
+      "date": "2023-03-11T21:03:19Z",
+      "libraryCatalog": "GitHub",
+      "url": "https://github.com/adrian-thurston/ragel/blob/65540b65ff09330b0293423e3fecc44e63f30614/examples/clang.rl",
+      "accessDate": "2023-03-13T09:25:25Z",
+      "rights": "MIT",
+      "extra": "original-date: 2020-03-07T13:42:38Z",
+      "programmingLanguage": "Ragel",
+      "creators": [
+        {
+          "firstName": "Adrian",
+          "lastName": "Thurston",
+          "creatorType": "programmer"
+        }
+      ],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-13T09:25:25Z",
+      "dateModified": "2023-03-13T09:25:25Z",
+      "uri": "http://zotero.org/groups/4899626/items/JMKCDCW3",
+      "itemID": 129,
+      "attachments": [],
+      "notes": [],
+      "citationKey": "thurstonAdrianthurstonRagel2023",
+      "itemKey": "JMKCDCW3",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/JMKCDCW3"
+    },
+    {
+      "key": "3F7C5FNL",
+      "version": 4,
+      "itemType": "presentation",
+      "title": "Generating parsers using Ragel and Lemon",
+      "date": "09:36:54 UTC",
+      "url": "https://www.slideshare.net/tristanpenman/generating-parsers-using-ragel-and-lemon?from_action=save",
+      "accessDate": "2022-11-30T17:02:34Z",
+      "creators": [
+        {
+          "firstName": "",
+          "lastName": "Tristan Penman",
+          "creatorType": "presenter"
+        }
+      ],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2022-12-29T14:09:35Z",
+      "dateModified": "2022-12-29T14:09:35Z",
+      "uri": "http://zotero.org/groups/4899626/items/3F7C5FNL",
+      "itemID": 102,
+      "attachments": [],
+      "notes": [],
+      "citationKey": "tristanpenmanGeneratingParsersUsing09:36:54UTC",
+      "itemKey": "3F7C5FNL",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/3F7C5FNL"
+    },
+    {
+      "key": "ID8RRBVR",
+      "version": 30,
+      "itemType": "webpage",
+      "title": "What Is a Trader and What Do Traders Do?",
+      "abstractNote": "A trader is an individual who engages in the transfer of financial assets in any financial market, either for themselves, or on behalf of a someone else.",
+      "language": "en",
+      "url": "https://www.investopedia.com/terms/t/trader.asp",
+      "accessDate": "2023-03-11T11:22:00Z",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-03-11T11:22:00Z",
+      "dateModified": "2023-03-11T11:22:00Z",
+      "uri": "http://zotero.org/groups/4899626/items/ID8RRBVR",
+      "itemID": 119,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "Snapshot",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-03-11T11:22:03Z",
+          "dateModified": "2023-03-11T11:22:03Z",
+          "uri": "http://zotero.org/groups/4899626/items/8EEYISSI",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\8EEYISSI\\trader.html",
+          "select": "zotero://select/groups/4899626/items/8EEYISSI"
+        }
+      ],
+      "notes": [],
+      "citationKey": "WhatTraderWhat",
+      "itemKey": "ID8RRBVR",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/ID8RRBVR",
+      "publicationTitle": "Investopedia"
+    },
+    {
+      "key": "849AJUFG",
+      "version": 103,
+      "itemType": "webpage",
+      "url": "http://polux.github.io/parsers/",
+      "accessDate": "2023-04-02T16:37:01Z",
+      "creators": [],
+      "tags": [],
+      "relations": [],
+      "dateAdded": "2023-04-02T16:37:01Z",
+      "dateModified": "2023-04-02T16:37:01Z",
+      "uri": "http://zotero.org/groups/4899626/items/849AJUFG",
+      "itemID": 165,
+      "attachments": [
+        {
+          "itemType": "attachment",
+          "title": "polux.github.io/parsers/",
+          "tags": [],
+          "relations": [],
+          "dateAdded": "2023-04-02T16:37:06Z",
+          "dateModified": "2023-04-02T16:37:06Z",
+          "uri": "http://zotero.org/groups/4899626/items/U7B76AYV",
+          "path": "C:\\Users\\xaper\\Zotero\\storage\\U7B76AYV\\parsers.html",
+          "select": "zotero://select/groups/4899626/items/U7B76AYV"
+        }
+      ],
+      "notes": [],
+      "citationKey": "zotero-165",
+      "itemKey": "849AJUFG",
+      "libraryID": 2,
+      "select": "zotero://select/groups/4899626/items/849AJUFG"
+    }
+  ]
+}

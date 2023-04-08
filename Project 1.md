@@ -1,0 +1,2 @@
+- able to create classroom session
+- able to create textbook, link it to other notions

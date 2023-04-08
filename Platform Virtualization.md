@@ -1,0 +1,162 @@
+---
+---
+
+# Platform Virtualization or Hardware virtualization
+
+-  What is Platform Virtualization ?
+	- Virtualization of a whole hardware platform → allows concurrent execution of multiple OSes on the same physical machine (host system) 
+ -  A VM is supported by what ? 
+	 - A VM is supported by a virtualization layer
+ - What is a virtualization layer ?
+	 - It's a virtual machine monitor (VMM) or hypervisor
+  - What are the requirements for a VMM
+	  - Equivalence (! not true in modern settings)
+	  - Efficiency
+	  - Safety & Isolation
+  - What is the notion of equivalence (req. for a VMM) ?
+	  - provide an environment essentially identical to the original machine; software on the VMM executes nearly identically to how it would on the real hardware
+  - What is the notion of efficiency (req. for a VMM) ?
+	  - a statistically dominant fraction of machine instructions must be executed by the guest OS without VMM intervention; these instructions run directly on the underlying physical hardware
+  - What is the notion of safety & isolation (req. for a VMM) ?
+	  - VMM is in complete control of the virtualized resources (hardware)
+  - Java Virtual Machine (JVM) is VM ?
+	  - no: equivalence, efficiency and isolation not satisfied
+  - QEMU running a Raspberry PI VM is VM ?
+	  - no: equivalence and efficiency not satisfied 
+  - Oracle VirtualBox running a VM with: Intel Core i7, VGA card, Intel Pro 1000 network card, IDE PIIX Disk controller is VM ?
+	  - yes 
+  - Oracle VirtualBox running a VM with: Intel Core i7, VGA card, Realtek RTL8111E network card, SCSI Adaptec Disk controller is VM ?
+	  - no: equivalence not satisfied
+  - What is full virtualization ?
+	  - Full virtualization is a type of virtualization where the guest OS does NOT know it’s running on top of a VMM
+  - What are the benefits of full virtualization
+	  - guest OS doesn’t need to be modified
+	  - any existing OS and existing drivers for real hardware will work
+		  - provided the VMM emulates the necessary devices
+	  - guest OS can run on real hardware
+  - What are the downsides of full virtualization
+	  - inefficient → low performances
+	  - complex implementation
+  - What is paravirtualization ?
+	  - Paravirtualization is a type of virtualization where the guest OS knows it’s running on top of a VMM
+  - What requires CPU paravirtualization ?
+	  - It requires that the guest kernel must be modified
+  - What requires Device paravirtualization ?
+	  - VMM exposes a virtual device that's easy to program
+  - Guest OS makes explicit calls to the VMM through hypercalls
+	  - typically for privileged operations
+  - What are the benefits of paravirtualization ?
+	  - much better performances than full virtualization
+		  - for both CPU and devices
+	  - much simpler driver implementation
+  - What are the downsides of paravirtualization ?
+	  - guest kernel must be modified (for CPU paravirtualization)
+	  - guest OS cannot run on real hardware
+  - What is hardware-assisted virtualization ?
+	  - Hardware-assisted virtualization is a type of virtualization that makes full virtualization much more efficient through dedicated hardware instructions
+  - What are the benefits of hardware-assisted virtualization ?
+	  - guest OS doesn’t need to be modified
+	  - much better performances than non hardware-assisted full virtualization
+  - What are the downsides of hardware-assisted virtualization ?
+	  - CPU must feature support for virtualization instructions
+  - How to virtualize the machine in platform virtualization, 3 main components must be virtualized: 
+	  - CPU
+	  - devices (also called Input/Output or I/O)
+	  - memory (MMU)
+  - What are the ways to virtualize the CPU ?
+	  - full virtualization
+	  - paravirtualization
+  - What are the ways to do full CPU virtualization ?
+	  - Trap-and-Emulate
+	  - Dynamic Binary Translation
+	  - Hardware-assisted
+  - What is CPU full virtualization with Trap-and-Emulate ?
+	  - Guest OS instructions are executed directly by the hardware
+  - How are privileged operations done in VMM ?
+	  - trap to VMM
+  - How are illegal operation dealt in TaE ?
+	  - Terminate VM
+  - How are legal operation dealt in TaE ?
+	  - emulate the behavior the guest OS was expecting from the hardware
+  - Why it is dynamic (CPU full virtualization with dynamic binary translation) ?
+	  - It is dynamic because a sequence may depend on the runtime state
+  - What is the goal of CPU paravirtualization ?
+	  - better performance by avoiding overhead/complexity required to support unmodified guest OSes
+  - What must be done for CPU paravirtualization in the guest OS ?
+	  - It must know it's running on top of a vmm
+	  - It must be modified
+  - How privilege operations are done with CPU paravirtualization ?
+	  - Hypercalls
+  - What is hardware-assisted virtualization ?
+	  - It's Intel VT-x & AMD-V
+  - What causes privileged operations in hardware-assisted virtualization CPUs ?
+	  - traps (VMexits)
+  - What are traps (VMexits) ?
+	  - It triggers the switch to root mode
+  - A VMM could use the following
+	  - non-root (guest)
+		  - ring 3 : applications
+		  - ring 0 : OS
+	  - root (VMM)
+		  - ring 0 : VMM
+	  - ![[Pasted image 20230329134339.png]]
+  - What is nested virtualization ?
+	  - Nested virtualization is the process of running a VM within a VM
+  - How to do efficiently nested virtualization ?
+	  - Efficient nested virtualization requires the host to expose hardware virtualization instructions to the guest OS
+  - When is it not possible to do nested virtualization ?
+	  - If a VMM requires hardware virtualization instructions and they’re not exposed to the guest OS → nested virtualization is not possible
+  - Three models for device virtualization (pre VT-d hardware):
+	  - Emulated
+	  - Paravirtualized
+	  - Passthrough
+  - What are the two things VMM must do to emulate a device ? 
+	  - VMM intercepts all device accesses
+	  - VMM emulates an existing device that's likely not physically present on the host
+	  - ![[Pasted image 20230329135431.png]]
+- What are the pros of device emulation ?
+	- VM decoupled from physical device
+	- device sharing
+	- VM migration
+- What are the cons of device emulation ?
+	- low performance
+	- emulation can be complex to implement
+- How does device virtualization with paravirtualization work ?
+	- The device access control is split between the front-end driver (guest VM) and the back-end driver in VMM.
+- How does VM & VMM communicates ?
+	- guest VM & VMM use hypercalls and shared memory to communicate
+	- ![[Pasted image 20230329140800.png]]
+- What are the pros of device paravirtualization ?
+	- VM decoupled from physical device
+	- device sharing
+	- VM migration
+	- no need to emulate a real device
+	- easy to implement
+	- high performance
+- What are the cons of device paravirtualization ?
+	- requires dedicated drivers in Guest OS
+- What is a device passthrough ?
+	- VMM gives guest VM exclusive direct access to physical device
+	- ![[Pasted image 20230329141036.png]]
+- What are the pros of device passthrough
+	- native (highest) performance
+- What are the cons of device passthrough
+	- device cannot be shared (or very difficult)
+	- VM migration difficult
+	- host must have the exact device type expected by the guest VM
+- What is hardware accelerated device virtualization ?
+	- Intel VT-d/AMD-V implement MMIO
+- What is the role of the MMIO ?
+	- hardware acceleration and security for I/O virtualization
+- On what are base hypervisors ?
+	- hardware assisted virtualization for the CPU
+	- emulated real devices through full virtualization
+	- paravirtualized "fake" devices
+- Hypervisors are in two categories:
+	- general OS modified to add a virtualization layer
+		- transform the OS into an hypervisor
+	- hypervisor that runs directly on the hardware
+		- only one goal: to manage VMs
+		- much smaller complexity than a general OS
+
+## References
