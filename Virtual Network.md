@@ -749,6 +749,38 @@ sequenceDiagram
 
 ### SEND/RECEIVE FLOW
 
+- ![[Pasted image 20230408215527.png]]
+- Quels sont les flux pour recevoir et envoyer un paquet sur l'interface wg0 en utilisant "Configuration 1" dans la conception de roaming de la section 2.1 avec la table de routage cryptokey de la section 2?
+	- Lorsqu'un paquet est généré localement (ou transmis) et prêt à être envoyé sur l'interface de sortie wg0 :
+		1.  Le paquet en clair atteint l'interface WireGuard, wg0.
+		2.  L'adresse IP de destination du paquet, 192.168.87.21, correspond au pair TrMv...WXX0.
+		3.  La clé de chiffrement symétrique d'envoi et le compteur de nonce de la session sécurisée associée au pair TrMv...WXX0 sont utilisés pour chiffrer le paquet en clair avec ChaCha20Poly1305.
+		4.  Un en-tête contenant divers champs est ajouté au paquet chiffré.
+		5.  Cet en-tête et le paquet chiffré sont envoyés sous forme de paquet UDP à l'endpoint Internet UDP/IP associé au pair TrMv...WXX0.
+	- En résumé
+		1. Atteindre l'interface WireGuard avec un paquet en clair
+		2.  Correspondance de l'adresse IP de destination avec un pair
+		3.  Chiffrement du paquet en clair à l'aide de ChaCha20Poly1305
+		4.  Ajout d'un en-tête aux paquets chiffrés
+		5.  Envoi du paquet chiffré via UDP à l'endpoint associé
+- Que se passe-t-il lorsqu'un paquet UDP/IP atteint le port UDP 41414 de l'hôte, qui est le port d'écoute UDP de l'interface wg0?
+	- Lorsqu'un paquet UDP/IP contenant un en-tête particulier et une charge utile chiffrée est reçu sur le bon port :
+		1.  Un paquet UDP/IP contenant un en-tête et une charge utile chiffrée est reçu sur le bon port (dans ce cas, le port 41414).
+		2.  WireGuard détermine qu'il est associé à la session sécurisée du pair TrMv...WXX0, vérifie la validité du compteur de messages et tente de l'authentifier et de le déchiffrer.
+		3.  Le paquet est authentifié correctement, l'adresse IP source du paquet UDP/IP externe est utilisée pour mettre à jour l'endpoint pour le pair TrMv...WXX0.
+		4.  Une fois le paquet déchiffré, l'interface a un paquet en clair qui est vérifié pour correspondre à la table de routage cryptokey.
+		5.  Si le paquet en clair n'a pas été supprimé, il est inséré dans la file d'attente de réception de l'interface wg0.
+	- En résumé
+		1. Réception d'un paquet UDP/IP chiffré sur le bon port
+		2.  Authentification et déchiffrement du paquet avec WireGuard
+		3.  Mise à jour de l'endpoint pour le pair suite à l'authentification
+		4.  Vérification de la correspondance avec la table de routage cryptokey
+		5.  Insertion du paquet en clair dans la file d'attente de réception
+-  Comment la liste des IP autorisées est-elle utilisée pour les paquets entrants et sortants?
+	- La liste des IP autorisées est utilisée pour vérifier l'adresse source des paquets entrants et pour choisir un pair en fonction de l'adresse de destination.
+	- Lors de l'envoi d'un paquet, la liste est consultée en fonction de l'adresse IP de destination ; lors de la réception d'un paquet, cette même liste est consultée pour déterminer si l'adresse IP source est autorisée.
+	- Cela permet d'appliquer un mappage un à un des adresses IP d'envoi et de réception, garantissant que si un paquet est reçu d'un pair particulier, les réponses à cette IP iront au même pair.
+
 ### LA COMPÉTITION
 
 - Qu'est-ce que le protocole IPsec ? (Internet Protocol Security) : 
