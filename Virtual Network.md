@@ -479,3 +479,76 @@
 	- Ansible Galaxy est un hub centralisé et une plateforme de partage pour les rôles Ansible créés par la communauté.
 - Quel est l'utilité d'Ansible Galaxy ?
 	- Il permet aux utilisateurs de trouver, réutiliser et partager des rôles Ansible pour faciliter la gestion de la configuration et le déploiement d'applications et de services.
+
+
+## WIREGUARD
+
+### INTRODUCTION
+
+- Qu'est-ce que WireGuard ?
+	- WireGuard est un protocole de réseau privé virtuel (VPN) ou "secure network tunnel" open-source conçu pour offrir une connexion sécurisée et cryptée entre les dispositifs sur un réseau.
+- Qu'est-ce qu'un "secure network tunnel" ?
+	- Un tunnel de réseau sécurisé (secure network tunnel) est une méthode de communication sécurisée qui permet à deux dispositifs ou réseaux distants de transférer des données de manière sécurisée et chiffrée à travers un réseau non sécurisé, généralement Internet.
+- Comment fonctionne (grossièrement) un "secure network tunnel" ?
+	- Le tunnel de réseau sécurisé crée un canal de communication privé en encapsulant et en chiffrant les données à l'intérieur d'un protocole de transport standard, de sorte que les données ne peuvent être interceptées ou décodées par des tiers non autorisés.
+- Quel est l'utilité d'un "secure network tunnel" ?
+	- Les tunnels de réseau sécurisés sont souvent utilisés pour mettre en place des réseaux privés virtuels (VPN) qui permettent aux utilisateurs et aux organisations de sécuriser leurs communications sur des réseaux publics ou non sécurisés.
+- Quels sont les trois protocoles VPN les plus courant ?
+	- IPsec
+	- OpenVPN
+	- WireGuard
+- L'interface de tunnel virtuel (virtual tunnel interface) se base sur quels principes ?
+	- Une association entre une clé public et l'adresse IP de la source du tunnel.
+	- Un "single round trip key exchange" basé sur NoiseIK.
+	- Gestion transparente à l'utilisateur des créations de sessions en utilisant un mécanisme de machine d'état temporisateur ("timer state machine").
+- Dans quel couche OSI WireGuard opère-t'il ?
+	- La couche 3.
+
+### CRYPOTKEY ROUTING
+
+- Qu'est-ce que le "Cryptokey Routing" ?
+	- 
+### LA DISTRIBUTION DES CLÉS
+
+- Quels sont les étapes liés aux clés ?
+	- Génération des clés
+	- Configuration des pairs
+	- Établissement de la connexion
+	- Échange de clés
+	- Chiffrement des données
+- Comment s'exécute l'étape de génération des clés ?
+	- Chaque pair (dispositif) génère une paire de clés, composée d'une clé privée et d'une clé publique.
+	- La clé privée est secrète et doit rester sur le dispositif qui l'a générée, tandis que la clé publique peut être partagée avec d'autres dispositifs.
+- Comment s'exécute l'étape de configuration des pairs ?
+	- Chaque pair doit être configuré avec la clé publique de l'autre pair et sa propre clé privée. 
+	- Dans la configuration de WireGuard, cela se fait en ajoutant des sections `[Peer]` pour chaque pair, avec les clés publiques et les adresses IP de chaque pair.
+- Comment s'exécute l'étape d'établissement de la connexion ?
+	- Lorsqu'un pair tente d'établir une connexion avec un autre pair, il envoie un message d'initiation chiffré avec la clé publique de ce pair.
+	- Le message d'initiation contient également la clé publique de l'expéditeur, de sorte que le destinataire puisse authentifier l'expéditeur et établir la connexion.
+- Comment s'exécute l'étape d'échange de clés ?
+	- Une fois la connexion établie, les pairs utilisent le protocole de WireGuard pour échanger leurs clés publiques et établir une connexion sécurisée.
+	- WireGuard utilise le protocole Noise, qui est un protocole cryptographique de nouvelle génération, pour gérer l'échange de clés et la création de sessions chiffrées.
+- Comment s'exécute l'étape de chiffrements des données ?
+	- Une fois l'échange de clés terminé, les pairs utilisent leurs clés privées et les clés publiques de l'autre pair pour chiffrer et déchiffrer les données transmises entre eux. WireGuard utilise des algorithmes de chiffrement modernes et sécurisés, tels que ChaCha20 pour le chiffrement des données et Poly1305 pour l'authentification des messages.
+
+### LA COMMUNICATION
+
+### LA COMPÉTITION
+
+- Qu'est-ce que le protocole IPsec ? (Internet Protocol Security) : 
+	- Un ensemble de protocoles de sécurité qui fonctionne au niveau de la couche réseau (Couche 2) pour sécuriser les communications sur les réseaux IP.
+- Qu'est-ce que le protocole OpenVPN ?
+	- Un protocole VPN open-source largement utilisé qui fonctionne au niveau de la couche application (Couche 7) pour sécuriser les communications sur les réseaux TCP/IP.
+
+- Quel est l'avantage de WireGuard par rapport à IPsec ?
+	- WireGuard n'utilise pas deux couches différentes pour l'échange de clé et le transport de données comme le fait IPsec. Ainsi cela diminue la **complexité** de l'implémentation.
+	- En effet, après une simple configuration d'une interface virtuel en lui assignant une clé privée et les clés publiques des pairs, le tunnel fonctionne !
+- Quel est le problème de Wireguard par rapport à IPsec ?
+	- Académiquement c'est pas une bonne manière d'abstraire les choses (mauvaise utilisation des couches). 
+	- Cependant, ces problèmes sont rectifiés à l'aide de techniques ingénierique (lol) et cryptographique.
+- Quel est le désavantage d'OpenVPN par rapport à WireGuard ?
+	- Du fait qu'il est implémenté dans la couche applicative (user space), il n'est pas très performant, puisque les packets sont copiés plusieurs fois entre l'espace kernel et utilisateur.
+	- Il faut aussi un daemon de "longue vie".
+	- Il n'est pas stateless du point de vue de l'administrateur.
+	- Il utilise un protocole complexe et lourd : TLS.
+
