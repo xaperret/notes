@@ -506,8 +506,39 @@
 
 ### CRYPOTKEY ROUTING
 
-- Qu'est-ce que le "Cryptokey Routing" ?
-	- 
+- Qu'est-ce que le *Cryptokey Routing* ?
+	- Le *Cryptokey Routing* est un concept utilisé par WireGuard pour établir et maintenir des connexions sécurisées entre les pairs dans un réseau VPN.
+	- Au lieu d'utiliser des configurations complexes basées sur des adresses IP ou des noms de domaine, **WireGuard associe directement les clés publiques aux adresses IP autorisées pour simplifier la gestion et le routage des connexions VPN**
+	- ![[Pasted image 20230408171030.png]]
+- Quels sont les étapes lié au "Cryptokey Routing" 
+	- Génération des clés
+	- Configuration des pairs
+	- Établissement de la connexion
+		- IP autorisé ?
+		- Si oui, quel clé publique ?
+	- Routage des paquets
+- En quoi consiste l'étape de générations des clés ?
+	- Chaque pair (client ou serveur) génère une paire de clés (clé privée et clé publique). La clé privée est conservée secrète par chaque pair, tandis que la clé publique est partagée entre les pairs pour établir une connexion sécurisée.
+- En quoi consiste la configuration des pairs ?
+	- Les pairs sont configurés en ajoutant des sections `[Peer]` dans leurs fichiers de configuration respectifs. Chaque section `[Peer]` contient la clé publique de l'autre pair et une liste d'adresses IP autorisées pour ce pair. L'adresse IP autorisée peut être une adresse IP unique ou un bloc CIDR, et elle détermine à quelle adresse IP le pair peut envoyer des paquets via le tunnel VPN.
+- En quoi consiste l'établissement de la connexion ?
+	- Lorsqu'un pair envoie un paquet à travers le tunnel VPN, WireGuard vérifie d'abord si l'adresse IP de destination est autorisée pour la clé publique du pair destinataire.
+	- Si l'adresse IP est autorisée, WireGuard utilise la clé publique pour chiffrer le paquet avant de l'envoyer au pair destinataire.
+- En quoi consiste le routage des paquets ?
+	- Lorsque le pair destinataire reçoit le paquet chiffré, il utilise sa clé privée pour déchiffrer le paquet. Ensuite, il vérifie si l'adresse IP source du paquet est autorisée pour la clé publique de l'expéditeur. Si l'adresse IP source est autorisée, le paquet est accepté et traité. Sinon, le paquet est rejeté.
+- Maintenant, que nous savons toutes ces choses, qu'est-ce que possède une interface ?
+	- Une clé privée
+	- Un port UDP sur lequel elle écoute
+	- Une liste de pairs autorisés
+- Un pair est identifié par 
+	- sa clé publique
+	- et est autorisé ensuite par son adresse ip.
+- Que se passe t'il si WireGuard reçoit un paquet chiffré ?
+	- Le paquet va être
+		- déchiffré
+		- authentifié
+	- Il sera ensuite accepté seulement si l'IP source se trouve dans la table et correspond à la clé publique utilisé pour déchiffré le paquet.
+	
 ### LA DISTRIBUTION DES CLÉS
 
 - Quels sont les étapes liés aux clés ?
@@ -531,7 +562,21 @@
 - Comment s'exécute l'étape de chiffrements des données ?
 	- Une fois l'échange de clés terminé, les pairs utilisent leurs clés privées et les clés publiques de l'autre pair pour chiffrer et déchiffrer les données transmises entre eux. WireGuard utilise des algorithmes de chiffrement modernes et sécurisés, tels que ChaCha20 pour le chiffrement des données et Poly1305 pour l'authentification des messages.
 
-### LA COMMUNICATION
+### ENDPOINTS & ROAMING
+
+- Qu'est-ce qu'un endpoint ?
+	- L'endpoint dans WireGuard fait référence à l'adresse IP publique et au port d'un pair auquel un autre pair doit envoyer des paquets chiffrés.
+- À quel moment l'endpoint est nécessaire (POV : Client) ?
+	- Lorsqu'un client (ou un pair) se connecte à un serveur (ou à un autre pair) via WireGuard, il doit connaître l'endpoint du serveur pour pouvoir envoyer des paquets chiffrés à ce serveur.
+- À quel moment l'endpoint est nécessaire (POV : Serveur) ?
+	- De même, le serveur doit également connaître l'endpoint du client pour envoyer des paquets chiffrés en retour.
+- Où est défini l'endpoint ?
+	- L'endpoint est défini dans la configuration de chaque pair et est essentiel pour établir la connexion.
+- Qu'est-ce que le roaming ?
+	- Le roaming est une fonctionnalité de WireGuard qui permet aux pairs de maintenir une connexion sécurisée, même lorsqu'ils changent d'adresse IP ou de réseau. Cela est particulièrement utile pour les clients mobiles, qui peuvent passer d'un réseau Wi-Fi à un réseau mobile ou changer d'adresse IP en raison de l'attribution dynamique des adresses par DHCP.
+- Qu'est-ce qu'une IP adresse externe ?
+	- Un *endpoint*
+	- En effet, chaque membre de la table de routage peut éventuellement pré-spécifié une adresse connue externe et un port UDP.
 
 ### LA COMPÉTITION
 
@@ -539,7 +584,6 @@
 	- Un ensemble de protocoles de sécurité qui fonctionne au niveau de la couche réseau (Couche 2) pour sécuriser les communications sur les réseaux IP.
 - Qu'est-ce que le protocole OpenVPN ?
 	- Un protocole VPN open-source largement utilisé qui fonctionne au niveau de la couche application (Couche 7) pour sécuriser les communications sur les réseaux TCP/IP.
-
 - Quel est l'avantage de WireGuard par rapport à IPsec ?
 	- WireGuard n'utilise pas deux couches différentes pour l'échange de clé et le transport de données comme le fait IPsec. Ainsi cela diminue la **complexité** de l'implémentation.
 	- En effet, après une simple configuration d'une interface virtuel en lui assignant une clé privée et les clés publiques des pairs, le tunnel fonctionne !
@@ -552,3 +596,6 @@
 	- Il n'est pas stateless du point de vue de l'administrateur.
 	- Il utilise un protocole complexe et lourd : TLS.
 
+### RÉFÉRENCES
+
+- https://www.youtube.com/watch?v=kxj8GMvnASE

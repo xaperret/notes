@@ -286,3 +286,73 @@ date modified: Tuesday, February 7th 2023, 9:37:29 am
 >%%TAGS%%
 >
 ^q9bzbttmetr
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-08T15:09:42.346Z","updated":"2023-04-08T15:09:42.346Z","document":{"title":"WireGuard: Next Generation Kernel Network Tunnel","link":[{"href":"urn:x-pdf:64e8e4753111ae743298375fc0f7a8dd"},{"href":"vault:/Books/wireguard.pdf"}],"documentFingerprint":"64e8e4753111ae743298375fc0f7a8dd"},"uri":"vault:/Books/wireguard.pdf","target":[{"source":"vault:/Books/wireguard.pdf","selector":[{"type":"TextPositionSelector","start":11397,"end":11526},{"type":"TextQuoteSelector","exact":"The fundamental principle of a secure VPN is an association between peers and the IP addresses each is allowedto use as source IP","prefix":"ve its goals.2 Cryptokey Routing","suffix":"s. In WireGuard, peers are ident"}]}]}
+>```
+>%%
+>*%%PREFIX%%ve its goals.2 Cryptokey Routing%%HIGHLIGHT%% ==The fundamental principle of a secure VPN is an association between peers and the IP addresses each is allowedto use as source IP== %%POSTFIX%%s. In WireGuard, peers are ident*
+>%%LINK%%[[#^ppehnzx1aq|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^ppehnzx1aq
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-08T15:11:39.934Z","updated":"2023-04-08T15:11:39.934Z","document":{"title":"WireGuard: Next Generation Kernel Network Tunnel","link":[{"href":"urn:x-pdf:64e8e4753111ae743298375fc0f7a8dd"},{"href":"vault:/Books/wireguard.pdf"}],"documentFingerprint":"64e8e4753111ae743298375fc0f7a8dd"},"uri":"vault:/Books/wireguard.pdf","target":[{"source":"vault:/Books/wireguard.pdf","selector":[{"type":"TextPositionSelector","start":12029,"end":12152},{"type":"TextQuoteSelector","exact":"The interface itself has a private key and a UDP port on which it listens (more on that later), followed by alist of peers.","prefix":".0/16gN65...z6EA 10.10.10.230/32","suffix":" Each peer is identified by its "}]}]}
+>```
+>%%
+>*%%PREFIX%%.0/16gN65...z6EA 10.10.10.230/32%%HIGHLIGHT%% ==The interface itself has a private key and a UDP port on which it listens (more on that later), followed by alist of peers.== %%POSTFIX%%Each peer is identified by its*
+>%%LINK%%[[#^o3vv9p044x|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^o3vv9p044x
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-08T15:19:41.812Z","updated":"2023-04-08T15:19:41.812Z","document":{"title":"WireGuard: Next Generation Kernel Network Tunnel","link":[{"href":"urn:x-pdf:64e8e4753111ae743298375fc0f7a8dd"},{"href":"vault:/Books/wireguard.pdf"}],"documentFingerprint":"64e8e4753111ae743298375fc0f7a8dd"},"uri":"vault:/Books/wireguard.pdf","target":[{"source":"vault:/Books/wireguard.pdf","selector":[{"type":"TextPositionSelector","start":12534,"end":12747},{"type":"TextQuoteSelector","exact":"Conversely, when wg0receives an encrypted packet, after decrypting and authenticating it, it will only accept it if its source IP resolvesin the table to the public key used in the secure session for decrypting it","prefix":"rom the public key TrMv...WXX0. ","suffix":". For example, if a packet is de"}]}]}
+>```
+>%%
+>*%%PREFIX%%rom the public key TrMv...WXX0.%%HIGHLIGHT%% ==Conversely, when wg0receives an encrypted packet, after decrypting and authenticating it, it will only accept it if its source IP resolvesin the table to the public key used in the secure session for decrypting it== %%POSTFIX%%. For example, if a packet is de*
+>%%LINK%%[[#^le07fz3a1x|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^le07fz3a1x
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-08T15:48:42.432Z","updated":"2023-04-08T15:48:42.432Z","document":{"title":"WireGuard: Next Generation Kernel Network Tunnel","link":[{"href":"urn:x-pdf:64e8e4753111ae743298375fc0f7a8dd"},{"href":"vault:/Books/wireguard.pdf"}],"documentFingerprint":"64e8e4753111ae743298375fc0f7a8dd"},"uri":"vault:/Books/wireguard.pdf","target":[{"source":"vault:/Books/wireguard.pdf","selector":[{"type":"TextPositionSelector","start":14325,"end":14454},{"type":"TextQuoteSelector","exact":"ach peer in the cryptokey routing table may optionally pre-specify a knownexternal IP address and UDP port of that peer’s endpoin","prefix":"particular Internet endpoints. E","suffix":"t. The reason it is optional is "}]}]}
+>```
+>%%
+>*%%PREFIX%%particular Internet endpoints. E%%HIGHLIGHT%% ==ach peer in the cryptokey routing table may optionally pre-specify a knownexternal IP address and UDP port of that peer’s endpoin== %%POSTFIX%%t. The reason it is optional is*
+>%%LINK%%[[#^logfxr80ume|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^logfxr80ume
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-08T15:55:23.991Z","updated":"2023-04-08T15:55:23.991Z","document":{"title":"WireGuard: Next Generation Kernel Network Tunnel","link":[{"href":"urn:x-pdf:64e8e4753111ae743298375fc0f7a8dd"},{"href":"vault:/Books/wireguard.pdf"}],"documentFingerprint":"64e8e4753111ae743298375fc0f7a8dd"},"uri":"vault:/Books/wireguard.pdf","target":[{"source":"vault:/Books/wireguard.pdf","selector":[{"type":"TextPositionSelector","start":14582,"end":14659},{"type":"TextQuoteSelector","exact":" it will use the outer external source IPaddress for determining the endpoint","prefix":"uthenticated packet from a peer,","suffix":".Since a public key uniquely ide"}]}]}
+>```
+>%%
+>*%%PREFIX%%uthenticated packet from a peer,%%HIGHLIGHT%% ==it will use the outer external source IPaddress for determining the endpoint== %%POSTFIX%%.Since a public key uniquely ide*
+>%%LINK%%[[#^cuyrjip897n|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^cuyrjip897n
