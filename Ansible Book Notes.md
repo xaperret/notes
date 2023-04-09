@@ -1698,3 +1698,367 @@ date modified: Tuesday, February 7th 2023, 9:37:29 am
 >%%TAGS%%
 >
 ^rstno3gekfl
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:16:40.028Z","updated":"2023-04-09T17:16:40.028Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":165616,"end":165633},{"type":"TextQuoteSelector","exact":"Managing software","prefix":"sh node4darlene@node4:~$ exit136","suffix":"You can use the following module"}]}]}
+>```
+>%%
+>*%%PREFIX%%sh node4darlene@node4:~$ exit136%%HIGHLIGHT%% ==Managing software== %%POSTFIX%%You can use the following module*
+>%%LINK%%[[#^9bm4567413i|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^9bm4567413i
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:16:47.831Z","updated":"2023-04-09T17:16:47.831Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":165633,"end":166508},{"type":"TextQuoteSelector","exact":"You can use the following modules to manage software in Ansible:• package → installs, upgrade and removes packages using the underlying OSpackage manager. For Windows targets, use the win_package module in-stead.• yum → installs, upgrade, downgrades, removes, and lists packages and groupswith the “yum” package manager.• apt → manages “apt” packages (such as for Debian/Ubuntu).• yum_repository → adds or removes YUM repositories in RPM-based Linuxdistributions.• package_facts → returns information about installed packages as facts.• rpm_key → adds or removes a gpg key to your rpm database.• redhat_subscription → manages registration and subscription to the RedHat Subscription Management entitlement platform using the ‘subscription-manager’ command.• rhn_register → manages registration to the Red Hat Network.• rhn_channel → adds or removes Red Hat software channels.","prefix":"ode4:~$ exit136Managing software","suffix":"Now let’s create a playbook that"}]}]}
+>```
+>%%
+>*%%PREFIX%%ode4:~$ exit136Managing software%%HIGHLIGHT%% ==You can use the following modules to manage software in Ansible:• package → installs, upgrade and removes packages using the underlying OSpackage manager. For Windows targets, use the win_package module in-stead.• yum → installs, upgrade, downgrades, removes, and lists packages and groupswith the “yum” package manager.• apt → manages “apt” packages (such as for Debian/Ubuntu).• yum_repository → adds or removes YUM repositories in RPM-based Linuxdistributions.• package_facts → returns information about installed packages as facts.• rpm_key → adds or removes a gpg key to your rpm database.• redhat_subscription → manages registration and subscription to the RedHat Subscription Management entitlement platform using the ‘subscription-manager’ command.• rhn_register → manages registration to the Red Hat Network.• rhn_channel → adds or removes Red Hat software channels.== %%POSTFIX%%Now let’s create a playbook that*
+>%%LINK%%[[#^8mfmikuk9we|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^8mfmikuk9we
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:17:29.770Z","updated":"2023-04-09T17:17:29.770Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":168968,"end":168996},{"type":"TextQuoteSelector","exact":"Managing processes and tasks","prefix":"s]$ ansible-doc package_facts139","suffix":"You can use the following module"}]}]}
+>```
+>%%
+>*%%PREFIX%%s]$ ansible-doc package_facts139%%HIGHLIGHT%% ==Managing processes and tasks== %%POSTFIX%%You can use the following module*
+>%%LINK%%[[#^wqe7etb8m2|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^wqe7etb8m2
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:17:34.037Z","updated":"2023-04-09T17:17:34.037Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":168996,"end":169452},{"type":"TextQuoteSelector","exact":"You can use the following modules to manage processes and tasks in Ansible:• cron → use this module to schedule cron jobs.• at → use this module to schedule a command or a script to run once in thefuture.• service → use this module to manage services (start, restart, enable on boot,disable, etc).• service_facts → returns service state information as fact data for variousservice management utilities.• systemd → controls systemd services on remote hosts.","prefix":"s139Managing processes and tasks","suffix":"Keep in mind that the cron modul"}]}]}
+>```
+>%%
+>*%%PREFIX%%s139Managing processes and tasks%%HIGHLIGHT%% ==You can use the following modules to manage processes and tasks in Ansible:• cron → use this module to schedule cron jobs.• at → use this module to schedule a command or a script to run once in thefuture.• service → use this module to manage services (start, restart, enable on boot,disable, etc).• service_facts → returns service state information as fact data for variousservice management utilities.• systemd → controls systemd services on remote hosts.== %%POSTFIX%%Keep in mind that the cron modul*
+>%%LINK%%[[#^taktpmlp2km|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^taktpmlp2km
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:25:20.797Z","updated":"2023-04-09T17:25:20.797Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":169452,"end":169651},{"type":"TextQuoteSelector","exact":"Keep in mind that the cron module has a name option which is used to uniquelyidentify entries in the crontab. The name option has no meaning for Cron, but ithelps Ansible in managing crontab entries.","prefix":"ystemd services on remote hosts.","suffix":"For example, Ansible uses the na"}]}]}
+>```
+>%%
+>*%%PREFIX%%ystemd services on remote hosts.%%HIGHLIGHT%% ==Keep in mind that the cron module has a name option which is used to uniquelyidentify entries in the crontab. The name option has no meaning for Cron, but ithelps Ansible in managing crontab entries.== %%POSTFIX%%For example, Ansible uses the na*
+>%%LINK%%[[#^f5eham80dxk|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^f5eham80dxk
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:27:25.543Z","updated":"2023-04-09T17:27:25.543Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":172000,"end":172253},{"type":"TextQuoteSelector","exact":"You should also know that there is no dedicated module to interact with Linuxprocesses in Ansible. If you want to send signals to a process; you can just useregular Linux commands like kill, pkill, killall with the command, shell, or rawAnsible modules.","prefix":"ran exactly twice as you wanted.","suffix":"142Configuring local storageYou "}]}]}
+>```
+>%%
+>*%%PREFIX%%ran exactly twice as you wanted.%%HIGHLIGHT%% ==You should also know that there is no dedicated module to interact with Linuxprocesses in Ansible. If you want to send signals to a process; you can just useregular Linux commands like kill, pkill, killall with the command, shell, or rawAnsible modules.== %%POSTFIX%%142Configuring local storageYou*
+>%%LINK%%[[#^negx3x8b35|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^negx3x8b35
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:27:31.386Z","updated":"2023-04-09T17:27:31.386Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":172256,"end":172281},{"type":"TextQuoteSelector","exact":"Configuring local storage","prefix":"shell, or rawAnsible modules.142","suffix":"You can use the following module"}]}]}
+>```
+>%%
+>*%%PREFIX%%shell, or rawAnsible modules.142%%HIGHLIGHT%% ==Configuring local storage== %%POSTFIX%%You can use the following module*
+>%%LINK%%[[#^cvp6cqolj3l|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^cvp6cqolj3l
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:27:44.763Z","updated":"2023-04-09T17:27:44.763Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":172281,"end":172778},{"type":"TextQuoteSelector","exact":"You can use the following modules to configure local storage in Ansible:• parted → This module allows configuring block device partition using the‘parted’ command line tool.• lvg → This module creates, removes or resizes volume groups.• lvol → This module creates, removes or resizes logical volumes.• filesystem → This module creates a filesystem.• mount → This module controls active and configured mount points in ‘/etc/fstab’.• vdo → This module controls the VDO dedupe and compression device.","prefix":"les.142Configuring local storage","suffix":"Now let’s create a new playbook "}]}]}
+>```
+>%%
+>*%%PREFIX%%les.142Configuring local storage%%HIGHLIGHT%% ==You can use the following modules to configure local storage in Ansible:• parted → This module allows configuring block device partition using the‘parted’ command line tool.• lvg → This module creates, removes or resizes volume groups.• lvol → This module creates, removes or resizes logical volumes.• filesystem → This module creates a filesystem.• mount → This module controls active and configured mount points in ‘/etc/fstab’.• vdo → This module controls the VDO dedupe and compression device.== %%POSTFIX%%Now let’s create a new playbook*
+>%%LINK%%[[#^nkmwqvea609|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^nkmwqvea609
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:28:27.579Z","updated":"2023-04-09T17:28:27.579Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":177510,"end":177540},{"type":"TextQuoteSelector","exact":"Configuring network interfaces","prefix":"l plays]$ ansible-doc mounted146","suffix":"You can use the following module"}]}]}
+>```
+>%%
+>*%%PREFIX%%l plays]$ ansible-doc mounted146%%HIGHLIGHT%% ==Configuring network interfaces== %%POSTFIX%%You can use the following module*
+>%%LINK%%[[#^ilipclfpcd|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^ilipclfpcd
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:28:35.838Z","updated":"2023-04-09T17:28:35.838Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":177540,"end":178003},{"type":"TextQuoteSelector","exact":"You can use the following modules to configure network interfaces in Ansible:• nmcli → manages the network devices. Create, modify and manage variousconnection and device type e.g., ethernet, teams, bonds, vlans, etc.• hostname → set system’s hostname, supports most OSs/Distributions, in-cluding those using systemd.• firewalld → This module allows for addition or deletion of services and ports(either TCP or UDP) in either running or permanent firewalld rules.","prefix":"46Configuring network interfaces","suffix":"Now let’s create a new playbook "}]}]}
+>```
+>%%
+>*%%PREFIX%%46Configuring network interfaces%%HIGHLIGHT%% ==You can use the following modules to configure network interfaces in Ansible:• nmcli → manages the network devices. Create, modify and manage variousconnection and device type e.g., ethernet, teams, bonds, vlans, etc.• hostname → set system’s hostname, supports most OSs/Distributions, in-cluding those using systemd.• firewalld → This module allows for addition or deletion of services and ports(either TCP or UDP) in either running or permanent firewalld rules.== %%POSTFIX%%Now let’s create a new playbook*
+>%%LINK%%[[#^d8b5xn28837|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^d8b5xn28837
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:29:14.072Z","updated":"2023-04-09T17:29:14.072Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":182527,"end":182562},{"type":"TextQuoteSelector","exact":"Chapter 12: Ansible Troubleshooting","prefix":"vided at the end of the book.152","suffix":"We all dream of a world where we"}]}]}
+>```
+>%%
+>*%%PREFIX%%vided at the end of the book.152%%HIGHLIGHT%% ==Chapter 12: Ansible Troubleshooting== %%POSTFIX%%We all dream of a world where we*
+>%%LINK%%[[#^yoo61xa921k|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^yoo61xa921k
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:29:44.772Z","updated":"2023-04-09T17:29:44.772Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":183033,"end":183055},{"type":"TextQuoteSelector","exact":"Enable Ansible logging","prefix":" connectivity issues in Ansible.","suffix":"By default, Ansible is not confi"}]}]}
+>```
+>%%
+>*%%PREFIX%%connectivity issues in Ansible.%%HIGHLIGHT%% ==Enable Ansible logging== %%POSTFIX%%By default, Ansible is not confi*
+>%%LINK%%[[#^7dp4wfvfoqt|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^7dp4wfvfoqt
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:29:53.488Z","updated":"2023-04-09T17:29:53.488Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":183055,"end":183313},{"type":"TextQuoteSelector","exact":"By default, Ansible is not configured to log its output anywhere. You can howeverchange this behavior by setting the log_path configuration setting in your Ansi-ble configuration file (ansible.cfg) to allow Ansible to log its output to a specificdestination.","prefix":"n Ansible.Enable Ansible logging","suffix":"To demonstrate, let’s first set "}]}]}
+>```
+>%%
+>*%%PREFIX%%n Ansible.Enable Ansible logging%%HIGHLIGHT%% ==By default, Ansible is not configured to log its output anywhere. You can howeverchange this behavior by setting the log_path configuration setting in your Ansi-ble configuration file (ansible.cfg) to allow Ansible to log its output to a specificdestination.== %%POSTFIX%%To demonstrate, let’s first set*
+>%%LINK%%[[#^53vh5k7eid|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^53vh5k7eid
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:30:17.702Z","updated":"2023-04-09T17:30:17.702Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":185402,"end":185424},{"type":"TextQuoteSelector","exact":"Using the debug module","prefix":": Playbook logging enabled^ here","suffix":"The debug module comes in handy "}]}]}
+>```
+>%%
+>*%%PREFIX%%: Playbook logging enabled^ here%%HIGHLIGHT%% ==Using the debug module== %%POSTFIX%%The debug module comes in handy*
+>%%LINK%%[[#^fget7xy8qq|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^fget7xy8qq
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:35:30.214Z","updated":"2023-04-09T17:35:30.214Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":185424,"end":185684},{"type":"TextQuoteSelector","exact":"The debug module comes in handy when troubleshooting as it can show variablesvalues in playbooks. You can also use the debug module to show messages in spe-cific error situations.You can specify the verbosity option to control when a debug task should execute.","prefix":"bled^ hereUsing the debug module","suffix":"To demonstrate, go ahead and cre"}]}]}
+>```
+>%%
+>*%%PREFIX%%bled^ hereUsing the debug module%%HIGHLIGHT%% ==The debug module comes in handy when troubleshooting as it can show variablesvalues in playbooks. You can also use the debug module to show messages in spe-cific error situations.You can specify the verbosity option to control when a debug task should execute.== %%POSTFIX%%To demonstrate, go ahead and cre*
+>%%LINK%%[[#^n2pinmobqsl|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^n2pinmobqsl
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:35:38.819Z","updated":"2023-04-09T17:35:38.819Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":186016,"end":186099},{"type":"TextQuoteSelector","exact":"Now go ahead and run the playbook with one level of verbosity by using the -voption","prefix":"ult_ipv4.address }}\"verbosity: 2","suffix":":[elliot@control plays]$ ansible"}]}]}
+>```
+>%%
+>*%%PREFIX%%ult_ipv4.address }}"verbosity: 2%%HIGHLIGHT%% ==Now go ahead and run the playbook with one level of verbosity by using the -voption== %%POSTFIX%%:[elliot@control plays]$ ansible*
+>%%LINK%%[[#^u2ba2ixc4u|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^u2ba2ixc4u
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:36:24.127Z","updated":"2023-04-09T17:36:24.127Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":188222,"end":188245},{"type":"TextQuoteSelector","exact":"Using the assert module","prefix":"rol plays]$ ansible-doc debug157","suffix":"The assert module can also come "}]}]}
+>```
+>%%
+>*%%PREFIX%%rol plays]$ ansible-doc debug157%%HIGHLIGHT%% ==Using the assert module== %%POSTFIX%%The assert module can also come*
+>%%LINK%%[[#^05earzh7xbxq|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^05earzh7xbxq
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:36:55.283Z","updated":"2023-04-09T17:36:55.283Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":186582,"end":186798},{"type":"TextQuoteSelector","exact":"Notice how the second task [show ip address] was skipped! That’s because youspecified verbosity: 2. To trigger task two; you need to specify at least two levelsof verbosity (-vv) while running the playbook as follows","prefix":"unreachable=0 failed=0 skipped=1","suffix":":[elliot@control plays]$ ansible"}]}]}
+>```
+>%%
+>*%%PREFIX%%unreachable=0 failed=0 skipped=1%%HIGHLIGHT%% ==Notice how the second task [show ip address] was skipped! That’s because youspecified verbosity: 2. To trigger task two; you need to specify at least two levelsof verbosity (-vv) while running the playbook as follows== %%POSTFIX%%:[elliot@control plays]$ ansible*
+>%%LINK%%[[#^tda72b095te|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^tda72b095te
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T18:42:24.245Z","updated":"2023-04-09T18:42:24.245Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":188245,"end":188368},{"type":"TextQuoteSelector","exact":"The assert module can also come in handy while troubleshooting as you can use itto test whether a specific condition is met","prefix":" debug157Using the assert module","suffix":".To demonstrate, go ahead and cr"}]}]}
+>```
+>%%
+>*%%PREFIX%%debug157Using the assert module%%HIGHLIGHT%% ==The assert module can also come in handy while troubleshooting as you can use itto test whether a specific condition is met== %%POSTFIX%%.To demonstrate, go ahead and cr*
+>%%LINK%%[[#^njcs3n7rorm|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^njcs3n7rorm
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T18:42:36.718Z","updated":"2023-04-09T18:42:36.718Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":190139,"end":190170},{"type":"TextQuoteSelector","exact":"Running playbooks in check mode","prefix":"trol plays]$ ansible-doc stat159","suffix":"You can use the --check (-C) opt"}]}]}
+>```
+>%%
+>*%%PREFIX%%trol plays]$ ansible-doc stat159%%HIGHLIGHT%% ==Running playbooks in check mode== %%POSTFIX%%You can use the --check (-C) opt*
+>%%LINK%%[[#^88xb1s0t|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^88xb1s0t
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T18:42:50.167Z","updated":"2023-04-09T18:42:50.167Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":190170,"end":190599},{"type":"TextQuoteSelector","exact":"You can use the --check (-C) option with the ansible-playbook command to doa dry run of a playbook. This will basically just predict and show you what willhappen when running the playbook without actually changing anything.You can also set the boolean check_mode: yes within a task to always runthat specific task in check mode. On the other hand, you can set the booleancheck_mode: no so that a task will never run in check mode","prefix":"9Running playbooks in check mode","suffix":".To demonstrate, go ahead and cr"}]}]}
+>```
+>%%
+>*%%PREFIX%%9Running playbooks in check mode%%HIGHLIGHT%% ==You can use the --check (-C) option with the ansible-playbook command to doa dry run of a playbook. This will basically just predict and show you what willhappen when running the playbook without actually changing anything.You can also set the boolean check_mode: yes within a task to always runthat specific task in check mode. On the other hand, you can set the booleancheck_mode: no so that a task will never run in check mode== %%POSTFIX%%.To demonstrate, go ahead and cr*
+>%%LINK%%[[#^cvd2nz49aq|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^cvd2nz49aq
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T18:43:24.267Z","updated":"2023-04-09T18:43:24.267Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":191968,"end":192005},{"type":"TextQuoteSelector","exact":"Troubleshooting connectivity problems","prefix":"plate files on managed hosts.161","suffix":"You may encounter connectivity i"}]}]}
+>```
+>%%
+>*%%PREFIX%%plate files on managed hosts.161%%HIGHLIGHT%% ==Troubleshooting connectivity problems== %%POSTFIX%%You may encounter connectivity i*
+>%%LINK%%[[#^9af0urt2kg|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^9af0urt2kg
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T18:43:38.481Z","updated":"2023-04-09T18:43:38.481Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":193455,"end":193493},{"type":"TextQuoteSelector","exact":"Using ping module to test connectivity","prefix":"leges to the become_user (root).","suffix":"The ping module comes in very ha"}]}]}
+>```
+>%%
+>*%%PREFIX%%leges to the become_user (root).%%HIGHLIGHT%% ==Using ping module to test connectivity== %%POSTFIX%%The ping module comes in very ha*
+>%%LINK%%[[#^o0mddqr5lhg|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^o0mddqr5lhg
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T18:43:56.592Z","updated":"2023-04-09T18:43:56.592Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":194228,"end":194352},{"type":"TextQuoteSelector","exact":"You can also use the --become option along with ping module to test if the Ansibleremote user is able to escalate privileges","prefix":"\"changed\": false,\"ping\": \"pong\"}","suffix":":[elliot@control plays]$ ansible"}]}]}
+>```
+>%%
+>*%%PREFIX%%"changed": false,"ping": "pong"}%%HIGHLIGHT%% ==You can also use the --become option along with ping module to test if the Ansibleremote user is able to escalate privileges== %%POSTFIX%%:[elliot@control plays]$ ansible*
+>%%LINK%%[[#^lbfevcse4x|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^lbfevcse4x
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T18:44:17.468Z","updated":"2023-04-09T18:44:17.468Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":194542,"end":194587},{"type":"TextQuoteSelector","exact":"Testing Connectivity to webservices endpoints","prefix":"\"changed\": false,\"ping\": \"pong\"}","suffix":"The uri module comes in very han"}]}]}
+>```
+>%%
+>*%%PREFIX%%"changed": false,"ping": "pong"}%%HIGHLIGHT%% ==Testing Connectivity to webservices endpoints== %%POSTFIX%%The uri module comes in very han*
+>%%LINK%%[[#^j3kg6lsbg4|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^j3kg6lsbg4
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T18:44:28.672Z","updated":"2023-04-09T18:44:28.672Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":194587,"end":194681},{"type":"TextQuoteSelector","exact":"The uri module comes in very handy when you are testing connectivity to webservices endpoints.","prefix":"ctivity to webservices endpoints","suffix":"For example, the following ad-ho"}]}]}
+>```
+>%%
+>*%%PREFIX%%ctivity to webservices endpoints%%HIGHLIGHT%% ==The uri module comes in very handy when you are testing connectivity to webservices endpoints.== %%POSTFIX%%For example, the following ad-ho*
+>%%LINK%%[[#^x8smdwmg1w|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^x8smdwmg1w
