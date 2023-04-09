@@ -1306,3 +1306,395 @@ date modified: Tuesday, February 7th 2023, 9:37:29 am
 >%%TAGS%%
 >
 ^dsbssu4wvug
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T13:48:38.027Z","updated":"2023-04-09T13:48:38.027Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":122641,"end":122665},{"type":"TextQuoteSelector","exact":"Chapter 9: Ansible Roles","prefix":"vided at the end of the book.102","suffix":"So far you have been creating An"}]}]}
+>```
+>%%
+>*%%PREFIX%%vided at the end of the book.102%%HIGHLIGHT%% ==Chapter 9: Ansible Roles== %%POSTFIX%%So far you have been creating An*
+>%%LINK%%[[#^bbmi0z2wo7n|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^bbmi0z2wo7n
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T13:50:08.269Z","updated":"2023-04-09T13:50:08.269Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":123169,"end":123460},{"type":"TextQuoteSelector","exact":"An Ansible role is a collection of files, tasks, templates, variables, and handlers thattogether serve a certain purpose like configuring a service. Roles allows you to easilyre-use code and share Ansible solutions with other users which makes working withlarge environments more manageable.","prefix":"oles.Understanding Ansible Roles","suffix":"Role directory structureA typica"}]}]}
+>```
+>%%
+>*%%PREFIX%%oles.Understanding Ansible Roles%%HIGHLIGHT%% ==An Ansible role is a collection of files, tasks, templates, variables, and handlers thattogether serve a certain purpose like configuring a service. Roles allows you to easilyre-use code and share Ansible solutions with other users which makes working withlarge environments more manageable.== %%POSTFIX%%Role directory structureA typica*
+>%%LINK%%[[#^t1h8ei29oce|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^t1h8ei29oce
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T13:50:10.393Z","updated":"2023-04-09T13:50:10.393Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":123460,"end":123484},{"type":"TextQuoteSelector","exact":"Role directory structure","prefix":"ge environments more manageable.","suffix":"A typical Ansible role follows a"}]}]}
+>```
+>%%
+>*%%PREFIX%%ge environments more manageable.%%HIGHLIGHT%% ==Role directory structure== %%POSTFIX%%A typical Ansible role follows a*
+>%%LINK%%[[#^2dvf8fvwx1c|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^2dvf8fvwx1c
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T13:50:31.913Z","updated":"2023-04-09T13:50:31.913Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":124448,"end":124474},{"type":"TextQuoteSelector","exact":"Storing and locating roles","prefix":"ies, althoughwon’t be useful!103","suffix":"By default, Ansible will look fo"}]}]}
+>```
+>%%
+>*%%PREFIX%%ies, althoughwon’t be useful!103%%HIGHLIGHT%% ==Storing and locating roles== %%POSTFIX%%By default, Ansible will look fo*
+>%%LINK%%[[#^z9k3z87vwdj|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^z9k3z87vwdj
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T13:50:37.744Z","updated":"2023-04-09T13:50:37.744Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":124865,"end":124889},{"type":"TextQuoteSelector","exact":"Using roles in playbooks","prefix":"fg).Figure 9: Setting roles_path","suffix":"There are two different ways you"}]}]}
+>```
+>%%
+>*%%PREFIX%%fg).Figure 9: Setting roles_path%%HIGHLIGHT%% ==Using roles in playbooks== %%POSTFIX%%There are two different ways you*
+>%%LINK%%[[#^xknnj5brg5l|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^xknnj5brg5l
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T13:50:48.179Z","updated":"2023-04-09T13:50:48.179Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":124972,"end":125022},{"type":"TextQuoteSelector","exact":"Using the roles keyword to statically import roles","prefix":"roles in an Ansible playbook:1. ","suffix":".2. Using the include_role modul"}]}]}
+>```
+>%%
+>*%%PREFIX%%roles in an Ansible playbook:1.%%HIGHLIGHT%% ==Using the roles keyword to statically import roles== %%POSTFIX%%.2. Using the include_role modul*
+>%%LINK%%[[#^4yd1rdtb53r|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^4yd1rdtb53r
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T13:51:01.735Z","updated":"2023-04-09T13:51:01.735Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":125026,"end":125083},{"type":"TextQuoteSelector","exact":"Using the include_role module to dynamically import roles","prefix":"d to statically import roles.2. ","suffix":".For instance, to statically imp"}]}]}
+>```
+>%%
+>*%%PREFIX%%d to statically import roles.2.%%HIGHLIGHT%% ==Using the include_role module to dynamically import roles== %%POSTFIX%%.For instance, to statically imp*
+>%%LINK%%[[#^qafgwztfu6j|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^qafgwztfu6j
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T13:57:32.499Z","updated":"2023-04-09T13:57:32.499Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":125084,"end":125203},{"type":"TextQuoteSelector","exact":"For instance, to statically import roles in a playbook, you can use the roles keywordin the playbook header as follows:","prefix":"ule to dynamically import roles.","suffix":"---- name: Including roles stati"}]}]}
+>```
+>%%
+>*%%PREFIX%%ule to dynamically import roles.%%HIGHLIGHT%% ==For instance, to statically import roles in a playbook, you can use the roles keywordin the playbook header as follows:== %%POSTFIX%%---- name: Including roles stati*
+>%%LINK%%[[#^mlnakqbyx1|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^mlnakqbyx1
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T13:58:08.571Z","updated":"2023-04-09T13:58:08.571Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":125273,"end":125349},{"type":"TextQuoteSelector","exact":"To dynamically import roles; you can use the include_role module as follows:","prefix":"osts: allroles:- role1- role2104","suffix":"---- name: Including roles dynam"}]}]}
+>```
+>%%
+>*%%PREFIX%%osts: allroles:- role1- role2104%%HIGHLIGHT%% ==To dynamically import roles; you can use the include_role module as follows:== %%POSTFIX%%---- name: Including roles dynam*
+>%%LINK%%[[#^0pivqfmm858|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^0pivqfmm858
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T14:02:41.457Z","updated":"2023-04-09T14:02:41.457Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":125507,"end":125548},{"type":"TextQuoteSelector","exact":"Using Ansible Galaxy for Ready­Made Roles","prefix":"stname in groups['dbservers']105","suffix":"Imagine a place where all the An"}]}]}
+>```
+>%%
+>*%%PREFIX%%stname in groups['dbservers']105%%HIGHLIGHT%% ==Using Ansible Galaxy for Ready­Made Roles== %%POSTFIX%%Imagine a place where all the An*
+>%%LINK%%[[#^651pf79kpba|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^651pf79kpba
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T14:02:45.817Z","updated":"2023-04-09T14:02:45.817Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":125953,"end":125972},{"type":"TextQuoteSelector","exact":"Searching for roles","prefix":"ndcheck out its amazing content.","suffix":"Ansible Galaxy has got its own C"}]}]}
+>```
+>%%
+>*%%PREFIX%%ndcheck out its amazing content.%%HIGHLIGHT%% ==Searching for roles== %%POSTFIX%%Ansible Galaxy has got its own C*
+>%%LINK%%[[#^b5ouu77xj5|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^b5ouu77xj5
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T14:02:48.764Z","updated":"2023-04-09T14:02:48.764Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":127404,"end":127428},{"type":"TextQuoteSelector","exact":"Getting role information","prefix":"lated to my search term mariadb.","suffix":"You can use the ansible-galaxy i"}]}]}
+>```
+>%%
+>*%%PREFIX%%lated to my search term mariadb.%%HIGHLIGHT%% ==Getting role information== %%POSTFIX%%You can use the ansible-galaxy i*
+>%%LINK%%[[#^zrbnu756i59|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^zrbnu756i59
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T14:02:53.985Z","updated":"2023-04-09T14:02:53.985Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":128482,"end":128508},{"type":"TextQuoteSelector","exact":"Installing and using roles","prefix":"on of the geerlingguy.mysqlrole.","suffix":"Before I show you how you to ins"}]}]}
+>```
+>%%
+>*%%PREFIX%%on of the geerlingguy.mysqlrole.%%HIGHLIGHT%% ==Installing and using roles== %%POSTFIX%%Before I show you how you to ins*
+>%%LINK%%[[#^eebim070ji|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^eebim070ji
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T14:04:27.185Z","updated":"2023-04-09T14:04:27.185Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":130154,"end":130310},{"type":"TextQuoteSelector","exact":"Now let’s go back to the plays directory and create a new playbook named mysql-role.yml that applies the geerlingguy.mysql role on the dbservers group host:","prefix":"that I had shown you earlier.108","suffix":"[elliot@control plays]$ cat mysq"}]}]}
+>```
+>%%
+>*%%PREFIX%%that I had shown you earlier.108%%HIGHLIGHT%% ==Now let’s go back to the plays directory and create a new playbook named mysql-role.yml that applies the geerlingguy.mysql role on the dbservers group host:== %%POSTFIX%%[elliot@control plays]$ cat mysq*
+>%%LINK%%[[#^jh63j7sxyh|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^jh63j7sxyh
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T16:52:06.813Z","updated":"2023-04-09T16:52:06.813Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":132303,"end":132354},{"type":"TextQuoteSelector","exact":"Using a requirements file to install multiple roles","prefix":"sfully removed geerlingguy.mysql","suffix":"Ansible galaxy can install multi"}]}]}
+>```
+>%%
+>*%%PREFIX%%sfully removed geerlingguy.mysql%%HIGHLIGHT%% ==Using a requirements file to install multiple roles== %%POSTFIX%%Ansible galaxy can install multi*
+>%%LINK%%[[#^knyk3xvojl|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^knyk3xvojl
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T16:53:00.272Z","updated":"2023-04-09T16:53:00.272Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":134451,"end":134472},{"type":"TextQuoteSelector","exact":"Creating Custom Roles","prefix":", master- jenkins_role, 4.3.0111","suffix":"You can also define your own rol"}]}]}
+>```
+>%%
+>*%%PREFIX%%, master- jenkins_role, 4.3.0111%%HIGHLIGHT%% ==Creating Custom Roles== %%POSTFIX%%You can also define your own rol*
+>%%LINK%%[[#^nas5pcttwro|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^nas5pcttwro
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T16:55:21.206Z","updated":"2023-04-09T16:55:21.206Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":137902,"end":137934},{"type":"TextQuoteSelector","exact":"Managing Order of Task Execution","prefix":"xy to share itwith the World!115","suffix":"You need to be well aware of the"}]}]}
+>```
+>%%
+>*%%PREFIX%%xy to share itwith the World!115%%HIGHLIGHT%% ==Managing Order of Task Execution== %%POSTFIX%%You need to be well aware of the*
+>%%LINK%%[[#^gry9goojcqg|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^gry9goojcqg
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T16:55:40.241Z","updated":"2023-04-09T16:55:40.241Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":138014,"end":138764},{"type":"TextQuoteSelector","exact":"If you use the roles keywork to import a role statically; then all the tasks in therole will run before all other tasks (included under the tasks section) in your play.You can use the pre_tasks keyword to include any tasks you want to run beforestatically imported roles. You can also use the post_tasks keyword to include anytasks you want to run after all the tasks under the tasks section.In summary, Ansible executes your playbook in the following order:1. pre_tasks will run first.2. handlers triggered by pre_tasks run next.3. statically imported roles listed under roles will run.4. tasks listed under the tasks section.5. handlers triggered by roles or tasks.6. post_tasks will run last.7. handlers triggered by post_tasks will run very last.","prefix":"xecution in an Ansible playbook.","suffix":"For a demonstration, take a look"}]}]}
+>```
+>%%
+>*%%PREFIX%%xecution in an Ansible playbook.%%HIGHLIGHT%% ==If you use the roles keywork to import a role statically; then all the tasks in therole will run before all other tasks (included under the tasks section) in your play.You can use the pre_tasks keyword to include any tasks you want to run beforestatically imported roles. You can also use the post_tasks keyword to include anytasks you want to run after all the tasks under the tasks section.In summary, Ansible executes your playbook in the following order:1. pre_tasks will run first.2. handlers triggered by pre_tasks run next.3. statically imported roles listed under roles will run.4. tasks listed under the tasks section.5. handlers triggered by roles or tasks.6. post_tasks will run last.7. handlers triggered by post_tasks will run very last.== %%POSTFIX%%For a demonstration, take a look*
+>%%LINK%%[[#^5a7tn0m6sl2|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^5a7tn0m6sl2
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:01:19.819Z","updated":"2023-04-09T17:01:19.819Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":141362,"end":141391},{"type":"TextQuoteSelector","exact":"Chapter 10: RHEL System Roles","prefix":"vided at the end of the book.119","suffix":"In the previous chapter; you lea"}]}]}
+>```
+>%%
+>*%%PREFIX%%vided at the end of the book.119%%HIGHLIGHT%% ==Chapter 10: RHEL System Roles== %%POSTFIX%%In the previous chapter; you lea*
+>%%LINK%%[[#^qdirr0n8lrm|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^qdirr0n8lrm
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:02:05.352Z","updated":"2023-04-09T17:02:05.352Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":141587,"end":141768},{"type":"TextQuoteSelector","exact":"Red Hat has created a collection of Ansible roles that is primarily targeting RHELsystems; these collections of roles are referred to as Red Hat Enterprise Linux(RHEL) System Roles.","prefix":"will focus on RHEL System Roles.","suffix":"In this chapter, you will learn "}]}]}
+>```
+>%%
+>*%%PREFIX%%will focus on RHEL System Roles.%%HIGHLIGHT%% ==Red Hat has created a collection of Ansible roles that is primarily targeting RHELsystems; these collections of roles are referred to as Red Hat Enterprise Linux(RHEL) System Roles.== %%POSTFIX%%In this chapter, you will learn*
+>%%LINK%%[[#^d3anzen9egl|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^d3anzen9egl
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:02:09.268Z","updated":"2023-04-09T17:02:09.268Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":141888,"end":141916},{"type":"TextQuoteSelector","exact":"Installing RHEL System Roles","prefix":"tomate standard RHEL operations.","suffix":"The RHEL System Roles is provide"}]}]}
+>```
+>%%
+>*%%PREFIX%%tomate standard RHEL operations.%%HIGHLIGHT%% ==Installing RHEL System Roles== %%POSTFIX%%The RHEL System Roles is provide*
+>%%LINK%%[[#^ifzquugg1h|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^ifzquugg1h
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:02:49.661Z","updated":"2023-04-09T17:02:49.661Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":145092,"end":145122},{"type":"TextQuoteSelector","exact":"Using RHEL SELinux System Role","prefix":"x• rhel-system-roles.timesync121","suffix":"You can use the RHEL SELinux sys"}]}]}
+>```
+>%%
+>*%%PREFIX%%x• rhel-system-roles.timesync121%%HIGHLIGHT%% ==Using RHEL SELinux System Role== %%POSTFIX%%You can use the RHEL SELinux sys*
+>%%LINK%%[[#^jyghutr9rzf|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^jyghutr9rzf
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:03:11.673Z","updated":"2023-04-09T17:03:11.673Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":156105,"end":156146},{"type":"TextQuoteSelector","exact":"Chapter 11: Managing Systems with Ansible","prefix":"vided at the end of the book.130","suffix":"So far, you have learned about a"}]}]}
+>```
+>%%
+>*%%PREFIX%%vided at the end of the book.130%%HIGHLIGHT%% ==Chapter 11: Managing Systems with Ansible== %%POSTFIX%%So far, you have learned about a*
+>%%LINK%%[[#^x3nx9p1kn0r|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^x3nx9p1kn0r
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:10:29.557Z","updated":"2023-04-09T17:10:29.557Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":156213,"end":156327},{"type":"TextQuoteSelector","exact":"Now it’s time tolearn about the most common Ansible modules that are used for performing dailyadministrative tasks","prefix":"the core components of Ansible. ","suffix":".In this chapter, you will learn"}]}]}
+>```
+>%%
+>*%%PREFIX%%the core components of Ansible.%%HIGHLIGHT%% ==Now it’s time tolearn about the most common Ansible modules that are used for performing dailyadministrative tasks== %%POSTFIX%%.In this chapter, you will learn*
+>%%LINK%%[[#^znhmq07s3ak|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^znhmq07s3ak
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:10:34.184Z","updated":"2023-04-09T17:10:34.184Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":156522,"end":156547},{"type":"TextQuoteSelector","exact":"Managing users and groups","prefix":" onyour Ansible managed systems.","suffix":"You can use the following module"}]}]}
+>```
+>%%
+>*%%PREFIX%%onyour Ansible managed systems.%%HIGHLIGHT%% ==Managing users and groups== %%POSTFIX%%You can use the following module*
+>%%LINK%%[[#^jh4j4zsmszm|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^jh4j4zsmszm
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:10:42.761Z","updated":"2023-04-09T17:10:42.761Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":156621,"end":157135},{"type":"TextQuoteSelector","exact":"user → manages user accounts and user attributes. For Windows targets,use the win_user module instead.• group → manages presence of groups on a host. For Windows targets, usethe win_group module instead.• pamd → edits PAM service’s type, control, module path and module argu-ments.• authorized_key → copies SSH public key from Ansible control node to thetarget user .ssh/authorized_keys file in the managed node.• acl → sets and retrieves file ACL information.• selogin → manages linux user to SELinux user mapping","prefix":"e users and groups in Ansible:• ","suffix":".You need to be aware that the a"}]}]}
+>```
+>%%
+>*%%PREFIX%%e users and groups in Ansible:•%%HIGHLIGHT%% ==user → manages user accounts and user attributes. For Windows targets,use the win_user module instead.• group → manages presence of groups on a host. For Windows targets, usethe win_group module instead.• pamd → edits PAM service’s type, control, module path and module argu-ments.• authorized_key → copies SSH public key from Ansible control node to thetarget user .ssh/authorized_keys file in the managed node.• acl → sets and retrieves file ACL information.• selogin → manages linux user to SELinux user mapping== %%POSTFIX%%.You need to be aware that the a*
+>%%LINK%%[[#^7wfk0w8kwsy|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^7wfk0w8kwsy
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:10:57.881Z","updated":"2023-04-09T17:10:57.881Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":157136,"end":157296},{"type":"TextQuoteSelector","exact":"You need to be aware that the authorized_key module doesn’t generate SSHkeys; To generate, SSH keys, you can use the generate_ssh_key option with theuser module","prefix":"ux user to SELinux user mapping.","suffix":".Also, keep in mind that there i"}]}]}
+>```
+>%%
+>*%%PREFIX%%ux user to SELinux user mapping.%%HIGHLIGHT%% ==You need to be aware that the authorized_key module doesn’t generate SSHkeys; To generate, SSH keys, you can use the generate_ssh_key option with theuser module== %%POSTFIX%%.Also, keep in mind that there i*
+>%%LINK%%[[#^bm5c70j9rb|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^bm5c70j9rb
+
+
+>%%
+>```annotation-json
+>{"created":"2023-04-09T17:12:33.968Z","updated":"2023-04-09T17:12:33.968Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":157297,"end":157469},{"type":"TextQuoteSelector","exact":"Also, keep in mind that there is no sudo module in Ansible. You can use Jinja2and other modules like lineinfile, blockinfile, replace, or copy to edit sudo con-figurations.","prefix":"_key option with theuser module.","suffix":"Now let’s create a playbook that"}]}]}
+>```
+>%%
+>*%%PREFIX%%_key option with theuser module.%%HIGHLIGHT%% ==Also, keep in mind that there is no sudo module in Ansible. You can use Jinja2and other modules like lineinfile, blockinfile, replace, or copy to edit sudo con-figurations.== %%POSTFIX%%Now let’s create a playbook that*
+>%%LINK%%[[#^rstno3gekfl|show annotation]]
+>%%COMMENT%%
+>
+>%%TAGS%%
+>
+^rstno3gekfl

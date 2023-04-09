@@ -378,6 +378,19 @@ Ces protocoles de routage sont utilisés pour maintenir et échanger des informa
   become: yes
 ```
 
+#### L'ORDRE D'EXÉCUTION DES TÂCHES
+
+- Ansible exécute le playbook dans l'ordre suivant :
+	1. **pre_tasks**.
+	2. handlers **déclenché** par **pre_tasks**.
+	3. Les rôles importé statiquement qui sont listés dans la section **roles**.
+	4. Les tâches listées dans la section des tâches.
+	5. les *handlers* déclenchées par les **rôles** et **tâches**.
+	6. **post_tasks**
+	7. les *handlers* déclenchées par **post_tasks**
+	- ![[Pasted image 20230409190034.png]]
+- 
+	
 ### OPÉRATIONS AVANCÉES
 
 #### TEMPLATES
