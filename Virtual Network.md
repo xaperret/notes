@@ -251,6 +251,7 @@ Ces protocoles de routage sont utilisés pour maintenir et échanger des informa
 	- Ansible Tower est une framework pour controller, sécuriser et gérer l'automatisation Ansible à l'aide d'une interface graphique et API REST.
 - Qu'est-ce qu'un `play` ?
 	- Un `play` est une séquence de tâches à exécuter sur un groupe d'hôtes dans le cadre d'un processus d'automatisation Ansible.
+	- ![[Pasted image 20230409114824.png]]
 - Qu'est-ce qu'un `playbook` ?
 	- Un `playbook` est un fichier texte écrit en YAML qui contient une ou plusieurs séquences de tâches (**plays**) à exécuter sur des groupes d'hôtes cibles.
 	- ![[Pasted image 20230407171738.png]]
@@ -276,9 +277,16 @@ Ces protocoles de routage sont utilisés pour maintenir et échanger des informa
  > [!summary] 
 > - Un playbook c'est plusieurs plays
 
-### FONCTIONNEMENT
+### OPÉRATION SIMPLE ET CONCEPT GÉNÉRAUX
 
 - Comment Ansible fonctionne ?
+- Qu'est-ce que l'idempotence ?
+	- Une opération est dite idempotente si, lorsqu'elle est effectuée plusieurs fois avec les mêmes paramètres, elle produit le même résultat que si elle n'avait été effectuée qu'une seule fois.
+	- En d'autres termes, une opération idempotente peut être répétée plusieurs fois sans changer l'état du système après la première exécution. Cette propriété est particulièrement importante pour assurer la stabilité et la prévisibilité des systèmes informatiques, car elle permet de gérer les erreurs et les défaillances sans provoquer d'effets secondaires indésirables.
+- On dit que les playbooks et les modules Ansible sont ?
+	- Idempotents
+- Qu'est-ce que cela signifie de dire que les playbooks et les modules Ansible sont idempotents ?
+	- Les playbooks et les modules Ansible sont idempotents, ce qui signifie qu'ils ne vont pas réappliquer un changement de configuration si celui-ci a déjà été effectué sur les nœuds gérés. Cette idempotence assure que les playbooks ne modifient pas l'état du système de manière inattendue lorsqu'ils sont exécutés plusieurs fois.
 - Qu'est-ce qu'un module Ansible ?
 	- Un module est constitué de morceaux de code transféré sur le système cible et exécuté pour satisfaire la tâche déclaré. 
 - Qu'est-ce que les `Run Commands` ?
@@ -513,6 +521,9 @@ Ces protocoles de routage sont utilisés pour maintenir et échanger des informa
 	- WireGuard est un protocole de réseau privé virtuel (VPN) ou "secure network tunnel" open-source conçu pour offrir une connexion sécurisée et cryptée entre les dispositifs sur un réseau.
 - Qu'est-ce qu'un "secure network tunnel" ?
 	- Un tunnel de réseau sécurisé (secure network tunnel) est une méthode de communication sécurisée qui permet à deux dispositifs ou réseaux distants de transférer des données de manière sécurisée et chiffrée à travers un réseau non sécurisé, généralement Internet.
+	- https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.1?topic=connections-secure-tunnel
+	- https://www.cloudflare.com/learning/network-layer/what-is-tunneling/
+	- https://en.wikipedia.org/wiki/Tunneling_protocol
 - Comment fonctionne (grossièrement) un "secure network tunnel" ?
 	- Le tunnel de réseau sécurisé crée un canal de communication privé en encapsulant et en chiffrant les données à l'intérieur d'un protocole de transport standard, de sorte que les données ne peuvent être interceptées ou décodées par des tiers non autorisés.
 - Quel est l'utilité d'un "secure network tunnel" ?
