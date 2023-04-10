@@ -2048,17 +2048,3 @@ date modified: Tuesday, February 7th 2023, 9:37:29 am
 >%%TAGS%%
 >
 ^j3kg6lsbg4
-
-
->%%
->```annotation-json
->{"created":"2023-04-09T18:44:28.672Z","updated":"2023-04-09T18:44:28.672Z","document":{"title":"learn_ansible_quickly.pdf","link":[{"href":"urn:x-pdf:f7e0c3b640379c0f263e43eee1b1f3b9"},{"href":"vault:/Books/learn_ansible_quickly.pdf"}],"documentFingerprint":"f7e0c3b640379c0f263e43eee1b1f3b9"},"uri":"vault:/Books/learn_ansible_quickly.pdf","target":[{"source":"vault:/Books/learn_ansible_quickly.pdf","selector":[{"type":"TextPositionSelector","start":194587,"end":194681},{"type":"TextQuoteSelector","exact":"The uri module comes in very handy when you are testing connectivity to webservices endpoints.","prefix":"ctivity to webservices endpoints","suffix":"For example, the following ad-ho"}]}]}
->```
->%%
->*%%PREFIX%%ctivity to webservices endpoints%%HIGHLIGHT%% ==The uri module comes in very handy when you are testing connectivity to webservices endpoints.== %%POSTFIX%%For example, the following ad-ho*
->%%LINK%%[[#^x8smdwmg1w|show annotation]]
->%%COMMENT%%
->
->%%TAGS%%
->
-^x8smdwmg1w
