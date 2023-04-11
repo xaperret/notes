@@ -35,7 +35,7 @@
 
 ### MULTILAYER SWITCH
 
-### ROUTER
+- Qu’est-ce qu’un multilayer switch ?
 
 ## DOMAINE DE COLLISION
 
@@ -50,12 +50,10 @@
 
 ## SWITCH ET LES DOMAINES DE BROADCAST ET DE COLLISION
 
-
-- Qu’est-ce qu’un switch ?
 - Qu’est-ce qu’il permet de faire (en lien avec les domaines de collision) ?
 	- Un switch segmente les domaines de collision de manière transparente et automatique
 - Comment un switch segmente les domaines de collision ?
-- Une interconnexion de switches Ethernet constitue un domaine de broadcast, mais chaque port du switch constitue un domaine de collision séparé.
+	- Une interconnexion de switches Ethernet constitue un domaine de broadcast, mais chaque port du switch constitue un domaine de collision séparé.
 
 ### FONCTIONNEMENT D’UN SWITCH ETHERNET
 
@@ -85,6 +83,18 @@
 	- Le broadcast
 
 ### EUI - 48
+
+- Qu’est-ce que EUI-48
+	- EUI-48 (Extended Unique Identifier - 48 bits) est un identifiant unique de 48 bits utilisé pour identifier de manière unique les interfaces réseau au niveau de la couche de liaison de données (couche 2) du modèle OSI. EUI-48 est principalement utilisé pour les adresses MAC (Media Access Control) dans les réseaux Ethernet et Wi-Fi.
+
+L'adresse EUI-48 est composée de deux parties :
+
+1.  OUI (Organizationally Unique Identifier) : Les 24 premiers bits de l'adresse EUI-48 sont appelés OUI. L'OUI est attribué par l'IEEE (Institute of Electrical and Electronics Engineers) à chaque fabricant de matériel réseau, garantissant ainsi que chaque OUI est unique. Les fabricants sont responsables de l'attribution d'adresses EUI-48 uniques à leurs produits en utilisant leur OUI comme préfixe.
+    
+2.  Extension d'identifiant : Les 24 bits restants de l'adresse EUI-48 sont appelés extension d'identifiant. Cette partie de l'adresse est gérée par le fabricant de matériel réseau et est attribuée de manière unique pour chaque interface réseau produite.
+    
+
+En combinant ces deux parties, l'EUI-48 assure que chaque adresse MAC est unique à l'échelle mondiale, évitant ainsi les conflits d'adresse dans les réseaux. Toutefois, il est important de noter qu'il existe des exceptions à l'unicité des adresses EUI-48, telles que les adresses MAC locales administrées, qui sont générées et gérées localement et ne garantissent pas l'unicité à l'échelle mondiale.
 
 ### COMMUNICATION ENTRE LES DOMAINES DE COLLISION
 
@@ -140,17 +150,32 @@
 ### PONT
 
 - Qu'est-ce qu'un pont ?
+	- Un bridge (pont) est un dispositif matériel ou logiciel qui permet de relier et de filtrer le trafic entre deux ou plusieurs réseaux locaux (LAN) au niveau de la couche 2 (couche de liaison de données) du modèle OSI (Open Systems Interconnection). Les bridges agissent principalement sur les trames Ethernet et utilisent les adresses MAC (Media Access Control) pour déterminer si une trame doit être transmise à un autre segment du réseau ou non.
+
+Le principal objectif d'un bridge est d'étendre ou de segmenter des réseaux locaux en créant des domaines de collision et de diffusion distincts, tout en permettant la communication entre ces domaines. Cela améliore les performances du réseau en réduisant la congestion et en minimisant les collisions de paquets.
+
+Les bridges fonctionnent en :
+
+1.  Apprenant et maintenant une table d'adresses MAC pour chaque segment de réseau connecté.
+2.  Filtrant les trames en fonction de leur adresse MAC de destination et en ne transmettant les trames qu'aux segments de réseau appropriés.
+3.  Transmettant les trames de diffusion (broadcast) et de multidiffusion (multicast) à tous les segments de réseau connectés.
+4.  Appliquant des règles de filtrage et de gestion du trafic pour améliorer les performances et la sécurité du réseau.
+
+Dans certains cas, les bridges peuvent également être utilisés pour connecter des réseaux utilisant des protocoles de couche 2 différents, tels que Ethernet et Token Ring, bien que cela soit moins courant dans les réseaux modernes. Les bridges sont souvent utilisés dans les réseaux d'entreprise et les centres de données pour gérer et étendre les réseaux locaux.
 
 ### ROUTER
 
 - Qu’est-ce qu’un router ?
+	- Un routeur est un dispositif matériel ou logiciel utilisé pour connecter et transmettre des paquets de données entre différents réseaux informatiques. Son principal objectif est d'assurer la communication et le transfert d'informations entre des réseaux distincts, généralement sur le protocole Internet (IP).
 
+Les routeurs opèrent principalement sur la couche 3 (couche réseau) du modèle OSI (Open Systems Interconnection), où ils analysent les paquets de données pour déterminer leur destination et choisir le meilleur chemin pour les acheminer. Ils utilisent des tables de routage et des protocoles de routage pour déterminer le chemin optimal vers la destination souhaitée.
 
-### PARE-FEU
+Les routeurs jouent un rôle essentiel dans l'infrastructure des réseaux, notamment en permettant :
 
-### PROXY
-
-### VPN
+1.  La connexion de réseaux locaux (LAN) à des réseaux étendus (WAN) ou à Internet.
+2.  La segmentation et la gestion du trafic entre différents sous-réseaux pour améliorer les performances et la sécurité.
+3.  L'acheminement des paquets de données vers leur destination en suivant les règles de routage définies.
+4.  La prise en charge de protocoles de routage dynamiques pour s'adapter aux changements de topologie et de charge du réseau.
 
 ### OVERLAY/TUNNEL
 
@@ -179,17 +204,166 @@ Ces protocoles de routage sont utilisés pour maintenir et échanger des informa
 
 ## ROUTAGE
 
+- Qu’est-ce que le routage ?
+	- Le routage, dans le contexte des réseaux informatiques, est le processus de sélection des chemins dans un réseau pour envoyer des paquets de données d'un dispositif à un autre. Les routeurs sont les dispositifs de réseau responsables de la gestion du routage. Leur principal objectif est de déterminer le meilleur chemin pour acheminer les paquets de données entre les différents réseaux et sous-réseaux, en fonction de divers paramètres tels que la distance, la vitesse, la charge du réseau et la disponibilité des routes.
+
+Le routage se fait généralement en deux étapes :
+
+1.  Création de la table de routage : La table de routage est une base de données stockée dans le routeur qui contient des informations sur les chemins possibles pour atteindre différentes destinations du réseau. Les routeurs obtiennent ces informations à partir de protocoles de routage (comme RIP, OSPF, EIGRP ou BGP), de la configuration manuelle ou de mécanismes de découverte automatique de réseau. La table de routage inclut des informations telles que l'adresse IP de destination, l'adresse IP de la passerelle (le prochain saut) et la métrique (un indicateur de la qualité ou de la performance du chemin).
+    
+2.  Prise de décision de routage : Lorsqu'un paquet de données arrive au routeur, celui-ci consulte la table de routage pour déterminer le meilleur chemin pour acheminer le paquet vers sa destination finale. Le routeur sélectionne généralement le chemin avec la métrique la plus faible ou la plus favorable. Une fois le chemin sélectionné, le routeur modifie le paquet, met à jour les informations d'en-tête (telles que l'adresse de la passerelle) et l'envoie au prochain saut sur le chemin sélectionné.
+    
+
+Il existe deux types principaux de routage :
+
+1.  Routage statique : Le routage statique est configuré manuellement par l'administrateur réseau. Les chemins et les passerelles pour atteindre différentes destinations sont définis explicitement, et les routeurs n'apprennent pas automatiquement les chemins disponibles. Le routage statique convient aux petits réseaux où les chemins et la topologie du réseau changent rarement.
+    
+2.  Routage dynamique : Le routage dynamique utilise des protocoles de routage pour permettre aux routeurs d'échanger des informations sur les chemins disponibles et les changements de topologie du réseau. Les routeurs mettent à jour automatiquement leur table de routage en fonction des informations reçues, ce qui permet une adaptation rapide aux changements de réseau. Le routage dynamique est plus adapté aux réseaux plus grands et plus complexes, où la topologie est susceptible de changer fréquemment.
+
+- Qu’est-ce que le policy routing ?
+	- Le policy routing, ou routage basé sur les politiques, est une méthode de routage avancée qui permet de déterminer le chemin des paquets de données dans un réseau en fonction de critères spécifiques définis par l'administrateur réseau, plutôt que de se baser uniquement sur l'adresse de destination, comme dans le routage traditionnel.
+
+Dans le policy routing, les paquets de données peuvent être acheminés en fonction de divers attributs, tels que l'adresse source, le type de service, le protocole, le port, la charge du réseau ou d'autres informations spécifiques au paquet. Cela permet aux administrateurs réseau de mettre en œuvre des stratégies de contrôle plus granulaires pour optimiser la performance du réseau, assurer la qualité de service (QoS), mettre en place des mécanismes de sécurité ou satisfaire à des exigences réglementaires.
+
+Le policy routing est généralement mis en œuvre à l'aide de règles de routage qui définissent les critères de correspondance des paquets et les actions à effectuer sur ces paquets. Par exemple, une règle de policy routing peut stipuler que tous les paquets provenant d'une adresse IP spécifique doivent être acheminés via une passerelle spécifique, indépendamment de la destination. Les routeurs prennent en compte ces règles lorsqu'ils prennent des décisions de routage.
+
+Le policy routing peut être utilisé pour répondre à divers besoins, tels que :
+
+1.  Équilibrage de charge : Le policy routing peut aider à répartir le trafic sur plusieurs liens ou passerelles pour optimiser l'utilisation des ressources et éviter la congestion.
+    
+2.  Qualité de service : Les paquets associés à des applications sensibles au délai, comme la VoIP ou la vidéoconférence, peuvent être acheminés via des chemins à faible latence ou à haute priorité pour garantir une expérience utilisateur satisfaisante.
+    
+3.  Sécurité : Les paquets de données peuvent être acheminés en fonction de leur source, de leur destination ou de leur contenu, pour renforcer la sécurité du réseau et contrôler l'accès aux ressources.
+    
+4.  Conformité réglementaire : Le policy routing peut être utilisé pour s'assurer que certains types de trafic, comme les communications financières ou médicales, sont acheminés conformément aux exigences légales ou réglementaires.
+
+
 ### NAT
 
+- Qu’est-ce que le NAT ?
+	- Le NAT (Network Address Translation) est une technique utilisée dans les réseaux informatiques pour permettre à plusieurs dispositifs ayant des adresses IP privées de partager une ou plusieurs adresses IP publiques pour accéder à Internet ou à d'autres réseaux externes. Le NAT est souvent mis en œuvre dans les routeurs et les pare-feu pour gérer le trafic entre les réseaux privés et les réseaux publics.
+
+Le NAT fonctionne en modifiant les adresses IP et les numéros de port des paquets IP lorsqu'ils traversent le routeur ou le pare-feu. Il existe plusieurs types de NAT, dont les plus courants sont :
+
+1.  NAT statique : Dans ce cas, une adresse IP privée est associée à une adresse IP publique spécifique. Chaque fois qu'un dispositif du réseau privé communique avec l'extérieur, son adresse IP privée est remplacée par l'adresse IP publique associée.
+    
+2.  NAT dynamique : Contrairement au NAT statique, le NAT dynamique attribue les adresses IP publiques disponibles de manière temporaire aux dispositifs du réseau privé lorsqu'ils ont besoin de communiquer avec l'extérieur. L'adresse IP publique est ensuite libérée et remise dans le pool d'adresses IP publiques une fois la communication terminée.
+    
+3.  PAT (Port Address Translation) ou NAPT (Network Address Port Translation) : Ce type de NAT, souvent appelé "NAT overload" ou simplement "masquerade", permet à plusieurs dispositifs du réseau privé de partager une seule adresse IP publique. Le routeur ou le pare-feu effectue la traduction d'adresse en modifiant à la fois l'adresse IP et le numéro de port pour distinguer les communications de chaque dispositif.
+    
+
+Le NAT présente plusieurs avantages, tels que :
+
+1.  Économie d'adresses IP : Le NAT permet de réduire le besoin en adresses IP publiques, ce qui est important étant donné la pénurie d'adresses IPv4.
+    
+2.  Sécurité : En masquant les adresses IP privées des dispositifs internes, le NAT ajoute une couche de sécurité en rendant plus difficile pour les attaquants de cibler directement ces dispositifs.
+    
+3.  Flexibilité : Le NAT permet aux réseaux privés d'utiliser n'importe quelle plage d'adresses IP sans se soucier de la compatibilité avec les réseaux externes.
+    
+
+Cependant, le NAT peut également présenter des inconvénients, tels que la complexité de la configuration, la dégradation des performances dues à la traduction d'adresse et la difficulté à mettre en œuvre certaines applications et services qui nécessitent des communications directes entre les dispositifs.
+- nftables
+
 ### MASQUERADE
+
+- Qu’est-ce que la masquerade ?
+	- C’est une technique utilisée pour masquer l'identité des adresses IP privées derrière une seule adresse IP publique, généralement celle d'un routeur ou d'un pare-feu. Cette technique est souvent utilisée dans les réseaux domestiques et les réseaux d'entreprise où les adresses IP privées ne peuvent pas être routées directement sur Internet. La masquerade est une forme de traduction d'adresse réseau (Network Address Translation, ou NAT).
+- À quoi sert la masquerade ?
+	- La masquerade permet aux hôtes du réseau privé d'accéder à Internet en utilisant l'adresse IP publique du routeur ou du pare-feu, tout en conservant leurs adresses IP privées.
+- Comment fonctionne la masquerade ?
+	- Lorsqu'un hôte du réseau privé envoie une requête sur Internet, le routeur ou le pare-feu remplace l'adresse IP privée de l'hôte par son adresse IP publique avant de transmettre la requête. Les réponses aux requêtes sont ensuite envoyées à l'adresse IP publique du routeur ou du pare-feu, qui inverse le processus de masquerade et transmet les réponses à l'adresse IP privée appropriée.
+- Comment mettre en place la masquerade sur Linux ?
+	- À l’aide la commande `iptables`
+- Quels sont les avantages de la masquerade ?
+	1.  Économie d'adresses IP : Comme plusieurs hôtes peuvent partager une seule adresse IP publique, la masquerade permet d'économiser des adresses IP publiques, qui sont une ressource limitée.
+	2.  Sécurité : La masquerade ajoute une couche de sécurité en masquant les adresses IP privées des hôtes du réseau. Les attaquants ne peuvent pas cibler directement les hôtes internes en se basant uniquement sur leurs adresses IP.
+	3.  Flexibilité : La masquerade permet à un réseau d'utiliser n'importe quelle plage d'adresses IP privées sans se soucier de la compatibilité avec les adresses IP publiques.
 
 ## CONFIGURATION DES PÉRIPHÉRIQUES VIRTUELS
 
 ### VETH
 
+Un veth (Virtual Ethernet) est un type d'interface réseau virtuelle dans les environnements Linux. Il fonctionne comme un câble Ethernet virtuel, permettant de connecter deux espaces de noms réseau (namespaces) ou d'autres dispositifs réseau virtuels entre eux. Les paires veth fonctionnent en tandem : les paquets envoyés sur une interface de la paire sont reçus par l'autre interface. Les veth sont généralement utilisés dans les conteneurs, les machines virtuelles et les environnements de réseau complexes.
+
+Pour créer un lien veth et le configurer avec iproute2 (outil "ip" dans Linux), suivez les étapes ci-dessous :
+
+1.  Créez une paire veth avec les noms veth1 et veth2 :
+
+bashCopy code
+
+`sudo ip link add veth1 type veth peer name veth2`
+
+2.  Attribuez des adresses IP aux interfaces veth :
+
+csharpCopy code
+
+`sudo ip addr add 192.168.1.1/24 dev veth1 sudo ip addr add 192.168.1.2/24 dev veth2`
+
+3.  Activez les interfaces veth :
+
+bashCopy code
+
+`sudo ip link set veth1 up sudo ip link set veth2 up`
+
+Maintenant, les deux interfaces veth sont configurées et peuvent être utilisées pour transmettre des paquets entre elles. Vous pouvez ajouter des routes via "ip route" si nécessaire, par exemple :
+
+csharpCopy code
+
+`sudo ip route add 192.168.2.0/24 via 192.168.1.2 dev veth1`
+
+Cela ajoutera une route pour atteindre le réseau 192.168.2.0/24 via l'interface veth1 et l'adresse IP 192.168.1.2.
+
+Pour créer des liens virtuels supplémentaires, répétez simplement les étapes ci-dessus en utilisant des noms et des adresses IP différents pour les interfaces veth.
+
+Il est important de noter que les interfaces veth ne sont pas limitées à la connexion de deux espaces de noms réseau locaux. Vous pouvez également les utiliser pour connecter des espaces de noms réseau à des bridges Linux, des dispositifs Open vSwitch et d'autres dispositifs de réseau virtuels.
+
 ### BRIDGE
 
-### WIREGUARD
+Un bridge (pont) est un dispositif réseau qui permet d'interconnecter plusieurs segments de réseau au niveau de la couche 2 (couche de liaison de données) du modèle OSI. Dans le contexte des réseaux Linux, un bridge est souvent utilisé pour connecter des interfaces réseau virtuelles, telles que les interfaces veth, tap ou les interfaces d'autres machines virtuelles ou conteneurs, pour créer un réseau virtuel partagé. Les bridges fonctionnent de manière similaire aux commutateurs réseau, en apprenant les adresses MAC et en acheminant les paquets entre les ports connectés.
+
+Voici comment créer un bridge et le configurer avec iproute2 (outil "ip" dans Linux) :
+
+1.  Installez le paquet "bridge-utils" si nécessaire (cette étape peut varier selon la distribution Linux) :
+
+arduinoCopy code
+
+`sudo apt-get install bridge-utils`
+
+2.  Créez un bridge nommé "br0" :
+
+bashCopy code
+
+`sudo ip link add name br0 type bridge`
+
+3.  Attribuez une adresse IP au bridge :
+
+csharpCopy code
+
+`sudo ip addr add 192.168.1.1/24 dev br0`
+
+4.  Activez le bridge :
+
+bashCopy code
+
+`sudo ip link set br0 up`
+
+Maintenant, le bridge est configuré et peut être utilisé pour connecter des interfaces réseau virtuelles. Pour ajouter des interfaces veth, tap ou autres au bridge, utilisez la commande suivante :
+
+bashCopy code
+
+`sudo ip link set veth1 master br0`
+
+Cela ajoutera l'interface "veth1" au bridge "br0". Répétez cette étape pour toutes les interfaces que vous souhaitez ajouter au bridge.
+
+Notez que la configuration des routes avec "ip route" est généralement utilisée pour la couche 3 (couche réseau) du modèle OSI et ne s'applique pas directement aux bridges. Cependant, si vous souhaitez ajouter des routes pour atteindre d'autres réseaux via le bridge, vous pouvez le faire en utilisant l'adresse IP du bridge comme passerelle :
+
+csharpCopy code
+
+`sudo ip route add 192.168.2.0/24 via 192.168.1.1 dev br0`
+
+Cela ajoutera une route pour atteindre le réseau 192.168.2.0/24 via l'interface "br0" et l'adresse IP 192.168.1.1.
+
+Pour créer des liens virtuels supplémentaires, il vous suffit de créer et d'ajouter d'autres interfaces réseau virtuelles (telles que veth, tap, etc.) au bridge en suivant les étapes ci-dessus.
 
 ## NAMESPACE RÉSEAUX LINUX
 
@@ -224,6 +398,70 @@ Ces protocoles de routage sont utilisés pour maintenir et échanger des informa
 	- Déplacer une interface dans le namespace par défaut (pid 1) `ip link set <iface> netns 1`
 - Comment est représenter un namespace réseaux linux ?
 	- Par la `struct net` du noyau Linux
+
+Les namespaces Linux sont une fonctionnalité du noyau Linux qui permet d'isoler et de virtualiser les ressources système pour un processus ou un groupe de processus. Dans le contexte des réseaux, les namespaces réseau (netns) permettent de créer des environnements réseau isolés, chacun avec ses propres interfaces, routes et règles de pare-feu.
+
+Voici comment utiliser les namespaces réseau avec l'outil "ip" d'iproute2 :
+
+1.  Créez un nouveau namespace réseau :
+
+csharpCopy code
+
+`sudo ip netns add netns1`
+
+Cela crée un namespace réseau appelé "netns1".
+
+2.  Pour exécuter des commandes spécifiques au namespace, utilisez la syntaxe suivante :
+
+bashCopy code
+
+`sudo ip netns exec netns1 <commande>`
+
+Par exemple, pour afficher les interfaces réseau dans "netns1" :
+
+bashCopy code
+
+`sudo ip netns exec netns1 ip link`
+
+3.  Créez une paire d'interfaces veth :
+
+bashCopy code
+
+`sudo ip link add veth1 type veth peer name veth2`
+
+Cela crée deux interfaces, "veth1" et "veth2", reliées l'une à l'autre.
+
+4.  Ajoutez une extrémité de la paire d'interfaces veth (par exemple, "veth1") au namespace :
+
+bashCopy code
+
+`sudo ip link set veth1 netns netns1`
+
+5.  Configurez les interfaces dans le namespace et dans l'espace global. Par exemple, attribuez des adresses IP et activez-les :
+
+bashCopy code
+
+`sudo ip addr add 10.0.0.1/24 dev veth2 sudo ip link set veth2 up sudo ip netns execnetns1 ip addr add 10.0.0.2/24 dev veth1 sudo ip netns exec netns1 ip link set veth1 up sudo ip netns exec netns1 ip link set lo up`
+
+6.  Configurez les routes si nécessaire. Par exemple, pour définir l'interface "veth1" comme passerelle par défaut dans le namespace "netns1" :
+
+sqlCopy code
+
+`sudo ip netns exec netns1 ip route add default via 10.0.0.1 dev veth1`
+
+Maintenant, vous avez un namespace réseau avec sa propre interface, des adresses IP et des routes. Vous pouvez exécuter des applications ou des commandes spécifiques à ce namespace pour tester la connectivité, comme "ping" :
+
+bashCopy code
+
+`sudo ip netns exec netns1 ping 10.0.0.1`
+
+Pour supprimer un namespace, utilisez la commande suivante :
+
+cssCopy code
+
+`sudo ip netns del netns1`
+
+Cela supprimera le namespace "netns1" et toutes les ressources qui lui sont associées.
 
 ## INTERFACES RÉSEAUX VIRTUELLES
 
