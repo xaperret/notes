@@ -36,6 +36,7 @@
 ### MULTILAYER SWITCH
 
 - Qu’est-ce qu’un multilayer switch ?
+	- Multi-layer switching combines layer 2, 3 and 4 switching technologies and provides high-speed scalability with low latency. Multi-layer switching can move traffic at [wire speed](https://en.wikipedia.org/wiki/Wire_speed "Wire speed") and also provide layer 3 routing.
 
 ## DOMAINE DE COLLISION
 
