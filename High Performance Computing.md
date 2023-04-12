@@ -55,10 +55,69 @@ MPI.Finalize()
 
 ## 9 - PRIMITIVES COLLECTIVES
 
+### INTRODUCTION AUX PRIMITIVES POINT À POINT ET COLLECTIVES
+
+- Qu'est-ce qu'une primitive de communication point à point ?
+	- Les primitives de communication point à point sont des opérations de communication dans un environnement de calcul parallèle où les messages sont échangés directement entre deux processus distincts.
+	- Exemple
+		- `MPI.Send`
+		- `MPI.Recv`
+		- `MPI.Sendrecv`
+- À quoi servent les primitives de communications ?
+	- Les primitives de communication point à point permettent aux processus de s'envoyer des messages (ou des données) directement les uns aux autres, sans impliquer d'autres processus dans la communication.
+- Dans le contexte du passage de messages, comme avec MPI, ces opérations sont souvent bloquantes ou non bloquantes :
+	- Opérations bloquantes
+		- L'opération bloquante attend que la communication soit terminée avant de permettre au processus de poursuivre. 
+		- Par exemple, lors de l'envoi d'un message, l'opération d'envoi bloquante attend que le message soit envoyé avant de continuer. De même, lors de la réception d'un message, l'opération de réception bloquante attend qu'un message soit reçu avant de continuer.
+	- Opérations non bloquantes
+		- L'opération non bloquante permet au processus de poursuivre sans attendre que la communication soit terminée. Dans ce cas, le programme doit utiliser des opérations de synchronisation séparées pour s'assurer que la communication est terminée avant d'accéder aux données envoyées ou reçues.
+- Qu'est-ce qu'une primitive de communication collective ?
+	- Ce sont des opérations de communications tout comme les primitives de communication. Contrairement aux communications point à point, où les messages sont échangés entre deux processus spécifiques, les communications collectives impliquent plusieurs processus qui participent simultanément à l'échange de messages ou à la synchronisation.
+	- Exemple
+		- `MPI.Barrier`
+		- `MPI.Bcast`
+		- `MPI.Scatter`
+		- `MPI.Gather`
+		- `MPI.Allgather`
+		- `MPI.Allreduce`
+- Quels sont les différentes primitives de communications collective ?
+	- Barrière de synchronisation
+	- Diffusion
+	- Dispersion
+	- Réunion
+	- Réunion sur tous
+	- Réduction
+
+### LES COMMUNICATEURS
+
+- Qu'est-ce qu'un communicateur ?
+	- Un communicateur est un groupe de processus
+- Chaque processus a un identifiant unique dans un communicateur
+- Quel est le communicateur de MPI ?
+	- `MPI.COMM_WORLD`, c'est lui qui englobe tous les processus
+- Comment peut-on organiser les communicateurs ?
+	- En sous groupe.
+	- Par exemple
+		- ![[Pasted image 20230412154425.png]]
+		- Ici on a le communicateur globale `MPI.COMM_WORLD` est en vert
+		- Et on divise le communicateur globale en sous communicateurs !
+
+### BARRIÈRE DE SYNCHRONISATION
+
+### DIFFUSION (BROADCAST)
+
+### DISPERSION (SCATTER)
+
+#### MPI.UBUFFER
+
+### RÉUNION (GATHER)
+
+### RÉUNION SUR TOUS (ALL GATHER)
+
+### RÉDUCTION (REDUCE)
 ## 10 - JULIA CUDA
 
 ## 11 - CONVOLUTION CUDA JULIA
-
 
 ## 12 - EXERCICES DE RÉVISION
 
@@ -67,7 +126,7 @@ MPI.Finalize()
 #### 01 - PRODUIT SCALAIRE EN MPI
 
 - Qu'est-ce que le produit scalaire ?
-	- Le produit scalaire, également appelé produit intérieur ou dot product en anglais, est une opération algébrique qui prend deux vecteurs de même taille et retourne un scalaire (un nombre réel). Le produit scalaire est utilisé dans divers domaines tels que l'algèbre linéaire, la géométrie analytique, la mécanique et le traitement du signal.
+	- Le produit scalaire, également appelé produit intérieur ou dot product en anglais, est une opération algébrique qui prend deux vecteurs de même taille et retourne **un scalaire (un nombre réel)**. 
 - Comment défini t'on mathématiquement le produit scalaire ?
 	- $$ A · B = Σ (A_i * B_i) \text{ pour i allant de 1 à n} $$
 - Comment définir le nœud racine (celui de rang 0) initialise les vecteurs a et b ?
