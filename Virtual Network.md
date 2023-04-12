@@ -406,17 +406,17 @@ Voici comment utiliser les namespaces réseau avec l'outil "ip" d'iproute2 :
 
 1.  Créez un nouveau namespace réseau :
 
-csharpCopy code
-
-`sudo ip netns add netns1`
+```bash
+sudo ip netns add netns1
+```
 
 Cela crée un namespace réseau appelé "netns1".
 
 2.  Pour exécuter des commandes spécifiques au namespace, utilisez la syntaxe suivante :
 
-bashCopy code
-
-`sudo ip netns exec netns1 <commande>`
+```bash
+sudo ip netns exec netns1 <commande>
+```
 
 Par exemple, pour afficher les interfaces réseau dans "netns1" :
 
@@ -440,9 +440,13 @@ bashCopy code
 
 5.  Configurez les interfaces dans le namespace et dans l'espace global. Par exemple, attribuez des adresses IP et activez-les :
 
-bashCopy code
-
-`sudo ip addr add 10.0.0.1/24 dev veth2 sudo ip link set veth2 up sudo ip netns execnetns1 ip addr add 10.0.0.2/24 dev veth1 sudo ip netns exec netns1 ip link set veth1 up sudo ip netns exec netns1 ip link set lo up`
+```bash
+sudo ip addr add 10.0.0.1/24 dev veth2 
+sudo ip link set veth2 up 
+sudo ip netns exec netns1 ip addr add 10.0.0.2/24 dev veth1 
+sudo ip netns exec netns1 ip link set veth1 up 
+sudo ip netns exec netns1 ip link set lo up
+```
 
 6.  Configurez les routes si nécessaire. Par exemple, pour définir l'interface "veth1" comme passerelle par défaut dans le namespace "netns1" :
 
@@ -809,7 +813,7 @@ Cela supprimera le namespace "netns1" et toutes les ressources qui lui sont asso
 - En quoi consiste la configuration des pairs ?
 	- Les pairs sont configurés en ajoutant des sections `[Peer]` dans leurs fichiers de configuration respectifs. Chaque section `[Peer]` contient la clé publique de l'autre pair et une liste d'adresses IP autorisées pour ce pair. L'adresse IP autorisée peut être une adresse IP unique ou un bloc CIDR, et elle détermine à quelle adresse IP le pair peut envoyer des paquets via le tunnel VPN.
 - En quoi consiste l'établissement de la connexion ?
-	- Lorsqu'un pair envoie un paquet à travers le tunnel VPN, WireGuard vérifie d'abord si l'adresse IP de destination est autorisée pour la clé publique du pair destinataire.
+	- Lorsqu'un pair envoie un paquet à travers le tunnel VPN, WireGuard pour vérifié d'abord si l'adresse IP de destination est autorisée pour la clé publique du pair destinataire.
 	- Si l'adresse IP est autorisée, WireGuard utilise la clé publique pour chiffrer le paquet avant de l'envoyer au pair destinataire.
 - En quoi consiste le routage des paquets ?
 	- Lorsque le pair destinataire reçoit le paquet chiffré, il utilise sa clé privée pour déchiffrer le paquet. Ensuite, il vérifie si l'adresse IP source du paquet est autorisée pour la clé publique de l'expéditeur. Si l'adresse IP source est autorisée, le paquet est accepté et traité. Sinon, le paquet est rejeté.
@@ -902,7 +906,7 @@ Cela supprimera le namespace "netns1" et toutes les ressources qui lui sont asso
 	- Chaque interface WireGuard a son propre fichier de configuration. WireGuard ne distingue pas les rôles "client" et "serveur", chaque nœud est considéré comme un "pair".
 - Quelle est la différence entre le champ "Endpoint" et le champ "AllowedIPs" pour la section [Peer] dans un fichier de configuration WireGuard ?
 	- Le champ "Endpoint" indique l'adresse IP réelle et le port du pair distant, tandis que le champ "AllowedIPs" spécifie les adresses IP que l'hôte local doit acheminer vers le pair distant via le tunnel WireGuard.
-- Comment fonctionne le routage de paquets entrants et sortants dans le tunnel WireGuard avec l'adresse IP virtuelle spécifiée dans la section [Interface] du fichier de configuration ?
+​- Comment fonctionne le routage de paquets entrants et sortants dans le tunnel WireGuard avec l'adresse IP virtuelle spécifiée dans la section [Interface] du fichier de configuration ?
 	- L'adresse IP virtuelle spécifiée dans la section [Interface] affecte le routage des paquets entrants et sortants du tunnel WireGuard. Cette adresse IP ne doit pas être une adresse IP réelle routable en dehors du VPN.
 - Quel est l'impact de la spécification d'un masque de réseau pour le paramètre "Address" dans un fichier de configuration WireGuard ?
 	- La spécification d'un masque de réseau pour le paramètre "Address" affecte les décisions de routage prises par l'hôte local concernant le trafic à envoyer dans le tunnel. Cela peut être redondant ou contradictoire avec le paramètre "AllowedIPs". Il est généralement préférable d'omettre le masque de réseau dans le paramètre "Address" et d'utiliser uniquement les paramètres "AllowedIPs" pour chaque pair pour contrôler le routage.
@@ -915,7 +919,7 @@ Cela supprimera le namespace "netns1" et toutes les ressources qui lui sont asso
 > -   Endpoint : adresse IP publique et port d'un pair pour l'envoi de paquets chiffrés
 > -   Endpoint nécessaire pour les clients et serveurs pour établir la connexion
 > -   Endpoint défini dans la configuration de chaque pair
-> -   Roaming : maintien d'une connexion sécurisée lors de changement d'adresse IP ou de réseau
+> -   Roaming : maintient d'une connexion sécurisée lors de changement d'adresse IP ou de réseau
 > -   Roaming dans WireGuard : échange de clés, routage via endpoints, mise à jour automatique d'endpoint
 > -   WireGuard identifie les pairs par clé publique et adresse IP source externe pour gérer le roaming
 > -   Roaming similaire à Mosh : mobilité des connexions sans interruption
@@ -1065,7 +1069,8 @@ sequenceDiagram
 ### LAYER 3 VPNS
 
 - Qu'est-ce qu'un layer 3 VPN ?
-	- 
+	- Layer 3 VPN, ou VPRN (réseau privé routé virtuel), utilise la VRF de couche 3 (VPN / routage et transfert virtuels) pour segmenter les tables de routage pour chaque client utilisant le service. Le client se connecte au routeur du fournisseur de services et les deux échangent des routes, qui sont placées dans une table de routage spécifique au client. Le protocole BGP multiprotocole (MP-BGP) est requis dans le cloud pour utiliser le service, ce qui augmente la complexité de la conception et de la mise en œuvre. Les VPN L3 ne sont généralement pas déployés sur les réseaux d’utilité en raison de leur complexité; cependant, un VPN L3 pourrait être utilisé pour router le trafic entre les sites d’entreprise ou de centre de données.
+
 ### RÉFÉRENCES
 
 - https://www.youtube.com/watch?v=kxj8GMvnASE
