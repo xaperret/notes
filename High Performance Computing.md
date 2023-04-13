@@ -284,6 +284,37 @@ MPI.Finalize()
 
 ## 8 - SÉMANTIQUE PTP 
 
+- Comment envoyer des informations d’un processus à l’autre à l’aide de MPI ?
+	- `MPI.send()`
+- Comment recevoir des informations d’un autre processus à l’aide de MPI ?
+	- `MPI.recv()`
+- Envoi non-bloquant
+	- `MPI.Isend()` ou `MPI.isend()
+- Réception non-bloquante
+	- `MPI.Irecv!()`
+- Pour chaque opération de communication, MPI considère deux éléments :
+	- La complétion locale
+	- La complétion globale
+- Qu’est-ce que la complétion locale ?
+	- C’est le moment où le bloc de mémoire peut être modifié sans perturber la communication
+- Qu’est-ce que la complétion globale ?
+	- C’est le moment où tous les processus impliqués dans la communication ont atteint la complétion locale.
+- Quand est-ce que la complétion locale est atteinte pour l’expéditeur lors de l’utilisation d’un `MPI_Bsend` (buffered send) ?
+	- Elle est atteinte lorsque l’expéditeur a finit de copié le message à envoyer dans le buffer
+	- Dans cette exemple ce moment coïncide avec la complétion globale.
+- Qu’est-ce qu’une fonction non-bloquante ?
+	- Une fonction est non-bloquante si elle n’attend pas la complétion locale avant de permettre au programme de poursuivre
+- Qu’est-ce qu’une fonction bloquante ?
+	- Une fonction est bloquante si et seulement si elle attend la complétion locale avant de se terminer et de permettre au programme de poursuivre
+- Qu’est-ce qu’une fonction synchronisée ?
+	- Une fonction est synchronisée si elle attend la complétion globale avant de se terminer
+- Qu’est-ce que `MPI.Send()` ?
+	- C’est une fonction bloquante, possiblement synchronisée permettant d’envoyer des données.
+	- `MPI.Ssend()` est
+		- bloquant et synchronisé
+	- `MPI.Bsend()`
+		- bloquant mais non synchronisé
+
 ## 9 - PRIMITIVES COLLECTIVES
 
 ### INTRODUCTION AUX PRIMITIVES POINT À POINT ET COLLECTIVES
@@ -291,9 +322,9 @@ MPI.Finalize()
 - Qu'est-ce qu'une primitive de communication point à point ?
 	- Les primitives de communication point à point sont des opérations de communication dans un environnement de calcul parallèle où les messages sont échangés directement entre deux processus distincts.
 	- Exemple
-		- `MPI.Send`
-		- `MPI.Recv`
-		- `MPI.Sendrecv`
+		- `MPI.send`
+		- `MPI.recv`
+		- `MPI.sendrecv`
 - À quoi servent les primitives de communications ?
 	- Les primitives de communication point à point permettent aux processus de s'envoyer des messages (ou des données) directement les uns aux autres, sans impliquer d'autres processus dans la communication.
 - Dans le contexte du passage de messages, comme avec MPI, ces opérations sont souvent bloquantes ou non bloquantes :
@@ -346,6 +377,7 @@ MPI.Finalize()
 ### RÉUNION SUR TOUS (ALL GATHER)
 
 ### RÉDUCTION (REDUCE)
+
 ## 10 - JULIA CUDA
 
 ## 11 - CONVOLUTION CUDA JULIA
