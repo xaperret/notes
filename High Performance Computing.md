@@ -22,21 +22,29 @@
 - [Slides ignorées](#slides-ignorées)
 
 ### GÉNÉRALITÉS
+
 Julia est un langage de programmation haut niveau. Il possède plus de 4000 packages (https://julialang.org/packages/). Les points forts de ce langage sont:
+
 - La rapidité (comparable au C)
 - Il est haut niveau
 - Il est adapté au calcul parallèle.
 - Sa polyvalence
 ### BASES
+
 Lancer julia:
+
 ```sh
 julia
 ```
+
 Executer un script:
+
 ```sh
 julia script.jl
 ```
+
 ### WTF IS HAPPENING WITH SYMBOLS
+
 En julia, il faut savoir que des caractères spéciaux `unicode` peuvent être utilisés avec le préfixe `\`. Certains d'entre eux peuvent avoir une signification particulière et donc influencer votre code.
 
 Exemples non exaustifs:
@@ -51,49 +59,63 @@ Exemples non exaustifs:
 Voici la liste exaustive: https://docs.julialang.org/en/v1/manual/unicode-input/
 
 ### VARIABLES
+
 Déclarer une variable:
+
 ```julia
 var1 = 42
 α = 10 # \alpha = 10
 name = "Jean-Marc Michel"
 ```
+
 Forcer le type d'une expression (assertion):
+
 ```julia
 forced = (10+10)::Int
 ```
+
 Conversions de type:
+
 ```julia
 converted = Float64(10+10)
 ```
 
 ### TYPES
+
 La racine de tous les types en Julia est `Any`.
 
 Pour connaitre le type d'une variable:
+
 ```julia
 typeof(x)
 ```
 
 Pour connaitre le sous-type et le super-type d'un type donné:
+
 ```julia
 supertype(Number)
 subtypes(Number)
 ```
 
 #### NOMBRES
+
 Il existe une hiérarchie des types, faisant que, par exemple, `Int8` sois un sous type de `Integer`.
 
 Voici un diagramme plus précis de la hiérarchie des types numériques: 
+
 ![Hierarchie des types](https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Type-hierarchy-for-julia-numbers.png/1200px-Type-hierarchy-for-julia-numbers.png)
 
 #### CARACTÈRES ET CHAINES DE CARACTÈRES
+
 Déclaration:
+
 ```julia
 c = `a`
 s1 = "Je suis une chaine de caracteres"
 ```
 
 Interpoler des valeurs dans une chaine de caractères:
+
 ```julia
 a = 3
 b = 8
@@ -102,6 +124,7 @@ println("Bonjour $nom, $a + $b = $(a+b)")
 ```
 
 Concaténer des chaines:
+
 ```julia
 string("Bonjour ", "les amis")
 string("Nous sommes le ", 12, " janvier")
@@ -112,7 +135,9 @@ s1*s2
 ```
 
 ### OPÉRATEURS
+
 Voici des opérations mathématiques de base:
+
 ```julia
 3 + 5 # Addition
 9 - 8 # Soustraction
@@ -124,6 +149,7 @@ Voici des opérations mathématiques de base:
 ```
 
 Voici les différentes égalités possibles:
+
 ```julia
 3 == 3				# Retourne true
 3.0 ≈ 3.00000001	# Retourne true  (\approx)
@@ -131,6 +157,7 @@ Voici les différentes égalités possibles:
 ```
 
 Opérateurs bit-à-bit:
+
 ```julia
 ~2         # => -3 # bitwise not
 3 & 5      # => 1  # bitwise and
@@ -142,6 +169,7 @@ xor(2, 4)  # => 6  # bitwise xor
 ```
 
 Opérateurs booléens:
+
 ```julia
 !true   # => false
 !false  # => true
@@ -159,11 +187,17 @@ Opérateurs booléens:
 ```
 
 ### BOUCLES
+
 [TODO]
+
 ### CONDITIONS
+
 [TODO]
+
 ### FONCTIONS
+
 Syntaxe de base:
+
 ```julia
 function add(x, y)
     println("x is $x and y is $y")
@@ -172,11 +206,13 @@ end
 ```
 
 Sytaxe compacte:
+
 ```julia
 add(x, y) = x + y
 ```
 
 Fonctions internes:
+
 ```julia
 function create_adder(x)
     function adder(y)
@@ -187,23 +223,30 @@ end
 ```
 
 Appel de fonction: 
+
 ```julia 
 add(10, 12)
 ```
 
 ### STRUCTURES DE DONNÉES
 #### DICTIONNAIRES
+
 Création d'un dictionnaire
+
 ```julia
 a = Dict("A"=>1, "B"=>2)
 a = Dict([("A", 1), ("B", 2)])
 ```
+
 Ajout et modification d'un élément 
+
 ```julia
 a["C"] = 17
 a["C"] = 2
 ```
+
 Retirer un élément
+
 ```julia
 pop!(a, "A") # "!" est une convention Julia indiquant qu'un paramètre est modifié
 ```
@@ -212,8 +255,10 @@ pop!(a, "A") # "!" est une convention Julia indiquant qu'un paramètre est modif
 
 ```julia
 ```
+
 ```julia
 ```
+
 ```julia
 ```
 
@@ -221,8 +266,10 @@ pop!(a, "A") # "!" est une convention Julia indiquant qu'un paramètre est modif
 
 ```julia
 ```
+
 ```julia
 ```
+
 ```julia
 ```
 
@@ -235,7 +282,9 @@ https://www.packtpub.com/product/julia-1-0-programming-complete-reference-guide/
 - https://enccs.github.io/Julia-for-HPC/
 
 ### SLIDES IGNORÉES
+
 Cette section répertorie les slides des présentations `03.01-julia.pdf` et `03.02-julia.pdf` qui furent ignorées par question de concision ou par flemme:
+
 - `03.01-julia.pdf`:  8 -  
 - `03.02-julia.pdf`:  
 
@@ -366,17 +415,169 @@ MPI.Finalize()
 
 ### BARRIÈRE DE SYNCHRONISATION
 
+- Qu'est-ce qu'une barrière de synchronisation ?
+	- Une barrière de synchronisation est un mécanisme de synchronisation utilisé en programmation parallèle et concurrente.
+	- Elle permet de garantir que tous les processus ou threads atteignent un certain point dans le code avant de continuer leur exécution. Lorsqu'un processus ou thread atteint la barrière, il se bloque jusqu'à ce que tous les autres processus ou threads atteignent également la barrière. Une fois que tous les processus ou threads sont arrivés à la barrière, ils sont libérés et peuvent continuer leur exécution.
+	-  ![[Pasted image 20230413200153.png]]
+- Quel est l'utilité d'une barrière de synchronisation ?
+	- De synchroniser tous les processus du communicateur
+	- Les barrières de synchronisation sont utiles pour coordonner le travail entre les processus ou threads, en particulier dans les situations où certains processus dépendent des résultats d'autres processus. Elles permettent de garantir que toutes les opérations précédentes sont terminées et que les données sont cohérentes avant de poursuivre.
+- Comment ça fonctionne ?
+
+```julia
+using MPI
+
+MPI.Init()
+
+comm = MPI.COMM_WORLD
+rank = MPI.Comm_rank(comm)
+size = MPI.Comm_size(comm)
+
+# Faites quelque chose ici...
+
+MPI.Barrier(comm) # Barrière de synchronisation
+
+# Continuez à faire quelque chose ici après que tous les processus aient atteint la barrière
+
+MPI.Finalize()
+```
+
 ### DIFFUSION (BROADCAST)
+
+- Qu'est-ce qu'une diffusion (broadcast) ?
+	- La diffusion (broadcast) est un mécanisme de communication dans les systèmes parallèles et distribués, tel que MPI (Message Passing Interface), où une donnée ou un message est envoyé par un processus (appelé processus racine) à tous les autres processus participant à la communication.
+	- Cela permet de partager des informations ou des données à l'échelle de l'ensemble des processus sans qu'ils aient à s'envoyer explicitement des messages individuels.
+	- ![[Pasted image 20230413200648.png]]
+- Quel est l'utilité de la diffusion ?
+	- La diffusion est particulièrement utile pour distribuer des paramètres, des configurations ou des données initiales à tous les processus dans un système parallèle ou distribué. Par exemple, lors du démarrage d'un calcul parallèle, il est courant de diffuser les paramètres de configuration à partir du processus racine vers tous les autres processus.
+- Comment ça fonctionne ?
+
+```julia
+using MPI
+
+MPI.Init()
+
+comm = MPI.COMM_WORLD
+rank = MPI.Comm_rank(comm)
+size = MPI.Comm_size(comm)
+
+root = 0 # Processus racine
+data = zeros(1) # Tableau pour stocker la donnée diffusée
+
+if rank == root
+    data[1] = 42.0 # La donnée à diffuser
+end
+
+# Diffuser la donnée à partir du processus racine vers tous les autres processus
+MPI.Bcast!(data, root, comm)
+
+@show data[1] # Affiche la donnée diffusée sur tous les processus
+
+MPI.Finalize()
+
+```
 
 ### DISPERSION (SCATTER)
 
+- Qu'est-ce qu'une dispersion (scatter) ?
+	- La dispersion (scatter) est un mécanisme de communication dans les systèmes parallèles et distribués, comme MPI (Message Passing Interface), où un processus racine distribue différentes parties d'un tableau de données à différents processus de manière équilibrée. 
+	- Cela permet de diviser le travail entre les processus en leur attribuant des parties distinctes des données initiales.
+- Quel est l'utilité de la dispersion ?
+	- La dispersion est souvent utilisée au début d'un calcul parallèle pour distribuer les données d'entrée entre les processus.
+	- Chaque processus travaille ensuite sur sa partie des données et, à la fin du calcul, les résultats sont généralement rassemblés (gather) pour former le résultat final.
+- Comment ça fonctionne ?
+
+```julia
+using MPI
+
+MPI.Init()
+
+comm = MPI.COMM_WORLD
+rank = MPI.Comm_rank(comm)
+size = MPI.Comm_size(comm)
+
+root = 0 # Processus racine
+num_elems = 10 # Nombre total d'éléments à distribuer
+
+sendbuf = nothing
+if rank == root
+    sendbuf = MPI.UBuffer(collect(1:num_elems), num_elems ÷ size) # Tableau de données à disperser
+end
+
+recvbuf = zeros(num_elems ÷ size) # Tableau pour stocker les données reçues
+
+# Disperser les données à partir du processus racine vers tous les autres processus
+MPI.Scatter!(sendbuf, recvbuf, comm)
+
+@show recvbuf # Affiche la partie des données reçues sur chaque processus
+
+MPI.Finalize()
+
+```
+
 #### MPI.UBUFFER
+
+- Qu'est-ce que `MPI.UBuffer` ?
+	- `MPI.UBuffer` est une fonction de la bibliothèque MPI.jl en Julia qui crée un tampon de type uniforme (UBuffer) à partir des données fournies. Ce tampon est utilisé pour faciliter la communication entre les processus dans les opérations collectives, telles que la dispersion (scatter), le rassemblement (gather), la diffusion (broadcast), etc.
+- Comment ça fonctionne ?
+	- Voici les deux arguments que la fonction prend en entrée :
+	1.  `data`: Il s'agit des données que vous souhaitez inclure dans le tampon. Cela peut être un tableau ou un autre type de données supporté par MPI.jl.
+	2.  `count`: C'est le nombre d'éléments du tampon que chaque processus doit recevoir lors de l'utilisation du tampon dans les opérations collectives. Dans le cas d'une dispersion (scatter) ou d'un rassemblement (gather), cela représente généralement le nombre d'éléments que chaque processus recevra ou enverra.
 
 ### RÉUNION (GATHER)
 
+- Qu'est-ce que la réunion ?
+	- La réunion (gather) est une opération de communication collective dans laquelle chaque processus envoie un élément ou un ensemble d'éléments à un processus racine. Le processus racine rassemble les données de tous les autres processus et les stocke dans un ordre déterminé. Gather est souvent utilisé pour collecter les résultats de calculs effectués par différents processus.
+	- ![[Pasted image 20230413201800.png]]
+
+
 ### RÉUNION SUR TOUS (ALL GATHER)
 
+- Qu'est-ce que la réunion sur tous ?
+	- La réunion sur tous (allgather) est similaire à la réunion (gather), mais au lieu de rassembler les données uniquement sur le processus racine, chaque processus reçoit une copie de toutes les données rassemblées. Cela signifie que chaque processus a accès aux données de tous les autres processus à la fin de l'opération allgather.
+	- ![[Pasted image 20230413201813.png]]
+	
 ### RÉDUCTION (REDUCE)
+
+- Qu'est-ce que la réduction ?
+	- La réduction (reduce) est une opération de communication collective où chaque processus envoie un élément ou un ensemble d'éléments à un processus racine. Contrairement à gather, où les données sont simplement rassemblées, dans reduce, une opération spécifiée (telle que l'addition, la multiplication, le minimum, le maximum, etc.) est appliquée aux données envoyées par les processus. Le processus racine reçoit le résultat de l'opération de réduction appliquée aux données de tous les processus.
+	- ![[Pasted image 20230413201928.png]]
+
+### EXEMPLE GATHER, ALL GATHER, REDUCE
+
+```julia
+using MPI
+
+MPI.Init()
+
+comm = MPI.COMM_WORLD
+rank = MPI.Comm_rank(comm)
+size = MPI.Comm_size(comm)
+
+root = 0
+send_data = rank
+
+# Gather
+gather_result = zeros(Int, size)
+MPI.Gather!(send_data, gather_result, root, comm)
+
+# Allgather
+allgather_result = zeros(Int, size)
+MPI.Allgather!(send_data, allgather_result, comm)
+
+# Reduce
+reduce_result = Ref{Int}(0)
+MPI.Reduce(send_data, reduce_result, MPI.SUM, root, comm)
+
+if rank == root
+    println("Gather result: ", gather_result)
+    println("Allgather result: ", allgather_result)
+    println("Reduce result (sum): ", reduce_result[])
+end
+
+MPI.Finalize()
+
+```
 
 ## 10 - JULIA CUDA
 
