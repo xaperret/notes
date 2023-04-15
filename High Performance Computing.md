@@ -5,7 +5,94 @@
 
 ## 1 - GÉNÉRALITÉS
 
+
 ## 2 - PARALLÉLISME
+
+- Quel est l'intérêt d'utiliser plus d'unités de calcul pour améliorer les performances de son code ?
+	- Car cela n'implique aucune charge de travail supplémentaire.
+- Mais quel est le problème de l'augmentation des performances par les unités de calcul ?
+	- On ne peut pas le faire indéfinimment.
+- Donc si augmenter les performances de son code par les unités de calcul n'est pas la solution, quelle est t'elle ?
+	- Le parallélisme
+- Qu'est-ce que le parallélisme ?
+	- C'est l'action d'exécuter plusieurs tâches en même temps au lieu de les accomplir séquentiellement.
+	- Le but final étant d'accélérer la réalisation de ces tâches.
+- Qu'est-ce que le problème de balance de charge ?
+	- Si les étapes d'un code ne prennent pas le même temps, on attendra donc sur le processus ayant l’étape la plus longue.
+- Qu'est-ce que le speedup ?
+	- Le speedup (accélération) est une mesure de l'efficacité d'un système de calcul parallèle par rapport à un système séquentiel (ou une version séquentielle d'un algorithme). 
+- Quel est l'utilité du speedup ?
+	- Le speedup est souvent utilisé pour évaluer la performance d'un algorithme parallèle ou d'un système de calcul parallèle.
+- Comment calculer le speedup en latence ?
+	- Le speedup est calculé en comparant le temps d'exécution d'un algorithme séquentiel (T₁) avec le temps d'exécution de la version parallèle de l'algorithme (Tₚ) sur P processeurs. La formule du speedup (S) est la suivante :
+		- S = T₁ / Tₚ
+		- où :
+			- T₁ est le temps d'exécution de l'algorithme séquentiel (ou la version séquentielle de l'algorithme)
+			- Tₚ est le temps d'exécution de l'algorithme parallèle sur P processeurs
+			- S est le speedup
+- Quel valeur de speedup serait idéal ?
+	- Lorsque S est égal à P, cela signifie que l'algorithme parallèle est P fois plus rapide que l'algorithme séquentiel.
+- Qu'est-ce que l'architecture d'un système distribué ?
+	- C'est une architecture composée de processeurs interconnectés
+- Qu'est-ce qu'un ordinateur parallèle ?
+	- C'est une machine composée de processeurs fortement couplés
+- Qu'est-ce que la taxonomie de Flynn ?
+	- C'est une manière de classer les architectures d'ordinateur
+	- Les classes sont basées sur le flux de données et du flux d’instructions :
+		- SISD - Single Instruction Single Data : unique flux d’instructions, unique flux de données
+		- SIMD - Single Instruction Multiple Data : unique flux d’instructions, multiples flux de données
+		- MISD - Multiple Instruction Single Data : multiples flux d’instructions, unique flux de données
+		- MIMD - Multiple Instruction Multiple Data : multiples flux d’instructions, multiples flux de données
+		
+- Qu'est-ce que SISD - Single Instruction Single Data ?
+	- Une architecture qui a 
+		- unique flux d’instructions, 
+		- unique flux de données
+		- ![[Pasted image 20230415153532.png]]
+- Qu'est-ce que SIMD - Single Instruction Multiple Data ?
+	- C'est une architecture qui a 
+		- unique flux d’instructions, 
+		- multiples flux de données
+		- ![[Pasted image 20230415153630.png]]
+- Qu'est-ce que MISD - Multiple Instruction Single Data ?
+	- C'est une architecture qui a
+		- multiples flux d’instructions,
+		- unique flux de données
+		- ![[Pasted image 20230415153740.png]]
+- Qu'est-ce que MIMD - Multiple Instruction Multiple Data ?
+	- C'est une architecture qui a
+		- multiples flux d’instructions,
+		- multiples flux de données
+		- ![[Pasted image 20230415153837.png]]
+- Qu'est-ce que l'architecture MIMD à mémoire partagée ?
+	- Une architecture MIMD où 
+		- processeurs synchronisés
+		- gestion des conflits d'accès par l'OS
+		- programmation conventionnelle
+		- ![[Pasted image 20230415154838.png]]
+- Qu'est-ce que l'architecture MIMD à mémoire distribuée ?
+	- Une architecture MIMD où
+		- processeurs non-synchronisés
+		- communication par échange de message
+		- gestion des échanges de données par le programmeur
+		- extensibilité du système par ajout de modules processeur-mémoire
+		- ![[Pasted image 20230415154952.png]]
+- Quels sont les types de parallélisme ?
+	- Le parallélisme de données ou *data parallelism*
+	- Le parallélisme de contrôle ou *task parallelism*
+- Qu'est-ce que le parallélisme de données ?
+	- C'est un type de parallélisme où l'on distribue les données sur différentes unités de calcul
+	- Les données sont traitées en parallèle
+	- La même opération ou tâche est appliquée sur les données sur chaque unité de calcul
+- Quel est l'utilité du parallélisme de données ?
+	- Le parallélisme de données s'applique bien aux applications scientifiques où l'on travaille avec des structures de données régulières (tableaux/vecteurs ou matrices)
+- Qu'est-ce que le parallélisme de contrôle ?
+	- Les unités de calcul exécutent différentes tâches
+	- Les tâches sont exécutées de manière concurrent sur les différentes unités de calcul
+- Quel est le problème avec Julia et le multithreading ?
+	- Julia utilise la librairie BLAS en backend pour les opérations d’algèbre linéaire (comme la multiplication de matrice en exemple). BLAS offre une version parallélisée en mémoire partagée des opérations. 
+	- Le problème est que par défaut, Julia utilise tous les threads disponibles sur la machine pour effectuer les calculs. Cela peut être pratique (gain de temps sur les opérations d’algèbre linéaire), mais dans le cas d’une utilisation sur un cluster, cela peut être dangereux (risque d’oversubscribing, création de plus de flux d’exécutions que d’unités de calcul.)
+
 
 ## 3 - JULIA
 ### SHORTCUTS
@@ -289,7 +376,66 @@ Cette section répertorie les slides des présentations `03.01-julia.pdf` et `03
 - `03.02-julia.pdf`:  
 
 
+
 ## 4 - THREADS EN JULIA
+
+- Qu'est-ce que la mémoire distribuée ?
+	- Chaque unité de calcul a un espace mémoire privé
+	- Programmation en multi-processus. Échange explicite de messages
+- Qu'est-ce que la memoire partagée ?
+	- Toutes les unités de calcul ont accès à la même mémoire.
+	- Programmation possible en multi-processus ou multi-threads (accès à un espace mémoire commun)
+- Quel est l'avantage du multi-threads ?
+	- Il n'y a pas d'échange explicite de messages (plus "simple")
+- Quel est le désavantage du multi-threads ?
+	- Toutes les problématique liées à la programmation concurrente.
+
+```julia
+using .Threads
+using MPI
+
+function mean(A)
+    sum = 0.0
+
+    for i in eachindex(A)
+        sum += i
+    end
+
+    return sum
+end
+
+function mean_threads(A)
+    sum = 0.0
+
+    @threads for i in eachindex(A)
+        sum += i
+        # @show threadid()
+    end
+
+    return sum
+end
+
+function mean_threads_good(A)
+    sums = zeros(nthreads()) # [0,0,0,0]
+
+    @threads for i in eachindex(A)
+        sums[threadid()] += i
+        # @show threadid()
+    end
+
+    return sum(sums)
+end
+
+# julia -t 8 live_code.jl
+function main_simple_threads()
+   data = fill(5, 100000000)
+    @show data
+
+    @time @show mean(data)
+    @time @show mean_threads(data)
+    @time @show mean_threads_good(data) 
+end
+```
 
 ### MPI VS THREAD
 
@@ -326,6 +472,9 @@ MPI.Finalize()
 ```
 
 ## 5 - CLUSTER SLURM
+
+- Qu'est-ce qu'un cluster ?
+	- Un cluster est un ensemble de serveurs ou d'ordinateurs interconnectés travaillant ensemble pour former un système unifié. Les clusters sont utilisés pour améliorer la performance, la disponibilité et la fiabilité des systèmes informatiques en répartissant les charges de travail et les ressources entre plusieurs machines. Ils sont couramment utilisés dans les environnements de calcul haute performance (HPC), les centres de données et pour les applications critiques nécessitant une tolérance aux pannes.
 
 ## 6 - GAIN LIMITATION PERF
 

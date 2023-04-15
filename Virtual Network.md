@@ -27,9 +27,14 @@
 ### SWITCH
 
 - Qu'est-ce qu'un switch ?
+	- Un switch (commutateur) est un dispositif de réseau utilisé pour connecter plusieurs appareils, tels que des ordinateurs, des serveurs, des imprimantes et d'autres équipements de réseau, au sein d'un réseau local (LAN). Il fonctionne principalement au niveau 2 (couche de liaison de données) du modèle OSI (Open Systems Interconnection) et facilite la communication entre les appareils connectés en transmettant des paquets de données.
 - Quel est l'utilité d'un switch ? 
-- Switch
-	- A switch utilizes an application-specific integrated circuit (ASIC), c'est la raison pour laquelle un switch appartient à la couche 2.
+	- L'utilité d'un switch est multiple :
+	1.  Connectivité : Il permet de relier plusieurs appareils entre eux, facilitant ainsi la communication et le partage de ressources au sein d'un réseau local.
+	2.  Gestion du trafic : Le switch examine les paquets de données qui lui parviennent et les dirige vers l'appareil de destination approprié. Contrairement à un hub, qui envoie les paquets à tous les appareils connectés, un switch transmet les paquets uniquement à l'appareil concerné, ce qui réduit la congestion du réseau et améliore les performances.
+	3.  Gestion des collisions : Un switch attribue une bande passante dédiée à chaque connexion, ce qui réduit les risques de collision de paquets de données et améliore la fiabilité et la vitesse du réseau.
+	4.  Sécurité : Les switchs gèrent les communications entre les appareils connectés, ce qui peut contribuer à améliorer la sécurité du réseau en empêchant les accès non autorisés et en limitant la diffusion des paquets à des destinations spécifiques.
+	5.  Évolutivité : Les switchs sont généralement modulaires, ce qui permet d'ajouter ou de retirer des appareils du réseau sans perturber les autres connexions. Ils peuvent être utilisés pour créer de petits réseaux domestiques ou pour étendre des réseaux d'entreprise complexes.
 
 ### LAYER 3 DEVICES
 
@@ -284,33 +289,27 @@ Cependant, le NAT peut également présenter des inconvénients, tels que la com
 
 ### VETH
 
-Un veth (Virtual Ethernet) est un type d'interface réseau virtuelle dans les environnements Linux. Il fonctionne comme un câble Ethernet virtuel, permettant de connecter deux espaces de noms réseau (namespaces) ou d'autres dispositifs réseau virtuels entre eux. Les paires veth fonctionnent en tandem : les paquets envoyés sur une interface de la paire sont reçus par l'autre interface. Les veth sont généralement utilisés dans les conteneurs, les machines virtuelles et les environnements de réseau complexes.
-
-Pour créer un lien veth et le configurer avec iproute2 (outil "ip" dans Linux), suivez les étapes ci-dessous :
-
+- Qu'est-ce qu'un VETH ?
+	- Un veth (Virtual Ethernet) est un type d'interface réseau virtuelle dans les environnements Linux. Il fonctionne comme un câble Ethernet virtuel, permettant de connecter deux espaces de noms réseau (namespaces) ou d'autres dispositifs réseau virtuels entre eux. Les paires veth fonctionnent en tandem : les paquets envoyés sur une interface de la paire sont reçus par l'autre interface. Les veth sont généralement utilisés dans les conteneurs, les machines virtuelles et les environnements de réseau complexes.
+- Pour créer un lien veth et le configurer avec iproute2 (outil "ip" dans Linux), suivez les étapes ci-dessous :
 1.  Créez une paire veth avec les noms veth1 et veth2 :
-
-bashCopy code
-
-`sudo ip link add veth1 type veth peer name veth2`
-
+```bash
+sudo ip link add veth1 type veth peer name veth2
+```
 2.  Attribuez des adresses IP aux interfaces veth :
-
-csharpCopy code
-
-`sudo ip addr add 192.168.1.1/24 dev veth1 sudo ip addr add 192.168.1.2/24 dev veth2`
-
+```bash
+sudo ip addr add 192.168.1.1/24 dev veth1 sudo ip addr add 192.168.1.2/24 dev veth2
+```
 3.  Activez les interfaces veth :
-
-bashCopy code
-
-`sudo ip link set veth1 up sudo ip link set veth2 up`
+```bash
+sudo ip link set veth1 up sudo ip link set veth2 up
+```
 
 Maintenant, les deux interfaces veth sont configurées et peuvent être utilisées pour transmettre des paquets entre elles. Vous pouvez ajouter des routes via "ip route" si nécessaire, par exemple :
 
-csharpCopy code
-
-`sudo ip route add 192.168.2.0/24 via 192.168.1.2 dev veth1`
+```bash
+sudo ip route add 192.168.2.0/24 via 192.168.1.2 dev veth1
+```
 
 Cela ajoutera une route pour atteindre le réseau 192.168.2.0/24 via l'interface veth1 et l'adresse IP 192.168.1.2.
 
@@ -320,47 +319,49 @@ Il est important de noter que les interfaces veth ne sont pas limitées à la co
 
 ### BRIDGE
 
-Un bridge (pont) est un dispositif réseau qui permet d'interconnecter plusieurs segments de réseau au niveau de la couche 2 (couche de liaison de données) du modèle OSI. Dans le contexte des réseaux Linux, un bridge est souvent utilisé pour connecter des interfaces réseau virtuelles, telles que les interfaces veth, tap ou les interfaces d'autres machines virtuelles ou conteneurs, pour créer un réseau virtuel partagé. Les bridges fonctionnent de manière similaire aux commutateurs réseau, en apprenant les adresses MAC et en acheminant les paquets entre les ports connectés.
+- Qu'est-ce qu'un bridge
+	- Un bridge (pont) est un dispositif réseau qui permet d'interconnecter plusieurs segments de réseau au niveau de la couche 2 (couche de liaison de données) du modèle OSI. Dans le contexte des réseaux Linux, un bridge est souvent utilisé pour connecter des interfaces réseau virtuelles, telles que les interfaces veth, tap ou les interfaces d'autres machines virtuelles ou conteneurs, pour créer un réseau virtuel partagé. Les bridges fonctionnent de manière similaire aux commutateurs réseau, en apprenant les adresses MAC et en acheminant les paquets entre les ports connectés.
 
 Voici comment créer un bridge et le configurer avec iproute2 (outil "ip" dans Linux) :
 
 1.  Installez le paquet "bridge-utils" si nécessaire (cette étape peut varier selon la distribution Linux) :
 
-arduinoCopy code
-
-`sudo apt-get install bridge-utils`
+```bash
+sudo apt-get install bridge-utils
+```
 
 2.  Créez un bridge nommé "br0" :
 
-bashCopy code
-
-`sudo ip link add name br0 type bridge`
+```bash
+sudo ip link add name br0 type bridge
+```
 
 3.  Attribuez une adresse IP au bridge :
 
-csharpCopy code
+```bash
+sudo ip addr add 192.168.1.1/24 dev br0
+```
 
-`sudo ip addr add 192.168.1.1/24 dev br0`
 
 4.  Activez le bridge :
 
-bashCopy code
-
-`sudo ip link set br0 up`
+```bash
+sudo ip link set br0 up
+```
 
 Maintenant, le bridge est configuré et peut être utilisé pour connecter des interfaces réseau virtuelles. Pour ajouter des interfaces veth, tap ou autres au bridge, utilisez la commande suivante :
 
-bashCopy code
-
-`sudo ip link set veth1 master br0`
+```bash
+sudo ip link set veth1 master br0
+```
 
 Cela ajoutera l'interface "veth1" au bridge "br0". Répétez cette étape pour toutes les interfaces que vous souhaitez ajouter au bridge.
 
 Notez que la configuration des routes avec "ip route" est généralement utilisée pour la couche 3 (couche réseau) du modèle OSI et ne s'applique pas directement aux bridges. Cependant, si vous souhaitez ajouter des routes pour atteindre d'autres réseaux via le bridge, vous pouvez le faire en utilisant l'adresse IP du bridge comme passerelle :
 
-csharpCopy code
-
-`sudo ip route add 192.168.2.0/24 via 192.168.1.1 dev br0`
+```bash
+sudo ip route add 192.168.2.0/24 via 192.168.1.1 dev br0
+```
 
 Cela ajoutera une route pour atteindre le réseau 192.168.2.0/24 via l'interface "br0" et l'adresse IP 192.168.1.1.
 
@@ -420,21 +421,15 @@ sudo ip netns exec netns1 <commande>
 
 Par exemple, pour afficher les interfaces réseau dans "netns1" :
 
-bashCopy code
-
 `sudo ip netns exec netns1 ip link`
 
 3.  Créez une paire d'interfaces veth :
-
-bashCopy code
 
 `sudo ip link add veth1 type veth peer name veth2`
 
 Cela crée deux interfaces, "veth1" et "veth2", reliées l'une à l'autre.
 
 4.  Ajoutez une extrémité de la paire d'interfaces veth (par exemple, "veth1") au namespace :
-
-bashCopy code
 
 `sudo ip link set veth1 netns netns1`
 
@@ -450,19 +445,13 @@ sudo ip netns exec netns1 ip link set lo up
 
 6.  Configurez les routes si nécessaire. Par exemple, pour définir l'interface "veth1" comme passerelle par défaut dans le namespace "netns1" :
 
-sqlCopy code
-
 `sudo ip netns exec netns1 ip route add default via 10.0.0.1 dev veth1`
 
 Maintenant, vous avez un namespace réseau avec sa propre interface, des adresses IP et des routes. Vous pouvez exécuter des applications ou des commandes spécifiques à ce namespace pour tester la connectivité, comme "ping" :
 
-bashCopy code
-
 `sudo ip netns exec netns1 ping 10.0.0.1`
 
 Pour supprimer un namespace, utilisez la commande suivante :
-
-cssCopy code
 
 `sudo ip netns del netns1`
 
@@ -906,7 +895,7 @@ Cela supprimera le namespace "netns1" et toutes les ressources qui lui sont asso
 	- Chaque interface WireGuard a son propre fichier de configuration. WireGuard ne distingue pas les rôles "client" et "serveur", chaque nœud est considéré comme un "pair".
 - Quelle est la différence entre le champ "Endpoint" et le champ "AllowedIPs" pour la section [Peer] dans un fichier de configuration WireGuard ?
 	- Le champ "Endpoint" indique l'adresse IP réelle et le port du pair distant, tandis que le champ "AllowedIPs" spécifie les adresses IP que l'hôte local doit acheminer vers le pair distant via le tunnel WireGuard.
-​- Comment fonctionne le routage de paquets entrants et sortants dans le tunnel WireGuard avec l'adresse IP virtuelle spécifiée dans la section [Interface] du fichier de configuration ?
+- Comment fonctionne le routage de paquets entrants et sortants dans le tunnel WireGuard avec l'adresse IP virtuelle spécifiée dans la section [Interface] du fichier de configuration ?
 	- L'adresse IP virtuelle spécifiée dans la section [Interface] affecte le routage des paquets entrants et sortants du tunnel WireGuard. Cette adresse IP ne doit pas être une adresse IP réelle routable en dehors du VPN.
 - Quel est l'impact de la spécification d'un masque de réseau pour le paramètre "Address" dans un fichier de configuration WireGuard ?
 	- La spécification d'un masque de réseau pour le paramètre "Address" affecte les décisions de routage prises par l'hôte local concernant le trafic à envoyer dans le tunnel. Cela peut être redondant ou contradictoire avec le paramètre "AllowedIPs". Il est généralement préférable d'omettre le masque de réseau dans le paramètre "Address" et d'utiliser uniquement les paramètres "AllowedIPs" pour chaque pair pour contrôler le routage.
