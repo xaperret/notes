@@ -478,7 +478,34 @@ MPI.Finalize()
 
 ## 6 - GAIN LIMITATION PERF
 
+- Il y a certaines tâches avec lesquels on ne peut pas aller plus vite même si on ajoute plus de processus, à cause de leur nature séquentielle.
+
 ## 7 - RÉSEAUX
+
+- Quel est l'utilité d'un réseau ?
+	- Il permet l'échange de données entre les différentes unités..
+- Les propriétés d'un réseau sont liées à la théorie des graphes
+	- le degré (ou connectivité),
+	- le diamètre 
+	- la largeur bi-sectionnelle 
+	- l'extensibilité 
+- Qu'est-ce que le degré ?
+	-  le nombre de voisin accessible par chaque nœud
+- Qu'est-ce que le diamètre ?
+	- C'est la longueur du chemin minimal reliant les deux nœuds les plus éloignés
+- Qu'est-ce que la largeur bi-sectionnelle ?
+	- C'est le débit d'information pouvant circuler sur le réseau si on le divise
+- Qu'est-ce que l'extensibilité ?
+	- C'est la possibilité d'augmenter la taille du réseau en ajoutant des nœuds
+- Qu'est-ce que le routage ?
+	- C'est un algorithme adapté à un réseau donné et définit une stratégie pour acheminer efficacement un message d'un noeud à un autre.
+- On appelle le composant qui se charge du routage :
+	- le routeur
+- On distingue les communications de type ?
+	- one-to-one ou communication point-à-point
+	- one-to-all, comme le broadcast ou le scatter
+	- all-to-one, comme la réduction ou le gather
+	- all-to-all ou échange totale
 
 ## 8 - SÉMANTIQUE PTP 
 
