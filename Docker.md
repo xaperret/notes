@@ -900,6 +900,11 @@ docker run -it --device=/dev/ttyUSB0 ubuntu
 ➜  v
 ```
 
+1.  `lowerdir`: C'est le répertoire utilisé comme couche inférieure (lower layer) dans overlayfs. Il est généralement en lecture seule et contient les fichiers et les répertoires de base (par exemple, l'image Docker).
+2.  `upperdir`: C'est le répertoire utilisé comme couche supérieure (upper layer) dans overlayfs. Il est en lecture/écriture et stocke les modifications apportées aux fichiers et répertoires pendant l'exécution du conteneur (par exemple, la couche de conteneur en lecture/écriture).
+3.  `workdir`: C'est un répertoire de travail utilisé par overlayfs pour gérer les opérations internes, telles que le mécanisme de copy-on-write. Ce répertoire doit être sur le même système de fichiers que `upperdir`.
+4.  `merged`: C'est le répertoire où la vue unifiée des couches inférieure et supérieure est montée. Les fichiers et répertoires de ce répertoire représentent la combinaison des deux couches, et c'est ce que voit et utilise un conteneur Docker. (le root en soit)
+
 ```shell
 ➜  v sudo mount -t overlay overlay -o lowerdir=lower,upperdir=upper,workdir=workdir merged
 [sudo] password for xavierp:
@@ -928,3 +933,250 @@ docker run -it --device=/dev/ttyUSB0 ubuntu
 - Le fichier original dans la couche basse reste inchangé, mais il est masqué par le whiteout dans la vue unifiée (merged).
 - Pour afficher les attributs d'un fichier avec un whiteout, vous pouvez utiliser `ls -l`.
 - Pour en savoir plus sur les whiteouts et la commande `mknod`, consultez la documentation du système de fichiers overlayfs et les pages de manuel Linux.
+
+## EXERCICE 2
+
+### MAINTENANT, ON S’INTÉRESSE À MIEUX COMPRENDRE COMMENT LES COUCHES D’UNE IMAGE/CONTAINER SONT GÉRÉES PAR DOCKER. 
+
+Exécutez un container Fedora:26, puis dans celui-ci : 
+
+- ajoutez un fichier à la racine
+- supprimez un fichier, par exemple /etc/issue
+- modifiez un fichier, par exemple en ajoutant une ligne à /etc/passwd
+
+```shell
+➜  school docker run -it --rm fedora:26 /bin/sh
+sh-4.4#
+sh-4.4# touch patate.txt
+sh-4.4# rm /etc/issue
+sh-4.4# echo pouf >> /etc/passwd
+sh-4.4# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+systemd-coredump:x:999:998:systemd Core Dumper:/:/sbin/nologin
+systemd-timesync:x:998:997:systemd Time Synchronization:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+tss:x:59:59:Account used by the trousers package to sandbox the tcsd daemon:/dev/null:/sbin/nologin
+pouf
+sh-4.4#
+```
+
+### UTILISEZ DOCKER INSPECT POUR INSPECTER LE CONTENU DU CONTAINER EN EXÉCUTION CI-DESSUS
+
+#### COMBIEN DE COUCHES BASSES (LOWER LAYERS) CONTIENT CE CONTAINER ET QUELLES SONT LEURS CHEMINS ABSOLUS DANS LE SYSTÈME DE FICHIERS SUR LA MACHINE HÔTE ?
+
+- Le nombre de couches basses (lower layers) dépend de l'image Docker utilisée et des couches qui la composent. Pour trouver leurs chemins absolus, utilisez la commande `docker inspect` et recherchez la valeur de "LowerDir" dans la section "GraphDriver" de la sortie JSON.
+
+```
+➜  v docker ps
+CONTAINER ID   IMAGE       COMMAND     CREATED          STATUS          PORTS     NAMES
+a742187698a6   fedora:26   "/bin/sh"   53 seconds ago   Up 53 seconds             determined_moser
+➜  v docker inspect a742187698a6
+
+...
+"GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/78acf48bc6744b02d651d0609027524541bda5bd219f086e691db7799d6ac2f1-init/diff:/var/lib/docker/overlay2/30175f2c9c4d4c6764a2b8076ff7f8ec88e5578bb049db731c9691cadbde5672/diff",
+                "MergedDir": "/var/lib/docker/overlay2/78acf48bc6744b02d651d0609027524541bda5bd219f086e691db7799d6ac2f1/merged",
+                "UpperDir": "/var/lib/docker/overlay2/78acf48bc6744b02d651d0609027524541bda5bd219f086e691db7799d6ac2f1/diff",
+                "WorkDir": "/var/lib/docker/overlay2/78acf48bc6744b02d651d0609027524541bda5bd219f086e691db7799d6ac2f1/work"
+            },
+            "Name": "overlay2"
+        },
+...
+```
+
+#### QUEL EST LE CHEMIN ABSOLU DE LA COUCHE CONTAINER WRITABLE (UPPER) ?
+
+- Le chemin absolu de la couche container writable (upper layer) est donné par la valeur de "UpperDir" dans la section "GraphDriver" de la sortie JSON de la commande `docker inspect`.
+
+#### EN INSPECTANT LE SYSTÈME DE FICHIERS SUR LA MACHINE HÔTE, LISTEZ LE CONTENU COMPLET DE LA COUCHE CONTAINER WRITABLE (INFO: TREE EST TRÈS PRATIQUE POUR VISUALISER LES ARBORESCENCES)
+
+- Utilisez la commande `tree` pour afficher le contenu complet de la couche container writable en exécutant :
+
+`tree /chemin/vers/UpperDir`
+
+- Nous pouvons voir que la couche upper contient les modifications que nous avons fait après l'instanciation du container.
+
+#### SUR LA MACHINE HÔTE, QUEL EST LE CHEMIN ABSOLU DU RÉPERTOIRE CORRESPONDANT AU ROOTFS DU CONTAINER ?
+
+- Le chemin absolu du répertoire correspondant au rootfs du container est donné par la valeur de "MergedDir" dans la section "GraphDriver" de la sortie JSON de la commande `docker inspect`.
+
+### SUR LA MACHINE HÔTE, DÉPLACEZ-VOUS DANS LE RÉPERTOIRE CORRESPONDANT AU ROOTFS DU CONTAINER. A L’INTÉRIEUR DE CELUI-CI, CRÉEZ LE FICHIER HELLO_FROM_THE_OUTSIDE
+
+#### SUITE À L’OPÉRATION CI-DESSUS, QU’OBSERVEZ-VOUS DANS LE CONTAINER LORSQUE VOUS LISTEZ LE CONTENU DU RÉPERTOIRE RACINE ?
+
+- Après avoir créé le fichier `Hello_from_the_outside` dans le répertoire rootfs du container sur la machine hôte, vous devriez voir ce fichier lorsque vous listez le contenu du répertoire racine dans le container.
+
+### PRÉCÉDEMMENT, VOUS AVEZ UTILISÉ LA COMMANDE DOCKER INSPECT POUR DÉTERMINER LES DIFFÉRENTES COUCHES (OVERLAYFS) DU CONTAINER
+
+#### EST-CE QU’IL EST POSSIBLE DE SIMPLEMENT UTILISER LA COMMANDE MOUNT SUR LE SERVEUR POUR OBTENIR LES MÊMES INFORMATIONS ? JUSTIFIEZ VOTRE DÉMARCHE
+
+- Oui, il est possible d'utiliser la commande `mount` pour obtenir des informations sur le système de fichiers overlay utilisé par le container. Cependant, les informations peuvent être formatées différemment et il peut être nécessaire d'analyser la sortie pour extraire les informations pertinentes.
+- Pour ce faire, exécutez la commande suivante : `mount | grep overlay`
+
+```
+sh-4.4# mount | grep overlay
+overlay on / type overlay (rw,relatime,lowerdir=/var/lib/docker/overlay2/l/J6J2YXETF3MGXBZEPZP3FRDOEP:/var/lib/docker/overlay2/l/STISIXXHST3EF244SLJI7RRGOL,upperdir=/var/lib/docker/overlay2/78acf48bc6744b02d651d0609027524541bda5bd219f086e691db7799d6ac2f1/diff,workdir=/var/lib/docker/overlay2/78acf48bc6744b02d651d0609027524541bda5bd219f086e691db7799d6ac2f1/work)
+sh-4.4#
+```
+
+## EXERCICE 3
+
+### DANS CET EXERCICE ON DÉSIRE MODIFIER UN CONTAINER ET RENDRE CES MODIFICATIONS PERSISTANTES, EN LES COMMITTANT DANS UNE NOUVELLE IMAGE
+
+#### QUELLE EST LA VERSION LA PLUS RÉCENTE QUE VOUS AVEZ TROUVÉE ?
+
+Déterminez l’image Debian la plus récente (en terme de numéro de version), puis téléchargez là. 
+
+```
+➜  school docker pull debian
+➜  school docker run debian cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
+NAME="Debian GNU/Linux"
+VERSION_ID="11"
+VERSION="11 (bullseye)"
+VERSION_CODENAME=bullseye
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+```
+
+### DÉMARREZ ALORS UN CONTAINER NOMMÉ MYDEBIAN INSTANCIÉ DEPUIS L’IMAGE QUE VOUS VENEZ DE TÉLÉCHARGER. 
+
+Dans ce container : 
+
+- Supprimez les répertoires /opt et /mnt et la commande /usr/bin/uniq 2 / 3
+- Avec dd, créez le fichier /home/random de 8500 bytes à partir de /dev/urandom
+- Ajouter la ligne ci-dessous à la fin du fichier /etc/motd: `Tagada tsoin tsoin`
+
+Une fois ces opérations réalisées, sortez du container. 
+
+```
+➜  school docker run -it --name mydebian debian
+root@ddc940dda346:/# rm -rf /opt /mnt /usr/bin/uniq
+root@ddc940dda346:/# dd if=/dev/urandom of=/home/random bs=1 count=8500
+8500+0 records in
+8500+0 records out
+8500 bytes (8.5 kB, 8.3 KiB) copied, 0.00941865 s, 902 kB/s
+root@ddc940dda346:/# echo "Tagada tsoin tsoin" >> /etc/motd
+root@ddc940dda346:/# exit
+```
+
+### A L’AIDE DE DOCKER DIFF, AFFICHEZ LES DIFFÉRENCES ENTRE VOTRE CONTAINER MYDEBIAN ET L’IMAGE UTILISÉE POUR SON INSTANTATION
+
+#### QUELLE EST LA SIGNIFICATION DE LA LETTRE SITUÉE DANS LA PREMIÈRE COLONNE DES RÉSULTATS DE DOCKER DIFF ?
+
+```shell
+➜  school docker diff mydebian
+C /etc
+C /etc/motd
+C /home
+A /home/random
+C /root
+A /root/.bash_history
+C /usr
+C /usr/bin
+D /usr/bin/uniq
+D /mnt
+D /opt
+➜  school
+```
+
+-   A : Ajout (Added)
+-   D : Suppression (Deleted)
+-   C : Modification (Changed)
+
+### A L’AIDE DE LA COMMANDE DOCKER COMMIT, COMMITTEZ ALORS CES CHANGEMENT EN CRÉEANT LA NOUVELLE IMAGE DEBIAN:NEW. DÉTRUISEZ ALORS LE CONTAINER DEBIAN PRÉCÉDENT ÉTANT DONNÉ QU’IL N’EST PLUS UTILE, PUIS INSPECTEZ L’HISTORIQUE DE L’IMAGE DEBIAN:NEW QUE VOUS VENEZ DE CRÉER
+
+```shell
+docker commit mydebian debian:new
+```
+
+```
+➜  school docker commit mydebian debian:new
+sha256:d87ccf9df1683e04fc12de730ccebc28bfd1fce573b373277dcd38f863dcc2d5
+➜  school
+```
+
+#### COMBIEN DE COUCHES ONT ÉTÉ AJOUTÉES À L’IMAGE SUITE À VOS MODIFICATIONS APPORTÉES AU CONTAINER CI-DESSUS ?
+
+- 1
+
+```
+➜  school docker history debian:new
+IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+d87ccf9df168   2 minutes ago   bash                                            8.93kB
+ca1a8403096e   13 days ago     /bin/sh -c #(nop)  CMD ["bash"]                 0B
+<missing>      13 days ago     /bin/sh -c #(nop) ADD file:f2d012660f882f319…   124MB
+```
+
+#### QUELLE EST LA TAILLE DE CES/CETTE NOUVELLE(S) COUCHE(S) ? 
+
+- `8.93kB`
+
+### ENFIN, INSTANCIEZ UN NOUVEAU CONTAINER À PARTIR DE VOTRE NOUVELLE IMAGE DEBIAN:NEW ET VÉRIFIEZ QUE CE NOUVEAU CONTAINER CONTIENT BIEN LES CHANGEMENTS EFFECTUÉS PRÉCÉDEMMENT
+
+## EXERCICE 4
+
+### ON DÉSIRE ENFIN SE FAMILIARISER AVEC L’UTILISATION DE VOLUMES ET BIND MOUNTS. SUR VOTRE MACHINE CLIENT, CRÉEZ LE VOLUME PICS, PUIS MONTEZ LE DANS LE RÉPERTOIRE /VOL/PICS D’UN CONTAINER UBUNTU:22.04 CRÉÉ POUR L’OCCASION
+
+#### DANS LE CONTAINER, QUEL EST LE CONTENU DU VOLUME PICS ?
+
+```
+➜  school docker volume create pics
+pics
+➜  school docker run -it --name my_ubuntu_container -v pics:/vol/pics ubuntu:22.04
+Unable to find image 'ubuntu:22.04' locally
+22.04: Pulling from library/ubuntu
+2ab09b027e7f: Pull complete
+Digest: sha256:67211c14fa74f070d27cc59d69a7fa9aeff8e28ea118ef3babc295a0428a6d21
+Status: Downloaded newer image for ubuntu:22.04
+root@de1db3d20cb7:/#
+```
+
+```
+➜  ~ docker cp images/ my_ubuntu_container:/vol/pics
+➜  ~
+```
+
+```
+root@de1db3d20cb7:/# ls vol/pics/images/
+c.jpg
+root@de1db3d20cb7:/#
+```
+
+### DEPUIS LA MACHINE CLIENTE, COPIEZ UN RÉPERTOIRE CONTENANT UNE SÉRIE D’IMAGES DANS LE VOLUME PICS ET VÉRIFIEZ QUE VOUS POUVEZ ACCÉDER À CES IMAGES DANS VOTRE CONTAINER
+
+Réalisez maintenant l’opération inverse: copiez le contenu du volume pics dans le répertoire courant de votre machine locale.
+
+#### EST-CE QUE LES OPÉRATIONS CI-DESSUS SUR LE VOLUME PICS FONCTIONNERONT CORRECTEMENT SI LE DAEMON DOCKERD S’EXÉCUTE SUR UNE MACHINE DIFFÉRENTE DU CLIENT DOCKER ? JUSTIFIEZ
+
+- 7.  Les opérations ci-dessus sur le volume `pics` fonctionneront correctement si le daemon `dockerd` s'exécute sur une machine différente du client Docker. Les volumes Docker sont gérés par le daemon Docker et peuvent être partagés entre plusieurs conteneurs, même sur des hôtes distants.
+
+```
+➜  ~ docker cp my_ubuntu_container:/vol/pics otherimages
+➜  ~ ls otherimages/pics/images/c.jpg
+otherimages/pics/images/c.jpg
+➜  ~
+```
+
+### RÉALISEZ MAINTENANT LES MÊME OPÉRATION QUE CI-DESSUS, MAIS PLUTÔT QUE D’UTILISER UN VOLUME, UTILISEZ UN BIND MOUNT
+
+#### EST-CE QUE DANS LE CAS D’UN BIND MOUNT, LES OPÉRATIONS CI-DESSUS FONCTIONNERONT CORRECTEMENT SI LE DAEMON DOCKERD S’EXÉCUTE SUR UNE MACHINE DIFFÉRENTE DU CLIENT DOCKER ? JUSTIFIEZ
+
+- Dans le cas d'un bind mount, les opérations ci-dessus pourraient ne pas fonctionner correctement si le daemon `dockerd` s'exécute sur une machine différente du client Docker. Les bind mounts dépendent du système de fichiers local de l'hôte où le daemon Docker s'exécute. Si le daemon Docker est sur une machine différente, le chemin vers le répertoire local sur le client ne sera pas accessible par le daemon Docker sur la machine distante. Pour partager des fichiers entre un client Docker et un daemon Docker distant, vous devrez utiliser une méthode de partage de fichiers compatible avec les deux machines, comme NFS ou SMB, ou utiliser des volumes Docker.
