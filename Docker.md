@@ -1,37 +1,930 @@
 ---
 ---
 
-# Docker
+# LVM
 
-Les distributions Linux, OS, et applications dépendent de librairies bien précises. Si les versions ne sont pas bonnes, rien ne fonctionnera.
+- Qu'est-ce qu'un Logical Volume Manager ?
+	- storage virtualization
+	- layer of abstraction over the physical storage
+	- utilise le DM
+- Qu'est-ce que le Linux Multiple Device (MD)  kernel driver ?
+	- C'est un driver qui fournie des virtual devices à partir de device physique
+	- Exemple
+		- Le RAID
+- Qu'est-ce que le Linux device mapper (DM) kernel driver ?
+	- C'est un driver qui virtualize les block devices
+	- Il permet aussi de mapper les blocks physiques sur des higher-level virtual block devices
+	- Exemple
+		- LVM, disk encryption, file system snapshots, etc.
+- Qu'est-ce que le Logical Volume Manager (LVM2) ?
+	- Cela utilise DM pour fournir une gestion générique des volumes depuis l'espace utilisateur
+- Quel est l'avantage du LVM2 ?
+	- Il peut être utilisé sur des devices MD ou DM.
+	- Thin provisioning
+	- Abstraction layer hides details about physical storage
+	- Data can be moved/re-arranged/resized at runtime
+	- Atomic filesystem snapshots
+- Quel est le bénéfice pour LVM de "Thin provisionning" ?
+	- Cela permet de crée des systèmes de fichiers plus grand que l'espace disque actuellement disponible
+- Quel est le bénéfice pour LVM de "Abstraction layer hides details about physical storage" ?
+	- L'espace de stockage peut être modifié "unknowingly" to applications
+		- transparent aggregation of multiple physical devices
+		- disks can be added/replaced at runtime (hot-swapping)
+- Quel est le bénéfice pour LVM de "Data can be moved/re-arranged/resized at runtime" ?
+	- Cela permet de la flexibilité
+- Quel est le bénéfice pour LVM de "Atomic filesystem snapshots" ?
+	- Regardless of the underlying physical layout which allows for consistent backups.
+- Pourquoi utilise t'on des LVM ?
+	- Car la virtualisation d'espace de stockage massif est mandatoire dans les data centers afin de réduire le system downtime et augmenter la flexibilité
+ - Qu'est-ce que Clustered LVM (CLVM)
+ - Qu'est-ce que High-Availability LVM (HA-LVM)
+ - Qu'est-ce que le Mirroring ?
+ - Qu'est-ce qu'un physical volume (LVM terminology) ?
+	 - Physical storage, typically hard disk, partition, or something that looks like a disk, e.g. software RAID device
+ - Qu'est-ce que le volume group (LVM terminology) ?
+	 - A pool of physical volumes presented as one administrative unit
+ - Qu'est-ce qu'un logical volume (LVM terminology) ?
+	 - An exposed block device (~ equivalent of a disk partition)
+	 - May be spanned, striped, mirrored, or a snapshot
+ - Quels sont les trois couches du modèle LVM ?
+	 - ![[Pasted image 20230424171530.png]]
+	 - ![[Pasted image 20230424171547.png]]
+ - Qu'est-ce que l'unité de base d'allocation de LVM ?
+	 - Extent
+ - Qu'est-ce qu'un extent ?
+	 - An extent is a contiguous area of storage, represented by 2 numbers: (offset, length)
+ - Quels sont les deux types d'extents ?
+	 - physical extents (PE)
+	 - logical extents (LE)
+ - physical volumes are divided into PE
+ - volume groups are sets of PE
+ - logical volumes are sets of LE
+ - PE and LE have the same size
+ - PE size displayed in vgdisplay
+ - Comment est réalisé le mappage de logical extent à physical extent ?
+	 - ![[Pasted image 20230424171839.png]]
+- LVM features
+	- Les volumes groups resizable online by absorbing new PVs or ejecting existing ones
+	- Logical Volume resizable online
+	- Logical Volume movable between PVs
+	- VGs can be split or merged as long as no LVs span the split • Useful when migrating whole LVs to or from offline storage
+	- Atomic snapshots (copy-on-write)
+	- Thinly-provisioned LVs (over-commit physical storage)
+	- Supports RAID 0, 1, 4, 5, 6, 10
+	- High availability (shared-storage cluster with shared PVs between hosts)
+- Snapshots
+	- A snapshots atomically saves the state of a logical volume • Snapshot performed at the block layer level → filesystem independent • Use Copy-On-Write (COW) • requires a new LV to save “changes” • up to the user to choose the new volume size • size must be enough to store the changes (10% of original’s LV is often recommended) • Allows to create atomic backups • a task impossible to perform on a filesystem that doesn’t support native shapshots, such as ext4
+- Snapshots behavior
+	- Let A be the original volume and S the snapshot volume of A • S stores the “changes” after the snapshot was performed • changes are not the new data, but A’s data before S • When accessing S (via mount), we see A’s original content, i.e. before S was taken • When accessing A, we see its current content • The atomic state of A prior to S can then be backup’ed • A snapshot’s content can be merged back to restore the state pre-snapshot • however: requires to umount the original volume (A) before applying the merge
+- Snapshots use-cases
+	- Atomic backup of a logical volume without taking the volume offline • System upgrade (likely to succeed) • snapshot before the upgrade • if everything goes well → remove the snapshot • if upgrade fails → revert (merge) the snapshot • Discardable changes for temporary use • create a snapshot of the system • mount the snapshot (say in /snap) • let user use /snap • when user is finished → discard the snapshot
 
-Les containers sont un moyen de mettre du scotch autour des applications.
+# CONTAINERS
 
-Docker est un framework qui permet de déployer des applications.
+- Qu'est-ce que l'operating system virtualization ou containerization ?
+	- C'est une technologie qui permet au kernel de créer et gérer des instances multiples d'espaces utilisateurs, appelées containers.
+- Pourquoi dis-t'on que la containerization fournie de l'isolation ?
+	- Car les processus dans un containers voient seulement le contenu du container et les devices qui lui sont assignés.
+- Que fournie le Kernel pour limiter l'impact des activités d'un container sur les autres containers ?
+	- Il fournie du resource-management.
+ - Quel est la différence entre la virtualization de OS et la virtualization de plateforme ?
+	 - Les containers partagent le même kernel mais ont des différentes librairies, utilities, root filesystem, view of process tree, networking, etc...
+	 - Les machines virtuelles ont des OS invités différents
+	 - ![[Pasted image 20230424192443.png]]
+- Quel est l'avantage des containers par rapport aux vms ?
+	- Moins d'overhead, mais moins d'isolation.
+- Qu'est-ce qu'un container ?
+	- A container is a set of processes that are isolated from the host system and other containers
+- De quel technologies les containers font usage ?
+	- Capabilities, provide security
+	- Namespaces, provide isolation
+	- Control groups, provide limits on resources
+	- Seccomp, provide security
+- Qu'est-ce que Capabilities ?
+	- Capabilities divide superuser’s privileges into small pieces
+	- Processes and files can each have capabilities • process capabilities: defines what privileged operations a process can do • file capabilities: what capabilities a process gets when executing the file
+- Qu'est-ce que Namespaces ?
+	- Namespaces are used to provide isolation
+- Qu'est-ce que Control groups ?
+	- Cgroups are used to control resources among groups of processes
+	- CPU time, memory, network bandwidth, I/O bandwidth
+	- provide fine-grained control over allocating, prioritizing, denying, managing, and monitoring system resources • organized hierarchically (like processes) and child cgroups inherit some of their parents’ attributes
+- Cgroups can be: • monitored • denied access to resources • reconfigured dynamically (i.e. at run-time)
+- Qu'est-ce que seccomp ?
+	- Seccomp is used to restrict the system calls a process makes
+- Pourquoi utilisé les containers ?
+	- Lightweight, fast, disposable. . . virtual environments
+	- Can be used as “light” virtual machines, but with less isolation
+	- Can be used to build, ship, deploy, and run applications
+- Quels sont les bénéfices de la containerization ?
+	- Isolation (security) • Provide a complete isolated OS environment • Allow packaging and isolation of applications with their entire runtime environment
+	- Portability • Container packaged with all its dependencies
+	- Productivity • Performance: lightweight environment • Consolidation: maximize resource utilization • Continuous integration: development, test, deployment
+- Containers vs virtual machines
+	- Containers are lightweight compared to traditional VMs → more containers can be run per host than traditional VMs • Unlike containers, VMs require emulation layers → consume more resources and add overhead • Containers share resources with the underlying host machine, with user space and process isolations • Starting a container is much faster2 than starting a VM
+- Qeuls sont les limtiations des containers Containers use same kernel as host → imposes strong limitations: ?
+	- Limited to running applications compiled for the host’s kernel architecture • Limitation from an hardware (CPU) point of view: can’t run an armhf (ARM) container on top of an amd64 (x86-64) system • Can’t run a Windows container on a Linux system • Limited to the host’s kernel (and its features) • Reliability: higher impact of a crash, especially in kernel area
 
-Docker est une application client serveur.
+# LXC
 
-Une image c'est un système de fichier racine. Contenant tout ce qui est nécessaire pour exécuter une application.
+- What is LXC?
+	- LXC = Linux Containers • low-level Linux container runtime
+- How does it work ?\
+	- Run multiple isolated Linux systems on a single host
+- Provide ?
+	- • Provide OS level virtualization (not an hypervisor!) • provide virtual OS with own CPU, memory, I/O and filesystem
+	- Provide a user space API
+- Containers share the same kernel as the host kernel!
+- What does it use for isolation ?
+	- Use kernel-based isolation mechanisms (capabilities, namespaces, cgroups, seccomp)
+- How to create different OS containers ?
+	- LXC uses templates to create different OS containers
+- What are templates ?
+	- • Templates = scripts to bootstrap specific OS
 
-```bash
-docker images
-```
+# DOCKER OVERVIEW
 
-This command will list the local images, not the public one.
+- What are docker's goals ?
+	- Package/ship applications independently of the underlying operating system
+	- Make applications deployment reproducible
+	- Increase applications’ security
+- What Docker provides
+	- Isolation
+	- Simplicity
+	- Lightweight
+	- Workflow
+	- Community
+- What is Docker ?
+	- Docker = open-source engine that automates the deployment of applications into containers
+	- Platform for developers/sysadmins to develop, ship, and run applications, based on containers
+- What does it also do
+	- Simplifies and standardizes the creation and management of containers
+	- Provides a RESTful API to perform queries and actions
+- Docker components
+	- Docker Engine (docker client + server)
+	- Images
+	- Registries
+	- Containers
+- What is docker engine ?
+	- Docker is a client-server application
+- • Docker ships with
+	- a command line client (docker) and 
+	- a RESTful API to interact with dockerd
+- Docker clients talk to the docker server (dockerd daemon) which does all the work
+- Images
+	- Every container is instantiated from an image → encloses a program within the image’s filesystem
+	- Hierarchy of images: images have a parent ↔ children relationship
+- Images are to containers what classes are to
+	- instances in OOP (Object Oriented Programming)
+- An image includes: 
+	- a full-fledged, isolated root filesystem (e.g. minimal filesystem provided by an Ubuntu distribution)
+	- the default program to execute when a container is created from an image
+		- this program is also called the entry-point
+	- network info (e.g. which ports should be exposed)
+- Registries
+	- Docker stores images that users build in registries
+- • Two types of registries, 
+	- public and
+	- private
+- The docker daemon has an internal registry of downloaded images • it caches them (on the host) to avoid downloading them again
+- Image names follow a precise format: `<repository>[:<tag>]` where `<repository> ::= [ /] < base name >]`
+- To list images available in the internal registry, execute:
+	- `docker images`
+ - Image can be manually downloaded via:
+	 - `docker pull <image name>
+	 - `docker pull <image id>`
+ - Containers
+	 - Docker helps build and deploy containers inside of which one can package applications and services
+ - Containers are launched from
+	 - images and contain one or more running processes
+ - A container terminates when 
+	 - its entry-point process terminates, regardless of the number of other processes still running in the container
+ - A container is 
+	 - an instance of an image, similar to a process is an instance of a program
+ - Images 
+	 - = building aspect of docker → immutable (static)
+ - Containers 
+	 - = running aspect of docker → mutable (dynamic)
+ - Docker daemon
+	 - Docker daemon = dockerd program
+	 - ![[Pasted image 20230424203212.png]]
+ - Containers are ran by 
+	 - the docker daemon, not the docker client
+ - Simplest example
+	 - `docker run debian echo " Hello world "`
+ - To create a container and launch a bash shell inside it:
+	 - `docker run -it debian /bin / bash`
+ - Running a container’s program with specific user and group IDs can be done with the argument:
+	 - `-u uid : gid`
+ - lists all running containers
+	 - `docker ps`
+	 - `docker ps -a`
+ - To re-execute the process (entry point) of a stopped container, or to start a container created via docker create, use:
+	 - `docker start`
+ - Might be useful to start other processes within a container (e.g. bash to explore or alter the filesystem):
+	 - `docker exec <exec args> <container> <cmd> <cmd args>`
+- The -d parameter of docker run creates a container running in the background (i.e. detached)
+- To output stdout and stderr logs for a given container
+	- `docker logs <container>`
+- A container can also be stopped from the host’s command line:
+	- `docker stop`
+- To send a signal to a container
+	- `docker kill`
+- To show detailed information about a container and its process, execute
+	- `docker inspect`
+- To remove a stopped container:
+	- `docker rm`
+- To remove all containers on the host:
+	- `docker rm -f $( docker ps -aq)`
+
+## REFERENCES
+
+# DOCKER DATA STORAGE
+
+
+## DOCKER IMAGES
+
+- Docker images
+	- Docker images are root filesystems (rootfs) for containers
+- What does it mean ?
+	- they do not need a kernel + modules: containers share the host kernel
+	- they do not need initialization tools or scripts
+	- they should be minimal: only include an application and its dependencies
+- What are the characteristics of an image ?
+	- immutable (read-only)
+	- portable
+	- sharable
+	- storable
+	- updatable
+- How are Image composed ?
+	- Images are layered
+- What does it mean to say that images are layered ?
+	- They are made of different stacked layers that can be reused by other images and shared by containers
+	- Every image extends a parent image (its first layer)
+	- ![[Pasted image 20230425162703.png]]
+- How are layers made ?
+	- Layers are created from Dockerfile instructions: `RUN, COPY, ADD`
+- What is a layer ?
+	- A layer is a collection of files and directories
+- What are the characteristics of a layer ?
+	- immutable
+	- represents a delta of the changes from the previous layer
+	- is associated and referenced by a hash generated from the layer’s content
+- What happens when you download an image ?
+	- Each layer is downloaded separately
+- What happens when a container is created ?
+	- a new writable layer is added on top of the image
+	- ![[Pasted image 20230425163349.png]]
+- This top layer is:
+	- called the container layer
+	- initially empty
+- Where are all changes made in a running container ?
+	- are written to the writable layer
+- What do multiple containers running the same image share ?
+	- The same immutable underlying layers
+	- ![[Pasted image 20230425163519.png]]
+- What is the difference between an image and a container ?
+	- the top writable layer!
+- What happens when a container is deleted ?
+	- Only its writable layer is deleted but the underlying immutable image remains!
+- How does Image inheritance work ?
+	- New images can be created from existing images
+- What is a base image ?
+	- • Images can also be created from scratch (from an archive)
+- How to inspect an image's layers ?
+	- `docker inspect`
+	- `docker inspect --format "{{json .RootFS.Layers}}" mongo :6`
+- Docker storage drivers, which the default is overlay2 is using :
+	- Linux’s overlay filesystem\
+- What is the Overlay filesystem ?
+	- It combines upper and lower directory trees and presents a unified view
+	- ![[Pasted image 20230425164305.png]]
+- Which layer is writeable ?
+	- upper one
+- What file/folder is visible when conflict ?
+	- file : only files in upper directory
+	- folder : union between both folders
+- How to create an overlay filesystem ?
+	- `mount -t overlay overlay -o lowerdir =/ low1 :/ low2 :/ low3 , upperdir =/ upper , workdir =/ work / merged`
+		- In this example the dir order is 
+		- `/ upper / low1 / low2 / low3`, meaning upper is writeable and lowN are the image layers
+- Rootfs indicates ?
+	- Merged directory
+- What is the issue with overlay filesystem ?
+	- Reading and writing in container’s writable layer is slower than on native filesystem!
+- What to use to write lots of data ?
+	- Use Docker volumes for write-heavy workloads instead of the container’s writable layer
+- Why use volumes to write a lot of data ?
+	- Volumes write directly to the host filesystem → better performances than writing to the writable layer!
+- Committing changes
+	- docker commit commits the current state of a container into an image file
+- What's the current state of a container ?
+	- all layers + top writable layer
+- What's the use of docker commit ?
+	- useful when modifying a container by hand and wanting to make these changes permanent
+- What is a better solution to docker commit ?
+	- Better to use dockerfiles, but commit useful for testing and preparing
+- Data sharing
+	- Files created inside a container are stored on a writable container layer: • data not persistent when container is deleted • can be difficult to get the data out of the container
+- How to share data between multiple containers?
+	- bind mount
+	- volume mount
+- Bind mount
+	- • Container can read-write files outside the container’s writable layer
+	- • A file or directory on the host machine is mounted into a container
+	- • The file or directory is referenced by its full absolute path on the host machine
+	- • Efficient, but rely on the host machine’s filesystem having a specific directory structure available (mount point)
+- Volume mount
+	- • Container can read-write files outside the container’s writable layer
+	- • A volume (local, but possibly remote) is mounted into a container
+	- Preferred mechanism for persisting data generated by and used by Docker containers
+	- • The volume is referenced by its name on the host machine
+	- • Volumes are fully managed by Docker
+- Volumes vs bind mounts
+	- Benefits of volumes over bind mounts:
+		- • Volumes manageable via Docker CLI or Docker API • Work on both Linux and Windows containers • Can be stored on remote hosts (e.g. Cloud), supports encrypted contents, etc. • New volumes can have their contents pre-populated by a container
+- Volumes vs writing to the container writable layer
+	- Volumes are often a better choice than persisting data in a container’s writable layer: 
+		- • Better read-write performance • Does not increase the container’s size • Contents exist outside the container’s lifecycle!
+- Transfering data to/from a volume
+	- How to copy data from: • the local filesystem to a volume? • a volume to the local filesystem?
+		- Copy content of the current dir in the local filesystem to the volume mounted in /shared in the container: docker cp . my_container :/ shared /
+		- Copy volume’s content (mounted in /shared in the container) to the current directory in the local filesystem: docker cp my_container :/ shared / .
+
+# DOCKERFILES
+
+# DOCKER BASIC NETWORKING
+
+# VIRTUALIZATION TECHNOLOGIES AND FRAMEWORKS
+
+# VIRTUALISATION - DOCKER BASICS
+
+## EXERCICE 1
+
+### PRENDRE L'IMAGE
 
 ```shell
-docker pull debian:buster
+docker search hepia
+
+NAME                    DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+hepia/docker_ex01                                                       0
+hepia/hepia-pandoc      convert markdown to pdf with custom template…   0
+hepia/docker_ex03                                                       0
+hepia/docker_ex02                                                       0
+hepia/docker_ex04                                                       0
+hepia/ubuntu-java       Ubuntu 19.04 with openjdk and other tools ar…   0
+hepia/docker_ex05                                                       0
+hepia/hbvar-openms      Open-source software for mass spectrometry a…   0
+peiryd/hepia                                                            0
+hepiall00001/leonidas   ubuntu                                          0
 ```
 
-This command will download the image of debian and the child of this image buster. This will then be stored locally.
+- Cette commande recherche et liste tous les conteneurs disponibles sur Docker Hub qui contiennent le mot-clé "hepia" dans leur nom ou leur description. La liste des conteneurs correspondants est affichée avec leurs noms, descriptions, étoiles, balises "Official" et "Automated".
 
-A container is the instanciation of an image.
+```shell
+docker pull hepia/docker_ex01
 
-Images uses local library from the system. Meaning they will be smaller.
+Using default tag: latest
+latest: Pulling from hepia/docker_ex01
+6c40cc604d8e: Pull complete
+26532eea736d: Pull complete
+Digest: sha256:522c719726dcedf03aecac97aff51dc2bf5f6ab03e8f396fd5a3fb028a4a0769
+Status: Downloaded newer image for hepia/docker_ex01:latest
+docker.io/hepia/docker_ex01:latest
+```
 
-The docker daemon could be executed locally or remotely. It's executed in `root`, it's dangerous as if the daemon is corrupted, then the whole system is corrupted.
-`podman` is not running in `root`.
-There is a `docker` rootless, but it's experimental.
-`systemd` is a container, it can manage, create container.
+- Cette commande télécharge l'image du conteneur "hepia/docker_ex01" depuis Docker Hub sur votre machine locale. Si aucune balise n'est spécifiée (par exemple, `:latest`), Docker utilisera la balise "latest" par défaut.
 
-## References
+### LANCER DES COMMANDES 
+
+```shell
+docker run hepia/docker_ex01 pwd
+/
+```
+
+- Cette commande exécute un conteneur basé sur l'image "hepia/docker_ex01" et lance la commande `pwd` (print working directory) à l'intérieur de ce conteneur. Dans ce cas, la commande `pwd` affiche le répertoire de travail actuel à l'intérieur du conteneur, qui est "/". Cette commande ne lance pas de shell interactif dans le conteneur, mais exécute simplement la commande spécifiée et affiche la sortie.
+
+```shell
+docker run hepia/docker_ex01 ls
+bin
+dev
+etc
+flag
+home
+lib
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+```
+
+```shell
+ls -ah
+.
+..
+.dockerenv
+bin
+dev
+etc
+flag
+home
+lib
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+
+ls -ahl
+total 68
+drwxr-xr-x    1 root     root        4.0K Apr 25 09:51 .
+drwxr-xr-x    1 root     root        4.0K Apr 25 09:51 ..
+-rwxr-xr-x    1 root     root           0 Apr 25 09:51 .dockerenv
+drwxr-xr-x    2 root     root        4.0K Jan 30  2019 bin
+drwxr-xr-x    5 root     root         340 Apr 25 09:51 dev
+drwxr-xr-x    1 root     root        4.0K Apr 25 09:51 etc
+-rw-r--r--    1 root     root          39 Feb  8  2019 flag
+drwxr-xr-x    2 root     root        4.0K Jan 30  2019 home
+drwxr-xr-x    5 root     root        4.0K Jan 30  2019 lib
+drwxr-xr-x    5 root     root        4.0K Jan 30  2019 media
+drwxr-xr-x    2 root     root        4.0K Jan 30  2019 mnt
+drwxr-xr-x    2 root     root        4.0K Jan 30  2019 opt
+dr-xr-xr-x  396 root     root           0 Apr 25 09:51 proc
+drwx------    2 root     root        4.0K Jan 30  2019 root
+drwxr-xr-x    2 root     root        4.0K Jan 30  2019 run
+drwxr-xr-x    2 root     root        4.0K Jan 30  2019 sbin
+drwxr-xr-x    2 root     root        4.0K Jan 30  2019 srv
+dr-xr-xr-x   11 root     root           0 Apr 25 09:51 sys
+drwxrwxrwt    2 root     root        4.0K Jan 30  2019 tmp
+drwxr-xr-x    7 root     root        4.0K Jan 30  2019 usr
+drwxr-xr-x   11 root     root        4.0K Jan 30  2019 var
+```
+
+```shell
+docker run hepia/docker_ex01 cat .dockerenv
+docker run hepia/docker_ex01 cat flag
+Well done !!! you've finished exercice
+➜  school
+```
+
+### QUESTIONS
+
+#### SUITE AUX DEUX OPÉRATIONS CI-DESSUS, COMBIEN DE CONTAINERS ONT ÉTÉ CRÉÉS ET QUELS SONT LEURS NOMS ET IDS ?
+
+- Comment affiché la liste des containers ?
+	- La commande nécessaire pour cette étape est `docker ps -a`
+
+```shell
+➜  school docker ps -a | grep ex01
+2bc803f65779   hepia/docker_ex01                                                                                   "ls -ahl"                2 minutes ago    Exited (0) 2 minutes ago              optimistic_bell
+51a14747ac05   hepia/docker_ex01                                                                                   "cat flag"               2 minutes ago    Exited (0) 2 minutes ago              hardcore_grothendieck
+0b1f34a9df67   hepia/docker_ex01                                                                                   "cat .dockerenv"         4 minutes ago    Exited (0) 4 minutes ago              bold_gould
+f7ebac069ad6   hepia/docker_ex01                                                                                   "cat .dockerenv"         6 minutes ago    Exited (0) 6 minutes ago              naughty_wing
+b852220154cb   hepia/docker_ex01                                                                                   "ls -ah"                 6 minutes ago    Exited (0) 6 minutes ago              angry_ptolemy
+2caaaa58bdf0   hepia/docker_ex01                                                                                   "ls home"                6 minutes ago    Exited (0) 6 minutes ago              loving_meninsky
+a7e3a18117a0   hepia/docker_ex01                                                                                   "ls"                     8 minutes ago    Exited (0) 8 minutes ago              charming_vaughan
+804127024dce   hepia/docker_ex01                                                                                   "pwd"                    12 minutes ago   Exited (0) 12 minutes ago             great_lovelace
+```
+
+- Il y a eu autant de containers crée que nous avons lancé la commande.
+
+#### QUEL EST L’ÉTAT DES CONTAINERS ?
+
+- Les conteneurs sont à l'état "exited", car ils ont terminé l'exécution des commandes spécifiées (ls et cat) et se sont arrêtés. 
+- Vous pouvez vérifier l'état des conteneurs avec la commande `docker ps -a`.
+- L'état des container est arrêté puisque les containers ne restent ouvert que le temps du processus qui est appelé, ici `ls`
+
+#### QUEL EST L’ID DE L’IMAGE UTILISÉE PAR LES CONTAINERS QUE VOUS VENEZ D’EXÉCUTER ?
+
+- Il existe plusieurs manière de récupérer l'ID de l'image utilisée par les containers, soit
+	- Cette suite de commande :
+		- `docker inspect <container>`
+		- `docker inspect <image> hepia/docker_ex01`
+	- Soit cette commande
+		- `docker image ls hepia/docker_ex01`
+- Le résultat est le suivant : `"sha256:cae01e578..."`
+
+#### EST-CE QUE L’ID DE L’IMAGE SERA IDENTIQUE CHEZ VOS CAMARADES DE CLASSE ?
+
+- Oui, si ils ont la même version d'image, puisque c'est un sha256.
+
+#### EST-CE QUE LES NOMS ET IDS DES CONTAINERS SERONT IDENTIQUES CHEZ VOS CAMARADES ?
+
+- Non, les noms et les ID des conteneurs seront différents pour chaque utilisateur et chaque instance de conteneur, car Docker génère des noms et des ID uniques pour chaque conteneur créé.
+
+## EXERCICE 2
+
+### EXÉCUTEZ LE CONTAINER HEPIA/DOCKER_EX03 AVEC UN SHELL (SH) EN MODE INTERACTIF. CRÉEZ ENSUITE LE FICHIER FANTASIO DANS LE RÉPERTOIRE /EX03/ AVEC LA COMMANDE TOUCH. 
+
+- Tout d'abord pour lancer le terminal en interactif on fait la commande suivante :
+	- `docker run -it <image> <shell>`
+ - Ce qui nous donne :
+
+```shell
+➜  school docker run -it hepia/docker_ex03 /bin/sh
+/ # ls
+bin    etc    flag   lib    mnt    proc   run    srv    tmp    var
+dev    ex03   home   media  opt    root   sbin   sys    usr
+/ # touch ex03/fantasio
+/ 
+```
+
+#### QUE SE PASSE-T-IL QUAND VOUS QUITTEZ LE SHELL AVEC CTRL+D ?
+
+- Quand vous quittez le shell avec ctrl+d, le conteneur s'arrête, car le processus principal (le shell) se termine.
+
+```shell
+➜  school docker ps -a | grep ex03
+f4ed42c7fa1d   hepia/docker_ex03
+  "/bin/sh"                2 minutes ago    Exited (0) 14 seconds ago              busy_galois
+➜  school
+```
+
+### EXÉCUTEZ UN NOUVEAU CONTAINER BASÉ SUR LA MÊME IMAGE QUE PRÉCÉDEMMENT ET NOMMEZ-LE ZORGLUB
+
+- Pour renommer un container il faut faire `docker rename <container name or id> <new name>`
+
+```shell
+➜  ~ docker ps
+CONTAINER ID   IMAGE               COMMAND     CREATED              STATUS              PORTS     NAMES
+8d43cceae149   hepia/docker_ex03   "/bin/sh"   About a minute ago   Up About a minute             agitated_hugle
+➜  ~ docker rename 8d43cceae149 zorglub
+➜  ~ docker ps
+CONTAINER ID   IMAGE               COMMAND     CREATED         STATUS         PORTS     NAMES
+8d43cceae149   hepia/docker_ex03   "/bin/sh"   2 minutes ago   Up 2 minutes             zorglub
+➜  ~
+```
+
+#### EST-CE QUE LE FICHIER /EX03/FANTASIO EXISTE OU PAS ? POURQUOI ?
+
+- Le fichier /ex03/fantasio n'existe pas dans le conteneur zorglub, car vous avez créé un nouveau conteneur basé sur la même image, et l'image ne contient pas le fichier. 
+- Les modifications apportées aux conteneurs précédents ne sont pas conservées dans l'image.
+
+#### DANS LE CONTAINER ZORGLUB, EXÉCUTEZ À NOUVEAU TOUCH /EX03/FANTASIO, PUIS PRESSEZ LA COMBINAISON DE TOUCHES CTRL+P CTRL+Q
+
+- La combinaison de touches ctrl+p ctrl+q permet de détacher le terminal du conteneur sans arrêter le conteneur.
+
+```shell
+➜  school docker ps -a | grep ex03
+650a121ba89d   hepia/docker_ex03
+  "/bin/sh"                2 minutes ago   Up 2 minutes                         optimistic_panini
+f4ed42c7fa1d   hepia/docker_ex03
+  "/bin/sh"                2 hours ago     Exited (0) 2 hours ago               busy_galois
+➜  school
+```
+
+#### QUEL EST L’ÉTAT (STOPPÉ, EN EXÉCUTION, ETC.) DU CONTAINER ZORGLUB ?
+
+- Après avoir utilisé ctrl+p ctrl+q, le conteneur zorglub reste en exécution. Vous pouvez le vérifier avec la commande `docker ps`.
+
+#### QUEL EST DONC LE RÔLE DE LA COMBINAISON DE TOUCHES CTRL+P CTRL+Q ?
+
+- La combinaison de touches ctrl+p ctrl+q permet de détacher le terminal du conteneur sans arrêter le conteneur.
+
+### ATTACHEZ-VOUS (DOCKER ATTACH) ALORS AU CONTAINER ZORGLUB
+
+#### EST-CE QUE LE FICHIER /EX03/FANTASIO EXISTE ENCORE ?
+
+- Oui, le fichier /ex03/fantasio existe toujours, car vous vous êtes simplement reconnecté au même conteneur qui était en cours d'exécution.
+- 
+
+```shell
+➜  school docker attach 650a121ba89d
+/ # ls
+bin    etc    flag   lib    mnt    proc   run    srv    tmp    var
+dev    ex03   home   media  opt    root   sbin   sys    usr
+/ # ls ex03/
+fantasio
+/ #
+```
+
+### DANS UN NOUVEAU TERMINAL, ATTACHEZ-VOUS À NOUVEAU AU CONTAINER ZORGLUB. PLACEZ CÔTE À CÔTE LES DEUX TERMINAUX DANS LESQUELS VOUS ÊTES ATTACHÉ AU CONTAINER ZORGLUB ET TAPEZ DES CARACTÈRES AU CLAVIER
+
+#### QU’OBSERVEZ-VOUS ET QUE POUVEZ-VOUS DONC EN DÉDUIRE ?
+
+- Lorsque vous tapez des caractères dans l'un des terminaux attachés, vous verrez les mêmes caractères apparaître dans l'autre terminal. Cela montre que les deux terminaux sont connectés au même conteneur et partagent le même environnement.
+
+### EXÉCUTEZ LA COMMANDE DOCKER EXEC -IT ZORGLUB SH
+#### EST-CE QUE LE FICHIER /EX03/FANTASIO EXISTE TOUJOURS ?
+
+- Oui, le fichier /ex03/fantasio existe toujours, car `docker exec` exécute simplement une nouvelle commande (dans ce cas, un nouveau shell) dans le conteneur en cours d'exécution sans modifier l'état du conteneur.
+
+#### COMBIEN DE SHELLS SONT EN COURS D’EXECUTION (AIDE: PS) ?
+
+- Il y en a deux qui sont ouvert !
+
+```shell
+/ # ps
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sh
+   16 root      0:00 sh
+   23 root      0:00 ps
+/ #
+```
+
+```shell
+/ # ps aux | grep -i 'sh' | grep -v grep | wc -l
+2
+/ #
+```
+
+#### QUELLE EST LA DIFFÉRENCE ENTRE LES COMMANDES ATTACH ET EXEC ?
+
+- La commande `attach` permet de se connecter à un conteneur en cours d'exécution et d'interagir avec son processus principal (généralement un shell). stdin et stdout sont redirigés.
+- La commande `exec` permet d'exécuter une nouvelle commande ou un nouveau processus dans un conteneur en cours d'exécution sans interférer avec le processus principal.
+
+### TERMINEZ LE SHELL (P.EX. AVEC CTRL+D) DANS LEQUEL VOUS AVIEZ EXÉCUTÉ DOCKER EXEC ... AUPARAVANT
+#### EST-CE QUE LE CONTAINER ZORGLUB EST TOUJOURS EN EXÉCUTION ?
+
+- Oui, le conteneur zorglub est toujours en exécution, car la fin d'un shell lancé avec `docker exec` n'affecte pas le processus principal du conteneur.
+
+```shell
+➜  ~ docker ps
+CONTAINER ID   IMAGE               COMMAND     CREATED         STATUS         PORTS     NAMES
+8d43cceae149   hepia/docker_ex03   "/bin/sh"   9 minutes ago   Up 9 minutes             zorglub
+➜  ~
+```
+
+### EXÉCUTEZ UN NOUVEAU SHELL DANS LE CONTAINER AVEC LA COMMANDE DOCKER EXEC -IT ZORGLUB SH, PUIS ALLEZ DANS LE TERMINAL OÙ VOUS AVIEZ AVIEZ RÉALISÉ LE DOCKER ATTACH PLUS HAUT. TERMINEZ ALORS CE SHELL AVEC CTRL+D. 
+
+#### EST-CE QUE LE CONTAINER ZORGLUB EST TOUJOURS EN EXÉCUTION ?  QUE POUVEZ-VOUS EN CONCLURE ? 
+
+- Non, lorsque vous terminez le shell principal (celui avec `docker attach`), cela entraîne également la fermeture du conteneur. Cela est dû au fait que le processus principal du conteneur (dans ce cas, le shell) a été terminé, et lorsque le processus principal se termine, le conteneur s'arrête également.
+- Dans ce cas, lorsque vous terminez le shell avec `ctrl+d` après avoir réalisé le `docker attach`, le conteneur zorglub s'arrêtera, et les autres shells ouverts avec `docker exec` seront également fermés. Vous pouvez vérifier l'état du conteneur en utilisant la commande `docker ps -a` et constater qu'il est arrêté.
+
+```shell
+➜  ~ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  ~
+```
+
+### DÉMARREZ LE CONTAINER ZORGLUB AVEC LA COMMANDE START -AI (ATTACH + INTERACTIVE)
+
+#### LE FICHIER /EX03/FANTASIO EXISTE-T-IL TOUJOURS ?
+
+- Le fichier /ex03/fantasio devrait toujours exister, car il a été créé dans un conteneur précédent qui a été démarré avec la commande `start -ai`. Les modifications apportées aux conteneurs sont persistantes tant que le conteneur n'est pas supprimé.
+
+```shell
+➜  ~ docker start -ai zorglub
+/ # ls ex03/
+fantasio
+/ #
+```
+
+- `docker start -ai`
+	- attach
+	- interactive
+
+## EXERCICE 3
+
+### EXÉCUTEZ UN CONTAINER BASÉ SUR L’IMAGE ALPINE 3.17 EN SPÉCIFIANT DE LE DÉTRUIRE UNE FOIS TERMINÉ. VÉRIFIEZ QUE VOUS UTILISEZ LA BONNE DISTRIBUTION EN INSPECTANT LE CONTENU DU FICHIER /ETC/OS-RELEASE
+
+```shell
+➜  ~ docker pull alpine:3.17
+3.17: Pulling from library/alpine
+f56be85fc22e: Pull complete
+Digest: sha256:124c7d2707904eea7431fffe91522a01e5a861a624ee31d03372cc1d138a3126
+Status: Downloaded newer image for alpine:3.17
+docker.io/library/alpine:3.17
+➜  ~
+```
+
+```shell
+➜  ~ docker run -it --rm alpine:3.17 /bin/sh
+/ # ls /etc/os-release
+/etc/os-release
+/ # cat /etc/os-release
+NAME="Alpine Linux"
+ID=alpine
+VERSION_ID=3.17.3
+PRETTY_NAME="Alpine Linux v3.17"
+HOME_URL="https://alpinelinux.org/"
+BUG_REPORT_URL="https://gitlab.alpinelinux.org/alpine/aports/-/issues"
+/ #
+```
+
+- Pour spécifier de le détruire on fait :
+	- `--rm`
+
+### DANS CE CONTAINER, EXÉCUTEZ LA COMMANDE TOP. INSPECTEZ ENSUITE LE PROCESSUS TOP À L’INTÉRIEUR DU CONTAINER ET SUR LA MACHINE HÔTE (VIA PS AUX)
+
+```shell
+Mem: 6728512K used, 9518596K free, 5536K shrd, 509312K buff, 3878076K cached
+CPU:   0% usr   0% sys   0% nic 100% idle   0% io   0% irq   0% sirq
+Load average: 0.00 0.00 0.00 1/1095 9
+  PID  PPID USER     STAT   VSZ %VSZ CPU %CPU COMMAND
+    1     0 root     S     1692   0%  18   0% /bin/sh
+    9     1 root     R     1620   0%   0   0% top
+```
+
+```shell
+➜  school ps aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   2324  1712 ?        Sl   11:24   0:00 /init
+root         4  0.0  0.0   2376    68 ?        Sl   11:24   0:02 plan9 --control-socket 5 --log-level 4 --server-
+root       131  0.0  0.0   2328   112 ?        Ss   11:24   0:00 /init
+root       132  0.0  0.0   2344   116 ?        S    11:24   0:00 /init
+root       133  0.0  0.1 733348 29232 pts/0    Ssl+ 11:24   0:00 /mnt/wsl/docker-desktop/docker-desktop-user-dist
+root       152  0.0  0.0   2344   116 ?        S    11:24   0:00 /init
+xavierp    153  0.0  0.2 769848 46024 pts/1    Ssl+ 11:24   0:00 docker serve --address unix:///home/xavierp/.doc
+root       188  0.0  0.0   2328   112 ?        Ss   11:31   0:00 /init
+root       189  0.0  0.0   2344   116 ?        R    11:31   0:00 /init
+xavierp    190  0.0  0.0  12896  9024 pts/2    Ss   11:31   0:02 -zsh
+root      2428  0.0  0.0   2340   112 ?        Ss   14:06   0:00 /init
+root      2429  0.0  0.0   2340   120 ?        S    14:06   0:00 /init
+xavierp   2430  0.1  0.0  12708  8864 pts/3    Ss   14:06   0:01 -zsh
+xavierp   4050  0.0  0.2 769848 43624 pts/3    Sl+  14:27   0:00 docker run -it alpine:3.17 /bin/sh
+xavierp   4067  0.0  0.2 1496316 42232 pts/3   Sl+  14:27   0:00 /mnt/wsl/docker-desktop/cli-tools/usr/bin/com.do
+xavierp   4083  0.0  0.0   7480  3092 pts/2    R+   14:28   0:00 ps aux
+➜  school
+```
+
+#### SELON VOTRE OBSERVATION, EST-CE QU’UN PROCESSUS APPARTENANT À ROOT DANS LE CONTAINER APPARTIENT ÉGALEMENT À ROOT EN DEHORS DU CONTAINER ?
+
+- Oui, un processus appartenant à root dans le conteneur appartient également à root en dehors du conteneur.
+- Cependant, il est important de noter que Docker utilise un mappage d'ID utilisateur pour isoler les UID à l'intérieur du conteneur.
+
+### POUR RAPPEL, ROOT POSSÈDE LE USER ID (UID) 0
+#### POURQUOI EST-IL DANGEREUX QU’UN PROCESSUS UID 0 DANS LE CONTAINER SOIT ÉGALEMENT UID 0 SUR LA MACHINE HÔTE ?
+
+- C'est dangereux car si un processus avec UID 0 dans le conteneur est compromis, l'attaquant peut potentiellement prendre le contrôle de la machine hôte. L'isolation entre les conteneurs et la machine hôte est essentielle pour maintenir la sécurité.
+
+#### QUELLE DIFFÉRENCE REMARQUEZ VOUS LORSQUE VOUS EXÉCUTEZ LA COMMANDE PS AUX DANS LE CONTAINER ET SUR LA MACHINE HÔTE ? A VOTRE AVIS, QUELLE EST LA RAISON DE CETTE DIFFÉRENCE ?
+
+- Dans le conteneur, `ps aux` affichera uniquement les processus en cours d'exécution à l'intérieur du conteneur, alors que sur la machine hôte, il affichera tous les processus en cours d'exécution sur la machine hôte, y compris ceux des conteneurs.
+- La différence est due à l'isolation des processus fournie par Docker. Les conteneurs sont isolés du système hôte et ne peuvent voir que leurs propres processus.
+
+### À L’INTÉRIEUR DU CONTAINER, TERMINEZ TOP (TOUCHE Q), PUIS INSTALLEZ ET EXÉCUTEZ LE PROGRAMME ASCIIQUARIUM. POUR INFO, ALPINE UTILISE LE PACKAGE MANAGER APK. LES ÉQUIVALENTS ALPINE DE APTGET UPDATE ET APT-GET INSTALL SONT APK UPDATE ET APK ADD. VOUS POUVEZ LISTER TOUS LES PAQUETS DISPONIBLES AVEC APK LIST
+#### QUEL EST LE PID DE CE PROCESSUS DANS LE CONTAINER ? QUEL EST LE PID DE CE MÊME PROCESSUS SUR LA MACHINE HÔTE ET POURQUOI EST-IL DIFFÉRENT À VOTRE AVIS ?
+
+- Le PID dans le conteneur est différent du PID sur la machine hôte. Docker utilise des espaces de noms (namespaces) pour isoler les processus entre le conteneur et l'hôte, ce qui entraîne des PIDs différents.
+
+### VOUS ALLEZ MAINTENANT INVESTIGUER EMPIRIQUEMENT LE COMPORTEMENT DES CONTAINERS
+#### QUEL EST LE PROCESSUS PORTANT LE NUMÉRO DE PID 1 DANS LE CONTAINER ?
+
+- Dans le conteneur, le processus avec le PID 1 est généralement le processus principal du conteneur (par exemple, le shell ou le processus d'entrée).
+
+```shell
+/ # ps aux
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sh
+   24 root      0:00 ps aux
+/ #
+```
+
+#### QUEL EST LE PROCESSUS PORTANT LE MÊME NUMÉRO DE PID SUR LA MACHINE HÔTE ? 
+
+- Sur la machine hôte, le processus avec le PID 1 est généralement le système d'initialisation (par exemple, systemd).
+
+```shell
+➜  school ps aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   2324  1712 ?        Sl   11:24   0:00 /init
+```
+
+#### POUR GÉNÉRALISER, QUEL EST LE PROCESSUS PORTANT LE PID 1 DANS LE CONTAINER (CÀD QUEL QUE SOIT LE CONTAINER EXÉCUTÉ) ? VOUS POUVEZ LE DÉDUIRE EMPIRIQUEMENT EN EXÉCUTANT D’AUTRES CONTAINERS AVEC DES PROGRAMMES DIFFÉRENTS
+
+- Le processus portant le PID 1 dans un conteneur est généralement le processus principal ou d'entrée du conteneur, qui dépend de l'image et de la configuration du conteneur.
+
+### COMPARER LE RÉSULTAT DE LA COMMANDE UNAME -RV DANS LE CONTAINER ET SUR LA MACHINE HÔTE
+
+#### QUE REMARQUEZ-VOUS ET QUE POUVEZ-VOUS EN CONCLURE ? 
+
+- Normalement les résultats doivent être les mêmes, car le conteneur utilise le noyau de la machine hôte.
+
+- Hôte
+
+```shell
+➜  school uname -rv
+5.15.90.1-microsoft-standard-WSL2 #1 SMP Fri Jan 27 02:56:13 UTC 2023
+➜  school
+```
+
+- Container
+
+```shell
+/ # uname -rv
+5.15.90.1-microsoft-standard-WSL2 #1 SMP Fri Jan 27 02:56:13 UTC 2023
+/ #
+```
+
+### SIMILAIREMENT À CI-DESSUS, COMPAREZ LE CONTENU DU RÉPERTOIRE /DEV/
+
+#### QUE REMARQUEZ-VOUS ?  A VOTRE AVIS QUELLE EST LA RAISON DE CETTE DIFFÉRENCE ?
+
+- Le contenu du répertoire /dev/ peut différer entre le conteneur et la machine hôte, car Docker crée un environnement isolé pour chaque conteneur.
+
+- Machine hôte
+
+```shell
+➜  school ls /dev/
+autofs           hvc0          loop2   ptp0   ram5    sg1     tty12  tty24  tty36  tty48  tty6     vcs
+block            hvc1          loop3   pts    ram6    sg2     tty13  tty25  tty37  tty49  tty60    vcs1
+bsg              hvc2          loop4   ram0   ram7    sg3     tty14  tty26  tty38  tty5   tty61    vcsa
+btrfs-control    hvc3          loop5   ram1   ram8    sg4     tty15  tty27  tty39  tty50  tty62    vcsa1
+bus              hvc4          loop6   ram10  ram9    shm     tty16  tty28  tty4   tty51  tty63    vcsu
+console          hvc5          loop7   ram11  random  stderr  tty17  tty29  tty40  tty52  tty7     vcsu1
+cpu_dma_latency  hvc6          mapper  ram12  rtc0    stdin   tty18  tty3   tty41  tty53  tty8     vfio
+cuse             hvc7          mem     ram13  sda     stdout  tty19  tty30  tty42  tty54  tty9     vhost-net
+dri              kmsg          net     ram14  sdb     tty     tty2   tty31  tty43  tty55  ttyS0    vport0p0
+dxg              kvm           null    ram15  sdc     tty0    tty20  tty32  tty44  tty56  ttyS1    vport0p1
+fd               loop-control  nvram   ram2   sdd     tty1    tty21  tty33  tty45  tty57  ttyS2    vsock
+full             loop0         ppp     ram3   sde     tty10   tty22  tty34  tty46  tty58  ttyS3    zero
+fuse             loop1         ptmx    ram4   sg0     tty11   tty23  tty35  tty47  tty59  urandom
+➜  school
+```
+
+- Container
+
+```shell
+/ # ls /dev/
+console  fd       mqueue   ptmx     random   stderr   stdout   urandom
+core     full     null     pts      shm      stdin    tty      zero
+/ #
+```
+
+#### EST-IL POSSIBLE DE DONNER À UN CONTAINER ACCÈS À UN OU PLUSIEURS PÉRIPHÉRIQUES DE LA MACHINE HÔTE ? COMMENT ? TROUVER UN MOYEN PERMETTANT DE VÉRIFIER VOTRE MÉTHODE
+
+- Oui, il est possible de donner à un conteneur accès à un ou plusieurs périphériques de la machine hôte en utilisant l'option `--device` lors de la création du conteneur. `docker run --device=/dev/sda:/dev/sda`
+- Par exemple, pour donner accès à un périphérique USB :
+
+```shell
+docker run -it --device=/dev/ttyUSB0 ubuntu
+```
+
+- Vous pouvez vérifier si le périphérique est accessible dans le conteneur en utilisant des commandes spécifiques au périphérique ou en vérifiant le contenu du répertoire `/dev/`.
+
+### EXÉCUTEZ LA COMMANDE MOUNT SUR LA MACHINE HÔTE ET DANS LE CONTAINER
+
+- Les montages et les systèmes de fichiers peuvent différer entre le conteneur et la machine hôte en raison de l'isolation des conteneurs.
+
+#### QUELLES DIFFÉRENCES REMARQUEZ VOUS, NOTAMMENT EN CE QUI CONCERNE LE SYSTÈME DE FICHIERS RACINE ?
+
+- Le système de fichiers racine du conteneur sera différent de celui de la machine hôte. 
+- Les conteneurs ont leur propre système de fichiers racine isolé, construit à partir de l'image du conteneur.
+- Le système de fichier racine est un overlay sur le container et sur l'hôte.
+
+#### RETROUVEZ-VOUS L’ENTRÉE DÉFINISSANT LE SYSTÈME DE FICHIERS RACINE DU CONTAINER SUR LA MACHINE HÔTE ? QUE POUVEZ-VOUS DONC CONCLURE DU SYSTÈME DE FICHIERS RACINE DU CONTAINER ?
+
+- L'entrée définissant le système de fichiers racine du conteneur peut ne pas être visible sur la machine hôte.
+- Les conteneurs ont leur propre système de fichiers racine qui est isolé de la machine hôte et construit à partir de l'image du conteneur. 
+- Cette isolation assure la sécurité et la portabilité des conteneurs.
+
+# VIRTUALISATION - DOCKER STORAGE
+
+## EXERCICE 1
+
+### CONFIGURATION
+
+```shell
+➜  school cd v
+➜  v mkdir lower
+➜  v mkdir upper
+➜  v mkdir merged
+➜  v mkdir workdir
+➜  v
+```
+
+```shell
+➜  v sudo mount -t overlay overlay -o lowerdir=lower,upperdir=upper,workdir=workdir merged
+[sudo] password for xavierp:
+➜  v
+```
+
+#### QUELLE EST L'ANALOGIE ENTRE LE SCÉNARIO QUE VOUS AVEZ RÉALISÉ ICI ET LES CONTAINERS DOCKER (IMAGE ET COUCHE CONTAINER) ?
+
+- L'analogie entre ce scénario et les containers Docker est que la couche basse (lower) correspond à l'image Docker en lecture seule, et la couche haute (upper) correspond à la couche de conteneur en lecture/écriture qui stocke les modifications apportées pendant l'exécution du conteneur.
+- La vue unifiée (merged) représente la combinaison des deux couches, tout comme l'environnement de fichiers d'un conteneur Docker.
+
+#### QUE SE PASSE-T-IL RÉELLEMENT LORSQU'UN FICHIER DE LA VUE UNIFIÉE (MERGED) EST AJOUTÉ ?
+
+- Lorsqu'un fichier est ajouté à la vue unifiée (merged), il est en réalité créé dans la couche haute (upper), car c'est la couche en lecture/écriture.
+- La couche basse (lower) reste inchangée, car elle est en lecture seule.
+
+#### QUE SE PASSE-T-IL RÉELLEMENT LORSQU'UN FICHIER DE LA VUE UNIFIÉE (MERGED) ET EXISTANT DANS LA COUCHE BASSE, EST MODIFIÉ ?
+
+- Lorsqu'un fichier existant dans la couche basse (lower) est modifié dans la vue unifiée (merged), le fichier modifié est créé dans la couche haute (upper), préservant ainsi l'original dans la couche basse.
+	- Ce mécanisme est appelé "copy-on-write".
+- La vue unifiée (merged) affiche la version modifiée du fichier.
+
+#### QUE SE PASSE-T-IL RÉELLEMENT LORSQU'UN FICHIER DE LA VUE UNIFIÉE (MERGED) ET EXISTANT DANS LA COUCHE BASSE, EST SUPPRIMÉ ?
+
+- Lorsqu'un fichier existant dans la couche basse (lower) est supprimé dans la vue unifiée (merged), un "whiteout" est créé dans la couche haute (upper) pour indiquer que le fichier a été supprimé.
+- Le fichier original dans la couche basse reste inchangé, mais il est masqué par le whiteout dans la vue unifiée (merged).
+- Pour afficher les attributs d'un fichier avec un whiteout, vous pouvez utiliser `ls -l`.
+- Pour en savoir plus sur les whiteouts et la commande `mknod`, consultez la documentation du système de fichiers overlayfs et les pages de manuel Linux.

@@ -786,4 +786,10 @@ end
 
 - Ensuite, on veut maintenant que notre code supporte les threads
 
+### Sorting algo
+
+- Merge sort
+- Spaghetti (Poll) sort
+- Bitonic sorter
+
 ## REFERENCES
