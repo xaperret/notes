@@ -3,37 +3,87 @@
 
 # LVM
 
+## LOGICAL VOLUME MANAGER
+
 - Qu'est-ce qu'un Logical Volume Manager ?
-	- storage virtualization
-	- layer of abstraction over the physical storage
-	- utilise le DM
+	- Le Logical Volume Manager (LVM) est un **système de gestion de stockage** pour Linux qui permet de gérer et d'organiser des espaces de stockage sur des disques durs ou d'autres dispositifs de stockage.
+	- LVM facilite la gestion des partitions et des volumes, en offrant **une abstraction des dispositifs de stockage physiques** et en permettant aux utilisateurs de **créer et de modifier des volumes logiques** sans se soucier des détails spécifiques du matériel
+ - Quels sont les avantages de LVM ?
+	 1.  **Redimensionnement dynamique des volumes**: LVM permet de redimensionner les volumes logiques à la volée, sans avoir besoin de redémarrer le système ou de démonter les systèmes de fichiers.
+	2.  **Gestion des snapshots**: LVM permet de créer des instantanés (snapshots) des volumes logiques, ce qui facilite la sauvegarde et la récupération des données.
+	3.  **Allocation de l'espace disque à la demande**: LVM permet d'allouer de l'espace disque aux volumes logiques au fur et à mesure de leurs besoins, ce qui évite le gaspillage d'espace disque et facilite la gestion du stockage.
+	4.  **Gestion des volumes répartis sur plusieurs disques**: LVM permet de créer des volumes logiques qui s'étendent sur plusieurs disques ou dispositifs de stockage, offrant ainsi une flexibilité accrue pour la gestion du stockage.
+
+> [!summary]
+> - Virtualization de stockage
+> - Couche d'abstraction pour le stockage
+> - Utilise le device mapper de Linux
+
+## LINUX MULTIPLE DEVICE (MD)
+
 - Qu'est-ce que le Linux Multiple Device (MD)  kernel driver ?
-	- C'est un driver qui fournie des virtual devices à partir de device physique
-	- Exemple
-		- Le RAID
+	- Le Linux Multiple Device (MD) kernel driver, également connu sous le nom de "mdadm" ou "software RAID", est un composant du noyau Linux qui permet de **créer et de gérer des ensembles RAID** (Redundant Array of Independent Disks) en utilisant **des dispositifs de stockage** (généralement des disques durs, dispositif physique) directement connectés à la machine.
+	- Le MD kernel driver est une solution logicielle pour **la mise en place de RAID**, contrairement aux solutions matérielles basées sur des contrôleurs RAID dédiés.
+
+> [!summary]
+> - Gérer des volumes logiques à l'aide de dispositif physique
+> - RAID logicielle
+
+## LINUX DEVICE MAPPER (DM)
+
 - Qu'est-ce que le Linux device mapper (DM) kernel driver ?
-	- C'est un driver qui virtualize les block devices
-	- Il permet aussi de mapper les blocks physiques sur des higher-level virtual block devices
-	- Exemple
-		- LVM, disk encryption, file system snapshots, etc.
+	- Le Linux Device Mapper (DM) kernel driver est un composant du noyau Linux qui fournit une **infrastructure générique pour la création et la gestion de dispositifs de mappage**. 
+	- Le Device Mapper permet de transformer et de mapper des **blocs de stockage** entre des dispositifs sources et des dispositifs cibles. 
+	- Cette fonctionnalité est utilisée pour mettre en œuvre diverses fonctionnalités de gestion du stockage, telles que le RAID logiciel, les volumes logiques (LVM), les instantanés de volume et le cryptage de disque.
+- Concrètement qu'est-ce que le Linux device mapper (DM) permet de réaliser ?
+	- Le Device Mapper permet de créer des **dispositifs de mappage** qui sont des **dispositifs virtuels de blocs** basés sur des dispositifs de **blocs physiques ou d'autres dispositifs de mappage**.
+	- Ces dispositifs virtuels peuvent être utilisés pour combiner, diviser, redimensionner, chiffrer ou manipuler de toute autre manière les dispositifs de blocs sous-jacents.
+	- Exemples :
+		1.  LVM (Logical Volume Manager) : Il permet de créer des volumes logiques flexibles qui peuvent être redimensionnés, déplacés ou combinés selon les besoins. Les volumes logiques reposent sur des groupes de volumes qui, à leur tour, reposent sur des dispositifs de stockage physiques.
+		2.  dm-crypt : Il s'agit d'un sous-système de Device Mapper qui fournit des fonctionnalités de cryptage de disque transparentes. dm-crypt est généralement utilisé avec LUKS (Linux Unified Key Setup) pour gérer le cryptage de disque.
+		3.  dm-raid : Il prend en charge la création et la gestion de RAID logiciel en utilisant Device Mapper au lieu de MD (Multiple Devices) kernel driver.
+		4.  dm-thin : Il permet la création de dispositifs de provisionnement mince (thin provisioning) pour une utilisation plus efficace de l'espace disque.
+
+> [!summary]
+> - Mapper les blocks physiques sur des higher-level virtual block devices
+> - C'est un driver qui virtualize les block devices
+> - LVM, disk encryption, file system snapshots, etc.
+
+## LOGICAL VOLUME MANAGER (LVM2)
+
 - Qu'est-ce que le Logical Volume Manager (LVM2) ?
-	- Cela utilise DM pour fournir une gestion générique des volumes depuis l'espace utilisateur
+	- Le Logical Volume Manager (LVM) est un outil de gestion du stockage sous Linux qui facilite l'allocation et la gestion flexibles de l'espace disque sur des disques durs physiques.
+ 
+ > [!summary]
+> - Cela utilise DM pour fournir une gestion générique des volumes depuis l'espace utilisateur
+
+## LVM2 ADVANTAGES
+
 - Quel est l'avantage du LVM2 ?
-	- Il peut être utilisé sur des devices MD ou DM.
-	- Thin provisioning
-	- Abstraction layer hides details about physical storage
-	- Data can be moved/re-arranged/resized at runtime
-	- Atomic filesystem snapshots
-- Quel est le bénéfice pour LVM de "Thin provisionning" ?
+	1.  Gestion flexible du stockage
+	2.  Instantanés (Snapshots)
+	3.  Striping et mirroring
+	4.  Migration de données
+	5.  Provisionnement fin (Thin Provisioning) : Cette fonctionnalité permet de créer des volumes logiques qui utilisent l'espace disque de manière plus efficace en n'allouant l'espace disque qu'au fur et à mesure de son utilisation.
+	6. Couche d'abstraction qui cache les détails d'implémentation
+- Qu'est-ce que l'on veut dire par Gestion flexible du stockage pour LVM2 ?
+	- LVM2 permet de créer, redimensionner, déplacer et supprimer facilement des volumes logiques, ce qui facilite l'adaptation de l'espace disque aux besoins changeants.
+- Qu'est-ce que l'on veut dire par Instantanés (Snapshots) pour LVM2  ?
+	- LVM2 prend en charge la création d'instantanés de volumes logiques, qui sont des copies de l'état d'un volume logique à un moment donné. Les instantanés sont utiles pour les sauvegardes et les tests, car ils permettent de revenir à un état antérieur du système en cas de problème.
+- Qu'est-ce que l'on veut dire par Striping et mirroring pour LVM2 ?
+	- LVM2 permet d'améliorer les performances et la redondance du stockage en répartissant les données sur plusieurs disques (striping) et en copiant les données sur plusieurs disques pour la redondance (mirroring).
+- Qu'est-ce que l'on veut dire par Migration de données pour LVM2 ?
+	- LVM2 facilite la migration des données entre différents disques ou systèmes de stockage sans interruption de service.
+- Qu'est-ce que l'on veut dire par Provisionnement fin (Thin Provisioning) pour LVM2 ?
+	- Cette fonctionnalité permet de créer des volumes logiques qui utilisent l'espace disque de manière plus efficace en n'allouant l'espace disque qu'au fur et à mesure de son utilisation.
 	- Cela permet de crée des systèmes de fichiers plus grand que l'espace disque actuellement disponible
-- Quel est le bénéfice pour LVM de "Abstraction layer hides details about physical storage" ?
-	- L'espace de stockage peut être modifié "unknowingly" to applications
-		- transparent aggregation of multiple physical devices
-		- disks can be added/replaced at runtime (hot-swapping)
-- Quel est le bénéfice pour LVM de "Data can be moved/re-arranged/resized at runtime" ?
-	- Cela permet de la flexibilité
-- Quel est le bénéfice pour LVM de "Atomic filesystem snapshots" ?
-	- Regardless of the underlying physical layout which allows for consistent backups.
+- Quel est le bénéfice pour LVM de " Couche d'abstraction qui cache les détails d'implémentation" ?
+	- L'espace de stockage peut être modifié de manière transparente aux applications
+	- Agrégation transparente de multiples dispositifs physiques possible
+	- Les dispositifs physiques peuvent être changer (hot-swapping)
+
+## LVM2 USAGE
+
 - Pourquoi utilise t'on des LVM ?
 	- Car la virtualisation d'espace de stockage massif est mandatoire dans les data centers afin de réduire le system downtime et augmenter la flexibilité
  - Qu'est-ce que Clustered LVM (CLVM)
@@ -105,7 +155,7 @@
 	- Processes and files can each have capabilities • process capabilities: defines what privileged operations a process can do • file capabilities: what capabilities a process gets when executing the file
 - Qu'est-ce que Namespaces ?
 	- Namespaces are used to provide isolation
-- Qu'est-ce que Control groups ?
+- Qu'est-ce que Control groups (Cgroups) ?
 	- Cgroups are used to control resources among groups of processes
 	- CPU time, memory, network bandwidth, I/O bandwidth
 	- provide fine-grained control over allocating, prioritizing, denying, managing, and monitoring system resources • organized hierarchically (like processes) and child cgroups inherit some of their parents’ attributes
@@ -241,9 +291,6 @@
 
 # DOCKER DATA STORAGE
 
-
-## DOCKER IMAGES
-
 - Docker images
 	- Docker images are root filesystems (rootfs) for containers
 - What does it mean ?
@@ -353,10 +400,113 @@
 
 # DOCKERFILES
 
+- What is a dockerfile ?
+	- A Dockerfile is a text file containing instructions on how to build an image
+- Why a Dockerfile?
+	- When existing images don’t satisfy our needs
+	- To customize an existing image to our needs
+- To build an image
+	- `docker build`
+- To run & create a container
+	- `docker run`
+- Dockerfile
+	1. Define base image (FROM) 
+	2. Set environment variables (ENV) 
+	3. Add instructions, e.g. packages to install, etc. (RUN) 
+	4. Add files (COPY or ADD) 
+	5. Define default command (CMD or ENTRYPOINT)
+	6. Indicates ports the container listens to for connections (EXPOSE)
+
+```dockerfile
+FROM alpine:3.16
+ENV EDITOR=vi
+RUN apk update
+RUN apk add git
+COPY hosts /etc/ 
+WORKDIR /home 
+CMD git
+```
+
+- COPY vs ADD both copy files from a specific location into a Docker image
+	- COPY can only copy a local file or directory from the host into the image
+	- ADD similar to COPY but more powerful: 
+		- can extract a tar archive into the image
+		- can specify an URL instead of a local file or directory
+- ENTRYPOINT also specify which command to execute when the image is instantiated
+- By opposition to CMD, ENTRYPOINT cannot be overriden when starting the container!
+- What is the purpose of ENTRYPOINT since CMD already exists?
+	- CMD contents is added to ENTRYPOINT as argument
+	- ENTRYPOINT + CMD = a way of specifying default, but overridable arguments
+
+```dockerfile
+ENTRYPOINT ["git"]
+CMD [" --help "]
+```
+
+- The docker build command builds an image from a Dockerfile and a build context
+- The build is run by the Docker daemon dockerd (on the host), not the client!
+- Docker builds the image myimage:mytag based on the content of a file named Dockerfile in the current directory
+	- `docker build . -t myimage : mytag`
+- Build context = set of files at a specified PATH or URL • PATH includes any subdirectories • URL includes a git repository and its submodules
+- • During build, the client sends the entire context recursively to the Docker daemon!
+- Use .dockerignore to specify which files to not sent to the daemon (similar to .gitignore)
+- why layers matter
+	- • Every RUN, COPY and ADD line creates a new layer
+	- each layer represents a delta of the changes from previous layer • what is present in a layer can never be removed!
+- docker export
+	- exports a container’s filesystem into a tar archive (to stdout) • archive contains the filesystem only
+	- docker import
+- docker save
+	- saves an image’s filesystem into a tar archive (to stdout) • archive contains the various layers’ contents (filesystem) and image meta-data (e.g. entry-point, etc.)
+	- docker load
+- What's the problem with building an image from a local root filesystem ?
+	- The image will likely change over time
+- What's the solution to the fact an image will likely change over time ?
+	- `docker export alpine :3.16 > alpine_3 .16. tar`
+
+```dockerfile
+FROM scratch
+ADD alpine_3.16.tar /
+CMD sh
+```
+
+- What if you want to build a container with a specific program that must be generated from source?
+	- multi-stage builds!
+- Best practices
+	- One container should only solve one problem! • Create Dockerfiles that define stateless images • any state should be kept outside of the container (volumes) • Minimize the image size by removing unecessary files, for instance with Debian-like distributions: apt - get clean && rm -rf / var /lib/ apt/ lists / var / cache / apt • Minimize number of layers (= minimize number of steps) • Use .dockerignore to avoid sending all context files/dirs to the Docker daemon
+
 # DOCKER BASIC NETWORKING
 
+- What are the main Docker network drivers ?
+	- None
+	- Host
+	- Bridge
+	- (Overlay)
+- What is the None network driver ?
+	- The none network driver ensure no network interface is available to the container (except for the local loopback interface)
+	- Example : `docker run -it --rm --network none ubuntu:22.04`
+- What is the Host network driver ?
+	- Remove network isolation between container and host
+	- All network interfaces from the host are available in the container
+	- Example : `docker run -it --rm --network host ubuntu:22.04`
+- What is the Bridge network driver ?
+	- Allow containers connected to the same bridge network to communicate, while providing isolation from containers which are not connected to it
+	- One can create user-defined custom bridge networks
+- What is the Default bridge network ?
+	- • When Docker daemon is started, a default network is created automatically • Named bridge and exposed via the docker0 interface • Newly-started containers connect to the bridge network unless otherwise specified • Containers conntected to the bridge network can reach each others by ip • The bridge network is legacy and is not recommended for production use • Instead, it’s recommended to create user-defined custom networksA
+	- ![[Pasted image 20230426114334.png]]
+- User-defined networks
+	- Containers connected to the same user-defined network:
+		- can reach each other by name or ip • effectively expose all ports to each other
+- User-defined networks provide name resolution between containers connected to the same network
+- For a port to be accessible to containers or non-Docker hosts on different networks, it must be published with -p
+- ![[Pasted image 20230426114524.png]]
+- User-defined network vs default bridge network (1/2)
+	- User-defined networks provide: • better flexibility and interoperability between containerized applications • name resolution between containers connected to the same network • The bridge network does not provide name resolution between containers!
+	- • Containers can be attached/detached from user-defined networks on the fly • to remove a container from the bridge network → must be stopped and recreated with different options • Each user-defined network creates a configurable bridge • configuring the bridge network happens outside of Docker itself, and requires a restart of Docker
 # VIRTUALIZATION TECHNOLOGIES AND FRAMEWORKS
 
+- Unikernel
 # VIRTUALISATION - DOCKER BASICS
 
 ## EXERCICE 1
