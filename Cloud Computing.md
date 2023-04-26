@@ -17,7 +17,7 @@ date modified: Monday, September 19th 2022, 6:09:45 pm
 ### Principle
 
 - Pay as you use
-initialization of a container is fast & lightweight
+initialization of a conteneur is fast & lightweight
 sometimes you do not need the service
 
 ### Purpose

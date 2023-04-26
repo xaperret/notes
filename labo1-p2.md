@@ -101,7 +101,7 @@ Vous pouvez utiliser la commande file pour vérifier le type de fichier : file h
 
 Un fichier OVA est généralement un fichier tar contenant:: plusieurs fichiers liés à la machine virtuelle, tels que les fichiers de configuration et les disques durs virtuels.
 
-Ce fichier contient en particulier 2 fichiers : 1 de type .ovf(Open Virtualization Format) et .vmdk(==container pour disque dur virtuel==).
+Ce fichier contient en particulier 2 fichiers : 1 de type .ovf(Open Virtualization Format) et .vmdk(==conteneur pour disque dur virtuel==).
 
 Les fichiers OVA (Open Virtualization Appliance) et VDI (Virtual Disk Image) sont deux formats différents utilisés dans la gestion des machines virtuelles, principalement dans VirtualBox. Voici les principales différences entre les deux :
 

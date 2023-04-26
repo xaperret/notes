@@ -61,7 +61,7 @@
 
 - Quel est l'avantage du LVM2 ?
 	1.  Gestion flexible du stockage
-	2.  Instantanés (Snapshots)
+	2.  Instantanés (Snapshots (copy-on-write))
 	3.  Striping et mirroring
 	4.  Migration de données
 	5.  Provisionnement fin (Thin Provisioning) : Cette fonctionnalité permet de créer des volumes logiques qui utilisent l'espace disque de manière plus efficace en n'allouant l'espace disque qu'au fur et à mesure de son utilisation.
@@ -82,70 +82,130 @@
 	- Agrégation transparente de multiples dispositifs physiques possible
 	- Les dispositifs physiques peuvent être changer (hot-swapping)
 
+> [!summary]
+> -   Gestion flexible du stockage pour l'adaptation aux besoins changeants
+> -   Instantanés (Snapshots) pour les sauvegardes et tests
+> -   Amélioration des performances et redondance avec striping et mirroring
+> -   Migration de données sans interruption de service
+> -   Thin Provisioning pour une utilisation efficace de l'espace disque
+> -   Couche d'abstraction pour la transparence des applications et l'agrégation de dispositifs physiques
+
 ## LVM2 USAGE
 
 - Pourquoi utilise t'on des LVM ?
-	- Car la virtualisation d'espace de stockage massif est mandatoire dans les data centers afin de réduire le system downtime et augmenter la flexibilité
- - Qu'est-ce que Clustered LVM (CLVM)
+	- Car LVM offre une gestion de stockage plus souple, efficace et performante, facilitant la maintenance et l'évolutivité des systèmes Linux. 
+	- Et ces avantages sont nécessaire lorsque l'on doit gérer des quantités de données massives dans les data centers.
+
+## TYPES OF LVM2
+
+ - Qu'est-ce que Clustered LVM (CLVM) ?
+	 - Clustered LVM (CLVM) est une extension du Logical Volume Manager (LVM) qui permet la gestion de volumes logiques dans un environnement de cluster. CLVM offre les mêmes fonctionnalités que LVM, mais ajoute la capacité de partager et gérer des volumes logiques sur plusieurs nœuds de cluster simultanément.
+	 - Dans un cluster, plusieurs serveurs (nœuds) travaillent ensemble pour fournir une haute disponibilité, une meilleure répartition de la charge et une évolutivité. CLVM est particulièrement utile pour les environnements où les données doivent être accessibles et partagées entre plusieurs nœuds, comme dans les cas de serveurs de fichiers, de bases de données ou de machines virtuelles.
  - Qu'est-ce que High-Availability LVM (HA-LVM)
+	 - High-Availability LVM (HA-LVM) est une configuration de LVM qui est utilisée en conjonction avec un logiciel de gestion de cluster pour fournir une disponibilité élevée des volumes logiques dans un environnement de cluster.
+	 - HA-LVM améliore la disponibilité des données en permettant la détection automatique des défaillances et la récupération des services de stockage sur un autre nœud du cluster en cas de défaillance d'un nœud.
  - Qu'est-ce que le Mirroring ?
+	 - Le mirroring (ou mise en miroir) est une technique de redondance de données qui consiste à copier les données d'un disque ou d'une partition sur un autre disque ou une autre partition, en temps réel ou presque.
+	 - Cette méthode de réplication des données est utilisée pour assurer la continuité de l'accès aux données et la protection contre la perte de données en cas de défaillance matérielle, comme la panne d'un disque dur.
+
+## LVM2 LAYERS
+
  - Qu'est-ce qu'un physical volume (LVM terminology) ?
-	 - Physical storage, typically hard disk, partition, or something that looks like a disk, e.g. software RAID device
+	 - Dans la terminologie LVM (Logical Volume Manager) sous Linux, un Physical Volume (PV) est un disque ou une partition de disque qui est utilisé comme bloc de base pour créer des volumes logiques.
+	 - Les Physical Volumes sont généralement des disques durs, des partitions de disque, des périphériques de stockage externes ou d'autres dispositifs de stockage reconnus par le système d'exploitation.
  - Qu'est-ce que le volume group (LVM terminology) ?
-	 - A pool of physical volumes presented as one administrative unit
+	 - Dans la terminologie LVM (Logical Volume Manager) sous Linux, un Volume Group (VG) est un regroupement de plusieurs Physical Volumes (PV). 
+	 - Le Volume Group permet d'agréger l'espace de stockage provenant de plusieurs Physical Volumes en une seule entité logique, facilitant ainsi la gestion et l'allocation de l'espace de stockage.
  - Qu'est-ce qu'un logical volume (LVM terminology) ?
-	 - An exposed block device (~ equivalent of a disk partition)
-	 - May be spanned, striped, mirrored, or a snapshot
+	 - Dans la terminologie LVM (Logical Volume Manager) sous Linux, un Logical Volume (LV) est une unité de stockage logique créée à partir de l'espace disponible dans un Volume Group (VG).
+	 - Les Logical Volumes sont les éléments sur lesquels vous créez des systèmes de fichiers et les montez dans l'arborescence du système de fichiers de votre système d'exploitation.
+	 - Un Logical Volume est un périphérique de blocs exposé, qui est plus ou moins équivalent à une partition de disque.
+	 - Il peut être étendu, réparti en bandes (striped), dupliqué (mirrored) ou être un instantané (snapshot), offrant ainsi une flexibilité et des options avancées pour la gestion de l'espace disque.
  - Quels sont les trois couches du modèle LVM ?
+	 1.  Physical Volume (PV)
+	 2.  Volume Group (VG)
+	 3.  Logical Volume (LV)
 	 - ![[Pasted image 20230424171530.png]]
 	 - ![[Pasted image 20230424171547.png]]
- - Qu'est-ce que l'unité de base d'allocation de LVM ?
-	 - Extent
- - Qu'est-ce qu'un extent ?
-	 - An extent is a contiguous area of storage, represented by 2 numbers: (offset, length)
- - Quels sont les deux types d'extents ?
-	 - physical extents (PE)
-	 - logical extents (LE)
- - physical volumes are divided into PE
- - volume groups are sets of PE
- - logical volumes are sets of LE
- - PE and LE have the same size
- - PE size displayed in vgdisplay
- - Comment est réalisé le mappage de logical extent à physical extent ?
-	 - ![[Pasted image 20230424171839.png]]
-- LVM features
-	- Les volumes groups resizable online by absorbing new PVs or ejecting existing ones
-	- Logical Volume resizable online
-	- Logical Volume movable between PVs
-	- VGs can be split or merged as long as no LVs span the split • Useful when migrating whole LVs to or from offline storage
-	- Atomic snapshots (copy-on-write)
-	- Thinly-provisioned LVs (over-commit physical storage)
-	- Supports RAID 0, 1, 4, 5, 6, 10
-	- High availability (shared-storage cluster with shared PVs between hosts)
-- Snapshots
-	- A snapshots atomically saves the state of a logical volume • Snapshot performed at the block layer level → filesystem independent • Use Copy-On-Write (COW) • requires a new LV to save “changes” • up to the user to choose the new volume size • size must be enough to store the changes (10% of original’s LV is often recommended) • Allows to create atomic backups • a task impossible to perform on a filesystem that doesn’t support native shapshots, such as ext4
-- Snapshots behavior
-	- Let A be the original volume and S the snapshot volume of A • S stores the “changes” after the snapshot was performed • changes are not the new data, but A’s data before S • When accessing S (via mount), we see A’s original content, i.e. before S was taken • When accessing A, we see its current content • The atomic state of A prior to S can then be backup’ed • A snapshot’s content can be merged back to restore the state pre-snapshot • however: requires to umount the original volume (A) before applying the merge
-- Snapshots use-cases
-	- Atomic backup of a logical volume without taking the volume offline • System upgrade (likely to succeed) • snapshot before the upgrade • if everything goes well → remove the snapshot • if upgrade fails → revert (merge) the snapshot • Discardable changes for temporary use • create a snapshot of the system • mount the snapshot (say in /snap) • let user use /snap • when user is finished → discard the snapshot
+ 
+> [!summary]
+> - Physical Volume (PV) : Il s'agit de la couche de base qui représente les disques physiques ou les partitions sur lesquels LVM opère. Un Physical Volume est un périphérique de stockage (un disque dur, une partition, ou un autre périphérique de stockage) qui est configuré pour être utilisé par LVM.
+> - Volume Group (VG) : Cette couche intermédiaire regroupe un ou plusieurs Physical Volumes en une seule entité logique. Un Volume Group agit comme un pool de stockage à partir duquel on peut allouer de l'espace pour créer des Logical Volumes. Un VG peut être étendu ou réduit en ajoutant ou en supprimant des PVs.
+> - Logical Volume (LV) : C'est la couche supérieure qui représente les unités de stockage virtuelles créées à partir de l'espace disponible dans un Volume Group. Les Logical Volumes sont les éléments sur lesquels vous créez des systèmes de fichiers et les montez dans la structure du système de fichiers de votre système d'exploitation. Les LVs peuvent être redimensionnés, déplacés, et configurés avec différentes options telles que le striping, le mirroring et les snapshots.
+    
+2.  Volume Group (VG) : Cette couche intermédiaire regroupe un ou plusieurs Physical Volumes en une seule entité logique. Un Volume Group agit comme un pool de stockage à partir duquel on peut allouer de l'espace pour créer des Logical Volumes. Un VG peut être étendu ou réduit en ajoutant ou en supprimant des PVs.
+    
+3.  Logical Volume (LV) : C'est la couche supérieure qui représente les unités de stockage virtuelles créées à partir de l'espace disponible dans un Volume Group. Les Logical Volumes sont les éléments sur lesquels vous créez des systèmes de fichiers et les montez dans la structure du système de fichiers de votre système d'exploitation. Les LVs peuvent être redimensionnés, déplacés, et configurés avec différentes options telles que le striping, le mirroring et les snapshots.
 
+## OTHER TERMINOLOGIES
+
+ - Qu'est-ce que l'unité de base d'allocation de LVM ?
+	- L'unité de base d'allocation de LVM (Logical Volume Manager) est appelée "Physical Extent"  (PE) ou Logical extents (LE), représentée par deux nombres : (décalage, longueur).
+ - Qu'est-ce qu'un extent ?
+	 - Un Physical Extent est un bloc d'espace disque de taille fixe contigüe sur un Physical Volume (PV). Lors de la création d'un Volume Group (VG), tous les PVs inclus sont divisés en Physical Extents de même taille.
+ - Quels sont les deux types d'extents ?
+	 1.  Physical Extents (PE) : Ce sont les unités de base d'allocation sur un Physical Volume (PV). Chaque Physical Extent est mappé sur un Logical Extent dans un Logical Volume.
+	 2.  Logical Extents (LE) : Ce sont les unités de base d'allocation sur un Logical Volume (LV). Les Logical Extents sont mappés sur des Physical Extents dans un ou plusieurs Physical Volumes.
+ - Les volumes physique sont divisés en ?
+	 - Les volumes physiques (Physical Volumes, PV) dans LVM sont divisés en unités d'allocation appelées Physical Extents (PE).
+ - Les volume groups sont des ensemble de ?
+	 - Les Volume Groups (VG) dans LVM sont des ensembles de volumes physiques (Physical Volumes, PV).
+ - Les volumes logiques sont des ensemble de ?
+	 - Les volumes logiques (Logical Volumes, LV) sont des ensembles d'extents logiques qui proviennent d'un Volume Group (VG).
+ - Les PE et LE ont la même taille
+ - Comment est réalisé le mappage de logical extent à physical extent ?
+	 - Le mappage de logical extents (LE) à physical extents (PE) est réalisé par le Logical Volume Manager (LVM). 
+	 - LVM maintient une table de mappage qui relie les extents logiques aux extents physiques sur les disques.
+	 - ![[Pasted image 20230424171839.png]]
+
+## LVM SNAPSHOTS
+
+- Qu'est-ce qu'un instantané (snapshot) ?
+	- Un instantané sauvegarde atomiquement l'état d'un volume logique. 
+	- L'instantané est effectué au niveau de la couche de blocs, ce qui le rend indépendant du système de fichiers.
+- Quel technique utilise un snapshot LVM ? 
+	- Il utilise la technique de copie à l'écriture (COW) et nécessite un nouveau volume logique pour sauvegarder les "changements". 
+ - Quel contrainte de taille pour un snapshot LVM ?
+	- La taille de ce nouveau volume doit être suffisante pour stocker les changements (10% de la taille du volume logique original est souvent recommandé). 
+- Comment fonctionnent les instantanés (snapshots) ?
+	- Soit A le volume original et S le volume instantané de A.
+	- S stocke les "changements" après la prise de l'instantané. 
+	- Les changements ne sont pas les nouvelles données, mais les données de A avant S. Lorsqu'on accède à S (via le montage), on voit le contenu original de A, c'est-à-dire avant que S ne soit pris. 
+	- Lorsqu'on accède à A, on voit son contenu actuel. 
+	- L'état atomique de A avant S peut alors être sauvegardé. 
+	- Le contenu d'un instantané peut être fusionné pour restaurer l'état avant l'instantané, mais cela nécessite de démonter le volume original (A) avant d'appliquer la fusion.
+ - Quels sont les cas d'utilisation des instantanés (snapshots) ?
+	-   Sauvegarde atomique d'un volume logique sans mettre le volume hors ligne : 
+		- mise à niveau du système (susceptible de réussir), 
+		- création d'un instantané avant la mise à niveau, 
+		- suppression de l'instantané si tout se passe bien, et réversion (fusion) de l'instantané en cas d'échec de la mise à niveau.
+	- Changements temporaires à jeter : 
+		- créer un instantané du système, 
+		- monter l'instantané (par exemple dans /snap), 
+		- laisser l'utilisateur utiliser /snap, 
+		- puis supprimer l'instantané lorsque l'utilisateur a terminé.
+  
 # CONTAINERS
 
-- Qu'est-ce que l'operating system virtualization ou containerization ?
-	- C'est une technologie qui permet au kernel de créer et gérer des instances multiples d'espaces utilisateurs, appelées containers.
-- Pourquoi dis-t'on que la containerization fournie de l'isolation ?
-	- Car les processus dans un containers voient seulement le contenu du container et les devices qui lui sont assignés.
-- Que fournie le Kernel pour limiter l'impact des activités d'un container sur les autres containers ?
+- Qu'est-ce que l'Operating System Virtualization ou conteneurisation ?
+	- La virtualisation du système d'exploitation, également appelée conteneurisation, est une méthode de virtualisation dans laquelle plusieurs instances isolées (appelées conteneurs) sont exécutées sur un seul hôte, partageant le même noyau du système d'exploitation.
+ - Dans la Conteneurisation chaque conteneur dispose de ?
+	- Chaque conteneur dispose de son propre espace de processus, de réseau, d'utilisateur et de système de fichiers, ce qui lui permet d'exécuter des applications et des services dans un environnement isolé. 
+- Pourquoi dis-t'on que la conteneurisation fournie de l'isolation ?
+	- On dit que la conteneurisation fournit de l'isolation car elle permet d'exécuter des applications et des services dans des environnements isolés, appelés conteneurs.
+	- Chaque conteneur dispose de sa propre instance des processus, du réseau, des utilisateurs et du système de fichiers. 
+	- Cette séparation permet aux conteneurs de fonctionner indépendamment les uns des autres, réduisant ainsi les conflits et les problèmes de compatibilité entre les différentes applications ou services.
+- Que fournie le Kernel pour limiter l'impact des activités d'un conteneur sur les autres conteneurs ?
 	- Il fournie du resource-management.
  - Quel est la différence entre la virtualization de OS et la virtualization de plateforme ?
-	 - Les containers partagent le même kernel mais ont des différentes librairies, utilities, root filesystem, view of process tree, networking, etc...
+	 - Les conteneurs partagent le même kernel mais ont des différentes librairies, utilities, root filesystem, view of process tree, networking, etc...
 	 - Les machines virtuelles ont des OS invités différents
 	 - ![[Pasted image 20230424192443.png]]
-- Quel est l'avantage des containers par rapport aux vms ?
+- Quel est l'avantage des conteneurs par rapport aux vms ?
 	- Moins d'overhead, mais moins d'isolation.
-- Qu'est-ce qu'un container ?
-	- A container is a set of processes that are isolated from the host system and other containers
-- De quel technologies les containers font usage ?
+- Qu'est-ce qu'un conteneur ?
+	- A conteneur is a set of processes that are isolated from the host system and other conteneurs
+- De quel technologies les conteneurs font usage ?
 	- Capabilities, provide security
 	- Namespaces, provide isolation
 	- Control groups, provide limits on resources
@@ -162,23 +222,23 @@
 - Cgroups can be: • monitored • denied access to resources • reconfigured dynamically (i.e. at run-time)
 - Qu'est-ce que seccomp ?
 	- Seccomp is used to restrict the system calls a process makes
-- Pourquoi utilisé les containers ?
+- Pourquoi utilisé les conteneurs ?
 	- Lightweight, fast, disposable. . . virtual environments
 	- Can be used as “light” virtual machines, but with less isolation
 	- Can be used to build, ship, deploy, and run applications
-- Quels sont les bénéfices de la containerization ?
+- Quels sont les bénéfices de la conteneurisation ?
 	- Isolation (security) • Provide a complete isolated OS environment • Allow packaging and isolation of applications with their entire runtime environment
 	- Portability • Container packaged with all its dependencies
 	- Productivity • Performance: lightweight environment • Consolidation: maximize resource utilization • Continuous integration: development, test, deployment
 - Containers vs virtual machines
-	- Containers are lightweight compared to traditional VMs → more containers can be run per host than traditional VMs • Unlike containers, VMs require emulation layers → consume more resources and add overhead • Containers share resources with the underlying host machine, with user space and process isolations • Starting a container is much faster2 than starting a VM
-- Qeuls sont les limtiations des containers Containers use same kernel as host → imposes strong limitations: ?
-	- Limited to running applications compiled for the host’s kernel architecture • Limitation from an hardware (CPU) point of view: can’t run an armhf (ARM) container on top of an amd64 (x86-64) system • Can’t run a Windows container on a Linux system • Limited to the host’s kernel (and its features) • Reliability: higher impact of a crash, especially in kernel area
+	- Containers are lightweight compared to traditional VMs → more conteneurs can be run per host than traditional VMs • Unlike conteneurs, VMs require emulation layers → consume more resources and add overhead • Containers share resources with the underlying host machine, with user space and process isolations • Starting a conteneur is much faster2 than starting a VM
+- Qeuls sont les limtiations des conteneurs Containers use same kernel as host → imposes strong limitations: ?
+	- Limited to running applications compiled for the host’s kernel architecture • Limitation from an hardware (CPU) point of view: can’t run an armhf (ARM) conteneur on top of an amd64 (x86-64) system • Can’t run a Windows conteneur on a Linux system • Limited to the host’s kernel (and its features) • Reliability: higher impact of a crash, especially in kernel area
 
 # LXC
 
 - What is LXC?
-	- LXC = Linux Containers • low-level Linux container runtime
+	- LXC = Linux Containers • low-level Linux conteneur runtime
 - How does it work ?\
 	- Run multiple isolated Linux systems on a single host
 - Provide ?
@@ -187,8 +247,8 @@
 - Containers share the same kernel as the host kernel!
 - What does it use for isolation ?
 	- Use kernel-based isolation mechanisms (capabilities, namespaces, cgroups, seccomp)
-- How to create different OS containers ?
-	- LXC uses templates to create different OS containers
+- How to create different OS conteneurs ?
+	- LXC uses templates to create different OS conteneurs
 - What are templates ?
 	- • Templates = scripts to bootstrap specific OS
 
@@ -205,10 +265,10 @@
 	- Workflow
 	- Community
 - What is Docker ?
-	- Docker = open-source engine that automates the deployment of applications into containers
-	- Platform for developers/sysadmins to develop, ship, and run applications, based on containers
+	- Docker = open-source engine that automates the deployment of applications into conteneurs
+	- Platform for developers/sysadmins to develop, ship, and run applications, based on conteneurs
 - What does it also do
-	- Simplifies and standardizes the creation and management of containers
+	- Simplifies and standardizes the creation and management of conteneurs
 	- Provides a RESTful API to perform queries and actions
 - Docker components
 	- Docker Engine (docker client + server)
@@ -222,13 +282,13 @@
 	- a RESTful API to interact with dockerd
 - Docker clients talk to the docker server (dockerd daemon) which does all the work
 - Images
-	- Every container is instantiated from an image → encloses a program within the image’s filesystem
+	- Every conteneur is instantiated from an image → encloses a program within the image’s filesystem
 	- Hierarchy of images: images have a parent ↔ children relationship
-- Images are to containers what classes are to
+- Images are to conteneurs what classes are to
 	- instances in OOP (Object Oriented Programming)
 - An image includes: 
 	- a full-fledged, isolated root filesystem (e.g. minimal filesystem provided by an Ubuntu distribution)
-	- the default program to execute when a container is created from an image
+	- the default program to execute when a conteneur is created from an image
 		- this program is also called the entry-point
 	- network info (e.g. which ports should be exposed)
 - Registries
@@ -244,12 +304,12 @@
 	 - `docker pull <image name>
 	 - `docker pull <image id>`
  - Containers
-	 - Docker helps build and deploy containers inside of which one can package applications and services
+	 - Docker helps build and deploy conteneurs inside of which one can package applications and services
  - Containers are launched from
 	 - images and contain one or more running processes
- - A container terminates when 
-	 - its entry-point process terminates, regardless of the number of other processes still running in the container
- - A container is 
+ - A conteneur terminates when 
+	 - its entry-point process terminates, regardless of the number of other processes still running in the conteneur
+ - A conteneur is 
 	 - an instance of an image, similar to a process is an instance of a program
  - Images 
 	 - = building aspect of docker → immutable (static)
@@ -262,29 +322,29 @@
 	 - the docker daemon, not the docker client
  - Simplest example
 	 - `docker run debian echo " Hello world "`
- - To create a container and launch a bash shell inside it:
+ - To create a conteneur and launch a bash shell inside it:
 	 - `docker run -it debian /bin / bash`
- - Running a container’s program with specific user and group IDs can be done with the argument:
+ - Running a conteneur’s program with specific user and group IDs can be done with the argument:
 	 - `-u uid : gid`
- - lists all running containers
+ - lists all running conteneurs
 	 - `docker ps`
 	 - `docker ps -a`
- - To re-execute the process (entry point) of a stopped container, or to start a container created via docker create, use:
+ - To re-execute the process (entry point) of a stopped conteneur, or to start a conteneur created via docker create, use:
 	 - `docker start`
- - Might be useful to start other processes within a container (e.g. bash to explore or alter the filesystem):
-	 - `docker exec <exec args> <container> <cmd> <cmd args>`
-- The -d parameter of docker run creates a container running in the background (i.e. detached)
-- To output stdout and stderr logs for a given container
-	- `docker logs <container>`
-- A container can also be stopped from the host’s command line:
+ - Might be useful to start other processes within a conteneur (e.g. bash to explore or alter the filesystem):
+	 - `docker exec <exec args> <conteneur> <cmd> <cmd args>`
+- The -d parameter of docker run creates a conteneur running in the background (i.e. detached)
+- To output stdout and stderr logs for a given conteneur
+	- `docker logs <conteneur>`
+- A conteneur can also be stopped from the host’s command line:
 	- `docker stop`
-- To send a signal to a container
+- To send a signal to a contenuueur
 	- `docker kill`
-- To show detailed information about a container and its process, execute
+- To show detailed information about a contenueur and its process, execute
 	- `docker inspect`
-- To remove a stopped container:
+- To remove a stopped conteneur:
 	- `docker rm`
-- To remove all containers on the host:
+- To remove all conteneurs on the host:
 	- `docker rm -f $( docker ps -aq)`
 
 ## REFERENCES
@@ -292,9 +352,9 @@
 # DOCKER DATA STORAGE
 
 - Docker images
-	- Docker images are root filesystems (rootfs) for containers
+	- Docker images are root filesystems (rootfs) for conteneurs
 - What does it mean ?
-	- they do not need a kernel + modules: containers share the host kernel
+	- they do not need a kernel + modules: conteneurs share the host kernel
 	- they do not need initialization tools or scripts
 	- they should be minimal: only include an application and its dependencies
 - What are the characteristics of an image ?
@@ -306,7 +366,7 @@
 - How are Image composed ?
 	- Images are layered
 - What does it mean to say that images are layered ?
-	- They are made of different stacked layers that can be reused by other images and shared by containers
+	- They are made of different stacked layers that can be reused by other images and shared by contenueurs
 	- Every image extends a parent image (its first layer)
 	- ![[Pasted image 20230425162703.png]]
 - How are layers made ?
@@ -319,20 +379,20 @@
 	- is associated and referenced by a hash generated from the layer’s content
 - What happens when you download an image ?
 	- Each layer is downloaded separately
-- What happens when a container is created ?
+- What happens when a conteneur is created ?
 	- a new writable layer is added on top of the image
 	- ![[Pasted image 20230425163349.png]]
 - This top layer is:
-	- called the container layer
+	- called the conteneur layer
 	- initially empty
-- Where are all changes made in a running container ?
+- Where are all changes made in a running conteneur ?
 	- are written to the writable layer
-- What do multiple containers running the same image share ?
+- What do multiple conteneurs running the same image share ?
 	- The same immutable underlying layers
 	- ![[Pasted image 20230425163519.png]]
-- What is the difference between an image and a container ?
+- What is the difference between an image and a conteneur ?
 	- the top writable layer!
-- What happens when a container is deleted ?
+- What happens when a contenueur is deleted ?
 	- Only its writable layer is deleted but the underlying immutable image remains!
 - How does Image inheritance work ?
 	- New images can be created from existing images
@@ -358,45 +418,45 @@
 - Rootfs indicates ?
 	- Merged directory
 - What is the issue with overlay filesystem ?
-	- Reading and writing in container’s writable layer is slower than on native filesystem!
+	- Reading and writing in conteneur’s writable layer is slower than on native filesystem!
 - What to use to write lots of data ?
-	- Use Docker volumes for write-heavy workloads instead of the container’s writable layer
+	- Use Docker volumes for write-heavy workloads instead of the conteneur’s writable layer
 - Why use volumes to write a lot of data ?
 	- Volumes write directly to the host filesystem → better performances than writing to the writable layer!
 - Committing changes
-	- docker commit commits the current state of a container into an image file
-- What's the current state of a container ?
+	- docker commit commits the current state of a conteneur into an image file
+- What's the current state of a conteneur ?
 	- all layers + top writable layer
 - What's the use of docker commit ?
-	- useful when modifying a container by hand and wanting to make these changes permanent
+	- useful when modifying a conteneur by hand and wanting to make these changes permanent
 - What is a better solution to docker commit ?
 	- Better to use dockerfiles, but commit useful for testing and preparing
 - Data sharing
-	- Files created inside a container are stored on a writable container layer: • data not persistent when container is deleted • can be difficult to get the data out of the container
-- How to share data between multiple containers?
+	- Files created inside a conteneur are stored on a writable conteneur layer: • data not persistent when conteneur is deleted • can be difficult to get the data out of the conteneur
+- How to share data between multiple conteneurs?
 	- bind mount
 	- volume mount
 - Bind mount
-	- • Container can read-write files outside the container’s writable layer
-	- • A file or directory on the host machine is mounted into a container
+	- • Container can read-write files outside the contenuuuueur’s writable layer
+	- • A file or directory on the host machine is mounted into a contenuuueur
 	- • The file or directory is referenced by its full absolute path on the host machine
 	- • Efficient, but rely on the host machine’s filesystem having a specific directory structure available (mount point)
 - Volume mount
-	- • Container can read-write files outside the container’s writable layer
-	- • A volume (local, but possibly remote) is mounted into a container
-	- Preferred mechanism for persisting data generated by and used by Docker containers
+	- • Container can read-write files outside the contenuueur’s writable layer
+	- • A volume (local, but possibly remote) is mounted into a contenueur
+	- Preferred mechanism for persisting data generated by and used by Docker conteneurs
 	- • The volume is referenced by its name on the host machine
 	- • Volumes are fully managed by Docker
 - Volumes vs bind mounts
 	- Benefits of volumes over bind mounts:
-		- • Volumes manageable via Docker CLI or Docker API • Work on both Linux and Windows containers • Can be stored on remote hosts (e.g. Cloud), supports encrypted contents, etc. • New volumes can have their contents pre-populated by a container
-- Volumes vs writing to the container writable layer
-	- Volumes are often a better choice than persisting data in a container’s writable layer: 
-		- • Better read-write performance • Does not increase the container’s size • Contents exist outside the container’s lifecycle!
+		- • Volumes manageable via Docker CLI or Docker API • Work on both Linux and Windows conteneurs • Can be stored on remote hosts (e.g. Cloud), supports encrypted contents, etc. • New volumes can have their contents pre-populated by a conteneur
+- Volumes vs writing to the conteneur writable layer
+	- Volumes are often a better choice than persisting data in a conteneur’s writable layer: 
+		- • Better read-write performance • Does not increase the conteneur’s size • Contents exist outside the conteneur’s lifecycle!
 - Transfering data to/from a volume
 	- How to copy data from: • the local filesystem to a volume? • a volume to the local filesystem?
-		- Copy content of the current dir in the local filesystem to the volume mounted in /shared in the container: docker cp . my_container :/ shared /
-		- Copy volume’s content (mounted in /shared in the container) to the current directory in the local filesystem: docker cp my_container :/ shared / .
+		- Copy content of the current dir in the local filesystem to the volume mounted in /shared in the conteneur: docker cp . my_conteneur :/ shared /
+		- Copy volume’s content (mounted in /shared in the conteneur) to the current directory in the local filesystem: docker cp my_contenuuuueur :/ shared / .
 
 # DOCKERFILES
 
@@ -407,7 +467,7 @@
 	- To customize an existing image to our needs
 - To build an image
 	- `docker build`
-- To run & create a container
+- To run & create a contenuueur
 	- `docker run`
 - Dockerfile
 	1. Define base image (FROM) 
@@ -415,7 +475,7 @@
 	3. Add instructions, e.g. packages to install, etc. (RUN) 
 	4. Add files (COPY or ADD) 
 	5. Define default command (CMD or ENTRYPOINT)
-	6. Indicates ports the container listens to for connections (EXPOSE)
+	6. Indicates ports the contenueur listens to for connections (EXPOSE)
 
 ```dockerfile
 FROM alpine:3.16
@@ -433,7 +493,7 @@ CMD git
 		- can extract a tar archive into the image
 		- can specify an URL instead of a local file or directory
 - ENTRYPOINT also specify which command to execute when the image is instantiated
-- By opposition to CMD, ENTRYPOINT cannot be overriden when starting the container!
+- By opposition to CMD, ENTRYPOINT cannot be overriden when starting the contenuueur!
 - What is the purpose of ENTRYPOINT since CMD already exists?
 	- CMD contents is added to ENTRYPOINT as argument
 	- ENTRYPOINT + CMD = a way of specifying default, but overridable arguments
@@ -454,7 +514,7 @@ CMD [" --help "]
 	- • Every RUN, COPY and ADD line creates a new layer
 	- each layer represents a delta of the changes from previous layer • what is present in a layer can never be removed!
 - docker export
-	- exports a container’s filesystem into a tar archive (to stdout) • archive contains the filesystem only
+	- exports a contenueur’s filesystem into a tar archive (to stdout) • archive contains the filesystem only
 	- docker import
 - docker save
 	- saves an image’s filesystem into a tar archive (to stdout) • archive contains the various layers’ contents (filesystem) and image meta-data (e.g. entry-point, etc.)
@@ -470,10 +530,10 @@ ADD alpine_3.16.tar /
 CMD sh
 ```
 
-- What if you want to build a container with a specific program that must be generated from source?
+- What if you want to build a conteneur with a specific program that must be generated from source?
 	- multi-stage builds!
 - Best practices
-	- One container should only solve one problem! • Create Dockerfiles that define stateless images • any state should be kept outside of the container (volumes) • Minimize the image size by removing unecessary files, for instance with Debian-like distributions: apt - get clean && rm -rf / var /lib/ apt/ lists / var / cache / apt • Minimize number of layers (= minimize number of steps) • Use .dockerignore to avoid sending all context files/dirs to the Docker daemon
+	- One conteneur should only solve one problem! • Create Dockerfiles that define stateless images • any state should be kept outside of the container (volumes) • Minimize the image size by removing unecessary files, for instance with Debian-like distributions: apt - get clean && rm -rf / var /lib/ apt/ lists / var / cache / apt • Minimize number of layers (= minimize number of steps) • Use .dockerignore to avoid sending all context files/dirs to the Docker daemon
 
 # DOCKER BASIC NETWORKING
 
@@ -483,27 +543,27 @@ CMD sh
 	- Bridge
 	- (Overlay)
 - What is the None network driver ?
-	- The none network driver ensure no network interface is available to the container (except for the local loopback interface)
+	- The none network driver ensure no network interface is available to the conteneur (except for the local loopback interface)
 	- Example : `docker run -it --rm --network none ubuntu:22.04`
 - What is the Host network driver ?
-	- Remove network isolation between container and host
-	- All network interfaces from the host are available in the container
+	- Remove network isolation between conteneur and host
+	- All network interfaces from the host are available in the conteneur
 	- Example : `docker run -it --rm --network host ubuntu:22.04`
 - What is the Bridge network driver ?
-	- Allow containers connected to the same bridge network to communicate, while providing isolation from containers which are not connected to it
+	- Allow contenuuuuueurs connected to the same bridge network to communicate, while providing isolation from contenuuuuueurs which are not connected to it
 	- One can create user-defined custom bridge networks
 - What is the Default bridge network ?
-	- • When Docker daemon is started, a default network is created automatically • Named bridge and exposed via the docker0 interface • Newly-started containers connect to the bridge network unless otherwise specified • Containers conntected to the bridge network can reach each others by ip • The bridge network is legacy and is not recommended for production use • Instead, it’s recommended to create user-defined custom networksA
+	- • When Docker daemon is started, a default network is created automatically • Named bridge and exposed via the docker0 interface • Newly-started contenuuuueurs connect to the bridge network unless otherwise specified • Containers conntected to the bridge network can reach each others by ip • The bridge network is legacy and is not recommended for production use • Instead, it’s recommended to create user-defined custom networksA
 	- ![[Pasted image 20230426114334.png]]
 - User-defined networks
 	- Containers connected to the same user-defined network:
 		- can reach each other by name or ip • effectively expose all ports to each other
-- User-defined networks provide name resolution between containers connected to the same network
-- For a port to be accessible to containers or non-Docker hosts on different networks, it must be published with -p
+- User-defined networks provide name resolution between contenueurs connected to the same network
+- For a port to be accessible to conteneurs or non-Docker hosts on different networks, it must be published with -p
 - ![[Pasted image 20230426114524.png]]
 - User-defined network vs default bridge network (1/2)
-	- User-defined networks provide: • better flexibility and interoperability between containerized applications • name resolution between containers connected to the same network • The bridge network does not provide name resolution between containers!
-	- • Containers can be attached/detached from user-defined networks on the fly • to remove a container from the bridge network → must be stopped and recreated with different options • Each user-defined network creates a configurable bridge • configuring the bridge network happens outside of Docker itself, and requires a restart of Docker
+	- User-defined networks provide: • better flexibility and interoperability between contenuueurized applications • name resolution betweenconteneurrs connected to the same network • The bridge network does not provide name resolution betweenconteneurrs!
+	- • Containers can be attached/detached from user-defined networks on the fly • to remove a conteneur from the bridge network → must be stopped and recreated with different options • Each user-defined network creates a configurable bridge • configuring the bridge network happens outside of Docker itself, and requires a restart of Docker
 # VIRTUALIZATION TECHNOLOGIES AND FRAMEWORKS
 
 - Unikernel
@@ -636,7 +696,7 @@ Well done !!! you've finished exercice
 
 #### SUITE AUX DEUX OPÉRATIONS CI-DESSUS, COMBIEN DE CONTAINERS ONT ÉTÉ CRÉÉS ET QUELS SONT LEURS NOMS ET IDS ?
 
-- Comment affiché la liste des containers ?
+- Comment affiché la liste des conteneurs ?
 	- La commande nécessaire pour cette étape est `docker ps -a`
 
 ```shell
@@ -1027,7 +1087,7 @@ docker run -it --device=/dev/ttyUSB0 ubuntu
 
 - Le système de fichiers racine du conteneur sera différent de celui de la machine hôte. 
 - Les conteneurs ont leur propre système de fichiers racine isolé, construit à partir de l'image du conteneur.
-- Le système de fichier racine est un overlay sur le container et sur l'hôte.
+- Le système de fichier racine est un overlay sur le contenueur et sur l'hôte.
 
 #### RETROUVEZ-VOUS L’ENTRÉE DÉFINISSANT LE SYSTÈME DE FICHIERS RACINE DU CONTAINER SUR LA MACHINE HÔTE ? QUE POUVEZ-VOUS DONC CONCLURE DU SYSTÈME DE FICHIERS RACINE DU CONTAINER ?
 
@@ -1063,7 +1123,7 @@ docker run -it --device=/dev/ttyUSB0 ubuntu
 
 #### QUELLE EST L'ANALOGIE ENTRE LE SCÉNARIO QUE VOUS AVEZ RÉALISÉ ICI ET LES CONTAINERS DOCKER (IMAGE ET COUCHE CONTAINER) ?
 
-- L'analogie entre ce scénario et les containers Docker est que la couche basse (lower) correspond à l'image Docker en lecture seule, et la couche haute (upper) correspond à la couche de conteneur en lecture/écriture qui stocke les modifications apportées pendant l'exécution du conteneur.
+- L'analogie entre ce scénario et les contenueurs Docker est que la couche basse (lower) correspond à l'image Docker en lecture seule, et la couche haute (upper) correspond à la couche de conteneur en lecture/écriture qui stocke les modifications apportées pendant l'exécution du conteneur.
 - La vue unifiée (merged) représente la combinaison des deux couches, tout comme l'environnement de fichiers d'un conteneur Docker.
 
 #### QUE SE PASSE-T-IL RÉELLEMENT LORSQU'UN FICHIER DE LA VUE UNIFIÉE (MERGED) EST AJOUTÉ ?
@@ -1088,7 +1148,7 @@ docker run -it --device=/dev/ttyUSB0 ubuntu
 
 ### MAINTENANT, ON S’INTÉRESSE À MIEUX COMPRENDRE COMMENT LES COUCHES D’UNE IMAGE/CONTAINER SONT GÉRÉES PAR DOCKER. 
 
-Exécutez un container Fedora:26, puis dans celui-ci : 
+Exécutez un contenueur Fedora:26, puis dans celui-ci : 
 
 - ajoutez un fichier à la racine
 - supprimez un fichier, par exemple /etc/issue
@@ -1151,31 +1211,31 @@ a742187698a6   fedora:26   "/bin/sh"   53 seconds ago   Up 53 seconds           
 
 #### QUEL EST LE CHEMIN ABSOLU DE LA COUCHE CONTAINER WRITABLE (UPPER) ?
 
-- Le chemin absolu de la couche container writable (upper layer) est donné par la valeur de "UpperDir" dans la section "GraphDriver" de la sortie JSON de la commande `docker inspect`.
+- Le chemin absolu de la couche conteneur writable (upper layer) est donné par la valeur de "UpperDir" dans la section "GraphDriver" de la sortie JSON de la commande `docker inspect`.
 
 #### EN INSPECTANT LE SYSTÈME DE FICHIERS SUR LA MACHINE HÔTE, LISTEZ LE CONTENU COMPLET DE LA COUCHE CONTAINER WRITABLE (INFO: TREE EST TRÈS PRATIQUE POUR VISUALISER LES ARBORESCENCES)
 
-- Utilisez la commande `tree` pour afficher le contenu complet de la couche container writable en exécutant :
+- Utilisez la commande `tree` pour afficher le contenu complet de la couche conteneur writable en exécutant :
 
 `tree /chemin/vers/UpperDir`
 
-- Nous pouvons voir que la couche upper contient les modifications que nous avons fait après l'instanciation du container.
+- Nous pouvons voir que la couche upper contient les modifications que nous avons fait après l'instanciation du conteneur.
 
 #### SUR LA MACHINE HÔTE, QUEL EST LE CHEMIN ABSOLU DU RÉPERTOIRE CORRESPONDANT AU ROOTFS DU CONTAINER ?
 
-- Le chemin absolu du répertoire correspondant au rootfs du container est donné par la valeur de "MergedDir" dans la section "GraphDriver" de la sortie JSON de la commande `docker inspect`.
+- Le chemin absolu du répertoire correspondant au rootfs du conteneur est donné par la valeur de "MergedDir" dans la section "GraphDriver" de la sortie JSON de la commande `docker inspect`.
 
 ### SUR LA MACHINE HÔTE, DÉPLACEZ-VOUS DANS LE RÉPERTOIRE CORRESPONDANT AU ROOTFS DU CONTAINER. A L’INTÉRIEUR DE CELUI-CI, CRÉEZ LE FICHIER HELLO_FROM_THE_OUTSIDE
 
 #### SUITE À L’OPÉRATION CI-DESSUS, QU’OBSERVEZ-VOUS DANS LE CONTAINER LORSQUE VOUS LISTEZ LE CONTENU DU RÉPERTOIRE RACINE ?
 
-- Après avoir créé le fichier `Hello_from_the_outside` dans le répertoire rootfs du container sur la machine hôte, vous devriez voir ce fichier lorsque vous listez le contenu du répertoire racine dans le container.
+- Après avoir créé le fichier `Hello_from_the_outside` dans le répertoire rootfs du conteneur sur la machine hôte, vous devriez voir ce fichier lorsque vous listez le contenu du répertoire racine dans le conteneur.
 
 ### PRÉCÉDEMMENT, VOUS AVEZ UTILISÉ LA COMMANDE DOCKER INSPECT POUR DÉTERMINER LES DIFFÉRENTES COUCHES (OVERLAYFS) DU CONTAINER
 
 #### EST-CE QU’IL EST POSSIBLE DE SIMPLEMENT UTILISER LA COMMANDE MOUNT SUR LE SERVEUR POUR OBTENIR LES MÊMES INFORMATIONS ? JUSTIFIEZ VOTRE DÉMARCHE
 
-- Oui, il est possible d'utiliser la commande `mount` pour obtenir des informations sur le système de fichiers overlay utilisé par le container. Cependant, les informations peuvent être formatées différemment et il peut être nécessaire d'analyser la sortie pour extraire les informations pertinentes.
+- Oui, il est possible d'utiliser la commande `mount` pour obtenir des informations sur le système de fichiers overlay utilisé par le conteneur. Cependant, les informations peuvent être formatées différemment et il peut être nécessaire d'analyser la sortie pour extraire les informations pertinentes.
 - Pour ce faire, exécutez la commande suivante : `mount | grep overlay`
 
 ```
@@ -1208,13 +1268,13 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 
 ### DÉMARREZ ALORS UN CONTAINER NOMMÉ MYDEBIAN INSTANCIÉ DEPUIS L’IMAGE QUE VOUS VENEZ DE TÉLÉCHARGER. 
 
-Dans ce container : 
+Dans ce conteneur : 
 
 - Supprimez les répertoires /opt et /mnt et la commande /usr/bin/uniq 2 / 3
 - Avec dd, créez le fichier /home/random de 8500 bytes à partir de /dev/urandom
 - Ajouter la ligne ci-dessous à la fin du fichier /etc/motd: `Tagada tsoin tsoin`
 
-Une fois ces opérations réalisées, sortez du container. 
+Une fois ces opérations réalisées, sortez du conteneur. 
 
 ```
 ➜  school docker run -it --name mydebian debian

@@ -122,7 +122,7 @@ System emulation emulates the whole system, including hardware
 
 ## Operating system (OS) virtualization
 
-Also known as containerization, this type of virtualization allows multiple isolated user-space instances, called containers, to run on the same operating system kernel. Containers share the host OS kernel but have their own file systems, libraries, and application environments.
+Also known as conteneurisation, this type of virtualization allows multiple isolated user-space instances, called conteneurs, to run on the same operating system kernel. Containers share the host OS kernel but have their own file systems, libraries, and application environments.
 
 ## Virtualization Vs Emulation Vs Simulation
 
