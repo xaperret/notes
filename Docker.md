@@ -1650,6 +1650,8 @@ ENV PATH="${PATH}:/root/go/bin/"
 ENTRYPOINT [ "asciicat" ]
 ```
 
+3.  Construisez l'image à l'aide du Dockerfile et exécutez un container à partir de cette image pour afficher l'image `cat.jpg` en ASCII art avec une largeur de 40 caractères.
+
 ```shell
 ➜  part3 git:(master) ✗ docker build -t asciicat3 .
 [+] Building 0.1s (7/7) FINISHED
