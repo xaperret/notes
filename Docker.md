@@ -132,10 +132,6 @@
 > - Physical Volume (PV) : Il s'agit de la couche de base qui représente les disques physiques ou les partitions sur lesquels LVM opère. Un Physical Volume est un périphérique de stockage (un disque dur, une partition, ou un autre périphérique de stockage) qui est configuré pour être utilisé par LVM.
 > - Volume Group (VG) : Cette couche intermédiaire regroupe un ou plusieurs Physical Volumes en une seule entité logique. Un Volume Group agit comme un pool de stockage à partir duquel on peut allouer de l'espace pour créer des Logical Volumes. Un VG peut être étendu ou réduit en ajoutant ou en supprimant des PVs.
 > - Logical Volume (LV) : C'est la couche supérieure qui représente les unités de stockage virtuelles créées à partir de l'espace disponible dans un Volume Group. Les Logical Volumes sont les éléments sur lesquels vous créez des systèmes de fichiers et les montez dans la structure du système de fichiers de votre système d'exploitation. Les LVs peuvent être redimensionnés, déplacés, et configurés avec différentes options telles que le striping, le mirroring et les snapshots.
-    
-2.  Volume Group (VG) : Cette couche intermédiaire regroupe un ou plusieurs Physical Volumes en une seule entité logique. Un Volume Group agit comme un pool de stockage à partir duquel on peut allouer de l'espace pour créer des Logical Volumes. Un VG peut être étendu ou réduit en ajoutant ou en supprimant des PVs.
-    
-3.  Logical Volume (LV) : C'est la couche supérieure qui représente les unités de stockage virtuelles créées à partir de l'espace disponible dans un Volume Group. Les Logical Volumes sont les éléments sur lesquels vous créez des systèmes de fichiers et les montez dans la structure du système de fichiers de votre système d'exploitation. Les LVs peuvent être redimensionnés, déplacés, et configurés avec différentes options telles que le striping, le mirroring et les snapshots.
 
 ## OTHER TERMINOLOGIES
 
@@ -195,8 +191,6 @@
 	- On dit que la conteneurisation fournit de l'isolation car elle permet d'exécuter des applications et des services dans des environnements isolés, appelés conteneurs.
 	- Chaque conteneur dispose de sa propre instance des processus, du réseau, des utilisateurs et du système de fichiers. 
 	- Cette séparation permet aux conteneurs de fonctionner indépendamment les uns des autres, réduisant ainsi les conflits et les problèmes de compatibilité entre les différentes applications ou services.
-- Que fournie le Kernel pour limiter l'impact des activités d'un conteneur sur les autres conteneurs ?
-	- Il fournie du resource-management.
  - Quel est la différence entre la virtualization de OS et la virtualization de plateforme ?
 	 - Les conteneurs partagent le même kernel mais ont des différentes librairies, utilities, root filesystem, view of process tree, networking, etc...
 	 - Les machines virtuelles ont des OS invités différents
@@ -205,258 +199,273 @@
 	- Moins d'overhead, mais moins d'isolation.
 - Qu'est-ce qu'un conteneur ?
 	- A conteneur is a set of processes that are isolated from the host system and other conteneurs
-- De quel technologies les conteneurs font usage ?
-	- Capabilities, provide security
-	- Namespaces, provide isolation
-	- Control groups, provide limits on resources
-	- Seccomp, provide security
-- Qu'est-ce que Capabilities ?
-	- Capabilities divide superuser’s privileges into small pieces
-	- Processes and files can each have capabilities • process capabilities: defines what privileged operations a process can do • file capabilities: what capabilities a process gets when executing the file
+
+## CONTAINERS AND KERNEL
+
+- Que fournie le Kernel pour limiter l'impact des activités d'un conteneur sur les autres conteneurs ?
+	- Le noyau Linux fournit plusieurs mécanismes pour limiter l'impact des activités d'un conteneur sur les autres conteneurs et pour assurer l'isolation et la sécurité entre eux. C'est-à-dire, du resource-management.
+ - Quel technologie sont offertes par le noyau Linux pour permettre l'isolation et dont les conteneurs font usage ?
+	1.  **Namespaces** 
+	2.  **Cgroups (Control Groups)**
+	3.  **Capabilities** 
+	4.  **Seccomp** 
 - Qu'est-ce que Namespaces ?
-	- Namespaces are used to provide isolation
+	- Les namespaces permettent d'isoler les ressources système entre les conteneurs, en leur donnant l'illusion de disposer de leurs propres ressources, telles que les processus, les utilisateurs, les interfaces réseau, les systèmes de fichiers et les groupes de contrôle. 
+	- Chaque conteneur dispose de ses propres namespaces, ce qui l'isole des autres conteneurs et empêche les accès non autorisés ou les conflits.
 - Qu'est-ce que Control groups (Cgroups) ?
-	- Cgroups are used to control resources among groups of processes
-	- CPU time, memory, network bandwidth, I/O bandwidth
-	- provide fine-grained control over allocating, prioritizing, denying, managing, and monitoring system resources • organized hierarchically (like processes) and child cgroups inherit some of their parents’ attributes
-- Cgroups can be: • monitored • denied access to resources • reconfigured dynamically (i.e. at run-time)
+	- Les cgroups permettent de gérer et de contrôler l'utilisation des ressources système, telles que le CPU, la mémoire, le réseau et les entrées/sorties disque, par les conteneurs.
+	- Ils offrent la possibilité de limiter la quantité de ressources qu'un conteneur peut utiliser, d'assurer la répartition équitable des ressources entre les conteneurs et d'éviter qu'un conteneur monopolise les ressources au détriment des autres.
+	- Exemple
+		- CPU time, memory, network bandwidth, I/O bandwidth
+- Qu'est-ce que Capabilities ?
+	- Les capacités sont un mécanisme de sécurité qui permet de restreindre les privilèges accordés aux processus s'exécutant dans un conteneur. 
+	- Elles permettent de décomposer les privilèges root en sous-ensembles plus granulaires, ce qui permet de limiter les actions qu'un processus peut effectuer et d'empêcher les abus de privilèges.
 - Qu'est-ce que seccomp ?
-	- Seccomp is used to restrict the system calls a process makes
-- Pourquoi utilisé les conteneurs ?
-	- Lightweight, fast, disposable. . . virtual environments
-	- Can be used as “light” virtual machines, but with less isolation
-	- Can be used to build, ship, deploy, and run applications
+	- Seccomp (secure computing mode) est un mécanisme de sécurité qui permet de limiter les appels système autorisés pour un processus s'exécutant dans un conteneur. 
+	- En filtrant les appels système, Seccomp empêche les processus malveillants ou défectueux d'exploiter des vulnérabilités du noyau et de compromettre d'autres conteneurs ou le système hôte.
+
+## CONTAINERS AND THEIR RIVALS
+ 
 - Quels sont les bénéfices de la conteneurisation ?
-	- Isolation (security) • Provide a complete isolated OS environment • Allow packaging and isolation of applications with their entire runtime environment
-	- Portability • Container packaged with all its dependencies
-	- Productivity • Performance: lightweight environment • Consolidation: maximize resource utilization • Continuous integration: development, test, deployment
-- Containers vs virtual machines
-	- Containers are lightweight compared to traditional VMs → more conteneurs can be run per host than traditional VMs • Unlike conteneurs, VMs require emulation layers → consume more resources and add overhead • Containers share resources with the underlying host machine, with user space and process isolations • Starting a conteneur is much faster2 than starting a VM
-- Qeuls sont les limtiations des conteneurs Containers use same kernel as host → imposes strong limitations: ?
-	- Limited to running applications compiled for the host’s kernel architecture • Limitation from an hardware (CPU) point of view: can’t run an armhf (ARM) conteneur on top of an amd64 (x86-64) system • Can’t run a Windows conteneur on a Linux system • Limited to the host’s kernel (and its features) • Reliability: higher impact of a crash, especially in kernel area
-
-# LXC
-
-- What is LXC?
-	- LXC = Linux Containers • low-level Linux conteneur runtime
-- How does it work ?\
-	- Run multiple isolated Linux systems on a single host
-- Provide ?
-	- • Provide OS level virtualization (not an hypervisor!) • provide virtual OS with own CPU, memory, I/O and filesystem
-	- Provide a user space API
-- Containers share the same kernel as the host kernel!
-- What does it use for isolation ?
-	- Use kernel-based isolation mechanisms (capabilities, namespaces, cgroups, seccomp)
-- How to create different OS conteneurs ?
-	- LXC uses templates to create different OS conteneurs
-- What are templates ?
-	- • Templates = scripts to bootstrap specific OS
+	1.  **Isolation** : Les conteneurs fournissent une isolation entre les applications et les dépendances, ce qui facilite la gestion des applications et réduit les conflits ou les problèmes de compatibilité entre les différentes parties d'un système.
+	2.  **Portabilité** : Les conteneurs permettent de créer des applications qui peuvent être facilement déployées sur différents environnements sans modification. Cela facilite le transfert des applications entre les environnements de développement, de test et de production, et garantit un fonctionnement cohérent sur différentes plateformes.
+	3.  **Légèreté** : Les conteneurs sont plus légers que les machines virtuelles traditionnelles, car ils partagent le même noyau et n'ont pas besoin d'un système d'exploitation complet pour chaque instance. Cela permet d'économiser de l'espace disque et d'améliorer les performances en réduisant la consommation de ressources système.
+	4.  **Densité** : Grâce à leur faible consommation de ressources et à leur légèreté, les conteneurs permettent d'exécuter un plus grand nombre d'applications sur une seule machine physique, ce qui augmente la densité et l'utilisation des ressources.
+	5.  **Scalabilité** : Les conteneurs facilitent le redimensionnement des applications en ajoutant ou en supprimant rapidement des instances pour répondre à la demande. Cela permet d'améliorer la performance et la disponibilité des applications tout en réduisant les coûts.
+	6.  **Déploiement rapide** : Les conteneurs permettent de déployer rapidement des applications et des services, ce qui accélère le processus de développement, de test et de mise en production.
+	7.  **Versioning et gestion des dépendances** : Les conteneurs permettent de gérer efficacement les versions des applications et leurs dépendances, en garantissant que chaque instance dispose de la bonne version des logiciels et des bibliothèques requises.
+	8.  **Intégration et automatisation** : Les conteneurs sont compatibles avec divers outils et plateformes d'intégration et de déploiement continu (CI/CD), ce qui facilite l'automatisation des processus de développement, de test et de déploiement.
+	- Les plus importants sont : Isolation, portabilité et productivité (performance)
+- Pourquoi utilisé les conteneurs par rapport aux machines virtuelles ?
+	1.  **Légèreté** : Les conteneurs sont généralement plus légers que les machines virtuelles, car ils partagent le même noyau du système d'exploitation hôte et n'ont pas besoin d'un système d'exploitation complet pour chaque instance. Cela permet d'économiser de l'espace disque et de réduire la consommation de ressources système, ce qui se traduit par une meilleure utilisation des ressources et des performances accrues.
+	2.  **Démarrage rapide** : Les conteneurs peuvent être lancés en quelques secondes, tandis que les machines virtuelles peuvent prendre des minutes pour démarrer. Cette rapidité de démarrage facilite le déploiement, la mise à l'échelle et la reprise après sinistre des applications.
+	3.  **Portabilité** : Les conteneurs encapsulent les applications et leurs dépendances, ce qui facilite leur déploiement sur différents environnements sans modification. Les machines virtuelles peuvent également être portables, mais elles sont généralement plus lourdes et plus sensibles aux variations de l'environnement sous-jacent.
+	4.  **Densité** : Grâce à leur légèreté, les conteneurs permettent d'exécuter un plus grand nombre d'applications sur une seule machine physique que les machines virtuelles. Cela augmente la densité et l'utilisation des ressources, ce qui se traduit par une réduction des coûts d'infrastructure.
+	5.  **Scalabilité et orchestration** : Les conteneurs facilitent la mise à l'échelle horizontale des applications en ajoutant ou en supprimant rapidement des instances pour répondre à la demande. Les technologies d'orchestration de conteneurs, comme Kubernetes, facilitent la gestion de ces environnements à grande échelle, tandis que les machines virtuelles peuvent être plus difficiles à gérer et à mettre à l'échelle.
+	6.  **Isolation des processus** : Bien que les machines virtuelles offrent une isolation complète au niveau du système d'exploitation, les conteneurs offrent une isolation suffisante pour la plupart des applications tout en étant plus légers et plus rapides. Les conteneurs isolent les processus et les ressources au niveau du noyau du système d'exploitation sans nécessiter de virtualisation complète du matériel.
+- Quels sont les limitations des conteneurs ?
+	1.  **Isolation moins stricte** : Les conteneurs offrent une isolation des processus et des ressources au niveau du noyau du système d'exploitation, mais cette isolation est généralement moins stricte que celle des machines virtuelles. Cela signifie que les conteneurs peuvent être plus vulnérables aux problèmes de sécurité, en particulier si un conteneur malveillant parvient à compromettre le noyau du système d'exploitation hôte.
+	2.  **Compatibilité du système d'exploitation** : Les conteneurs partagent le même noyau que le système d'exploitation hôte, ce qui signifie qu'ils ne peuvent pas exécuter des applications qui nécessitent un système d'exploitation différent ou une version de noyau spécifique. Les machines virtuelles, en revanche, peuvent exécuter n'importe quel système d'exploitation compatible avec le matériel sous-jacent.
+	3. **Limitation d'architecture du noyau** : Les conteneurs ne peuvent exécuter que des applications compilées pour l'architecture du noyau de l'hôte. Par exemple, il n'est pas possible d'exécuter un conteneur armhf (ARM) sur un système amd64 (x86-64).
+	4. **Dépendance du noyau hôte** : Les conteneurs sont limités aux fonctionnalités du noyau de l'hôte sur lequel ils sont exécutés.
+	5. **Fiabilité** : En cas de crash, notamment au niveau du noyau, l'impact est plus important sur les conteneurs que sur les machines virtuelles, car ils partagent le même noyau avec le système d'exploitation hôte.
 
 # DOCKER OVERVIEW
 
-- What are docker's goals ?
-	- Package/ship applications independently of the underlying operating system
-	- Make applications deployment reproducible
-	- Increase applications’ security
-- What Docker provides
-	- Isolation
-	- Simplicity
-	- Lightweight
-	- Workflow
-	- Community
-- What is Docker ?
-	- Docker = open-source engine that automates the deployment of applications into conteneurs
-	- Platform for developers/sysadmins to develop, ship, and run applications, based on conteneurs
-- What does it also do
-	- Simplifies and standardizes the creation and management of conteneurs
-	- Provides a RESTful API to perform queries and actions
-- Docker components
-	- Docker Engine (docker client + server)
-	- Images
-	- Registries
-	- Containers
-- What is docker engine ?
-	- Docker is a client-server application
-- • Docker ships with
-	- a command line client (docker) and 
-	- a RESTful API to interact with dockerd
-- Docker clients talk to the docker server (dockerd daemon) which does all the work
-- Images
-	- Every conteneur is instantiated from an image → encloses a program within the image’s filesystem
-	- Hierarchy of images: images have a parent ↔ children relationship
-- Images are to conteneurs what classes are to
-	- instances in OOP (Object Oriented Programming)
-- An image includes: 
-	- a full-fledged, isolated root filesystem (e.g. minimal filesystem provided by an Ubuntu distribution)
-	- the default program to execute when a conteneur is created from an image
-		- this program is also called the entry-point
-	- network info (e.g. which ports should be exposed)
-- Registries
-	- Docker stores images that users build in registries
-- • Two types of registries, 
-	- public and
-	- private
-- The docker daemon has an internal registry of downloaded images • it caches them (on the host) to avoid downloading them again
-- Image names follow a precise format: `<repository>[:<tag>]` where `<repository> ::= [ /] < base name >]`
-- To list images available in the internal registry, execute:
-	- `docker images`
- - Image can be manually downloaded via:
-	 - `docker pull <image name>
-	 - `docker pull <image id>`
- - Containers
-	 - Docker helps build and deploy conteneurs inside of which one can package applications and services
- - Containers are launched from
-	 - images and contain one or more running processes
- - A conteneur terminates when 
-	 - its entry-point process terminates, regardless of the number of other processes still running in the conteneur
- - A conteneur is 
-	 - an instance of an image, similar to a process is an instance of a program
- - Images 
-	 - = building aspect of docker → immutable (static)
- - Containers 
-	 - = running aspect of docker → mutable (dynamic)
- - Docker daemon
-	 - Docker daemon = dockerd program
-	 - ![[Pasted image 20230424203212.png]]
- - Containers are ran by 
-	 - the docker daemon, not the docker client
- - Simplest example
-	 - `docker run debian echo " Hello world "`
- - To create a conteneur and launch a bash shell inside it:
-	 - `docker run -it debian /bin / bash`
- - Running a conteneur’s program with specific user and group IDs can be done with the argument:
-	 - `-u uid : gid`
- - lists all running conteneurs
-	 - `docker ps`
-	 - `docker ps -a`
- - To re-execute the process (entry point) of a stopped conteneur, or to start a conteneur created via docker create, use:
-	 - `docker start`
- - Might be useful to start other processes within a conteneur (e.g. bash to explore or alter the filesystem):
-	 - `docker exec <exec args> <conteneur> <cmd> <cmd args>`
-- The -d parameter of docker run creates a conteneur running in the background (i.e. detached)
-- To output stdout and stderr logs for a given conteneur
-	- `docker logs <conteneur>`
-- A conteneur can also be stopped from the host’s command line:
-	- `docker stop`
-- To send a signal to a contenuueur
-	- `docker kill`
-- To show detailed information about a contenueur and its process, execute
-	- `docker inspect`
-- To remove a stopped conteneur:
-	- `docker rm`
-- To remove all conteneurs on the host:
-	- `docker rm -f $( docker ps -aq)`
-
-## REFERENCES
+- Quels sont les objectifs de docker ?
+	- Docker vise à améliorer 
+		- la reproductibilité
+		- la portabilité, 
+		- la scalabilité 
+		- la sécurité
+		- l'isolation des applications
+- Qu'est-ce que Docker ?
+	-   Docker est une plateforme open-source qui :
+	    - Automatise le déploiement d'applications
+	    - Utilise des conteneurs pour empaqueter et isoler les applications et leurs dépendances
+	    - Facilite la portabilité des applications entre différents environnements
+	    - Simplifie la gestion et la maintenance des infrastructures informatiques
+	    - Encourage la collaboration et le partage d'applications au sein de la communauté de développement
+- Quels sont les composants de Docker ?
+	- **Docker Engine**
+	- **Docker Images**
+	- **Docker Containers**
+	- **Docker Registries**
+	- Dockerfile : Fichier texte contenant les instructions pour construire une image Docker
+	- Docker Compose : Outil pour définir et gérer des applications multi-conteneurs avec des fichiers de configuration YAML
+	- Docker Hub : Répertoire en ligne de Docker qui permet de partager et de télécharger des images Docker
+	- Docker Swarm : Système de gestion et d'orchestration de clusters pour les services Docker
+- Docker engine ?
+	- Moteur de Docker qui gère la création, l'exécution et la gestion des conteneurs
+	- Application client-server
+- Docker Images ?
+	- Images contenant les applications et leurs dépendances, utilisées pour créer des conteneurs
+- Docker Containers ?
+	- Instances exécutables des images, qui encapsulent les applications et leur environnement
+ - Docker Registries ?
+	 - Un registre Docker est un service en ligne qui permet de stocker et de distribuer des images Docker. Il facilite le partage, la distribution et la collaboration autour des images Docker entre les développeurs et les équipes.
+	 - Docker Hub est un exemple de registre Docker public, mais il est également possible de créer des registres Docker privés pour stocker et partager des images au sein d'une organisation ou d'un projet spécifique.
+-  Docker est livré avec :
+	-   un client en ligne de commande (docker) et
+	-   une API RESTful pour interagir avec dockerd
+- Les clients Docker communiquent avec ?
+	- le serveur Docker (daemon dockerd) qui effectue tout le travail
+-   Chaque conteneur est instancié à partir
+	- d'une image
+-   Lorsque l'on ajoute des modifications à une image (A) et que l'on commit (B) on dit que A est le ? de B
+	- Le parent de B, car il existe une hiérarchie des images
+	- Les images ont une relation parent ↔ enfant
+- Les images sont aux conteneurs ce que les classes sont aux
+	-   instances en POO (Programmation Orientée Objet) 
+- Une image comprend :
+	- Un système de fichiers racine complet et isolé (par exemple, système de fichiers minimal fourni par une distribution Ubuntu)
+	- Le programme par défaut à exécuter lorsqu'un conteneur est créé à partir d'une image
+	- Informations réseau (par exemple, les ports à exposer)
+- Comment appelle-t'on le programme par défaut à exécuter lorsqu'un conteneur est créé à partir d'une image ?
+	- Le point d'entrée
+- Le démon Docker dispose d'un registre interne d'images téléchargées
+	- il les met en cache (sur l'hôte) pour éviter de les télécharger à nouveau
+-   Un conteneur est
+    -   une instance d'une image, similaire à un processus est une instance d'un programme
+-   Images
+    -   = aspect de construction de Docker → immuable (statique)
+-   Conteneurs
+    -   = aspect d'exécution de Docker → mutable (dynamique)
+-   Docker daemon
+    -   Docker daemon = programme dockerd
+    - ![[Pasted image 20230424203212.png]]
+-   Les conteneurs sont exécutés par
+    -   le démon Docker, et non le client Docker
+-   Exemple le plus simple
+    -   `docker run debian echo "Hello world"`
+-   Pour créer un conteneur et lancer un shell bash à l'intérieur :
+    -   `docker run -it debian /bin/bash`
+-   Exécuter le programme d'un conteneur avec des identifiants d'utilisateur et de groupe spécifiques peut être fait avec l'argument :
+    -   `-u uid : gid`
+-   Liste tous les conteneurs en cours d'exécution
+    -   `docker ps`
+    -   `docker ps -a`
+-   Pour réexécuter le processus (point d'entrée) d'un conteneur arrêté, ou pour démarrer un conteneur créé via docker create, utilisez :
+    -   `docker start`
+-   Peut être utile pour démarrer d'autres processus dans un conteneur (par exemple, bash pour explorer ou modifier le système de fichiers) :
+    -   `docker exec <args exec> <conteneur> <cmd> <args cmd>`
+-   Le paramètre -d de docker run crée un conteneur s'exécutant en arrière-plan (c'est-à-dire détaché)
+-   Pour afficher les journaux stdout et stderr pour un conteneur donné :
+    -   `docker logs <conteneur>`
+-   Un conteneur peut également être arrêté depuis la ligne de commande de l'hôte :
+    -   `docker stop`
+-   Pour envoyer un signal à un conteneur :
+    -   `docker kill`
+-   Pour afficher des informations détaillées sur un conteneur et son processus, exécutez :
+    -   `docker inspect`
+-   Pour supprimer un conteneur arrêté :
+    -   `docker rm`
+-   Pour supprimer tous les conteneurs sur l'hôte :
+    -   `docker rm -f $(docker ps -aq)`
 
 # DOCKER DATA STORAGE
 
-- Docker images
-	- Docker images are root filesystems (rootfs) for conteneurs
-- What does it mean ?
-	- they do not need a kernel + modules: conteneurs share the host kernel
-	- they do not need initialization tools or scripts
-	- they should be minimal: only include an application and its dependencies
-- What are the characteristics of an image ?
-	- immutable (read-only)
-	- portable
-	- sharable
-	- storable
-	- updatable
-- How are Image composed ?
-	- Images are layered
-- What does it mean to say that images are layered ?
-	- They are made of different stacked layers that can be reused by other images and shared by contenueurs
-	- Every image extends a parent image (its first layer)
+## IMAGE DOCKER
+
+- Qu'est-ce que les images Docker ?
+	- Les images Docker sont des systèmes de fichiers racine (rootfs) pour les conteneurs.
+	- Les images Docker sont des modèles immuables utilisés pour créer des conteneurs. Chaque conteneur est instancié à partir d'une image qui inclut le système de fichiers, l'application et ses dépendances.
+	- Les images Docker sont organisées de manière hiérarchique, avec des relations parents-enfants entre elles. Une image peut être basée sur une autre image, héritant ainsi de ses couches et de son contenu.
+- Une image contient :
+	- Un système de fichiers complet et isolé (par exemple, le système de fichiers minimal fourni par une distribution Ubuntu).
+	- Le programme par défaut à exécuter lorsqu'un conteneur est créé à partir de l'image (également appelé point d'entrée).
+	- Des informations réseau (par exemple, quels ports doivent être exposés).
+- Que signifie cette phrase "Les images Docker sont des systèmes de fichiers racine (rootfs) pour les conteneurs." ?
+	- Cette phrase signifie que les images Docker fournissent le système de fichiers de base (également appelé système de fichiers racine ou rootfs) qui est utilisé pour créer des conteneurs. 
+	- Le système de fichiers racine est la partie principale du système de fichiers qui contient tous les fichiers, dossiers et dépendances nécessaires pour exécuter une application ou un service à l'intérieur d'un conteneur.
+- Qu'est-ce que signifie l'utilisation de rootfs des Image pour les containers ?
+	- Ils n'ont pas besoin d'un noyau + modules : les conteneurs partagent le noyau de l'hôte
+	- Ils n'ont pas besoin d'outils ou de scripts d'initialisation
+	- Ils doivent être minimaux : inclure uniquement une application et ses dépendances
+- Quelles sont les caractéristiques d'une image ?
+	-   immuable (en lecture seule)
+	-   portable
+	-   partageable
+	-   stockable
+	-   mise à jour possible
+- Comment les images sont-elles composées ?
+	-   Les images sont constituées de couches
+ - Que signifie dire que les images sont constituées de couches ?
+	-   Elles sont composées de différentes couches empilées qui peuvent être réutilisées par d'autres images et partagées par les conteneurs
+	-   Chaque image étend une image parente (sa première couche)
 	- ![[Pasted image 20230425162703.png]]
-- How are layers made ?
-	- Layers are created from Dockerfile instructions: `RUN, COPY, ADD`
-- What is a layer ?
-	- A layer is a collection of files and directories
-- What are the characteristics of a layer ?
-	- immutable
-	- represents a delta of the changes from the previous layer
-	- is associated and referenced by a hash generated from the layer’s content
-- What happens when you download an image ?
-	- Each layer is downloaded separately
-- What happens when a conteneur is created ?
-	- a new writable layer is added on top of the image
+
+## LAYERS OF AN IMAGE
+
+-   Comment les couches sont-elles créées ?
+    -   Les couches sont créées à partir d'instructions Dockerfile : `RUN, COPY, ADD`
+-   Qu'est-ce qu'une couche ?
+    -   Une couche est une collection de fichiers et de répertoires
+-   Quelles sont les caractéristiques d'une couche ?
+    -   immuable
+    -   représente un delta des changements par rapport à la couche précédente
+    -   est associée et référencée par un hachage généré à partir du contenu de la couche
+-   Que se passe-t-il lorsque vous téléchargez une image ?
+    -   Chaque couche est téléchargée séparément
+- Que se passe-t-il lorsqu'un conteneur est créé ?
+	-   une nouvelle couche modifiable est ajoutée au-dessus de l'image
 	- ![[Pasted image 20230425163349.png]]
-- This top layer is:
-	- called the conteneur layer
-	- initially empty
-- Where are all changes made in a running conteneur ?
-	- are written to the writable layer
-- What do multiple conteneurs running the same image share ?
-	- The same immutable underlying layers
+-   Cette couche supérieure est :
+    -   appelée la couche conteneur
+    -   initialement vide
+-   Où sont écrites toutes les modifications effectuées dans un conteneur en cours d'exécution ?
+    -   elles sont écrites dans la couche modifiable
+-   Que partagent plusieurs conteneurs exécutant la même image ?
+    -   Les mêmes couches sous-jacentes immuables
 	- ![[Pasted image 20230425163519.png]]
-- What is the difference between an image and a conteneur ?
-	- the top writable layer!
-- What happens when a contenueur is deleted ?
-	- Only its writable layer is deleted but the underlying immutable image remains!
-- How does Image inheritance work ?
-	- New images can be created from existing images
-- What is a base image ?
-	- • Images can also be created from scratch (from an archive)
-- How to inspect an image's layers ?
-	- `docker inspect`
-	- `docker inspect --format "{{json .RootFS.Layers}}" mongo :6`
-- Docker storage drivers, which the default is overlay2 is using :
-	- Linux’s overlay filesystem\
-- What is the Overlay filesystem ?
-	- It combines upper and lower directory trees and presents a unified view
+ -   Quelle est la différence entre une image et un conteneur ?
+    -   la couche modifiable en haut !
+-   Que se passe-t-il lorsqu'un conteneur est supprimé ?
+    -   Seule sa couche modifiable est supprimée, mais l'image immuable sous-jacente reste !
+-   Comment fonctionne l'héritage d'images ?
+    -   De nouvelles images peuvent être créées à partir d'images existantes
+-   Qu'est-ce qu'une image de base ?
+    -   Les images peuvent également être créées à partir de zéro (à partir d'une archive)
+-   Comment inspecter les couches d'une image ?
+    -   `docker inspect`
+    -   `docker inspect --format "{{json .RootFS.Layers}}" mongo :6`
+-   Les pilotes de stockage Docker, dont le défaut est overlay2, utilisent :
+    -   Le système de fichiers overlay de Linux
+-   Qu'est-ce que le système de fichiers Overlay ?
+    -   Il combine des arbres de répertoires supérieurs et inférieurs et présente une vue unifiée
 	- ![[Pasted image 20230425164305.png]]
-- Which layer is writeable ?
-	- upper one
-- What file/folder is visible when conflict ?
-	- file : only files in upper directory
-	- folder : union between both folders
-- How to create an overlay filesystem ?
+-   Quelle couche est modifiable ?
+    -   la couche supérieure
+-   Quel fichier/dossier est visible en cas de conflit ?
+    -   fichier : uniquement les fichiers dans le répertoire supérieur
+    -   dossier : union entre les deux dossiers
+- Comment créer un système de fichiers overlay ?
 	- `mount -t overlay overlay -o lowerdir =/ low1 :/ low2 :/ low3 , upperdir =/ upper , workdir =/ work / merged`
 		- In this example the dir order is 
 		- `/ upper / low1 / low2 / low3`, meaning upper is writeable and lowN are the image layers
-- Rootfs indicates ?
-	- Merged directory
-- What is the issue with overlay filesystem ?
-	- Reading and writing in conteneur’s writable layer is slower than on native filesystem!
-- What to use to write lots of data ?
-	- Use Docker volumes for write-heavy workloads instead of the conteneur’s writable layer
-- Why use volumes to write a lot of data ?
-	- Volumes write directly to the host filesystem → better performances than writing to the writable layer!
-- Committing changes
-	- docker commit commits the current state of a conteneur into an image file
-- What's the current state of a conteneur ?
-	- all layers + top writable layer
-- What's the use of docker commit ?
-	- useful when modifying a conteneur by hand and wanting to make these changes permanent
-- What is a better solution to docker commit ?
-	- Better to use dockerfiles, but commit useful for testing and preparing
-- Data sharing
-	- Files created inside a conteneur are stored on a writable conteneur layer: • data not persistent when conteneur is deleted • can be difficult to get the data out of the conteneur
-- How to share data between multiple conteneurs?
-	- bind mount
-	- volume mount
-- Bind mount
-	- • Container can read-write files outside the contenuuuueur’s writable layer
-	- • A file or directory on the host machine is mounted into a contenuuueur
-	- • The file or directory is referenced by its full absolute path on the host machine
-	- • Efficient, but rely on the host machine’s filesystem having a specific directory structure available (mount point)
-- Volume mount
-	- • Container can read-write files outside the contenuueur’s writable layer
-	- • A volume (local, but possibly remote) is mounted into a contenueur
-	- Preferred mechanism for persisting data generated by and used by Docker conteneurs
-	- • The volume is referenced by its name on the host machine
-	- • Volumes are fully managed by Docker
-- Volumes vs bind mounts
-	- Benefits of volumes over bind mounts:
-		- • Volumes manageable via Docker CLI or Docker API • Work on both Linux and Windows conteneurs • Can be stored on remote hosts (e.g. Cloud), supports encrypted contents, etc. • New volumes can have their contents pre-populated by a conteneur
-- Volumes vs writing to the conteneur writable layer
-	- Volumes are often a better choice than persisting data in a conteneur’s writable layer: 
-		- • Better read-write performance • Does not increase the conteneur’s size • Contents exist outside the conteneur’s lifecycle!
-- Transfering data to/from a volume
-	- How to copy data from: • the local filesystem to a volume? • a volume to the local filesystem?
-		- Copy content of the current dir in the local filesystem to the volume mounted in /shared in the conteneur: docker cp . my_conteneur :/ shared /
-		- Copy volume’s content (mounted in /shared in the conteneur) to the current directory in the local filesystem: docker cp my_contenuuuueur :/ shared / .
+-   Rootfs indique ?
+    -   Répertoire fusionné
+-   Quel est le problème avec le système de fichiers overlay ?
+    -   La lecture et l'écriture dans la couche modifiable du conteneur sont plus lentes que sur le système de fichiers natif !
+-   Que faut-il utiliser pour écrire beaucoup de données ?
+    -   Utilisez les volumes Docker pour les charges de travail en écriture intensive plutôt que la couche modifiable du conteneur
+-   Pourquoi utiliser des volumes pour écrire beaucoup de données ?
+    -   Les volumes écrivent directement sur le système de fichiers de l'hôte → de meilleures performances que l'écriture sur la couche modifiable !
+-   Committer des changements
+    -   Docker commit permet de valider l'état actuel d'un conteneur dans un fichier image
+-   Qu'est-ce que l'état actuel d'un conteneur ?
+    -   toutes les couches + couche modifiable supérieure
+-   À quoi sert Docker commit ?
+    -   utile lors de la modification d'un conteneur à la main et souhaitant rendre ces modifications permanentes
+-   Quelle est une meilleure solution à Docker commit ?
+    -   Il est préférable d'utiliser les Dockerfiles, mais le commit est utile pour les tests et la préparation
+-   Partage de données
+    -   Les fichiers créés à l'intérieur d'un conteneur sont stockés sur une couche modifiable du conteneur : les données ne sont pas persistantes lorsque le conteneur est supprimé, il peut être difficile de sortir les données du conteneur
+-   Comment partager des données entre plusieurs conteneurs ?
+    -   montage de liaison (bind mount)
+    -   montage de volume (volume mount)
+-   Montage de liaison (bind mount)
+    -   Le conteneur peut lire et écrire des fichiers en dehors de la couche modifiable du conteneur
+    -   Un fichier ou un répertoire de la machine hôte est monté dans un conteneur
+    -   Le fichier ou répertoire est référencé par son chemin absolu complet sur la machine hôte
+    -   Efficace, mais repose sur la structure de répertoires du système de fichiers de la machine hôte (point de montage)
+-   Montage de volume (volume mount)
+    -   Le conteneur peut lire et écrire des fichiers en dehors de la couche modifiable du conteneur
+    -   Un volume (local, mais éventuellement distant) est monté dans un conteneur
+    -   Mécanisme préféré pour la persistance des données générées par et utilisées par les conteneurs Docker
+    -   Le volume est référencé par son nom sur la machine hôte
+    -   Les volumes sont entièrement gérés par Docker
+-   Volumes vs écriture sur la couche modifiable du conteneur
+    -   Les volumes sont souvent un meilleur choix que de persister les données dans la couche modifiable d'un conteneur :
+        -   Meilleures performances en lecture-écriture
+        -   Ne pas augmenter la taille du conteneur
+        -   Le contenu existe en dehors du cycle de vie du conteneur !
+-   Transfert de données vers/depuis un volume
+    -   Comment copier les données de :
+        -   Le système de fichiers local vers un volume ?
+        -   Un volume vers le système de fichiers local ?
+            -   Copier le contenu du répertoire courant dans le système de fichiers local vers le volume monté dans /shared dans le conteneur : `docker cp . my_conteneur :/ shared /`
+            -   Copier le contenu du volume (monté dans /shared dans le conteneur) vers le répertoire courant dans le système de fichiers local : `docker cp my_conteneur :/ shared / .`
 
 # DOCKERFILES
 
@@ -535,38 +544,6 @@ CMD sh
 - Best practices
 	- One conteneur should only solve one problem! • Create Dockerfiles that define stateless images • any state should be kept outside of the container (volumes) • Minimize the image size by removing unecessary files, for instance with Debian-like distributions: apt - get clean && rm -rf / var /lib/ apt/ lists / var / cache / apt • Minimize number of layers (= minimize number of steps) • Use .dockerignore to avoid sending all context files/dirs to the Docker daemon
 
-# DOCKER BASIC NETWORKING
-
-- What are the main Docker network drivers ?
-	- None
-	- Host
-	- Bridge
-	- (Overlay)
-- What is the None network driver ?
-	- The none network driver ensure no network interface is available to the conteneur (except for the local loopback interface)
-	- Example : `docker run -it --rm --network none ubuntu:22.04`
-- What is the Host network driver ?
-	- Remove network isolation between conteneur and host
-	- All network interfaces from the host are available in the conteneur
-	- Example : `docker run -it --rm --network host ubuntu:22.04`
-- What is the Bridge network driver ?
-	- Allow contenuuuuueurs connected to the same bridge network to communicate, while providing isolation from contenuuuuueurs which are not connected to it
-	- One can create user-defined custom bridge networks
-- What is the Default bridge network ?
-	- • When Docker daemon is started, a default network is created automatically • Named bridge and exposed via the docker0 interface • Newly-started contenuuuueurs connect to the bridge network unless otherwise specified • Containers conntected to the bridge network can reach each others by ip • The bridge network is legacy and is not recommended for production use • Instead, it’s recommended to create user-defined custom networksA
-	- ![[Pasted image 20230426114334.png]]
-- User-defined networks
-	- Containers connected to the same user-defined network:
-		- can reach each other by name or ip • effectively expose all ports to each other
-- User-defined networks provide name resolution between contenueurs connected to the same network
-- For a port to be accessible to conteneurs or non-Docker hosts on different networks, it must be published with -p
-- ![[Pasted image 20230426114524.png]]
-- User-defined network vs default bridge network (1/2)
-	- User-defined networks provide: • better flexibility and interoperability between contenuueurized applications • name resolution betweenconteneurrs connected to the same network • The bridge network does not provide name resolution betweenconteneurrs!
-	- • Containers can be attached/detached from user-defined networks on the fly • to remove a conteneur from the bridge network → must be stopped and recreated with different options • Each user-defined network creates a configurable bridge • configuring the bridge network happens outside of Docker itself, and requires a restart of Docker
-# VIRTUALIZATION TECHNOLOGIES AND FRAMEWORKS
-
-- Unikernel
 # VIRTUALISATION - DOCKER BASICS
 
 ## EXERCICE 1
@@ -1390,3 +1367,323 @@ otherimages/pics/images/c.jpg
 #### EST-CE QUE DANS LE CAS D’UN BIND MOUNT, LES OPÉRATIONS CI-DESSUS FONCTIONNERONT CORRECTEMENT SI LE DAEMON DOCKERD S’EXÉCUTE SUR UNE MACHINE DIFFÉRENTE DU CLIENT DOCKER ? JUSTIFIEZ
 
 - Dans le cas d'un bind mount, les opérations ci-dessus pourraient ne pas fonctionner correctement si le daemon `dockerd` s'exécute sur une machine différente du client Docker. Les bind mounts dépendent du système de fichiers local de l'hôte où le daemon Docker s'exécute. Si le daemon Docker est sur une machine différente, le chemin vers le répertoire local sur le client ne sera pas accessible par le daemon Docker sur la machine distante. Pour partager des fichiers entre un client Docker et un daemon Docker distant, vous devrez utiliser une méthode de partage de fichiers compatible avec les deux machines, comme NFS ou SMB, ou utiliser des volumes Docker.
+
+# VIRTUALISATION - DOCKERFILES
+
+## EXERCICE 1
+
+### A) DÉCRIVEZ CE QUE RÉALISE CE CONTAINER EN EXPLIQUANT CHAQUE LIGNE DU DOCKERFILE
+
+```dockerfile
+FROM alpine:latest
+
+LABEL maintainer="Yoda"
+
+ADD files.tar.gz /dir_tar
+
+RUN mkdir /dir_add
+
+COPY file0* /dir_add/
+
+CMD ["ls", "-al", "/dir_tar", "/dir_add"]
+```
+
+Ce Dockerfile crée une image de conteneur basée sur l'image officielle d'Alpine Linux (la version la plus récente). Voici une explication de chaque ligne du Dockerfile :
+
+1.  `FROM alpine:latest` : Cette ligne indique que l'image de base pour ce Dockerfile est `alpine:latest`, qui est la dernière version de l'image officielle d'Alpine Linux.
+2.  `LABEL maintainer="Yoda"` : Cette ligne ajoute une étiquette (label) à l'image avec le champ `maintainer` et la valeur "Yoda". Les étiquettes sont utilisées pour ajouter des métadonnées aux images.
+3.  `ADD files.tar.gz /dir_tar` : Cette ligne décompresse l'archive `files.tar.gz` et ajoute son contenu dans le répertoire `/dir_tar` à l'intérieur de l'image.
+4.  `RUN mkdir /dir_add` : Cette ligne crée un nouveau répertoire appelé `/dir_add` à l'intérieur de l'image.
+5.  `COPY file0* /dir_add/` : Cette ligne copie tous les fichiers dont le nom commence par `file0` dans le répertoire `/dir_add` de l'image.
+6.  `CMD ["ls", "-al", "/dir_tar", "/dir_add"]` : Cette ligne définit la commande par défaut à exécuter lorsque le conteneur est lancé. Dans ce cas, la commande est `ls -al /dir_tar /dir_add`, qui affiche les détails des fichiers et des répertoires dans `/dir_tar` et `/dir_add`.
+
+### B) POURQUOI LE FICHIER FILE04 N’EST PAS PRÉSENT DANS LE RÉPERTOIRE /DIR_ADD DU CONTAINER (INDICE: INSPECTEZ LES FICHIERS DANS EX01) ?
+
+Il est dans le `.dockerignore`.
+
+### C) EN OBSERVANT LA SORTIE DU CONTAINER, QUE REMARQUEZ-VOUS AU NIVEAU DES ATTRIBUTS DES FICHIERS AJOUTÉS ? D’OÙ VIENT CETTE DIFFÉRENCE ?
+
+En observant la sortie du conteneur, vous pouvez remarquer que les attributs des fichiers diffèrent entre les répertoires `/dir_add` et `/dir_tar`. Les fichiers ajoutés à `/dir_add` ont été copiés avec l'instruction `COPY` du Dockerfile et sont donc créés avec l'utilisateur `root` et le groupe `root`. Les permissions sont définies sur `-rw-r--r--` pour ces fichiers.
+
+En revanche, les fichiers ajoutés à `/dir_tar` ont été extraits de l'archive `files.tar.gz` avec l'instruction `ADD`. Ces fichiers conservent les attributs originaux de l'archive, qui comprennent l'utilisateur `1000` et le groupe `1000`. Les permissions sont `-rw-rw-r--` pour ces fichiers.
+
+La différence provient donc de la manière dont les fichiers ont été ajoutés au conteneur. L'instruction `COPY` copie les fichiers en utilisant l'utilisateur et le groupe courants dans l'image (dans ce cas, `root`), tandis que l'instruction `ADD` extrait les fichiers de l'archive en conservant leurs attributs d'origine.
+
+```shell
+➜  ex01 git:(master) id
+uid=1000(xavierp) gid=1000(xavierp) groups=1000(xavierp),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),116(netdev),1001(docker)
+```
+
+```shell
+➜  ex01 git:(master) docker run -it --rm exercice1
+/dir_add:
+total 32
+drwxr-xr-x    1 root     root          4096 Apr 27 08:18 .
+drwxr-xr-x    1 root     root          4096 Apr 27 08:23 ..
+-rw-r--r--    1 root     root            36 Apr 24 13:08 file01
+-rw-r--r--    1 root     root          2796 Apr 24 13:08 file02
+-rw-r--r--    1 root     root         13990 Apr 24 13:08 file03
+
+/dir_tar:
+total 108
+drwxr-xr-x    2 root     root          4096 Apr 27 08:18 .
+drwxr-xr-x    1 root     root          4096 Apr 27 08:23 ..
+-rw-rw-r--    1 1000     1000            36 Apr 20 20:07 file01
+-rw-rw-r--    1 1000     1000          2796 Apr 20 20:07 file02
+-rw-rw-r--    1 1000     1000         13990 Apr 20 20:09 file03
+-rw-rw-r--    1 1000     1000         75133 Apr 20 20:08 file04
+```
+
+### D) INSPECTEZ L’HISTORIQUE (NON-TRONQUÉE) DE L’IMAGE QUE VOUS AVEZ CRÉÉE ET DÉCRIVEZ CHAQUE LAYER (COUCHE) DE L’IMAGE
+
+```shell
+➜  ex01 git:(master) docker history --no-trunc exercice1
+IMAGE         CREATED          CREATED BY
+          SIZE      COMMENT
+sha256:   12 minutes ago   CMD ["ls" "-al" "/dir_tar" "/dir_add"]                                                              0B        buildkit.dockerfile.v0
+<missing> 12 minutes ago   COPY file0* /dir_add/ # buildkit                                                                    16.8kB    buildkit.dockerfile.v0
+<missing> 12 minutes ago   RUN /bin/sh -c mkdir /dir_add # buildkit                                                            0B        buildkit.dockerfile.v0
+<missing> 12 minutes ago   ADD files.tar.gz /dir_tar # buildkit                                                                92kB      buildkit.dockerfile.v0
+<missing> 12 minutes ago   LABEL maintainer=Yoda                                                                               0B        buildkit.dockerfile.v0
+```
+
+Voici la description de chaque couche (layer) de l'image que vous avez créée en utilisant `docker history --no-trunc exercice1` :
+
+1.  `CMD ["ls" "-al" "/dir_tar" "/dir_add"]`: Cette couche définit la commande par défaut à exécuter lorsque le conteneur est démarré. Ici, la commande `ls -al` est utilisée pour afficher le contenu des répertoires `/dir_tar` et `/dir_add`.
+2.  `COPY file0* /dir_add/`: Cette couche copie les fichiers commençant par `file0` du contexte de construction (répertoire local) vers le répertoire `/dir_add` du conteneur.
+3.  `RUN /bin/sh -c mkdir /dir_add`: Cette couche crée un nouveau répertoire nommé `/dir_add` dans le conteneur en utilisant la commande `mkdir`.
+4.  `ADD files.tar.gz /dir_tar`: Cette couche ajoute le fichier `files.tar.gz` au répertoire `/dir_tar` du conteneur et décompresse automatiquement l'archive tar.gz.
+5.  `LABEL maintainer=Yoda`: Cette couche ajoute une étiquette (label) à l'image avec la clé "maintainer" et la valeur "Yoda".
+6.  `/bin/sh -c #(nop) CMD ["/bin/sh"]`: Cette couche est celle de l'image de base `alpine:latest` et définit la commande par défaut à exécuter dans le conteneur comme `/bin/sh`. Les couches précédentes ont modifié cette commande par défaut avec la couche `CMD ["ls" "-al" "/dir_tar" "/dir_add"]`.
+
+Chaque couche représente une instruction du Dockerfile, et elles sont empilées pour former l'image complète. Les couches sont immuables et peuvent être partagées entre différentes images et conteneurs pour économiser de l'espace disque et du temps de construction.
+
+### E) RE-CRÉEZ L’IMAGE EN TANT QU’UTILISATEUR ROOT. EST-CE QUE CELA CHANGE QUELQUE CHOSE ? JUSTIFIEZ
+
+```dockerfile
+FROM alpine:latest
+USER root
+LABEL maintainer="Yoda"
+ADD files.tar.gz /dir_tar
+RUN mkdir /dir_add
+COPY file0* /dir_add/
+CMD ["ls", "-al", "/dir_tar", "/dir_add"]
+```
+
+```shell
+➜  ex01 git:(master) ✗ docker run -it --rm exercice1:0.2
+/dir_add:
+total 32
+drwxr-xr-x    1 root     root          4096 Apr 27 08:42 .
+drwxr-xr-x    1 root     root          4096 Apr 27 08:43 ..
+-rw-r--r--    1 root     root            36 Apr 20 20:07 file01
+-rw-r--r--    1 root     root          2796 Apr 20 20:07 file02
+-rw-r--r--    1 root     root         13990 Apr 20 20:09 file03
+
+/dir_tar:
+total 108
+drwxr-xr-x    2 root     root          4096 Apr 27 08:18 .
+drwxr-xr-x    1 root     root          4096 Apr 27 08:43 ..
+-rw-rw-r--    1 1000     1000            36 Apr 20 20:07 file01
+-rw-rw-r--    1 1000     1000          2796 Apr 20 20:07 file02
+-rw-rw-r--    1 1000     1000         13990 Apr 20 20:09 file03
+-rw-rw-r--    1 1000     1000         75133 Apr 20 20:08 file04
+➜  ex01 git:(master) ✗
+```
+
+Dans ce contexte, puisque vous travaillez déjà avec l'image `alpine:latest`, qui exécute les commandes en tant qu'utilisateur root par défaut, vous n'avez pas besoin d'ajouter l'instruction `USER root` dans le Dockerfile. Les instructions du Dockerfile que vous avez partagées précédemment sont déjà exécutées en tant qu'utilisateur root.
+
+Cependant, si vous utilisiez une image de base qui définissait un autre utilisateur par défaut, vous devriez ajouter l'instruction `USER root` dans le Dockerfile pour exécuter les commandes en tant qu'utilisateur root.
+
+Dans votre cas actuel, puisque vous travaillez déjà avec l'utilisateur root par défaut, reconstruire l'image ne devrait pas changer le comportement de l'image.
+
+## EXERCICE 2
+
+On désire créer un container Docker permettant de convertir (non-récursivement) les images du répertoire courant dans tout autre format d’image. Pour information, la commande mogrify -format png \*.jpg permet de convertir au format PNG tous les fichiers (du répertoire courant) se terminant par l’extension jpg. A savoir que l’outil mogrify est disponible dans le package imagemagick.
+
+Votre solution doit respecter les points suivants :
+
+- On doit pouvoir spécifier, au moment de l’instantiation du container, en quel format les images doivent être converties, de même que les images à convertir. 
+	- Par exemple, passer 1 / 3 l’argument a*.jpg" doit convertir tous les fichiers du répertoire courant commençant par a et se terminant par .jpg.
+- Les fichiers générés par le container doivent appartenir à l’utilisateur ayant exécuté le container et non à root (indice : slide 26 du cours “08-Docker_overview.pdf” et aussi commande id)
+- Au cas où aucun argument n’est spécifié, on désire qu’un texte d’aide soit affiché, indiquant la syntaxe à utiliser.
+- On veut que le Dockerfile se base sur une image de distribution Linux spécifique à une version donnée (donc pas latest), ceci afin de rendre le comportement du container plus stable. Le choix de la distribution est par contre libre.
+- On désire une image aussi petite que possible.
+- Afin d’éviter une accumulation inutile de containers, on désire que le container soit supprimé une fois son exécution terminée.
+
+```dockerfile
+FROM alpine:3.14
+LABEL maintainer="Xavier Perret"
+
+RUN apk update && \
+  apk add --no-cache imagemagick && \
+  mkdir /images && \
+  chmod 777 /images
+
+COPY ./images /images
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+```
+
+```shell
+#!/bin/sh
+
+if [ $# -eq 0 ]; then
+  echo "Usage: docker run --rm -v \$(pwd):/images IMAGE_NAME [pattern] [format]"
+  echo "Example: docker run --rm -v \$(pwd):/images IMAGE_NAME a*.jpg png"
+  exit 1
+fi
+
+PATTERN=$1
+FORMAT=$2
+
+echo "Mogrifying images with pattern $PATTERN to format $FORMAT"
+
+cd images/
+mogrify -format $FORMAT $PATTERN
+ls -l
+```
+
+```shell
+docker build -t image-converter .
+
+docker run --rm -u $(id -u):$(id -g) image-converter "a*.jpg" "png"
+```
+
+## EXERCICE 3
+
+### PARTIE 1
+
+```dockerfile
+FROM golang:1.17
+RUN go install github.com/alfg/asciicat@latest
+
+ADD /images .
+
+ENTRYPOINT [ "asciicat" ]
+```
+
+```shell
+➜  ex03 git:(master) ✗ docker run --rm -v $(pwd):/images -w /images asciicat -i images/cat.jpg -w 400
+```
+
+- L'option `-v $(pwd):/images` dans la commande `docker run` sert à monter un volume dans le container Docker.
+
+- Dans ce cas, `$(pwd)` représente le chemin du répertoire courant sur la machine hôte, et `/images` est le point de montage dans le container. Lorsque vous utilisez cette option, le répertoire courant de la machine hôte est monté dans le container sous `/images`. Ainsi, tous les fichiers présents dans le répertoire courant de la machine hôte seront accessibles par le container sous `/images`. Cela permet au container de lire et éventuellement de modifier les fichiers du répertoire courant sans avoir à les copier dans l'image Docker elle-même.
+
+
+#### A) QUELLE EST LA TAILLE DE L’IMAGE GÉNÉRÉE ?
+
+```shell
+➜  part1 git:(master) docker inspect asciicat1
+        "Size": 945673463,
+```
+
+```shell
+➜  part1 git:(master) docker history asciicat1
+IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+620f6a01e36d   13 minutes ago   ENTRYPOINT ["asciicat"]                         0B        buildkit.dockerfile.v0
+<missing>      13 minutes ago   RUN /bin/sh -c go install github.com/alfg/as…   4.07MB    buildkit.dockerfile.v0
+<missing>      8 months ago     /bin/sh -c #(nop) WORKDIR /go                   0B
+<missing>      8 months ago     /bin/sh -c mkdir -p "$GOPATH/src" "$GOPATH/b…   0B
+<missing>      8 months ago     /bin/sh -c #(nop)  ENV PATH=/go/bin:/usr/loc…   0B
+<missing>      8 months ago     /bin/sh -c #(nop)  ENV GOPATH=/go               0B
+<missing>      8 months ago     /bin/sh -c set -eux;  arch="$(dpkg --print-a…   408MB
+<missing>      8 months ago     /bin/sh -c #(nop)  ENV GOLANG_VERSION=1.17.13   0B
+<missing>      9 months ago     /bin/sh -c #(nop)  ENV PATH=/usr/local/go/bi…   0B
+<missing>      9 months ago     /bin/sh -c set -eux;  apt-get update;  apt-g…   228MB
+<missing>      9 months ago     /bin/sh -c apt-get update && apt-get install…   152MB
+<missing>      9 months ago     /bin/sh -c set -ex;  if ! command -v gpg > /…   19MB
+<missing>      9 months ago     /bin/sh -c set -eux;  apt-get update;  apt-g…   10.7MB
+<missing>      9 months ago     /bin/sh -c #(nop)  CMD ["bash"]                 0B
+<missing>      9 months ago     /bin/sh -c #(nop) ADD file:3451708ab45bc1bcf…   124MB
+➜  part1 git:(master)
+```
+
+- La taille ajouté est de 4.07 MB
+- La taille entière est de 900 MB
+
+#### B) QUELLE EST LA LIGNE DE COMMANDE À EXÉCUTER POUR AFFICHER L’IMAGE CAT.PNG (SE TROUVANT DANS LE RÉPERTOIRE COURANT) EN ASCII ART SUR UNE LARGEUR DE 40 CARACTÈRES ?
+
+```shell
+➜  part1 git:(master) ✗ docker run --rm asciicat1 -i cat.jpg -w 40
+```
+
+### PARTIE 2
+
+```dockerfile
+FROM golang:1.17 AS builder
+
+RUN go install github.com/alfg/asciicat@latest
+
+FROM alpine:latest
+
+COPY --from=builder /go/bin/asciicat /usr/local/bin/asciicat
+
+ENTRYPOINT [ "asciicat" ]
+```
+
+### PARTIE 3
+
+1.  Tout d'abord, exportez le système de fichiers d'une image Alpine existante. Pour ce faire, créez un container à partir de l'image Alpine, puis exportez le système de fichiers dans un fichier TAR.
+
+```shell
+docker create --name my-alpine-container alpine:3.14
+docker export my-alpine-container > my-alpine.tar
+```
+
+2.  Créez un Dockerfile pour construire l'image asciicat en utilisant le fichier TAR exporté.
+
+```dockerfile
+FROM scratch
+ADD alpine_3.17.tar /
+
+RUN apk add --no-cache git go && \
+  go install github.com/alfg/asciicat@latest
+
+COPY images/ .
+ENV PATH="${PATH}:/root/go/bin/"
+
+ENTRYPOINT [ "asciicat" ]
+```
+
+```shell
+➜  part3 git:(master) ✗ docker build -t asciicat3 .
+[+] Building 0.1s (7/7) FINISHED
+ => [internal] load build definition from Dockerfile                                                          0.0s
+ => => transferring dockerfile: 237B                                                                          0.0s
+ => [internal] load .dockerignore                                                                             0.0s
+ => => transferring context: 2B                                                                               0.0s
+ => [internal] load build context                                                                             0.0s
+ => => transferring context: 100B                                                                             0.0s
+ => CACHED [1/3] ADD alpine_3.17.tar /                                                                        0.0s
+ => CACHED [2/3] RUN apk add --no-cache git go &&   go install github.com/alfg/asciicat@latest                0.0s
+ => CACHED [3/3] COPY images/ .                                                                               0.0s
+ => exporting to image                                                                                        0.0s
+ => => exporting layers                                                                                       0.0s
+ => => writing image sha256:e00af82997dcff613ade59bd7d4ca7f2ca0a487f24345f5885bd1151da7491ff                  0.0s
+ => => naming to docker.io/library/asciicat3
+ ```
+
+```shell
+➜  part3 git:(master) ✗ docker run --rm asciicat3 -i cat.jpg -w 40
+ooooooio*********ooooooo+++++o*ooooooooo
+****ooioo**%%%%%%%**o++++++++iiii++ooo**
+%%%*o*iooo%%*%%%******o*ooooo+++++++++oo
+oo*ooo;+o+ooooooooooo*****oooooo++++++++
+++++ii;ii++++++iiiiiiiiiiiiiii++++++++++
+;;;;;;:;;;;;;;iiiiiii;:;iiiiiiiiiii;;;;:
+,,,,:,,;;:::::::::::::::;;;;::;:::::::'`
+,,,,,,.,,,,,,,,,,.,,,...,,,,..,,,,,,,.``
+,,,,....,,,,,,,,,,,,,,........,....,,```
+'''''`''''''''''''''''`'````````````````
+```````````````````````   ``````````````
+````````````````````````''.''```````````
+``````````````````'',,,.'```````````````
+``````````'``''',...'```````````````````
+
+➜  part3 git:(master) ✗
+```
