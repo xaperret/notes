@@ -1,0 +1,10 @@
+{
+	"nodes":[
+		{"type":"file","file":"Book Notes/Database.md","id":"00ffcaff874a08c9","x":-1040,"y":-520,"width":760,"height":1060},
+		{"type":"file","file":"Database systems.md","id":"16b1ad0f2db63142","x":-100,"y":-460,"width":660,"height":860},
+		{"id":"1f3b481ffbdd530c","x":760,"y":-460,"width":400,"height":400,"type":"file","file":"Introduction to Databases.md"}
+	],
+	"edges":[
+		{"id":"03e6d01956b17c1a","fromNode":"16b1ad0f2db63142","fromSide":"right","toNode":"1f3b481ffbdd530c","toSide":"left"}
+	]
+}

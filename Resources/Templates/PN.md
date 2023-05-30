@@ -1,7 +1,7 @@
----
----
+# LINK TO CANVAS
 
-# {{title}}
+# {{TITLE}}
 
+## ....
 
-## References
+## REFERENCES

@@ -1,18 +1,21 @@
 ---
 date created: Monday, December 20th 2021, 3:27:48 pm
 date modified: Sunday, January 16th 2022, 4:59:18 pm
+tags: [review, pn_2_1]
 ---
 
 - Topic:
 - Tags: #review #pn_2_1
-- Links: [[Variance]][[Variance in Java]]
+- Links: 
+	- [[Variance]]
+	- [[Variance in Java]]
 - Date Created: 20-12-21
 
 ---
 
-# Covariance
+# COVARIANCE
 
-## Covariance in Few Words
+## COVARIANCE IN FEW WORDS
 
 Is a way to substitute a type by its [[Subtype]].
 
@@ -46,8 +49,8 @@ numbers.addAll(arguments);
 
 ![[Pasted image 20211220184721.png]]
 
-## Covariance in Details
+## COVARIANCE IN DETAILS
 
-## References
+## REFERENCES
 
 - https://cavat.website/poo/docs/variance/
